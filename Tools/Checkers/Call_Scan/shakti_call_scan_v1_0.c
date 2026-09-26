@@ -671,7 +671,7 @@ static int write_records(const char *output) {
         return bench("sync %s: %s", temporary, strerror(saved));
     }
     if (close(fd) != 0) {
-        (void)unlink(temporary);
+        saved = errno; (void)unlink(temporary);
         return bench("close %s: %s", temporary, strerror(saved));
     }
     if (renameat2(AT_FDCWD, temporary, AT_FDCWD, output,
