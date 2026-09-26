@@ -56,7 +56,7 @@ static void sha_block(Sha *s, const unsigned char *p) {
     uint32_t w[64], a,b,c,d,e,f,g,h,t1,t2;
     unsigned i;
     for(i=0;i<16;i++) w[i]=((uint32_t)p[i*4]<<24)|((uint32_t)p[i*4+1]<<16)|((uint32_t)p[i*4+2]<<8)|p[i*4+3];
-    for(i=16;i<64;i++) w[i]=(rr(w[i-2],17)^rr(w[i-2],19)^(rr(w[i-2],19)^(w[i-2]>>10)))+w[i-7]+(rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>3))+w[i-16];
+    for(i=16;i<64;i++) w[i]=(rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>10))+w[i-7]+(rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>3))+w[i-16];
     a=s->h[0];b=s->h[1];c=s->h[2];d=s->h[3];e=s->h[4];f=s->h[5];g=s->h[6];h=s->h[7];
     for(i=0;i<64;i++) {
         t1=h+(rr(e,6)^rr(e,11)^rr(e,25))+((e&f)^(~e&g))+k[i]+w[i];
@@ -289,7 +289,7 @@ static int hash_file(const char *path,const struct stat *seen,char out[65],uint6
        before.st_ctime!=after.st_ctime||before.st_dev!=at_path.st_dev||
        before.st_ino!=at_path.st_ino||(uint64_t)before.st_size!=sha.bytes)
        return fail("file changed during hash",path);
-    *bytes=sha.bytes;sha_end(ha,out);return 0;
+    *bytes=sha.bytes;sha_end(&sha,out);return 0;
 }
 static int selected(const char *name) {
     size_t n=strlen(name);
