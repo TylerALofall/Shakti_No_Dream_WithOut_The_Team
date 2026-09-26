@@ -1,0 +1,110 @@
+SHAKTI MENU HOOK / CHEAT SHEET                              2026-09-26
+Status: wiring reference; no menu loader has been edited by this file.
+
+PURPOSE
+  See the exact XML nesting, keep the work-order extraction in order,
+  and draw one pixel map per Section A through O. All processing tools
+  below are C99, use fixed storage, and require no malloc/calloc.
+
+WHAT A LEVEL MEANS
+  "lvl3" is only a sample spelling. The scanner reads the actual word
+  between < and >. For example, in a real work order:
+    <Work_Order>                level 1, root
+      <SECTION>                 level 2, child of Work_Order
+        <function_name>...</function_name>  level 3, child of SECTION
+      </SECTION>
+    </Work_Order>
+  The exact opening name must match its closing name, including case.
+  An opener and closer on one line still count as a wrapped child.
+  Template matching discovers any valid tag name; the graph extractor
+  deliberately reads the named work-order fields listed below.
+
+FILES IN BUILD ORDER (exact spellings; sources are separate from binaries)
+  1. shakti-xml-wrap-v4.h            scanner declarations and limits
+  2. shakti-xml-wrap-v4.c            bounded fgetc opener/closer scan
+  3. shakti-xml-template-v4.c        tabbed report + template + names
+     Build 1-3 together into shakti-xml-template-v4:
+     cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti-xml-wrap-v4.c shakti-xml-template-v4.c -o shakti-xml-template-v4
+  4. shakti_batch_extract.c         filled SECTION XML -> graph.txt
+     cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_batch_extract.c -o shakti_batch_extract
+  5. shakti_batch_bitmap.c          graph.txt -> section_A.bmp ... section_O.bmp
+     cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_batch_bitmap.c -o shakti_batch_bitmap
+  Run each build as its own action. Stop on any compiler diagnostic.
+
+MENU OPTIONS
+  CHECK:      run the synthetic check round below; stop after reporting.
+  AUTO:       run CHECK first; on full success run NORMAL on the selected
+              batch manifest. Require assigned addresses before rendering.
+              Any unexpected result stops before NORMAL.
+  PREVIEW:    run CHECK first, then NORMAL with explicit notice that
+              missing function addresses produce NO verified links.
+  GRAMMAR:    separate parser for c_syntax.bnf, using
+              shakti-grammar-template.c; never feed BNF to the XML scanner.
+              Build: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti-grammar-template.c -o shakti-grammar-template
+              Run: ./shakti-grammar-template c_syntax.bnf grammar_template.xml grammar_names.txt grammar_master.txt
+              Use new output paths; grammar_master.txt is append-only.
+
+CHECK ROUND (fresh, disposable output names; never use the live master)
+  1. Build the three executables above with the exact commands shown.
+  2. ./shakti-xml-template-v4 example_matched.txt check_report.txt check_names.txt check_template.xml check_master.txt
+     Require exit 0. Read check_report.txt: lvl1 1->8, lvl2 2->4,
+     lvl3 3->3, lvl2 5->7, lvl3 6->6; parent and depth must agree.
+  3. ./shakti-xml-template-v4 example_unclosed.txt reject_report.txt reject_names.txt reject_template.xml check_master.txt
+     Require exit 2, "REFUSE: ... no matching closer", and no reject outputs.
+     This expected refusal counts as a successful negative check.
+  4. ./shakti_batch_extract review_explicit.list check_graph.txt
+     Require exit 0, three Section A function records in check_graph.txt.
+  5. ./shakti_batch_bitmap check_graph.txt check_section
+     Require exit 0 and "2 exact address links"; inspect check_section_A.bmp.
+  6. Optional SCALE: ./shakti_batch_extract review_scale.list scale_graph.txt
+     Require A through O in order, 100 functions each, 1500 total.
+  Check fixtures: example_matched.txt, example_unclosed.txt,
+  review_explicit.list + review_explicit_links.xml. The scale fixture
+  also needs review_scale.list + review_scale_A.xml ... review_scale_O.xml.
+  Bundle or configure their locations before enabling AUTO in the menu.
+  Use a fresh check directory/name per round; the bitmap tool overwrites
+  an existing BMP and the graph extractor overwrites an existing graph.
+
+NORMAL (only after a successful CHECK in AUTO or PREVIEW)
+  1. Take accepted, filled work-order XML from the existing extraction
+     process. TEMPLATE.xml from the v4 tool is a SHAPE, not filled records.
+  2. Create batch.list explicitly in A..O order, one line per XML file:
+       A /absolute/path/to/accepted_A.xml
+       B /absolute/path/to/accepted_B.xml
+       ...
+       O /absolute/path/to/accepted_O.xml
+     Each <SECTION> is ONE function, including <file_name>,
+     <function_name>, <function_order>, <function_type>,
+     <function_input>, <function_return>, <function_description>,
+     <function_complete>. Include unique <function_address> and
+     exact upstream <function_input_address> for verified arrows.
+     The extractor preserves the letter from batch.list, not directory order.
+  3. ./shakti_batch_extract batch.list fresh_graph.txt
+     Require exit 0; read the printed count per letter and total.
+     A missing function_address is recorded as UNSET, not inferred.
+  4. ./shakti_batch_bitmap fresh_graph.txt fresh_section
+     Require exit 0; inspect printed per-section counts and link counts.
+     Output names are fresh_section_A.bmp ... fresh_section_O.bmp.
+     Solid arrows use exact function_input_address -> function_address.
+     Dotted lines only suggest adjacent source order and are NOT dependencies.
+  5. Keep fresh_graph.txt with the BMPs: full names, input text, description,
+     file name and function order live there; labels in a bitmap abbreviate.
+
+STOP / HANDOFF
+  STOP on failed build, wrong CHECK output, invalid wrap, bad manifest,
+  oversized record, duplicate/unresolved address, failed bitmap, or a
+  missing accepted source file. Never turn a refusal into a green check.
+  For AUTO, also STOP on UNSET addresses: the current
+  extractor permits UNSET for PREVIEW, so the assembly loader must add
+  that gate before claiming it has verified the full dependency graph.
+  Current B_WORK_FILLED.out(1).xml has no function_address fields; it can
+  make an order preview, but cannot prove address-linked arrows as-is.
+  Existing shakti-parser-config.xml names shakti_template and
+  shakti_extract2. Those are different commands from the v4 tools above;
+  connect their formats only after checking the actual handoff contract.
+  The attached 475-line Pasted text(1).txt is a design reference, not
+  the menu command: strict -Werror rejects its unused parent_sec_id,
+  its section letters follow directory iteration, and its links are guessed.
+
+Optional visual alternative: locked scopeflow_v3.c takes its OWN address-
+first Section XML and writes SVG on request. It does not take graph.txt.
