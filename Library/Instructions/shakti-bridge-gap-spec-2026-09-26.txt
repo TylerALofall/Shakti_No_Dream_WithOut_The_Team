@@ -1,0 +1,122 @@
+SHAKTI GAP SPEC — 2026-09-26
+Authority: TYLER ALLEN LOFALL
+For: the builder completing the v5 XML pair and the batch bridge
+Supervision/inspection: Kimi (K3), after delivery. Nothing is accepted
+without a successful run. There are no tests, only RUNS.
+
+STANDING LAWS (bind every file you deliver)
+- C99 strict: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2
+- ZERO HEAP: no malloc/calloc/realloc/free. Fixed compile-time static
+  storage. Overflow prints BENCH and exits nonzero — never silent
+  truncation, never realloc.
+- Deterministic: same input, same bytes out, every run.
+- Failures bench loudly. Never guess, never mock, never hide a gap.
+- Synthetic fixtures only. Never touch live project files.
+- .tmp-then-rename on outputs; refuse to overwrite an existing path.
+
+================================================================
+HOLE 1 — V5 XML PAIR (replaces v4; v4 has a confirmed live defect)
+================================================================
+Files: shakti-xml-wrap-v5.c, shakti-xml-wrap-v5.h,
+       shakti-xml-template-v5.c
+
+CONFIRMED V4 DEFECT (reproduced 2026-09-26, exit 0, silent):
+  input: <orphan id="X">some text and a complete <child>ok</child>
+  v4 returned OK, discarded the unclosed orphan, promoted child to root.
+
+V5 MUST:
+1. Refuse an unmatched opener at EVERY level (exit 2, loud message
+   naming the tag and line).
+2. Refuse an unowned closing tag at the root (exit 2, loud).
+3. Refuse crossed closers (exit 2, loud).
+4. Keep every v4 behavior on VALID input, byte-for-byte:
+   - bounded fgetc reader, real parent/child levels, line spans
+   - template with [parent.child] value placeholders and
+     [owner.@name] attribute placeholders
+   - discovery-order report (element, open->close, lines, parent,
+     level, boundary)
+   - two-match confirmation gating any master-list append;
+     master is append-only, never duplicated
+5. NEW — STORE ATTRIBUTE VALUES, not just names. v4 keeps the name
+   and discards the value: id="one" and id="two" yield the same
+   shape. v5 must retain the value in the wrapped node and print it
+   in the report so the merger's MATCH identity (function_order +
+   function_type + file_name, and later id) can fact-prove the object.
+
+REQUIRED BATTERY (post the actual output lines with the delivery):
+  a. orphan opener (above)            -> refuse, exit 2
+  b. crossed closers <a><b></a></b>   -> refuse, exit 2
+  c. unowned root closer </x> alone   -> refuse, exit 2
+  d. matched 5-tag sample             -> discovery 1->8, 2->4, 3->3,
+                                         5->7, 6->6; one structure;
+                                         master unchanged
+  e. B work order sample              -> 1 object, 17 unique names,
+                                         23 repeated shapes; confirmed
+  f. two inputs identical except id value -> reports must differ
+
+================================================================
+HOLE 2 — BATCH BRIDGE (the missing weld in the auto-flow)
+================================================================
+Files: shakti_batch_extract.c, shakti_batch_bitmap.c
+Position in flow:
+  filled SECTION XML --(batch_extract)--> graph.txt
+  graph.txt ---------(batch_bitmap)---> section_A.bmp .. section_O.bmp
+
+Current state (from the 2026-09-26 parser review — treat as
+troubleshooting, not proof; every item must re-run clean):
+  - extract produced 3 records and 2 exact address links from a
+    synthetic Section A (2 functions) + Section B (1 function). GOOD —
+    this is the CHECK contract; keep it exact.
+  - bitmap counted a cross-section link but did NOT draw it between
+    bitmaps. FINISH THIS.
+  - glyphs: diamond = internal bridge, rectangle = void exist;
+    requested circle = cross-section link and triangle = void are
+    UNFINISHED. FINISH BOTH.
+  - full descriptions exist in graph.txt but are NOT rendered on the
+    bitmap. RENDER THEM.
+
+CONTRACT:
+  batch_extract:
+  - input: one filled work-order XML (SECTION records with the 8
+    function fields), or a manifest of them
+  - output: graph.txt — one record per function with its exact
+    [parent.child]-style address; address links between records
+    computed, counted, and printed with the count on the summary line
+  - CHECK fixture: Section A with 2 functions, Section B with 1
+    -> exactly 3 records, exactly 2 exact address links
+  batch_bitmap:
+  - input: graph.txt; scale parameter (CHECK uses scale 1500)
+  - output: one BMP per section, section_A.bmp .. section_O.bmp
+  - glyphs: diamond = internal bridge; circle = cross-section link;
+    triangle = void
+  - cross-section links drawn between the bitmaps they connect
+  - function descriptions rendered on the map, not left in graph.txt
+
+REQUIRED BATTERY:
+  a. CHECK fixture above at scale 1500 -> 3 records, 2 exact address
+     links; bitmaps for A and B written; 1 internal link drawn in A;
+     cross-section link drawn; descriptions visible
+  b. empty section -> benches or reports void triangle, never crashes
+  c. malformed graph.txt -> loud refuse, nonzero exit
+
+================================================================
+HOLE 3 — PARSER CONFIG REGISTRATION
+================================================================
+The standing parser config (2026-09-24 edition) names shakti_template
+and shakti_extract2 and knows nothing of v4/v5 or the batch pair.
+- Register shakti-xml-wrap-v5, shakti-xml-template-v5,
+  shakti_batch_extract, shakti_batch_bitmap with heap="none".
+- Rewrite the repeat-fold open item to be version-specific (it
+  describes the older tool).
+- Do not delete existing entries; amendments are append-only.
+
+================================================================
+DELIVERY FORMAT
+================================================================
+- Source files only, versioned names, originals untouched.
+- With each file: the strict build command and the FULL output of
+  every battery item above, pasted verbatim.
+- If anything cannot be finished, say so in plain words at the top.
+  A stated gap is a pass; a hidden gap voids the inspection.
+- Kimi rebuilds every file strict, re-runs every battery item, and
+  byte-compares before anything ships to the repo.
