@@ -1,0 +1,11 @@
+# TOOLS_REGISTRY — REPAIR LOG (append-only)
+# Law: APPEND ONLY. Lines are NEVER edited, reordered, or removed.
+#      A wrong line is corrected by a NEW line saying so.
+# Format (pipe-separated, one event per line):
+#   date(UTC) | file | who | what happened
+# Sits at repo root next to TOOLS_REGISTRY.sha256 (the hash master).
+2026-09-26 | Tools/Checkers/section_hash_watch.c | Kimi K3 | Transcription drift in pushed copy (sha_block sigma typo + sha_end bit extraction) caught by pull-back byte-verify; repaired and re-pushed, commit 14dd236, pull-back IDENT.
+2026-09-26 | Tools/Checkers/Call_Scan/shakti_call_scan_v1_0.c | Kimi K3 | Transcription drift in first push (dropped `saved = errno;` in write_records close-error branch) caught by pull-back byte-verify; repaired in commit 9c652bb, blob-hash IDENT.
+2026-09-26 | Tools/Checkers/Call_Scan/tests/B.c | Kimi K3 | First push dropped prototype line `int alpha(int x);`; caught by pull-back byte-verify; repaired in commit 9c652bb, blob-hash IDENT.
+2026-09-27 | TOOLS_REGISTRY.sha256 | Kimi K3 | Registry created. 11 tool files hashed from main via raw pull (SHA-256). Initial run: 11/11 OK.
+2026-09-27 | TOOLS_REGISTRY.sha256 | Kimi K3 | Appended Tools/Checkers/Call_Scan/shakti_call_scan_v1_0.c after push + blob-hash verify (d8f00207...d895bd). Run: 12/12 OK.
