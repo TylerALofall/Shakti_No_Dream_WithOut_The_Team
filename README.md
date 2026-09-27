@@ -22,3 +22,5 @@ Verify: `sha256sum -c TOOLS_REGISTRY.sha256` from the repo root (checks the late
 | Tools/Checkers/Call_Scan/shakti_call_scan_v1_0.c | `d8f002075ef72db88ff6d5eae8536828da38180eb7e1a5761ea8917722d895bd` |
 | Tools/Checkers/section_hash_watch.c | `79e0b6cecde9d1a576a3706e7c56b0f97c109f446a7ecefc72b79903965df1f3` |
 | Tools/Checkers/shakti_line_diff.c | `837b4efe6bf1b95cf31f14a2532172d446f6f199fc0881e47e87ffaeabc69b13` |
+
+Fixtures registered for integrity (not tools): Tools/Checkers/Call_Scan/tests/big.c `f3bc9a2900dbd9f4e4fa5b225bfbc5d8f48923deb5c83b3ac4538f376aed6990`

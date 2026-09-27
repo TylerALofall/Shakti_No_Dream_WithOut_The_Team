@@ -9,3 +9,4 @@
 2026-09-26 | Tools/Checkers/Call_Scan/tests/B.c | Kimi K3 | First push dropped prototype line `int alpha(int x);`; caught by pull-back byte-verify; repaired in commit 9c652bb, blob-hash IDENT.
 2026-09-27 | TOOLS_REGISTRY.sha256 | Kimi K3 | Registry created. 11 tool files hashed from main via raw pull (SHA-256). Initial run: 11/11 OK.
 2026-09-27 | TOOLS_REGISTRY.sha256 | Kimi K3 | Appended Tools/Checkers/Call_Scan/shakti_call_scan_v1_0.c after push + blob-hash verify (d8f00207...d895bd). Run: 12/12 OK.
+2026-09-27 | Tools/Checkers/Call_Scan/tests/big.c | Tyler + Kimi K3 | Fixture too large for K3 push channel; Tyler uploaded via phone (landed as big_c.txt, blob IDENT, renamed to big.c on main). Registry line appended after blob-hash verify 51ede13c. Run: 13/13 OK.
