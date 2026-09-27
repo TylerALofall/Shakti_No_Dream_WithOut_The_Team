@@ -1,0 +1,31 @@
+#SECTION-B
+##File Name: example/producer.c
+——-
+
+###Function Name: ready
+Function Address: Bb-01
+Function Order: 1
+Function Type: static bool
+Function Inputs: const char *message
+Function Outputs: bool
+Function Description /Notes: Checks the message received from dispatch. Returns true or false to that caller so it can decide whether to hand the same message to consume. This synthetic function is a Boolean gate; the chart must not invent which outgoing call is conditional.
+
+###Function Name: dispatch
+Function Address: Bb-02
+Function Order: 2
+Function Type: int
+Function Inputs: const char *message
+Function Outputs: int
+Function Description /Notes: Receives a message from the test caller, asks ready to check it, and passes it to consume in the other file. Returns an integer result to the caller. The cross-file connection must retain the circle marker without changing either function's declared return type.
+
+
+##File Name: example/consumer.c
+——-
+
+###Function Name: consume
+Function Address: Bc-01
+Function Order: 1
+Function Type: enum Mode
+Function Inputs: const char *message
+Function Outputs: enum Mode
+Function Description /Notes: Consumes the message handed over by dispatch and returns an enum Mode to that caller. Literal text survives XML decoding and output escaping: A & B < C, "quoted", 'apostrophe'. This synthetic record deliberately supplies no enum member list; the renderer must not invent one.
