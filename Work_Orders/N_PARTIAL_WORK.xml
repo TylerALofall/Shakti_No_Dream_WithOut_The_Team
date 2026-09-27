@@ -1,0 +1,1000 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-SOL</QA_specialist>
+<date>2026-09-20</date>
+<repair>no</repair>
+<total_items>90</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/bind_probe.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/crossed.c</file_name>
+    <function_name>in_list</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned long v, const unsigned long *l, unsigned int n</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/crossed.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *data, size_t len</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>hash_to_cell</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>uint64_t a, uint64_t b</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>compute_pin</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_init</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_converges</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t sight_hash, uint64_t sound_hash, unsigned int *cell_out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_create</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t sight_hash, uint64_t sound_hash, uint64_t beat</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_lookup_sight</function_name>
+    <function_order>7</function_order>
+    <function_type>const bind_moment_t *</function_type>
+    <function_input>uint64_t sight_hash</function_input>
+    <function_return>const bind_moment_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_lookup_sound</function_name>
+    <function_order>8</function_order>
+    <function_type>const bind_moment_t *</function_type>
+    <function_input>uint64_t sound_hash</function_input>
+    <function_return>const bind_moment_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_reinforce</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t sight_hash, uint64_t sound_hash</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_at_cell</function_name>
+    <function_order>10</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>unsigned int cell, const bind_moment_t **out, unsigned int max_out</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_verify</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_pin</function_name>
+    <function_order>12</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_print_bindings</function_name>
+    <function_order>13</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>tet_pow</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned long base, unsigned int exp</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>tet_build</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *data, size_t len</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>be64</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *out, uint64_t v</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>compute_pin</function_name>
+    <function_order>5</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_init</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_advance</function_name>
+    <function_order>7</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_advance_n</function_name>
+    <function_order>8</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>unsigned long n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_get_firing</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>pulse_firing_t *out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_firing_at</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t beat, pulse_firing_t *out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_organ_now</function_name>
+    <function_order>11</function_order>
+    <function_type>pulse_organ_t</function_type>
+    <function_input>void</function_input>
+    <function_return>pulse_organ_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_organ_at</function_name>
+    <function_order>12</function_order>
+    <function_type>pulse_organ_t</function_type>
+    <function_input>uint64_t beat</function_input>
+    <function_return>pulse_organ_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_converges</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t beat_a, uint64_t beat_b</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_mesh_count</function_name>
+    <function_order>14</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>uint64_t beat</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_verify</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_pin</function_name>
+    <function_order>16</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_print_state</function_name>
+    <function_order>17</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *data, size_t len</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>compute_spine</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const witness_record_t *rec</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>compute_link</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t prev_spine, uint64_t this_spine</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>compute_pin</function_name>
+    <function_order>4</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_init</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_record</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *tag, const unsigned char *body, unsigned int body_len, uint64_t beat, unsigned int organ</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_mark_erased</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *tag</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_prove_chain</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_find</function_name>
+    <function_order>9</function_order>
+    <function_type>const witness_record_t *</function_type>
+    <function_input>const unsigned char *tag</function_input>
+    <function_return>const witness_record_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_erased</function_name>
+    <function_order>10</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>const witness_record_t **out, unsigned int max_out</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_converges</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *tag</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_print_chain</function_name>
+    <function_order>12</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_verify</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_pin</function_name>
+    <function_order>14</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/handoff.c</file_name>
+    <function_name>measure</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, long *bytes, long *lines</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/handoff.c</file_name>
+    <function_name>copy_into</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/handoff.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/mirroraxis.c</file_name>
+    <function_name>name_of</function_name>
+    <function_order>1</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>unsigned long p</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/mirroraxis.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/mirrorcheck.c</file_name>
+    <function_name>slot_of</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned long p</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/mirrorcheck.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/orbits.c</file_name>
+    <function_name>gcd_ul</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned long a, unsigned long b</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/orbits.c</file_name>
+    <function_name>lcm_ul</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned long a, unsigned long b</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/orbits.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/organcheck.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/phicheck.c</file_name>
+    <function_name>is_fib</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned int n, unsigned int *which</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/phicheck.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *d, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>be8</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *o, uint64_t v</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>be4</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *o, uint64_t v</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>show</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *what, uint64_t got</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_invert.c</file_name>
+    <function_name>prime_inverse</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_invert.c</file_name>
+    <function_name>cmp_meet</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const void *a, const void *b</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_invert.c</file_name>
+    <function_name>solve32</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *label, uint64_t start, uint64_t target, uint64_t pinv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_invert.c</file_name>
+    <function_name>main</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_solve.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_solve2.c</file_name>
+    <function_name>fold_be8</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, unsigned long v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_solve2.c</file_name>
+    <function_name>fold_be4</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, unsigned long v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_solve2.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pulse_probe.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unjson.c</file_name>
+    <function_name>hexval</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>int c</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unjson.c</file_name>
+    <function_name>put_utf8</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned long cp, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unjson.c</file_name>
+    <function_name>read_u4</function_name>
+    <function_order>3</function_order>
+    <function_type>static long</function_type>
+    <function_input>FILE *in</function_input>
+    <function_return>long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unjson.c</file_name>
+    <function_name>main</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>emit</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f, int c</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>newline</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>feed</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f, int c, int next</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>feed_guarded</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f, int c, int next</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/wheelart.c</file_name>
+    <function_name>period_of</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned int a, unsigned int b, unsigned int c, unsigned int d</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/wheelart.c</file_name>
+    <function_name>index_of</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>unsigned int a, unsigned int b, unsigned int c, unsigned int d</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/wheelart.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/witness_probe.c</file_name>
+    <function_name>say</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tag, const char *body, uint64_t beat, unsigned organ</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/witness_probe.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/womb.c</file_name>
+    <function_name>ipow</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned long b, unsigned int e</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/womb.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

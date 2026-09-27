@@ -1,0 +1,769 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-09-20</date>
+<repair>no</repair>
+<total_items>69</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_register</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *name, actuator_fn fn</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_lookup</function_name>
+    <function_order>4</function_order>
+    <function_type>static actuator_fn</function_type>
+    <function_input>const char *name</function_input>
+    <function_return>actuator_fn</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>dry_run_actuator</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tool, const char *args, char *reply, size_t cap</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>brand_lookup</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tool, uint64_t *epoch_out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>brand_write</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tool, uint64_t epoch</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>converge</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>ticket</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>uint64_t seq, const char *cmd, uint64_t recv_beat, uint64_t waited, uint64_t delib, const char *result</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>teach_me</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *what, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>tag_write</function_name>
+    <function_order>11</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *tag</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>block_recall</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t block_no, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>trickle</function_name>
+    <function_order>13</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>curriculum_take</function_name>
+    <function_order>14</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *buf, size_t cap</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_tempo</function_name>
+    <function_order>15</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_hb</function_name>
+    <function_order>16</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_speak</function_name>
+    <function_order>17</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_learn</function_name>
+    <function_order>18</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_train</function_name>
+    <function_order>19</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_use</function_name>
+    <function_order>20</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>look_begin</function_name>
+    <function_order>21</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>look_finish</function_name>
+    <function_order>22</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>consume</function_name>
+    <function_order>23</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_beat</function_name>
+    <function_order>24</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_init</function_name>
+    <function_order>25</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_seal</function_name>
+    <function_order>26</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_stream_pin</function_name>
+    <function_order>27</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_beat_count</function_name>
+    <function_order>28</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_next_seq</function_name>
+    <function_order>29</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_blocks</function_name>
+    <function_order>30</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_recall</function_name>
+    <function_order>31</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t block_no, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_register_tool</function_name>
+    <function_order>32</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *name, actuator_fn fn</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>outbox</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *kind, const char *what</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>teach_me_shape</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *shape</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>ticket</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *event, const word_t *w, size_t widx, const char *detail</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>make_options</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>const word_t *w, size_t self, size_t opts[OPTS], size_t *correct_slot</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_step</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>word_t *w, size_t idx</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_beat</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_load</function_name>
+    <function_order>9</function_order>
+    <function_type>size_t</function_type>
+    <function_input>void</function_input>
+    <function_return>size_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_init</function_name>
+    <function_order>10</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_seal</function_name>
+    <function_order>11</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_stream_pin</function_name>
+    <function_order>12</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_beat_count</function_name>
+    <function_order>13</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_blocks</function_name>
+    <function_order>14</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_known</function_name>
+    <function_order>15</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_teach_count</function_name>
+    <function_order>16</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_word_count</function_name>
+    <function_order>17</function_order>
+    <function_type>size_t</function_type>
+    <function_input>void</function_input>
+    <function_return>size_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_word_stage</function_name>
+    <function_order>18</function_order>
+    <function_type>int</function_type>
+    <function_input>size_t i</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_word_strength</function_name>
+    <function_order>19</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>size_t i</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>rd_u32le</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const unsigned char *p</function_input>
+    <function_return>uint32_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>rd_u16le</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint16_t</function_type>
+    <function_input>const unsigned char *p</function_input>
+    <function_return>uint16_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>wr_u32le</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *p, uint32_t v</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>wr_u16le</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *p, uint16_t v</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>refuse</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *file, const char *reason, int code</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>main</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/school_test.c</file_name>
+    <function_name>write_wordlist</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/school_test.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>verdict</function_name>
+    <function_order>3</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>const char *line</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>load_all</function_name>
+    <function_order>4</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/foundations_test.c</file_name>
+    <function_name>write_curriculum</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/foundations_test.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/builder_test.c</file_name>
+    <function_name>write_curriculum</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/builder_test.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
