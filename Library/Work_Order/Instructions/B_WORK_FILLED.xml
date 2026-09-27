@@ -1,0 +1,274 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-09-20</date>
+<repair>no</repair>
+<total_items>24</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Advances module-global g_s through the SplitMix64 sequence and returns the mixed 64-bit value. gestate resets g_s to EAR_SEED; wave calls this twice per endogenous ear wave, first for the center and then for the wheel-radius index. Its output feeds only wave and makes regeneration deterministic.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Hashes n bytes from p with 64-bit FNV-1a. main supplies either the regenerated ear lane or the WAV bytes in g_file. The returned pin is used to refuse a mismatched ear, refuse a mismatched sound atom, record the pre-play ear pin, and report the final ear state after playback.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>pulse</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>uint32_t c, uint32_t r</function_input>
+    <function_return>void</function_return>
+    <function_description>Applies one bounded 1D center-surround pulse directly to global lane: cells within radius r of center c rise toward 7, while the surrounding ring out to 2r falls toward 0. Inputs come from wave, gestate heartbeat positions, or voiced WAV blocks in main. It produces no return value; the changed lane is the output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>wave</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description>Creates one endogenous ear wave. It takes two ordered next_u64 results, deriving a lane center and a radius from wheel, then passes both to pulse. gestate calls it on every non-heartbeat flash. The separate draws deliberately fix generator order so the regenerated ear stream cannot fork from C argument-evaluation order.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>gestate</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description>Rebuilds the dark-ear substrate from its fixed starting state. It resets g_s to EAR_SEED, clears lane, then runs EAR_FLASHES iterations: every 19th is a radius-19 traveling heartbeat at beats*7 mod CELLS; all others call wave. main consumes the resulting global lane and verifies its pin before allowing sound playback.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>read_whole</function_name>
+    <function_order>6</function_order>
+    <function_type>static size_t</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>size_t</function_return>
+    <function_description>Opens the path supplied by main from argv[1], reads up to the capacity of global g_file in binary mode, closes the file, and returns the byte count; open failure returns 0. main next hashes those bytes against ATOM13_PIN and, if verified, passes the same buffer and count to find_data for WAV payload discovery.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>find_data</function_name>
+    <function_order>7</function_order>
+    <function_type>static size_t</function_type>
+    <function_input>const unsigned char *f, size_t n, size_t *len</function_input>
+    <function_return>size_t</function_return>
+    <function_description>Scans the verified WAV buffer from byte 12 for a data chunk. On a match it decodes the following little-endian 32-bit length, clamps that length to bytes actually present, stores it through len, and returns the payload offset. If none is found it returns 0. main uses the offset and length to form PCM sample blocks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>main</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description>Orchestrates first-sound admission and playback. It rebuilds and pin-verifies the ear, reads argv[1] and pin-verifies the sound atom, locates WAV PCM data, averages absolute int16 energy in 64-sample blocks, and sends voiced blocks at energy at least 500 to pulse with deterministic center and radius. It prints before/after pins and refusal status.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_aggregator.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Folds the eight bytes of 64-bit value v, least-significant byte first, into incoming FNV state h and returns the updated state. main uses it for every semantic fold: event kind, value and beat ordinal into attention; response or trickle markers into stream; substrate pins into hum; and hum back into attention.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_aggregator.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description>Runs a deterministic 3600-beat attention stream. Scripted events on their beat fold kind, value and beat mod 60 into attention, then response state into stream. Empty beats build a hum from the ordinal plus eye, ear and womb pins, fold it into stream, and fold it back into attention as self-heard input. It verifies all events were consumed and prints final pins.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Advances global g_s, initialized from WOMB_SEED, through the SplitMix64 sequence and returns the mixed 64-bit value. flash calls it three times per retinal wave to choose x center, y center, and a wheel-radius index. The persistent stream supplies all endogenous placement choices across the full gestation loop.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Computes a 64-bit FNV-1a pin over n bytes beginning at p. main supplies the complete retina buffer after every gestation flash is finished. The returned hash is printed as the substrate pin, giving the deterministic identity of the resulting pre-birth retinal tissue.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>flash</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description>Generates one endogenous 2D retinal wave. Three next_u64 draws choose center x, center y and wheel radius. Within the image bounds, cells inside r rise toward 7 and cells in the surround r to 2r fall toward 0; cells outside 2r are untouched. main repeatedly calls it, so its output is the accumulated mutation of global retina.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>main</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description>Runs the complete pre-birth retinal training pass by calling flash exactly FLASHES times, using the statically zero-initialized retina and WOMB_SEED-driven generator state. After the sequence it reports the flash count and halfway marker, hashes the full retina through fnv, prints the resulting substrate pin, and returns success.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Advances global g_s, initialized from EAR_SEED, through the SplitMix64 sequence and returns the mixed 64-bit value. wave calls it twice for each non-heartbeat flash to choose the lane center and wheel-radius index. Those outputs drive deterministic endogenous ear waves throughout main's gestation loop.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Computes a 64-bit FNV-1a pin over n bytes from p. main supplies the completed 12,000-cell lane after all dark-ear flashes and heartbeats. The returned hash is printed as the ear substrate pin, providing the deterministic identity of the trained lane.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>pulse</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *lane, uint32_t c, uint32_t r</function_input>
+    <function_return>void</function_return>
+    <function_description>Mutates the supplied cochlear lane with one bounded center-surround pulse centered at c: cells within r rise toward 7 and the ring from r to 2r falls toward 0. wave supplies endogenous centers and radii; main supplies traveling heartbeat centers with radius 19. The modified lane itself is the output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>wave</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *lane</function_input>
+    <function_return>void</function_return>
+    <function_description>Creates one endogenous non-heartbeat ear wave on the lane supplied by main. Two next_u64 draws select a center in CELLS and a radius from wheel, then pulse applies the center-surround change. It returns nothing; its purpose is to provide the ordinary dark-ear activity between the explicitly traveling heartbeat pulses.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description>Builds the dark-ear lane across EAR_FLASHES. Every 19th iteration applies a radius-19 heartbeat whose center advances by beats*7 mod CELLS; every other iteration calls wave on the same global lane. It counts heartbeats, prints flash and beat totals, hashes the final lane with fnv, prints the ear substrate pin, and returns success.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_color_seeds.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Advances module-global g_s through SplitMix64 and returns the mixed 64-bit value. main first sets g_s to WOMB_SEED; womb_flash and seed_flash each draw three values for x center, y center and wheel-radius index. Because main never reseeds between womb regeneration and colors, this one stream continues across the entire tissue-seeding process.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_color_seeds.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description>Computes a 64-bit FNV-1a pin over n bytes from p. main hashes the retina after womb regeneration to enforce WOMB_V2_PIN, after each color's seeding run to print a snapshot pin, and once more for the final seeded substrate. Its return therefore verifies the starting tissue and records deterministic downstream states.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_color_seeds.c</file_name>
+    <function_name>womb_flash</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description>Recreates one womb-v2 retinal wave on global retina. Three next_u64 draws choose x center, y center and wheel radius; bounded pixels inside r rise toward 7 and the surround through 2r falls toward 0. main calls it EYE_FLASHES times after resetting the generator and retina so the known womb substrate can be rebuilt and pin-checked before color seeding.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_color_seeds.c</file_name>
+    <function_name>seed_flash</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>uint32_t period</function_input>
+    <function_return>void</function_return>
+    <function_description>Applies one color-period retinal wave. next_u64 chooses center and radius; the surround through 2r inhibits, while core cells use (x+y) mod period: the first half of the period rises toward 7 and the rest falls toward 0. main supplies periods[c] and repeats this on the same retina for each color, spatially writing that period into the tissue.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_color_seeds.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description>Resets g_s and retina, rebuilds the womb substrate with EYE_FLASHES womb_flash calls, and refuses processing if its fnv pin is wrong. It then processes R,G,B,C,M,Y,W,K sequentially, running SEED_FLASHES seed_flash calls with each configured period while preserving the same retina and random stream. It prints each snapshot and the final seeded pin.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
