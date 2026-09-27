@@ -13,3 +13,4 @@
 2026-09-27 | Library/2026-09-27-guide-shakti-introduction.md | Kimi K3 | First push truncated (10,122 of 44,180 bytes; commit b795e39) caught immediately by blob-size check against local f3480cb2; completed push in commit b7b3e5a, blob IDENT f3480cb2, 44,180 bytes.
 2026-09-27 | Library/Templates/filled_footer_example.txt | Kimi K3 | QA fixture + standing transport probe pushed (commit 40d0bec), blob IDENT 05fc8146; XML-metachar payload line survived the push channel byte-exact (probe PASS). Registry line appended, 14 lines.
 2026-09-27 | OAI.Skill.zip | Kimi K3 | Security find: public zip contains a Codex/OpenAI API key in its internal FILENAMES (key already revoked by OpenAI per Tyler). Reported; removal from main pending Tyler's word. Law: keys never in repos, files, zips, or filenames.
+2026-09-27 | OAI.Skill.zip | Kimi K3 | Deleted from main per Tyler's GO (commit 1064f8d). Copilot_Intake/ drop folder created for phone uploads (commit 461da1e).
