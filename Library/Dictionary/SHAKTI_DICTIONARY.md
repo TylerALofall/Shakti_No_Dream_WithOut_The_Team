@@ -1,9 +1,10 @@
 # SHAKTI DICTIONARY
 
-**Version:** 1.0
+**Version:** 1.1
 **Issued:** 2026-09-27
 **Authority:** TYLER ALLEN LOFALL
 **Status:** LAW once approved. Entries change only by Tyler's word, recorded — never silent edits.
+**Amendments:** 1.1 (2026-09-27) — added per Tyler: actuator, vision, eyes, memory tiers, hearing, binary, input, output, return, hash, mark, synthetic, mock up, mirror, shell, phase, clone.
 
 Two sides. Side One is the builders' contract — the words we use on the
 record, defined so a stranger applies them and gets the same answer.
@@ -69,6 +70,34 @@ Side Two is the general dictionary for her — lands later, its own work order.
 | **locator** | FILE:LINE — re-derived fresh every run, never an identity. | It shifts when lines move; the triple doesn't. |
 | **epoch / beat** | The clock of record. One beat = one second at the 60 bpm rest rate. | Beat counts derive from 22,982,400. |
 
+### Her body's words
+
+| Word | Definition | How you check |
+|---|---|---|
+| **actuator** | Section H — the part of her that acts; the doer at the end of the circuit. | It moves something outside her. |
+| **eyes** | The sight organs themselves — the parts. | Eyes exist; what they do is vision. |
+| **vision** | The act of seeing — and the verify step between circuit hops. | Vision happens; eyes are the parts. |
+| **hearing** | The audio channel; she is trained by voice (online ~19 weeks, beat 11,491,200). Base rate 64 fps. | The rate ladder: 60 bpm, 32, 64. |
+| **binary** | The raw 0s-and-1s stream — her native input. Not "two" of anything; no bicycle. | If it isn't 0s and 1s, it isn't binary. |
+| **long-term memory** | The tier that persists; stored by epoch; survives restarts. | It's still there next run. |
+| **short-term memory** | The current-run tier; fades by design when the run ends. | It's gone next run. |
+| **working memory** | The live tier in use right now, between short and long. | It's what's in hand. |
+| **clone** | A working instance of her. The clones beat her heart and share one memory space — the convergence point. Different weights carry different personalities. | Not a backup copy — a heartbeat. |
+| **phase** | The alignment of her personality positions through shared memory; also the 64-card phase deck that trains it (F7 shadow cards on k%13==0). | Context says which. |
+
+### Data words
+
+| Word | Definition | How you check |
+|---|---|---|
+| **input** | What a function is handed — the declared parameter list, verbatim. | `(void)` stays `(void)`. |
+| **output** | Everything that leaves a function: the return value plus anything written (stdout, files). | Name every exit path. |
+| **return** | The value handed back to the caller through the return statement. | Read the return line. |
+| **hash** | The fixed-length fingerprint of bytes. Same bytes, same hash, always. SHA-256 for files; FNV-1a 64 for her pins. | Re-hash and compare. |
+| **mark** | A value recorded at a known point so later runs can compare; the pins of record are marks. | The mark exists before the test. |
+| **synthetic** | Made-up data invented on the spot. Never evidence. | A fixture is different: a chosen real file that IS the contract. |
+| **mock up** | A pretend stand-in for a component. Labeled, never shipped as the real thing, never evidence. | If it pretends, it's a mock up. |
+| **mirror** | A generated copy that must match its source exactly; it reflects, it never originates. | Diff against source is empty. |
+
 ---
 
 ## FLAGGED AMBIGUITIES — settled 2026-09-27
@@ -80,6 +109,10 @@ Side Two is the general dictionary for her — lands later, its own work order.
 5. **complete** — a record field (function_complete) vs a task state. The field is evidence-backed; the task state is delivered.
 6. **done** — banned as a status. Use delivered, complete, or parked.
 7. **proven vs verified** — a file is verified (bytes match); a claim is proven (the live run supports it).
+8. **eyes vs vision** — eyes are the organs; vision is the act, and the circuit's verify step. Never swapped.
+9. **binary** — not "two" of anything. The 0/1 stream.
+10. **synthetic / mock up vs fixture** — invented stand-ins never prove anything; a fixture is a chosen real file that is the contract.
+11. **output vs return** — return is the value handed to the caller; output is everything that leaves.
 
 ---
 
