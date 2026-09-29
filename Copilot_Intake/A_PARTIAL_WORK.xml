@@ -1,0 +1,1704 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-SOL</QA_specialist>
+<date>2026-09-20</date>
+<repair>no</repair>
+<total_items>154</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_artifact.c</file_name>
+    <function_name>read_u16_le</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint16_t</function_type>
+    <function_input>const unsigned char bytes[2]</function_input>
+    <function_return>uint16_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_artifact.c</file_name>
+    <function_name>read_u32_le</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const unsigned char bytes[4]</function_input>
+    <function_return>uint32_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_artifact.c</file_name>
+    <function_name>shakti_artifact_join</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *root, const char *directory, const char *filename, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_artifact.c</file_name>
+    <function_name>shakti_artifact_validate_written_text</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, const char *expected_text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_artifact.c</file_name>
+    <function_name>shakti_artifact_validate_svg</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_artifact.c</file_name>
+    <function_name>shakti_artifact_validate_wav</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>append_character</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t destination_size, size_t *used, char character</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>append_text__asset_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t destination_size, size_t *used, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>shakti_asset_key_from_text</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>shakti_asset_filename</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, const char *extension, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>shakti_asset_safe_filename</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *filename</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_handwriting.c</file_name>
+    <function_name>find_entry</function_name>
+    <function_order>1</function_order>
+    <function_type>static const shakti_font_entry_t *</function_type>
+    <function_input>unsigned char character</function_input>
+    <function_return>const shakti_font_entry_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_handwriting.c</file_name>
+    <function_name>shakti_handwriting_render_char</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned char character, char rows[8][9]</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_handwriting.c</file_name>
+    <function_name>shakti_handwriting_supports_text</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_handwriting.c</file_name>
+    <function_name>shakti_handwriting_write_text_artifact</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>shakti_loader_kind_name</function_name>
+    <function_order>1</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_loader_kind_t kind</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>shakti_loader_kind_from_text</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, shakti_loader_kind_t *kind</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>safe_path</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>shakti_loader_load</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, shakti_loader_kind_t kind, shakti_loader_result_t *result</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>fnv1a_text</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>uint32_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>sanitize_field</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *source, char *destination, size_t destination_size</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>shakti_channel_name</function_name>
+    <function_order>3</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_channel_t channel</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>shakti_log_append</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, const char *prefix, const shakti_tick_t *tick, const char *section, unsigned int function_order, const char *phase, const char *channel, const char *subject, const char *property, const char *value</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>shakti_log_validate_file</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, unsigned long *valid_lines, unsigned long *invalid_lines</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>copy_text__loop_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *destination, size_t destination_size, const char *source</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>trim_text__loop_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>read_whole_file</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>write_whole_file</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>parse_menu</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>append_loop_log</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *path, const char *prefix, const char *section, unsigned int function_order, const char *route, const char *subject, const char *property, const char *value, shakti_tick_t *used_tick</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>heartbeat_is_due</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_loop_state_t *state, time_t now</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>schedule_next_heartbeat</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>shakti_loop_state_t *state, time_t now</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_init</function_name>
+    <function_order>9</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_load</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_loop_state_t *state, const char *goal_path, const char *notebook_path, const char *menu_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_begin_cycle</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, shakti_tick_t *cycle_tick</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_finish_cycle</function_name>
+    <function_order>12</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_set_heartbeat</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_loop_state_t *state, unsigned int minutes</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_set_goal</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *goal</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_notebook</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *entry</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_menu_titles</function_name>
+    <function_order>16</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_menu_section</function_name>
+    <function_order>17</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_loop_state_t *state, const char *title</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_record_message</function_name>
+    <function_order>18</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *route, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_interrupt_tools</function_name>
+    <function_order>19</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_resume_tools</function_name>
+    <function_order>20</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_tools_available</function_name>
+    <function_order>21</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_loop_state_t *state</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_defer_reflection</function_name>
+    <function_order>22</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_print_reflection_questions</function_name>
+    <function_order>23</function_order>
+    <function_type>void</function_type>
+    <function_input>FILE *output</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_run_reflection</function_name>
+    <function_order>24</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, FILE *input, FILE *output</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_print_status</function_name>
+    <function_order>25</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>trim_text__manifest_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>xml_unescape__manifest_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *source, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>extract_tag__manifest_h</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, const char *tag, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>extract_order__manifest_h</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, const char *element, unsigned int *order</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>is_absolute_path</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>resolve_path</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *manifest_path, const char *relative, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>find_level</function_name>
+    <function_order>7</function_order>
+    <function_type>static const shakti_manifest_level_t *</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *id</function_input>
+    <function_return>const shakti_manifest_level_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>requirements_are_valid</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *requirements, unsigned int owner_order</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>validate_manifest</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_manifest_t *manifest</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_init</function_name>
+    <function_order>10</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_manifest_t *manifest</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_load</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_manifest_t *manifest, const char *manifest_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>write_ledger_text</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_write_ledger</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *manifest_path, const char *ledger_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_print</function_name>
+    <function_order>14</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_manifest_t *manifest</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>copy_text__memory_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *destination, size_t destination_size, const char *source</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>load_text_file</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>readable_file_ready</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_init</function_name>
+    <function_order>4</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_memory_state_t *memory</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_load_always</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_memory_state_t *memory, const char *goal_path, const char *notebook_path, const char *menu_path, const char *long_term_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_reload_notebook</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_memory_state_t *memory, const char *notebook_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_reload_goal</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_memory_state_t *memory, const char *goal_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_remember</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_memory_state_t *memory, const shakti_tick_t *tick, const char *text</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_print_status</function_name>
+    <function_order>9</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_memory_state_t *memory</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_recall_text_file</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, const char *term, unsigned int maximum_matches</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>trim_text__reason_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>copy_checked</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t destination_size, const char *source</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>split_fields</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *line, char **fields, size_t field_count</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>allowed_symbol</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned char character</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>normalize_basic</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *input, char *output, size_t output_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>find_canonical_token</function_name>
+    <function_order>6</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *token</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>creative_rewrite_question</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *basic_question, char *rewritten, size_t rewritten_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>evidence_score</function_name>
+    <function_order>8</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const shakti_evidence_t *entry</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>same_answer</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *left, const char *right</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>consider_answer</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>scored_answer_t *best, scored_answer_t *second, const char *answer, unsigned int score</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>evaluate_exact_question</function_name>
+    <function_order>11</function_order>
+    <function_type>static shakti_decision_t</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *question</function_input>
+    <function_return>shakti_decision_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>count_shared_tokens</function_name>
+    <function_order>12</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const char *left, const char *right</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>count_creative_candidates</function_name>
+    <function_order>13</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *question</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>find_evidence</function_name>
+    <function_order>14</function_order>
+    <function_type>static shakti_evidence_t *</function_type>
+    <function_input>shakti_reason_state_t *state, const char *question, const char *answer</function_input>
+    <function_return>shakti_evidence_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>apply_evidence_event</function_name>
+    <function_order>15</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const shakti_tick_t *tick, const char *question, const char *answer, shakti_source_t source, int contradiction</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>append_evidence_event</function_name>
+    <function_order>16</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const shakti_tick_t *tick, const char *question, const char *answer, shakti_source_t source, int contradiction</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>parse_source_name</function_name>
+    <function_order>17</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *text, shakti_source_t *source</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>parse_tick_text</function_name>
+    <function_order>18</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *text, shakti_tick_t *tick</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>load_facts</function_name>
+    <function_order>19</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>load_synonyms</function_name>
+    <function_order>20</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>load_evidence</function_name>
+    <function_order>21</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_init</function_name>
+    <function_order>22</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_reason_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_load</function_name>
+    <function_order>23</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *facts_path, const char *thesaurus_path, const char *evidence_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_record_evidence</function_name>
+    <function_order>24</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *evidence_path, const shakti_tick_t *tick, const char *question, const char *answer, shakti_source_t source, int contradiction</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_answer</function_name>
+    <function_order>25</function_order>
+    <function_type>shakti_decision_t</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *question</function_input>
+    <function_return>shakti_decision_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_source_name</function_name>
+    <function_order>26</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_source_t source</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_init</function_name>
+    <function_order>1</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_receptor_t *receptor</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_configure</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor, unsigned int width, unsigned int height, unsigned int exposure_ticks, unsigned int gain, unsigned int binning</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_open_shutter</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor, shakti_tick_clock_t *clock_state</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_poll</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>collect_cell</function_name>
+    <function_order>5</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const shakti_receptor_t *receptor, unsigned int row, unsigned int column</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_readout</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_binarize_frame</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *frame_text, unsigned int cell_count, char *output, unsigned long output_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_write_frame_artifact</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_receptor_t *receptor, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>split_tabs</function_name>
+    <function_order>1</function_order>
+    <function_type>static size_t</function_type>
+    <function_input>char *line, char *fields[SHAKTI_LEDGER_FIELDS]</function_input>
+    <function_return>size_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>parse_ulong</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>count_tablet_state</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>shakti_report_t *report, const char *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_init</function_name>
+    <function_order>4</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_report_t *report</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_read_ledger</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *ledger_path, shakti_report_t *report</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>write_report_body</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, const shakti_report_t *report, const shakti_school_state_t *school</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_write</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *report_path, const shakti_report_t *report, const shakti_school_state_t *school</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_print</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_report_t *report, const shakti_school_state_t *school</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_run</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *manifest_path, const char *ledger_path, const char *report_path, const shakti_school_state_t *school, shakti_report_t *report</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>trim_text__school_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>append_school_line</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const shakti_tick_t *tick, const char *event, const char *symbol, unsigned int pass, unsigned int streak</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_init</function_name>
+    <function_order>3</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_school_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_load</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_school_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_set_pass</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_school_state_t *state, const char *path, const shakti_tick_t *tick, unsigned int pass</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_record_trial</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_school_state_t *state, const char *path, const shakti_tick_t *tick, const char *symbol, int correct</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>reward_for_streak</function_name>
+    <function_order>7</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>unsigned int streak</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>show_trial_progress</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>const shakti_school_state_t *state, int correct</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>show_mastery_reward</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>const shakti_school_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_show_written_text_pixels</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_draft_snapshots</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>print_drill_status</function_name>
+    <function_order>12</function_order>
+    <function_type>static void</function_type>
+    <function_input>const shakti_runtime_t *runtime</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>print_drill_controls</function_name>
+    <function_order>13</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>handle_drill_control</function_name>
+    <function_order>14</function_order>
+    <function_type>static shakti_drill_input_result_t</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *input</function_input>
+    <function_return>shakti_drill_input_result_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_run_drill</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *symbol</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_score.c</file_name>
+    <function_name>shakti_score_make</function_name>
+    <function_order>1</function_order>
+    <function_type>shakti_validation_score_t</function_type>
+    <function_input>unsigned long passed, unsigned long required</function_input>
+    <function_return>shakti_validation_score_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_score.c</file_name>
+    <function_name>shakti_score_add</function_name>
+    <function_order>2</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_validation_score_t *total, const shakti_validation_score_t *part</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_score.c</file_name>
+    <function_name>shakti_score_format</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_validation_score_t *score, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>trim_text__tablet_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>xml_unescape__tablet_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *source, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>extract_tag__tablet_h</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, const char *tag, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>extract_order__tablet_h</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, const char *element, unsigned int *order</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>sound_sequence_visit</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *sequence, int (*visitor)(const char *clip, void *context), void *context</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>validate_sound_contract</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_stone_t *stone</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>validate_filename_contract</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_stone_t *stone</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>validate_sound_clip</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *clip, void *context</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>validate_sound_artifacts</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_stone_t *stone, const char *artifact_root</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>validate_artifacts</function_name>
+    <function_order>10</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_stone_t *stone, const char *artifact_root, int sound_required</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>shakti_tablet_init</function_name>
+    <function_order>11</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_tablet_t *tablet</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>shakti_tablet_load_internal</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_tablet_t *tablet, const char *xml_path, const char *artifact_root, int require_artifacts</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>shakti_tablet_parse</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_tablet_t *tablet, const char *xml_path</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>shakti_tablet_load</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_tablet_t *tablet, const char *xml_path, const char *artifact_root</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>shakti_tablet_audit</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_tablet_t *tablet, const char *artifact_root, shakti_tablet_audit_t *audit</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_tablet.c</file_name>
+    <function_name>shakti_tablet_print</function_name>
+    <function_order>16</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_tablet_t *tablet</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_tick_clock_init</function_name>
+    <function_order>1</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_tick_clock_t *clock_state</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_tick_next</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_tick_clock_t *clock_state, shakti_tick_t *tick</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_tick_format</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_tick_t *tick, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_event_id_format</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_tick_t *tick, const char *section, unsigned int function_order, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

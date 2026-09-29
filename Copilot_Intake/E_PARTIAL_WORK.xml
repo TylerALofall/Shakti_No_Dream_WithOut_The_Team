@@ -1,0 +1,384 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-SOL</QA_specialist>
+<date>2026-09-20</date>
+<repair>no</repair>
+<total_items>34</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>find_glyph</function_name>
+    <function_order>1</function_order>
+    <function_type>static const eyes_font_entry_t *</function_type>
+    <function_input>unsigned char character</function_input>
+    <function_return>const eyes_font_entry_t *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>dimensions_valid</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned int width, unsigned int height</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>luma_of</function_name>
+    <function_order>3</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const unsigned char *rgba, unsigned long pixel_index</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_cells_x</function_name>
+    <function_order>4</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>unsigned int width</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_cells_y</function_name>
+    <function_order>5</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>unsigned int height</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_render_glyph</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned char character, char bitmap[8][9]</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_text_supported</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>fill_white</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned long pixel_count</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>stamp_glyph</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned int width, unsigned int height, unsigned int origin_x, unsigned int origin_y, unsigned char character</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>stamp_line</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned int width, unsigned int height, const char *line, unsigned int origin_y</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>generate_color_pattern</function_name>
+    <function_order>11</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned int width, unsigned int height, unsigned long seed</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_load_document</function_name>
+    <function_order>12</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned int kind, unsigned int width, unsigned int height, const eyes_text_page_t *text, unsigned long seed, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>channel_saturated</function_name>
+    <function_order>13</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const unsigned char *rgba, unsigned long pixel_index, unsigned int channel</function_input>
+    <function_return>unsigned int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_pull_color</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *rgba, unsigned int width, unsigned int height, char *bits, unsigned long bits_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_pull_mono</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *rgba, unsigned int width, unsigned int height, char *bits, unsigned long bits_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_reconstruct_color</function_name>
+    <function_order>16</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *bits, unsigned int width, unsigned int height, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_reconstruct_mono</function_name>
+    <function_order>17</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *bits, unsigned int width, unsigned int height, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_diff</function_name>
+    <function_order>18</function_order>
+    <function_type>unsigned long</function_type>
+    <function_input>const unsigned char *original, const unsigned char *reconstructed, unsigned int width, unsigned int height, int color</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_recognize_text</function_name>
+    <function_order>19</function_order>
+    <function_type>unsigned long</function_type>
+    <function_input>const unsigned char *mono_rgba, unsigned int width, unsigned int height, eyes_recog_t *out, unsigned long out_capacity</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_render_clean_page</function_name>
+    <function_order>20</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned int width, unsigned int height, const eyes_recog_t *characters, unsigned long character_count, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_write_frame</function_name>
+    <function_order>21</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, unsigned int width, unsigned int height, int color, const char *bits</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_write_recon</function_name>
+    <function_order>22</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, unsigned int width, unsigned int height, int color, const unsigned char *rgba</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_run_cycles</function_name>
+    <function_order>23</function_order>
+    <function_type>unsigned long</function_type>
+    <function_input>const unsigned char *original, unsigned int width, unsigned int height, int color, unsigned char *work_a, unsigned char *work_b, char *bits_a, char *bits_b, unsigned long buffer_capacity</function_input>
+    <function_return>unsigned long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>strip_line_end__xml_rebuild_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *line</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>read_line</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, char *line, unsigned long capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>append_text__xml_rebuild_h</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *buffer, unsigned long capacity, unsigned long *used, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>build_document_path__xml_rebuild_h</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tag, char *path, unsigned long capacity</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>argument_is_xml_path</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *argument</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>parse_unsigned__xml_rebuild_h</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char **cursor, unsigned int *value_out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>match_text</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char **cursor, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>parse_document_open</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, unsigned int *page_count_out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>parse_page_open</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, eyes_xml_page_record_t *page</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>eyes_xml_read_document</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, eyes_xml_page_record_t *pages, unsigned int page_capacity, char bits[][EYES_XML_PAGE_BITS_CAPACITY], unsigned int *page_count_out</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes_xml_rebuild.c</file_name>
+    <function_name>EYES_XML_REBUILD_MAIN</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

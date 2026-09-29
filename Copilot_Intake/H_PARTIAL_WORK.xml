@@ -1,0 +1,593 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-SOL</QA_specialist>
+<date>2026-09-20</date>
+<repair>no</repair>
+<total_items>53</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/avatar_pure.c</file_name>
+    <function_name>rect</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>int x, int y, int w, int h</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/avatar_pure.c</file_name>
+    <function_name>disc</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>int cx, int cy, int r</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/avatar_pure.c</file_name>
+    <function_name>AVATAR_PURE_MAIN</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/card_forge.c</file_name>
+    <function_name>load_glyph_file__card_forge_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/card_forge.c</file_name>
+    <function_name>load_glyphs__card_forge_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/card_forge.c</file_name>
+    <function_name>safe_name</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *sym, char *out</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/card_forge.c</file_name>
+    <function_name>CARD_FORGE_MAIN</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/check_manifest.c</file_name>
+    <function_name>fnv_file__check_manifest_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path, int *ok</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/check_manifest.c</file_name>
+    <function_name>CHECK_MANIFEST_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/gen_math_deck.c</file_name>
+    <function_name>GEN_MATH_DECK_MAIN</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/hear_song.c</file_name>
+    <function_name>fnv1a_file</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/hear_song.c</file_name>
+    <function_name>fnv1a_mem</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/hear_song.c</file_name>
+    <function_name>HEAR_SONG_MAIN</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>fnv1a64__match_game_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const unsigned char *s, size_t n</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lcg</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned</function_type>
+    <function_input>void</function_input>
+    <function_return>unsigned</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_known</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *s, const char *c</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>bcopy</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *dst, const char *src, size_t cap</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_add</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *s, const char *c</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_load</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_save</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>speak</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>FILE *log, int pos</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>facedown</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>int pos</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>cards_match</function_name>
+    <function_order>10</function_order>
+    <function_type>static int</function_type>
+    <function_input>int a, int b</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>learn</function_name>
+    <function_order>11</function_order>
+    <function_type>static void</function_type>
+    <function_input>int pos</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>shakti_turn</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *log, int turn</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>random_turn</function_name>
+    <function_order>13</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *log, int turn</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>MATCH_GAME_MAIN</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/quiz_type.c</file_name>
+    <function_name>digit_voice</function_name>
+    <function_order>1</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>char c</function_input>
+    <function_return>const char *</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/quiz_type.c</file_name>
+    <function_name>QUIZ_TYPE_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>say_number</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>int n, char *buf, size_t cap</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>seal_putc</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>struct seal *s, char c</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>seal_puts</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>struct seal *s, const char *t</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>seal_line</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>struct seal *s, const char *t</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>build_lesson1</function_name>
+    <function_order>5</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>build_lesson2</function_name>
+    <function_order>6</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>build_lesson3</function_name>
+    <function_order>7</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>build_lesson4</function_name>
+    <function_order>8</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>build_lesson5</function_name>
+    <function_order>9</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path, const char *opname, char sym, int mode</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>build_doctrine</function_name>
+    <function_order>10</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path, const char *body</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_build.c</file_name>
+    <function_name>SCHOOL_BUILD_MAIN</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_seal.c</file_name>
+    <function_name>fnv_file__school_seal_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path, int *ok</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_seal.c</file_name>
+    <function_name>SCHOOL_SEAL_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/seal_v2.c</file_name>
+    <function_name>fnv_file__seal_v2_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path, int *ok</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/seal_v2.c</file_name>
+    <function_name>SEAL_V2_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>load_glyph_file__svg_pure_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>load_glyphs__svg_pure_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>draw_rect</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>int x, int y, int w, int h, int W, int H</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>draw_circle</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>int cx, int cy, int r, int W, int H</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>draw_text</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>int x, int y, int fs, const char *s, int W, int H</function_input>
+    <function_return>void</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>render</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, int *Wp, int *Hp, int *unsup</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>SVG_PURE_MAIN</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/verify_cards.c</file_name>
+    <function_name>extract_text</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, char *out, size_t cap</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/verify_cards.c</file_name>
+    <function_name>VERIFY_CARDS_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_description></function_description>
+    <function_complete>no</function_complete>
+</SECTION>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
