@@ -1,0 +1,5 @@
+DROP HERE (4 files): shakti_order.c, shakti_validate.c, shakti_work_order.c, shakti_extract.c
+The Work Order machine: order writes WOs, validate checks returned WOs,
+work_order runs validate/import/inspect/carry/work, extract is the extractor
+(shakti_diff.c includes it — same family).
+NOTE: file renames to First.Second.c form happen at registration, with Tyler's GO.
