@@ -1,0 +1,5 @@
+DROP HERE (4 files, they compile together): shakti_sha256_v1-check.c, shakti_sha256_v1.h,
+shakti_batch_hash_v1-second.c, shakti_batch_prove_v2.c
+The automated proof gate: extract_v2 -> batch_prove_v2 -> bitmap_v3, batch_hash_v1 snapshots.
+sha256 lib carries the corrected K[11] already.
+NOTE: file renames to First.Second.c form happen at registration, with Tyler's GO.
