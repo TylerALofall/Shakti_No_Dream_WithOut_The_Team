@@ -124,7 +124,7 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_type>static void</function_type>
     <function_input>int value</function_input>
     <function_return>void</function_return>
-    <function_remote_call>NULL</function_remote_call>
+    <function_remote_call></function_remote_call>
     <function_description></function_description>
     <function_complete>no</function_complete>
 </SECTION>
