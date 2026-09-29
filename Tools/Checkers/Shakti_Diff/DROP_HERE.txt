@@ -1,0 +1,3 @@
+DROP HERE: shakti_diff.c (QA signoff diff tool — compare/signoff/selftest/counts/combine).
+Upload into this folder via web UI. K3 verifies hash against the copy already examined
+(sha256 2f1bdd98...), strict-builds, runs the battery, then assembler README + registry.
