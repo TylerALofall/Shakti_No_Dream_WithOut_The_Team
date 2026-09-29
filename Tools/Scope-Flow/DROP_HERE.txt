@@ -1,0 +1,31 @@
+DROP HERE (phone upload, Tyler):
+
+The Controlled Scope Flow v2 renderer package — the whole unzipped contents
+of controlled_scope_flow_skill_v2.zip:
+  scopeflow.c  (the renderer, ~56KB)
+  SKILL.md
+  scope_template.xml
+  README.md
+  TEST_RECORD.txt
+  examples/  (the shipped example scope.xml files)
+
+WHY THIS FOLDER:
+  This is the map drawer. Tools/Scope-Feed/Scope.Feed.c (registered
+  2026-09-29) turns filled work orders into scope.xml; scopeflow v2 draws
+  it. Chosen over bitmap v3 per the look-at-both comparison: v2 lays out
+  automatically, directional top-down. bitmap v3 stays in Batch_Flow for
+  per-section pages.
+
+WHY PHONE UPLOAD:
+  Package is over the K3 push channel's reliable size. Phone upload keeps
+  bytes exact; K3 pull-back verifies blob SHA against the local verified
+  copy (strict-build clean, selftest PASS, examples regenerate
+  byte-identical — proven 2026-09-29).
+
+AFTER LANDING:
+  K3 verifies bytes, builds strict, re-runs selftest from pulled source,
+  runs the assembler for the family README (binary name per law:
+  shakti-flow), appends registry lines, logs in TOOLS_REGISTRY.0_REPAIR_LOG.
+
+NOTE: scopeflow.c -> Scope.Flow.c rename waits for the compliance rename
+wave (Tyler's GO). Until then it lands under its current name.
