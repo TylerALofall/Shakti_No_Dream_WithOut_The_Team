@@ -1,0 +1,3 @@
+DROP HERE: shakti_build.c (the builder — step 6, add cross-template functions).
+Upload into this folder via web UI. K3 verifies hash, strict-builds, runs the battery,
+then assembler README + registry line + repair log. Do not rename the file after upload.
