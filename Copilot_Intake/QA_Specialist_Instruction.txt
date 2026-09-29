@@ -41,12 +41,11 @@ You are the QA Specialist. Your product is not code — it is **certainty**. The
 | `<function_type>` | The full declared return type including qualifiers: `static uint64_t`, `const char *`, `int`, `void`. Everything before the function name on its declaration line. |
 | `<function_input>` | The complete parameter list verbatim as declared, between the outermost `(` and `)`. `(void)` stays `(void)` — never "simplified." |
 | `<function_return>` | What the function actually returns. Watch for missing explicit returns and mixed paths. |
+| `<function_remote_call>` | `[file_name]`:`[function_name]` is used to list functions that reaches outside its residing file to another function | 
 | `<function_description>` | Your work product. Max 512 Unicode characters after XML decoding. See Part III. |
 | `<function_complete>` | `yes` or `no`. Your sworn verdict on whether this record is evidence-backed. See Part III. |
 | `<corrections>` | Your list of every fixed field you changed from the issued record: record, field, was, now, one-line source evidence. Empty if none. |
 | Destination sources | The `.c` files this work order describes. **Read-only.** You will never modify them. |
-| `function.xml` | The registry: byte offsets, call evidence, ordinals. Reference only — the raw source outranks it. |
-
 ---
 
 ## III. TASK — DIRECT AND ASSERTIVE
@@ -87,7 +86,8 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_type>[declared return type]</function_type>
     <function_input>[verbatim parameter list]</function_input>
     <function_return>[return type]</function_return>
-    <function_description></function_description>
+    <function_description><function_remote_call>[{file_name}:{function_name}]</function_remote_call><!— note this is the remote function outside of the target file only —->
+</function_description>
     <function_complete>no</function_complete>
 </SECTION>
 
@@ -112,7 +112,8 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_type>static int</function_type>
     <function_input>int value</function_input>
     <function_return>int</function_return>
-    <function_description></function_description>
+    <function_description><function_remote_call>Remote_file.c : remote_function_being_called()</function_remote_call>
+</function_description>
     <function_complete>no</function_complete>
 </SECTION>
 
@@ -123,6 +124,7 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_type>static void</function_type>
     <function_input>int value</function_input>
     <function_return>void</function_return>
+    <function_remote_call>NULL</function_remote_call>
     <function_description></function_description>
     <function_complete>no</function_complete>
 </SECTION>
@@ -138,6 +140,10 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_type>static int</function_type>
     <function_input>int value</function_input>
     <function_return>int</function_return>
+    <function_remote_call> 
+Tyler.c : beast_mode()
+Tyler_attitude.c : confidence()
+</function_remote_call>
     <function_description>Processes the integer supplied by its caller; returns zero for a negative value and otherwise returns that value unchanged. remember_input passes its own input here and stores the returned integer in file-local last_input. This helper establishes a nonnegative stored value without changing global state itself.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
@@ -148,13 +154,14 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_order>2</function_order>
     <function_type>static void</function_type>
     <function_input>int value</function_input>
-    <function_return>void</function_return>
+    <function_return>void</function_return> 
+    <function_remote_call>NULL</function_remote_call>
     <function_description>Receives an integer from its caller, passes it to clamp_nonnegative, then writes that helper's result to file-local last_input; it returns no value. Its string and character literals exercise quoted-brace parsing and have no output effect. The file contains no caller or reader of last_input, so the downstream consumer is unresolved; this function demonstrates storing a bounded input.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 ```
 
-Study the difference. The filled copies state provenance, name identifiers, admit the unresolved consumer instead of hiding it, and every sentence would still be true if you re-read the source.
+Study the difference. The filled copies state provenance, name identifiers, admit the unresolved consumer instead of hiding it, and every sentence would still be true if you re-read the source. When there is not an element for “function_remote_call” and no need for one add the section with “NULL” regardless for uniformity, each actual call should have its own line before the closing. 
 
 ---
 
