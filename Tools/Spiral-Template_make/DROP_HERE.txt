@@ -1,0 +1,4 @@
+DROP HERE: Spiral.Template_make.c — STATIC BSS MEMORY EDITION (zero malloc).
+Malloc edition deleted from spiral-wip 2026-09-29 by Tyler's ruling; BSS edition verified:
+strict build clean, byte-parity with malloc edition, deterministic, benches confirmed.
+Naming-law compliant family. K3: pull-back verify, rebuild, battery, assembler README, registry.
