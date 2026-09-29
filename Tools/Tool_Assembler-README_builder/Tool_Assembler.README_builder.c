@@ -491,7 +491,7 @@ static int emit_family(const char *tools_dir, const char *fam)
             k++;
             snprintf(num, sizeof num, "%d of %d " EM_DASH " ", k, sets);
             out_add(num);
-            snprintf(stem, sizeof num, "%s", g_de[i].name);
+            snprintf(stem, sizeof stem, "%s", g_de[i].name);
             sl = strlen(stem);
             stem[sl - 2] = '\0';            /* strip ".c" */
             out_add(stem);
