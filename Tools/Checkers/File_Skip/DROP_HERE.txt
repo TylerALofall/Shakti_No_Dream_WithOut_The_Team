@@ -1,0 +1,3 @@
+DROP HERE: shakti-file-skip-2026-09-22.c (THE GATE — hash every file, skip unchanged;
+survivors get the expensive structural diff; old manifest never written).
+Upload via web UI. K3 verifies, strict-builds, batteries, assembler README, registry.
