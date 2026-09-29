@@ -267,7 +267,7 @@ static int same_attrs(const char *a, const char *b)
 }
 int shakti_xml_same_shape(const XmlScan *s, int a, int b)
 {
-    int k, n = s->node[a].after - b > 0 ? s->node[a].after - a : 0;
+    int k, n = s->node[a].after - a;
     if (n != s->node[b].after - b) return 0;
     for (k = 0; k < n; k++) {
         const XmlNode *x = &s->node[a + k], *y = &s->node[b + k];
