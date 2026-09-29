@@ -1,4 +1,6 @@
-DROP HERE: Spiral.Template_make.c (the spiral template maker — loaded over xml-template-v4/v5).
-Upload into this folder via web UI. K3 verifies hash against the copy already examined
-(sha256 a5a4f9da...), strict-builds, runs the battery, then assembler README + registry.
-NOTE: this one uses heap (malloc) — registration waits on Tyler's heap ruling.
+DROP HERE: Spiral.Template_make.c — STATIC BSS MEMORY EDITION (zero malloc/realloc/free).
+The malloc edition was deleted from spiral-wip 2026-09-29 by Tyler's ruling.
+K3 has the BSS edition verified: strict build clean, byte-parity with malloc edition on
+INV.xml + WORK_FILLED.xml, deterministic, exit 1/2 benches confirmed.
+Upload the BSS file here via web UI; K3 pull-back verifies, rebuilds, reruns the battery,
+then assembler README + registry line + repair log.
