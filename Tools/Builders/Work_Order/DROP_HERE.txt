@@ -1,5 +1,0 @@
-DROP HERE (4 files): shakti_order.c, shakti_validate.c, shakti_work_order.c, shakti_extract.c
-The Work Order machine: order writes WOs, validate checks returned WOs,
-work_order runs validate/import/inspect/carry/work, extract is the extractor
-(shakti_diff.c includes this file — keep them family).
-Upload via web UI. K3 verifies, strict-builds, batteries, assembler READMEs, registry.
