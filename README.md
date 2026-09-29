@@ -1,6 +1,8 @@
 # Shakti_No_Dream_WithOut_The_Team
 Plugging in the Drift Free Workflow and hitting the build hard with work flows and systematic building
 
+> **START HERE — QA work orders:** the one live instruction document is `Copilot_Intake/QA_specialist_Instruction.md` (v1.1, 2026-09-29). The old `QA_Specialist_Instruction.txt` is deleted. The `2026-09-22 No Drift.zip` is a frozen snapshot — never read instructions from it. Copilot agents: read `.github/copilot-instructions.md` first.
+
 ## Tools Registry (append-only)
 
 Hash master: `TOOLS_REGISTRY.sha256` at this root. Repair log: `TOOLS_REGISTRY.0_REPAIR_LOG`.
