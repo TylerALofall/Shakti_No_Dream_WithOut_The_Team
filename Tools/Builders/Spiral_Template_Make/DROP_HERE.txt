@@ -1,0 +1,4 @@
+DROP HERE: Spiral.Template_make.c (the spiral template maker — loaded over xml-template-v4/v5).
+Upload into this folder via web UI. K3 verifies hash against the copy already examined
+(sha256 a5a4f9da...), strict-builds, runs the battery, then assembler README + registry.
+NOTE: this one uses heap (malloc) — registration waits on Tyler's heap ruling.
