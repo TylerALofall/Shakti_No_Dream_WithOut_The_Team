@@ -141,9 +141,9 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_input>int value</function_input>
     <function_return>int</function_return>
     <function_remote_call> 
-Tyler.c : beast_mode()
-Tyler_attitude.c : confidence()
-</function_remote_call>
+        Tyler.c : beast_mode()
+        Tyler_attitude.c : confidence()
+    </function_remote_call>
     <function_description>Processes the integer supplied by its caller; returns zero for a negative value and otherwise returns that value unchanged. remember_input passes its own input here and stores the returned integer in file-local last_input. This helper establishes a nonnegative stored value without changing global state itself.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
@@ -154,8 +154,8 @@ Tyler_attitude.c : confidence()
     <function_order>2</function_order>
     <function_type>static void</function_type>
     <function_input>int value</function_input>
-    <function_return>void</function_return> 
-    <function_remote_call>NULL</function_remote_call>
+    <function_return>void</function_return>
+    <function_remote_call></function_remote_call>
     <function_description>Receives an integer from its caller, passes it to clamp_nonnegative, then writes that helper's result to file-local last_input; it returns no value. Its string and character literals exercise quoted-brace parsing and have no output effect. The file contains no caller or reader of last_input, so the downstream consumer is unresolved; this function demonstrates storing a bounded input.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
