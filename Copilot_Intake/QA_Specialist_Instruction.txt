@@ -86,8 +86,8 @@ If a source file is missing or unreadable: `function_complete=no`, description c
     <function_type>[declared return type]</function_type>
     <function_input>[verbatim parameter list]</function_input>
     <function_return>[return type]</function_return>
-    <function_description><function_remote_call>[{file_name}:{function_name}]</function_remote_call><!— note this is the remote function outside of the target file only —->
-</function_description>
+    <function_remote_call>[{file_name}:{function_name}]</function_remote_call><!— note this is the remote function outside of the target file only —->
+    <function_description>[see `function_description` above]</function_description>
     <function_complete>no</function_complete>
 </SECTION>
 
