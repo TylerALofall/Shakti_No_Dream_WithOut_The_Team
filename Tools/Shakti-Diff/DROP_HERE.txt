@@ -1,0 +1,3 @@
+DROP HERE: shakti_diff.c (QA signoff diff — compare/signoff/selftest/counts/combine).
+Upload via web UI. K3 verifies against held hash 2f1bdd98..., strict-builds, batteries,
+assembler README, registry. NOTE: includes shakti_extract.c from Shakti-Work_order — family link.
