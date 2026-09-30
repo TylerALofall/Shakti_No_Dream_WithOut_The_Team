@@ -1,0 +1,18 @@
+Ticket {TICKET} of {TICKETS}: {UNITS} records in {PIECE_COUNT} piece(s).
+
+Before you start, read .github/copilot-instructions.md and the instruction
+document it points to, in full. That document is the only authority on how
+to fill a record.
+
+Your pieces. Finish each one before starting the next. Each piece names
+its source file: read that file, in full, from that exact path.
+{PIECES}
+Create only these files:
+{OUTPUTS}
+Do not modify, rename, or delete any existing file.
+
+Each output file holds only its own piece's records, filled per the
+instruction document. The records below are copied exactly from the work
+order.
+
+{RECORDS}
