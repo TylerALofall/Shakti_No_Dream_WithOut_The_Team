@@ -11,8 +11,6 @@ Create only these files:
 {OUTPUTS}
 Do not modify, rename, or delete any existing file.
 
-Each output file holds only its own piece's records, filled per the
-instruction document. The records below are copied exactly from the work
-order.
+Each output file must be a complete <Work_Order> containing only its own piece's records, filled per the instruction document. Include all required envelope fields, set <total_items> to the piece's record count, sign the exact Part VII <QA_Specialist_attestation>, and leave <Supervisor_attestation> unchanged. The records below are copied exactly from the source work order.
 
 {RECORDS}
