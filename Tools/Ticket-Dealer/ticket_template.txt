@@ -1,0 +1,16 @@
+Ticket {TICKET} of {TICKETS}: {UNITS} records in {PIECE_COUNT} piece(s).
+
+Before you start, read .github/copilot-instructions.md and the instruction
+document it points to, in full. That document is the only authority on how
+to fill a record.
+
+Your pieces. Finish each one before starting the next. Each piece names
+its source file: read that file, in full, from that exact path.
+{PIECES}
+Create only these files:
+{OUTPUTS}
+Do not modify, rename, or delete any existing file.
+
+Each output file must be a complete <Work_Order> containing only its own piece's records, filled per the instruction document. Include all required envelope fields, set <total_items> to the piece's record count, sign the exact Part VII <QA_Specialist_attestation>, and leave <Supervisor_attestation> unchanged. The records below are copied exactly from the source work order.
+
+{RECORDS}
