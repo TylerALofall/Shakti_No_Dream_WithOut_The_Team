@@ -1,0 +1,8 @@
+If you are dropping off a final work order you are in the correct location ! 
+
+format: 
+WO-[sec letter]-[filename]-[letter on workorder A, B, C].txt
+
+EXAMPLE: 
+((for SECTION-A main.c))
+[WO-A-main_c-A.txt] <<file for main>>
