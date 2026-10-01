@@ -187,7 +187,7 @@ libc: printf()
 Study the difference. The filled copies state provenance, name identifiers, admit the unresolved consumer instead of hiding it, and every sentence would still be true if you re-read the source. The `<function_remote_call>` element is always present, always before `<function_description>`. Each actual call gets its own line before the closing tag; when there are no outside calls the content is the single word `NONE` — never `NULL`, never empty.
 
 ---
-**CRITICAL NAMING LAW:** at the top of your ticket thete is one or more file you will be saving your work under! this is critical you are exact or it will overwrite each another models work. 
+**CRITICAL NAMING LAW:** At the top of your ticket, one or more output filenames are listed. Copy each filename exactly; otherwise, one model's work may overwrite another model's work.
 
 **EACH FILE MUST BE SAVED EXACTLY AS YOUR TICKET DIRECTS**
 You must output each piece into its own strictly named file exactly as requested in the work order header. You will NOT combine files. The naming format is strictly `WO-[SECTION_ID]-[filename_with_underscores]-A.txt`.
