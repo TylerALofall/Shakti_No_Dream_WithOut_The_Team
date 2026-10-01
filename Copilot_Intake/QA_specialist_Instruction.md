@@ -1,8 +1,11 @@
 MUST READ WITH EYES BEFORE STARTING!!!
 
-README.md
-THIS DOCUMENT : QA_specialist_Instruction.md
-AN EXAMPLE WORK ORDER IN THIS DIR
+README.md + the following: (Qa_specialist_instructions govern this assignment) 
+1. THIS DOCUMENT : [QA_specialist_Instruction.md]
+2. [EXAMPLE WORK ORDER] IN THIS DIR;
+3. [THE FILES ON YOUR WORK ORDER] they can be fount in their SECTION in ROOT!!!
+4. MUST READ WHOLE DOCUMENTs!!!
+
 Each file in whole
 
 > **NEW 2026-09-29 — READ THIS FIRST:** `<function_remote_call>` is now a
