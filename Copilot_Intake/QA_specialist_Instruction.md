@@ -225,7 +225,7 @@ IN SUM YOUR STEPS WILL BE AS FOLLOWS:
 10. Files are named on your tickets!
 11. add all names to the [COPILOT_OUTPUT] dir in root make sure the numbers are correct!
 12. if you find a skipped function and you have the one above and below it! write it at the end of the fill wrap the whole xml object in correction block!
-13. sign the bottom of each submission withbthe honestly statement below ! if you know what model your base came from add it in. 
+13. Sign the bottom of each submission using the exact attestation in Part VII, substituting only your model name and completion date.
 14. once submitted! HAVE A GREAT DAY! and THANK YOU! 🙏 
 
 ## VII. CONCLUSION AND ATTESTATION
