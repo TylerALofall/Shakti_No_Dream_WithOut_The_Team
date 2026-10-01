@@ -219,7 +219,7 @@ IN SUM YOUR STEPS WILL BE AS FOLLOWS:
 4. Now you read your Ticket and see what files you will be working on!;
 5. TAKE SPECIAL NOTE ON THE FILE NAME(s) YOU WILL BE CREATING!
 6. put exactly ! those functions inside those files!
-7. any corrections add to CORRECTIONS!, ([function_remote_call], [function_description] and [function_complete] since they are empty do not need to be added in the [correction] section:.. ** no matter what you see elsewhere ! corrections are to be filled in normally in the xml and explained in the “<correction>” element added after the “<function_complete>” element.
+7. Record every correction to an issued fixed field in the existing `<corrections>` element after all `<SECTION>` records, including the record, field, previous value, corrected value, and source evidence. Do not report values filled into initially empty `<function_remote_call>`, `<function_description>`, or `<function_complete>` fields as corrections.
 8. one blank line between elements
 9. one file per file (max 20 functions)
 10. Files are named on your tickets!
