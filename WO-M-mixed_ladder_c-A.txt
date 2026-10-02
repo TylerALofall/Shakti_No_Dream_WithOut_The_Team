@@ -28,8 +28,10 @@
 libc: printf()
 libc: printf()
 libc: printf()
+libc: printf()
+libc: printf()
     </function_remote_call>
-    <function_description>Receives num, den, and steps from main, prints the lane label, then doubles num for each k and reduces each fraction with gcd_u. It writes integer or mixed-number values and a newline to stdout. This renders one lane so main can compare when different ratios resolve.</function_description>
+    <function_description>Receives num, den, and steps from main, prints the lane label, then doubles num for each k and reduces each fraction with gcd_u. It writes integer or mixed-number values and a newline to stdout. This places each ratio's progression in the program's resolution report.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
@@ -44,7 +46,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Passes six fixed numerator-denominator pairs and step counts to lane, then scans a local denominator array by stripping factors of two. It prints the resolution rule and each result to stdout and returns 0; no in-file consumer exists, so downstream consumer unresolved. This compares mixed-number doubling lanes.</function_description>
+    <function_description>Passes six fixed numerator-denominator pairs and step counts to lane, then scans a local denominator array by stripping factors of two. It prints the resolution rule and denominator results to stdout; lane prints the progressions. It returns 0; no in-file consumer exists, so downstream consumer unresolved. This presents the mixed-number doubling comparison.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 

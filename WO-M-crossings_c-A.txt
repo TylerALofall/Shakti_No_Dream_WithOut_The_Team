@@ -25,7 +25,7 @@
     <function_input>uint64_t n</function_input>
     <function_return>int</function_return>
     <function_remote_call>NONE</function_remote_call>
-    <function_description>Processes n from main by repeatedly removing factors in local P={2,3,5,7,19}, then returns 1 if the remainder is 1 and 0 otherwise. main uses this result to label each swept Fibonacci value as on- or off-wheel, supporting the crossing report.</function_description>
+    <function_description>For each positive Fibonacci value from main, removes factors in local P={2,3,5,7,19}, then returns whether the residue is 1. main uses this result to label the swept value on- or off-wheel, supporting the crossing report.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 

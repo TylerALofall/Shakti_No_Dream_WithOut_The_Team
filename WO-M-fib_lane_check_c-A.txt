@@ -55,6 +55,8 @@ libc: printf()
 libc: printf()
 libc: printf()
 libc: printf()
+libc: printf()
+libc: printf()
     </function_remote_call>
     <function_description>Uses constants and local loop variables with is_fib and print_bin to test 104=13 shifted three places, the 13 Fibonacci identity, rung counts, rational bounds and Cassini's equation, then scans 1 through 128 for selected odd cores. It prints checks to stdout and returns 1 on failures or 0 otherwise; no in-file consumer exists, so downstream consumer unresolved.</function_description>
     <function_complete>yes</function_complete>

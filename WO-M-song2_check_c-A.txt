@@ -13,7 +13,7 @@
     <function_input>uint64_t n</function_input>
     <function_return>int</function_return>
     <function_remote_call>NONE</function_remote_call>
-    <function_description>Tests caller-supplied n by removing every factor in local P={2,3,5,7,19}; it returns 1 when no factor remains and 0 otherwise to main. This supplies the wheel-membership predicate used to classify the song's numbers.</function_description>
+    <function_description>For the positive numbers main supplies, removes every factor in local P={2,3,5,7,19}, then returns whether the residue is 1. main uses this wheel-membership result to classify the song's listed numbers.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
