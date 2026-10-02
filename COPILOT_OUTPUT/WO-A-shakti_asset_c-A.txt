@@ -46,7 +46,7 @@ libc: snprintf()
 libc: isalnum()
 libc: snprintf()
     </function_remote_call>
-    <function_description>Converts caller text into a bounded asset key: a lone non-alphanumeric byte becomes ascii_NNN, letters, digits, and hyphens pass through, spaces become underscores, and other printable ASCII bytes become uppercase %XX escapes; invalid bytes, edge spaces, repeated spaces, or insufficient capacity fail. shakti_asset_filename consumes the key and status to form a filename. This canonicalizes text for asset naming.</function_description>
+    <function_description>Converts caller text into a bounded asset key: a one-byte value classified as non-alphanumeric becomes ascii_NNN; otherwise letters, digits, and hyphens pass through, one internal space becomes _, and other printable ASCII bytes become uppercase %XX. It rejects NULL text or destination, empty text, zero capacity, edge or repeated spaces, nonprintable bytes in the general path, and insufficient capacity. shakti_asset_filename consumes the key and status. It canonicalizes asset names.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
