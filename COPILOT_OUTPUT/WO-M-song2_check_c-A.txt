@@ -54,7 +54,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Uses fixed gestation, ratio, prime, and bit-count values to print checks for 266 days, 1.2 = 6/5, the 4/3 gestation result, 71, 19, 33 and their sum, week-20 timing, and the 5/eight-bit claims. is_prime and on_wheel supply classifications. The report goes to stdout and the program returns 0; downstream consumer unresolved. It checks the song's numerical claims.</function_description>
+    <function_description>Uses fixed gestation, ratio, prime, and bit-count values to print checks for 266 days, 1.2 = 6/5, the 4/3 gestation result, 71, 19, 33 and their sum, week-20 timing, and the threshold-5 and eight-bit claims. is_prime and on_wheel supply classifications. The report goes to stdout and the program returns 0; downstream consumer unresolved. It checks the song's numerical claims.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
