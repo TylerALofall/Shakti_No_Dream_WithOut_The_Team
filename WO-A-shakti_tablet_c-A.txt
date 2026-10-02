@@ -64,8 +64,8 @@ libc: memcpy()
     <function_return>int</function_return>
     <function_remote_call>
 libc: snprintf()
-libc: strncmp()
 libc: strlen()
+libc: strncmp()
 libc: strlen()
 libc: strtoul()
 libc: strcmp()
