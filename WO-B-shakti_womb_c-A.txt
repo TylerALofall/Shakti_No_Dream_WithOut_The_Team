@@ -1,0 +1,63 @@
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>(void)</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Updates file-local g_s, initialized from WOMB_SEED, by the SplitMix64 increment and mixing steps, then returns the mixed uint64_t. flash consumes three successive results to choose cx, cy, and a wheel index. This stream supplies deterministic endogenous placement for retinal waves.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes n bytes beginning at p with FNV-1a, using FNV_BASIS and FNV_PRIME. main supplies retina and NPX after the flash loop and passes the returned pin to printf as the substrate identifier. This gives the completed retinal substrate a deterministic fingerprint.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>flash</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>(void)</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses three successive next_u64 results and file-local wheel to choose cx, cy, and r. It scans in-bounds cells around that center: cells with d2<=rr increment toward 7, cells with rr<d2<=rr2 decrement toward 0, and others remain unchanged. main repeats flash FLASHES times on global retina to build the deterministic pre-birth substrate.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_womb.c</file_name>
+    <function_name>main</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>(void)</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Starts with the statically zero-initialized retina and file-local g_s seeded by WOMB_SEED; it has no parameters. It calls flash FLASHES times, prints the flash count and halfway marker to stdout, calls fnv on retina, prints that pin, and returns 0. This runs the deterministic pre-birth training pass; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>
+SECTION B / shakti_womb.c / next_u64 (order 1) — function_input — was: void — now: (void) — source: static uint64_t next_u64(void)
+SECTION B / shakti_womb.c / flash (order 3) — function_input — was: void — now: (void) — source: static void flash(void)
+SECTION B / shakti_womb.c / main (order 4) — function_input — was: void — now: (void) — source: int main(void)
+</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
