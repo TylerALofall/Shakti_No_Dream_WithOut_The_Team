@@ -1,0 +1,81 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *d, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds n bytes from caller-supplied d into FNV state h with XOR and multiplication by FNV_PRIME, then returns the hash. main supplies the fixed candidate encodings or ASCII labels and uses each result for show; this helper compares structurally plausible bind-pin inputs.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>be8</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *o, uint64_t v</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Writes v as eight big-endian bytes into caller-supplied buffer o. main passes header constants and geometry values, then folds those bytes through fnv for candidate pins; this encoder tests the eight-byte format used by eden_pulse.c.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>be4</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *o, uint64_t v</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Writes the low four bytes of v in big-endian order into caller-supplied buffer o. main passes BIND_MAX_BINDINGS and other header constants, then folds the bytes through fnv; this encoder reproduces the four-byte format in the pasted bind implementation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>show</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *what, uint64_t got</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+    </function_remote_call>
+    <function_description>Receives a candidate label and hash from main, prints the label and 16-digit value, and marks an exact match to the frozen pin. Its output goes to stdout; the visible comparison lets the diagnostic harness judge each variant without tuning a value.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pin_hunt.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Builds and displays candidate FNV pins from fixed header constants, TET geometry, and the ASCII labels eden_bind and bind, using be4, be8, fnv, and show. It prints whether any candidate equals the frozen pin, takes no caller input, writes to stdout, and returns 0; the harness diagnoses the pin mismatch without tuning candidates.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>Work_Order — total_items — 90 — 5 — This output piece contains five SECTION records.</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
