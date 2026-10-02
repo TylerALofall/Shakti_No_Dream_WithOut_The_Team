@@ -1,0 +1,207 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>13</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes v as eight least-significant-first bytes, folding each into incoming FNV state h with XOR and FNV_PRIME multiplication; it returns the updated state. fnv_str, sight_hash, and sight_record supply bytes for labels, dimensions, pixels, and pins. The returned hash continues the deterministic sight, ticket, and block chains.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes the NUL-terminated string s byte by byte, starting from caller-supplied hash h, by passing each unsigned byte to fnv1; it returns the accumulated hash. sight_hash and sight_record supply labels, formats, names, stages, and pin prefixes. Its result extends deterministic sight identities and stream or ticket pins.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>sight_hash</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *name, const char *fmt</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes name and fmt from intake plus the loaded global PX grid and px_rows/px_cols. intake passes the loader-derived name and manifest format; the loader supplies the pixels and dimensions. This function folds the label, format, name, dimensions, and pixels in BAYER rank order, returning the canonical sight identity to intake for sight_record.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>load_8x8</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *f, char *name, size_t ncap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fgets()
+libc: strncmp()
+libc: strncmp()
+    </function_remote_call>
+    <function_description>Reads from the FILE *f that intake opened after its magic line; a TEXT= line supplies name within ncap, and dot/hash rows fill global PX while px_rows and px_cols define the grid. It returns true only for a nonempty name and at least one complete 8-row character. intake uses the grid for ink counting and sight_hash before recording the glyph.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>load_64x64</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *f, char *name, size_t ncap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fgets()
+libc: strncmp()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Reads from the FILE *f that intake opened after its magic line; ASCII= supplies the code and complete 64-bit binary rows fill global PX. With an ASCII code and exactly 64 rows, it writes name as ascii_NNN and returns 1; otherwise it returns 0. intake counts ink and hashes the loaded grid before recording the glyph.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>sight_record</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *name, const char *fmt, uint64_t hash, uint64_t ink, const char *wav</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: strcmp()
+libc: fprintf()
+libc: fclose()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives the loaded glyph name, manifest format and sound binding, ink count, and hash from intake. It derives a sequence ticket pin, appends a sight line when SIGHT.ndx opens, then advances stream_pin and block_pin; every ten tickets it appends a block seal and reseeds block_pin. It returns no status and builds the ledger's deterministic proof chain.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>intake</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path, const char *fmt, const char *wav</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: memset()
+libc: fgets()
+libc: strncmp()
+libc: strncmp()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Processes one path, format, and sound tuple parsed from GLYPH_MANIFEST.txt by eye_intake_run. It opens the glyph, selects a loader from its magic, counts lit pixels, hashes accepted grid data, increments glyph_count, then calls sight_record; missing paths and rejected glyphs add path-tagged markers to stream_pin, while an empty file returns after close. It converts usable tuples into ledger records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>eye_intake_init</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses no caller data; it seeds stream_pin and block_pin with FNV_BASIS and clears block_tickets, block_count, tseq, and glyph_count. The initialized globals are read and advanced by eye_intake_run's intake and sight_record chain as glyphs are captured. This reset gives the capture pipeline deterministic counters and hash chains.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>eye_intake_run</function_name>
+    <function_order>9</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: memset()
+libc: memset()
+libc: memset()
+libc: sscanf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens the fixed GLYPH_MANIFEST.txt path, reads each line, and passes complete path/format/wav triples to intake in file order; lines without three tokens are skipped. It closes the manifest and returns glyph_count, or 0 if opening fails. No caller appears in this file, so downstream consumer unresolved. It drives ordered glyph capture.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>eye_seal</function_name>
+    <function_order>10</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads global stream_pin and, when SIGHT.ndx opens in append mode, writes it as the final stream line and closes the ledger; it returns no status and skips the write on open failure. The best-effort seal leaves the completed stream proof in the ledger. No caller appears in this file, so downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>eye_stream_pin</function_name>
+    <function_order>11</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global stream_pin without changing it; intake adds missing/bad path markers and sight_record advances it for each glyph ticket. The value exposes the accumulated sight-stream hash to callers. No caller appears in this file, so downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>eye_blocks</function_name>
+    <function_order>12</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global block_count without changing it; sight_record increments the count and writes a block seal whenever ten glyph tickets close a block. The value exposes the number of completed seals to callers. No caller appears in this file, so downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/eye_intake.c</file_name>
+    <function_name>eye_glyphs</function_name>
+    <function_order>13</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global glyph_count without changing it; intake increments the count after a glyph loads and its sight hash is ready for sight_record. The value exposes the number of loaded glyphs sent for recording to callers. No caller appears in this file, so downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
