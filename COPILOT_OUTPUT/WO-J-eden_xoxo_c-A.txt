@@ -1,0 +1,122 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>6</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_xoxo.c</file_name>
+    <function_name>fnv1a</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes n bytes from p using FNV-1a starting at caller-supplied hash h and returns the updated 64-bit state. main supplies each 64-byte grid row; the returned state feeds the next row and becomes the current pass ledger. This helper pins each glyph stream so main can compare both ingestion passes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_xoxo.c</file_name>
+    <function_name>is_prime_u64</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t n</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests caller-supplied n, rejecting values below 2 and even composites before checking odd divisors through i&lt;=n/i. main passes each alternating-bit value and prints PRIME only for a true result. This keeps the xoxo-family report tied to integer primality.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_xoxo.c</file_name>
+    <function_name>load_grid</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>int ascii</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: fopen()
+libc: fgets()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Uses caller-supplied ascii to open GDIR/ascii_NNN.txt and loads accepted rows into global grid, treating each character equal to '1' as ink and others as ground. It returns 0 after 64 rows or -1 otherwise; main skips failures before RLE validation and hashing. It supplies glyph grids for both ingestion passes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_xoxo.c</file_name>
+    <function_name>rle_roundtrip</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Scans global grid in row-major order, stores same-bit run lengths in global runs, then checks alternating run values cover all 4096 cells without a mismatch. It returns the run count or -1 to main, which totals valid runs or tracks a failure before comparing pass pins. This verifies each glyph's xoxo run encoding.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_xoxo.c</file_name>
+    <function_name>dither_check</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint32_t n, uint32_t d</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Counts k below d for which ((uint64_t)k*n)%d is less than n and returns whether that count equals n. main supplies each numerator and denominator from its fixed R table and prints exact or FAIL; a failed result stops glyph ingestion. It checks that the configured integer dithers realize their ratios exactly.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_xoxo.c</file_name>
+    <function_name>main</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: fopen()
+libc: printf()
+libc: memset()
+libc: snprintf()
+libc: strlen()
+libc: fwrite()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fwrite()
+libc: fwrite()
+libc: fclose()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Processes the fixed alternating-bit sequence, ten blend ratios in R, and ASCII 32–127 glyph files under GDIR. It uses is_prime_u64, dither_check, load_grid, rle_roundtrip, and fnv1a; on the second pass it packs each grid and appends a VSN1 record to OUTPATH, while printf reports checks and totals. It returns 0 on success, 1 on validation or drift failure, or 2 if OUTPATH cannot open.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
