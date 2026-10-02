@@ -1,0 +1,74 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>3</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/hear_song.c</file_name>
+    <function_name>fnv1a_file</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fread()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads bytes from the caller's path in 8192-byte chunks and folds them into a 64-bit FNV-1a hash. HEAR_SONG_MAIN passes argv[1], the MP3 path, and uses the returned hash for the read-failure check and song fingerprint in its log. An open failure returns 0. This helper fingerprints the exact song bytes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/hear_song.c</file_name>
+    <function_name>fnv1a_mem</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes n bytes beginning at p with 64-bit FNV-1a. HEAR_SONG_MAIN supplies the bytes read from argv[2] and their length, then writes the returned PCM fingerprint to its log. The helper provides a deterministic identity for the raw audio input.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/hear_song.c</file_name>
+    <function_name>HEAR_SONG_MAIN</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: fprintf()
+libc: fopen()
+libc: fprintf()
+libc: fread()
+libc: fclose()
+libc: fopen()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads argv[1] for an MP3 fingerprint, argv[2] as raw little-endian PCM, and argv[3] as the log path. It decodes PCM samples, hashes the bytes, measures per-second RMS, and selects peak, quiet, and above-half-peak seconds. Metrics and the envelope go to the log; a summary goes to stdout. It returns 2 for wrong argc, 1 on file failure, otherwise 0, providing deterministic song measurements.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
