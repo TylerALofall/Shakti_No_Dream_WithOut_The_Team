@@ -1,0 +1,325 @@
+<Work_Order>
+<QA_specialist>GitHub Copilot Task Agent (model identifier not exposed)</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>20</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and their order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>trim_text__reason_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_remote_call>
+libc: isspace()
+libc: strlen()
+libc: isspace()
+    </function_remote_call>
+    <function_description>Receives mutable line text from split_fields and the file loaders, skips leading whitespace, removes trailing whitespace in place, and returns the first nonspace character. Those parsers use the returned text before testing comments or splitting fields. It standardizes input lines for the reasoning-data loaders.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>copy_checked</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t destination_size, const char *source</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Receives a destination buffer, its capacity, and source text from file loaders and answer-handling helpers. It measures the source, refuses when its length is at least the capacity, otherwise copies the bytes and terminator and returns success. Callers use this bounded copy to store text consumed by later reasoning steps.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>split_fields</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *line, char **fields, size_t field_count</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strchr()
+libc: strchr()
+    </function_remote_call>
+    <function_description>Receives a mutable record line and field array from load_facts, load_synonyms, or load_evidence. It trims each field, replaces required pipe separators with terminators, and rejects missing or empty intermediate fields and an empty or pipe-containing last field. The loaders consume its field pointers to populate reasoning state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>allowed_symbol</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned char character</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a byte from normalize_basic and accepts only plus, minus, asterisk, slash, equals, less-than, greater-than, period, or colon. normalize_basic uses this result to retain approved punctuation while canonicalizing questions and answers for lookup, comparison, and evidence storage.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>normalize_basic</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *input, char *output, size_t output_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: isalnum()
+libc: tolower()
+    </function_remote_call>
+    <function_description>Receives caller text and an output buffer; it rejects null pointers and zero capacity. It lowercases alphanumeric and approved symbol bytes, collapses other runs to single spaces, and refuses overflow or empty output. same_answer, shakti_reason_answer, and apply_evidence_event use the resulting canonical text for comparison, lookup, and storage.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>find_canonical_token</function_name>
+    <function_order>6</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *token</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Receives a token from creative_rewrite_question and searches state->synonyms for a matching variant. It returns that entry's canonical text or the original token when no variant matches. creative_rewrite_question appends the result to its rewritten question before shakti_reason_answer attempts another exact grounded lookup.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>creative_rewrite_question</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *basic_question, char *rewritten, size_t rewritten_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strtok()
+libc: strlen()
+libc: strcmp()
+libc: memcpy()
+libc: strtok()
+    </function_remote_call>
+    <function_description>Receives the normalized question from shakti_reason_answer, state, and a caller output buffer. It tokenizes a bounded copy, substitutes each token through find_canonical_token, and writes the space-separated result; copy or output overflow returns 0. It reports whether any token changed so shakti_reason_answer can cross-check an approved synonym rewrite against exact facts and evidence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>evidence_score</function_name>
+    <function_order>8</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const shakti_evidence_t *entry</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a stored evidence entry from evaluate_exact_question or apply_evidence_event. It scores the source and at most 20 confirmations, caps the score at 1000, and subtracts 250 per contradiction, returning zero when the penalty exhausts the score. The evaluator ranks candidate answers with this value, and the event updater stores it as last_score.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>same_answer</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *left, const char *right</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Receives two answer strings from consider_answer or find_evidence and normalizes both into bounded keys with normalize_basic. It returns whether the keys match; candidate consolidation and evidence lookup use that result to treat normalized variants as one answer rather than separate choices.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>consider_answer</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>scored_answer_t *best, scored_answer_t *second, const char *answer, unsigned int score</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives the current best and second scored-answer slots plus an answer and score from evaluate_exact_question. It merges normalized duplicates through same_answer or updates the two highest distinct candidates by replacing or swapping slots. The evaluator reads the resulting pair to set the decision answer, score, and margin.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>evaluate_exact_question</function_name>
+    <function_order>11</function_order>
+    <function_type>static shakti_decision_t</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *question</function_input>
+    <function_return>shakti_decision_t</function_return>
+    <function_remote_call>
+libc: memset()
+libc: memset()
+libc: memset()
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Receives reason state and a normalized question from shakti_reason_answer or apply_evidence_event. It gathers exact-question facts at score 1000 and matching active evidence scored by evidence_score, then consolidates candidates through consider_answer. It returns the strongest answer, margin, and KNOWN, CAUTIOUS, or UNKNOWN status; shakti_reason_answer searches related questions when this result is UNKNOWN.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>count_shared_tokens</function_name>
+    <function_order>12</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const char *left, const char *right</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>
+libc: strtok()
+libc: strtok()
+libc: strtok()
+libc: strcmp()
+libc: strtok()
+    </function_remote_call>
+    <function_description>Receives two question strings from count_creative_candidates, copies and tokenizes them, and counts right-side tokens matching any stored left-side token. It returns the shared-token count, or zero if a copy or left-token storage fails. count_creative_candidates uses positive counts to identify related facts after exact-answer evaluation fails.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>count_creative_candidates</function_name>
+    <function_order>13</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *question</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives the normalized question from shakti_reason_answer and scans state->facts in stored order. It counts facts whose questions share at least one token through count_shared_tokens, stopping at SHAKTI_MAX_CREATIVE_CANDIDATES. The returned count records related candidates without treating them as cross-validated answers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>find_evidence</function_name>
+    <function_order>14</function_order>
+    <function_type>static shakti_evidence_t *</function_type>
+    <function_input>shakti_reason_state_t *state, const char *question, const char *answer</function_input>
+    <function_return>shakti_evidence_t *</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Receives mutable reason state, a normalized question, and an answer from apply_evidence_event. It scans active evidence entries, matching the question exactly and the answer through same_answer, then returns the entry pointer or NULL. The caller updates a match in place instead of adding duplicate evidence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>apply_evidence_event</function_name>
+    <function_order>15</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const shakti_tick_t *tick, const char *question, const char *answer, shakti_source_t source, int contradiction</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+libc: memset()
+    </function_remote_call>
+    <function_description>Receives state, tick, question, answer, source, and contradiction status from load_evidence or shakti_reason_record_evidence. It normalizes the text, finds or creates a bounded evidence entry, updates confirmation or contradiction counts and teaching_steps, then reevaluates the question and stores score, stability, and first-convergence data. It returns success to both callers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>append_evidence_event</function_name>
+    <function_order>16</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const shakti_tick_t *tick, const char *question, const char *answer, shakti_source_t source, int contradiction</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strchr()
+libc: strchr()
+shakti_time.c: shakti_tick_format()
+libc: fopen()
+libc: fprintf()
+libc: fflush()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives the evidence path, tick, question, answer, source, and contradiction flag from shakti_reason_record_evidence. It rejects pipe characters or invalid normalized/formatted values, then appends and flushes an EV1 ADD or REJECT line using shakti_tick_format and shakti_source_name. It returns write success; the public recorder updates memory only after this append succeeds.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>parse_source_name</function_name>
+    <function_order>17</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *text, shakti_source_t *source</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Receives a source label and output enum pointer from load_evidence. It maps exactly observed, curriculum, or verified to the corresponding shakti_source_t value and returns success; any other label is refused. load_evidence uses this gate before applying a persisted evidence event.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>parse_tick_text</function_name>
+    <function_order>18</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *text, shakti_tick_t *tick</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: sscanf()
+    </function_remote_call>
+    <function_description>Receives serialized tick text from load_evidence and an output tick pointer. It parses epoch and frame, rejects trailing bytes or a frame at or above SHAKTI_FRAME_LIMIT, then stores epoch_seconds and frame and returns success. load_evidence passes the parsed tick to apply_evidence_event for evidence timestamps.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>load_facts</function_name>
+    <function_order>19</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives reason state and a facts-file path from shakti_reason_load. It skips blank/comment lines, parses four pipe-separated fields, normalizes each question, and stores bounded question, answer, relation, and source_id values until capacity. Open, parse, copy, or capacity failure returns 0; shakti_reason_load uses this as its first data-loading stage.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>load_synonyms</function_name>
+    <function_order>20</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strchr()
+libc: strchr()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives reason state and a thesaurus path from shakti_reason_load. It skips blank/comment lines, parses two pipe-separated fields, normalizes each into a single-token variant and canonical form, and stores the pair until capacity; open, parse, or capacity failure returns 0. creative_rewrite_question later uses these pairs to rewrite unresolved questions before exact evidence evaluation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GitHub Copilot Task Agent (model identifier not exposed), on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GitHub Copilot Task Agent (model identifier not exposed) 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
