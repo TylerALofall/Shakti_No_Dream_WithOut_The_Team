@@ -41,7 +41,7 @@ eden_bind.c: bind_at_cell()
 libc: printf()
 eden_bind.c: bind_print_bindings()
     </function_remote_call>
-    <function_description>Uses fixed sight and sound hashes to test pin stability, cell convergence, duplicate creation, lookup, and reinforcement; then creates 400 loop-derived pairs and checks table integrity and cell enumeration. Inputs are constants and loop index i, and eden_bind.c supplies each result. The report goes to stdout; main returns bind_verify's rc as process status, with no in-file downstream consumer. This harness probes the binding API.</function_description>
+    <function_description>Uses fixed sight and sound hashes to test pin stability, cell convergence, duplicate creation, lookup, and reinforcement; then creates 400 loop-derived pairs and checks table integrity and cell enumeration. Inputs are constants and loop index i, and eden_bind.c supplies each result. The report goes to stdout; main returns 1 if bind_init fails, otherwise bind_verify's rc, with no in-file downstream consumer. This harness probes the binding API.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
