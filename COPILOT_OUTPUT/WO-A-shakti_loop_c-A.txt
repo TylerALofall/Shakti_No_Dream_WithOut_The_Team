@@ -204,7 +204,7 @@ libc: printf()
     <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
     <function_name>shakti_loop_set_heartbeat</function_name>
     <function_order>13</function_order>
-    <function_type>static int</function_type>
+    <function_type>int</function_type>
     <function_input>shakti_loop_state_t *state, unsigned int minutes</function_input>
     <function_return>int</function_return>
     <function_remote_call>
@@ -268,7 +268,7 @@ libc: printf()
     <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
     <function_name>shakti_loop_menu_section</function_name>
     <function_order>17</function_order>
-    <function_type>static int</function_type>
+    <function_type>int</function_type>
     <function_input>const shakti_loop_state_t *state, const char *title</function_input>
     <function_return>int</function_return>
     <function_remote_call>
@@ -283,7 +283,7 @@ libc: printf()
     <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
     <function_name>shakti_loop_record_message</function_name>
     <function_order>18</function_order>
-    <function_type>static int</function_type>
+    <function_type>int</function_type>
     <function_input>shakti_runtime_t *runtime, const char *route, const char *text</function_input>
     <function_return>int</function_return>
     <function_remote_call>
