@@ -1,0 +1,56 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>1</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/bind_probe.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+eden_bind.c: bind_init()
+libc: printf()
+eden_bind.c: bind_pin()
+libc: printf()
+eden_bind.c: bind_pin()
+libc: printf()
+eden_bind.c: bind_converges()
+eden_bind.c: bind_converges()
+libc: printf()
+eden_bind.c: bind_create()
+eden_bind.c: bind_create()
+eden_bind.c: bind_lookup_sight()
+libc: printf()
+libc: printf()
+eden_bind.c: bind_reinforce()
+eden_bind.c: bind_lookup_sound()
+libc: printf()
+eden_bind.c: bind_lookup_sight()
+libc: printf()
+eden_bind.c: bind_create()
+eden_bind.c: bind_verify()
+libc: printf()
+eden_bind.c: bind_at_cell()
+libc: printf()
+eden_bind.c: bind_at_cell()
+libc: printf()
+eden_bind.c: bind_print_bindings()
+    </function_remote_call>
+    <function_description>Uses fixed sight and sound hashes to test pin stability, cell convergence, duplicate creation, lookup, and reinforcement; then creates 400 loop-derived pairs and checks table integrity and cell enumeration. Inputs are constants and loop index i, and eden_bind.c supplies each result. The report goes to stdout; main returns bind_verify's rc as process status, with no in-file downstream consumer. This harness probes the binding API.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>Work_Order — total_items — 90 — 1 — This output piece contains one SECTION record.</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
