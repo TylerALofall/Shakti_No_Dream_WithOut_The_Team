@@ -1,0 +1,248 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>16</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight bytes of caller-supplied value v, least-significant byte first, into FNV state h and returns the updated state. fnv_str, paint_hash, and paint_record consume that state for text, pixel, ticket, block, and stream hashes. This helper supplies deterministic hashing for painted-card identity and ledger chaining.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Consumes caller-supplied string s from initial state h, applying fnv1 to each unsigned-byte value until the terminator. paint_hash and paint_record use the returned state for painted labels, names, colors, and ledger pins. This helper binds text into deterministic paint identities and stream records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>palette_hex</function_name>
+    <function_order>3</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>const char *name</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Searches fixed palette PALETTE for caller-supplied color name and returns its hex string or NULL when absent. paint_emit uses the result to validate and label both colors, while paint_swab rejects an unknown swab color with it. This lookup keeps both paint paths on the same palette.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>load_8x8</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *f, char *name, size_t ncap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fgets()
+libc: strncmp()
+libc: strncmp()
+    </function_remote_call>
+    <function_description>Reads rows from the opened stream f supplied by paint_glyph, captures its TEXT name into the caller buffer, and loads dot-or-hash pixels into global PX with eight columns. It returns success when a name and at least one complete eight-row character are present; paint_glyph then passes the grid to paint_emit. This decodes the text glyph format.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>load_64x64</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *f, char *name, size_t ncap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fgets()
+libc: strncmp()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Reads ASCII metadata and complete binary rows from the opened stream f supplied by paint_glyph, storing 64-column pixels in global PX. With an ASCII value and exactly 64 rows, it writes the name ascii_NNN and returns success; paint_glyph then passes the grid to paint_emit. This decodes the binary glyph format.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>make_swab</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *name, int rows, int cols</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives dimensions and the swab name from paint_swab, sets global pixel dimensions, and fills every PX cell with 1; name is intentionally unused. paint_swab next sends this grid to paint_emit. This helper creates the solid pixel shape for a pure-color card.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_hash</function_name>
+    <function_order>7</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *name, const char *ink, const char *ground</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes caller-supplied name, ink, and ground together with file-local PX and its dimensions, visiting pixels in BAYER rank order. paint_emit passes the returned identity to paint_record. This makes color and grid content part of each deterministic painted-card hash.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_record</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *name, const char *ink, const char *ground, uint64_t hash, const char *wav</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives the painted identity and sound binding from paint_emit, appends its record to PAINT.ndx when the file opens, and derives a ticket pin from tseq, name, and hash. It advances stream_pin and block_pin, writing a block seal every ten tickets and reseeding the next block from that pin. This maintains the paint ledger proof chain.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_emit</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *name, const char *ink, const char *ground, const char *wav</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: fopen()
+libc: fprintf()
+libc: fputc()
+libc: fputc()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives a name, colors, and wav from paint_glyph or paint_swab and uses global PX as the grid. It validates palette names, hashes the card, writes a painted-grid file under PAINT_DIR, increments paint_count, and calls paint_record; it returns 1 after that path or 0 for invalid colors or an open failure. This centralizes card output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_init</function_name>
+    <function_order>10</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses no parameters and resets global stream_pin and block_pin to FNV_BASIS while clearing block_tickets, block_count, tseq, and paint_count. Later paint_record calls consume these initialized values. This starts paint-ledger state deterministically; no caller appears in this file, so the downstream caller is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_glyph</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, const char *fmt, const char *ink, const char *ground, const char *wav</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: memset()
+libc: fgets()
+libc: fclose()
+libc: strncmp()
+libc: strcmp()
+libc: strncmp()
+libc: strcmp()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Processes caller-supplied path, format, colors, and wav by opening the glyph file, clearing PX, checking its magic and format, then loading it through load_8x8 or load_64x64. It passes the loaded name and colors to paint_emit and returns that result, or 0 on earlier failure. This is the file-glyph entry path; no caller appears in this file, so its downstream caller is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_swab</function_name>
+    <function_order>12</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *color, int rows, int cols</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Processes caller-supplied color and dimensions, refusing unknown palette colors or dimensions outside PX bounds. It names the card swab_color, uses make_swab to fill PX, then calls paint_emit with the color as ink and ground and wav NONE. It returns the emission result; no caller appears in this file, so its downstream caller is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_seal</function_name>
+    <function_order>13</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Uses no parameters and reads global stream_pin to append a final stream record to PAINT.ndx when the ledger opens. No later function in this file consumes that line, so the downstream consumer is unresolved. This best-effort seal leaves the accumulated paint-stream proof in the ledger.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_stream_pin</function_name>
+    <function_order>14</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses no parameters and returns global stream_pin, which paint_record accumulates from paint tickets. The value goes to its caller, but no caller appears in this file, so the downstream consumer is unresolved. This accessor exposes the current deterministic paint-stream proof without changing state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_blocks</function_name>
+    <function_order>15</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses no parameters and returns global block_count, which paint_record increments after each ten-ticket block. The value goes to its caller, but no caller appears in this file, so the downstream consumer is unresolved. This accessor exposes the number of completed paint blocks without changing state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/glyph_paint.c</file_name>
+    <function_name>paint_count_done</function_name>
+    <function_order>16</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses no parameters and returns global paint_count, which paint_emit increments after opening and writing a painted-grid file. The value goes to its caller, but no caller appears in this file, so the downstream consumer is unresolved. This accessor reports completed card output without changing paint state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
