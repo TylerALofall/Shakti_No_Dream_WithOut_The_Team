@@ -1,0 +1,264 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-SOL</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>20</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>find_glyph</function_name>
+    <function_order>1</function_order>
+    <function_type>static const eyes_font_entry_t *</function_type>
+    <function_input>unsigned char character</function_input>
+    <function_return>const eyes_font_entry_t *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Searches EYES_FONT for the character supplied by its caller and returns the matching table entry or NULL. eyes_render_glyph and eyes_text_supported pass characters here; the returned entry supplies the 5x7 rows used to render or validate text. This shared lookup defines the supported glyph set for the page pipeline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>dimensions_valid</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned int width, unsigned int height</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Checks the caller's width and height are nonzero and their product does not exceed EYES_MAX_PIXELS. Image-loading, pulling, reconstruction, comparison, recognition, rendering, and writing functions use the result to reject invalid raster dimensions. It bounds pixel processing before those stages access image buffers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>luma_of</function_name>
+    <function_order>3</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const unsigned char *rgba, unsigned long pixel_index</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads the RGB bytes for pixel_index in the caller's RGBA buffer and returns their rounded integer luma using weights 77, 150, and 29. eyes_pull_mono and eyes_recognize_text threshold that value, while eyes_diff compares thresholded original and reconstructed pixels. It supplies one grayscale test for extraction, recognition, and comparison.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_cells_x</function_name>
+    <function_order>4</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>unsigned int width</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Divides the caller's image width by eight and returns the number of complete glyph cells across, discarding any remainder. eyes_recognize_text uses this count to bound its column scan. It converts pixel width into the horizontal extent of the 8x8 recognition grid.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_cells_y</function_name>
+    <function_order>5</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>unsigned int height</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Divides the caller's image height by eight and returns the number of complete glyph cells down, discarding any remainder. eyes_recognize_text uses this count to bound its row scan. It converts pixel height into the vertical extent of the 8x8 recognition grid.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_render_glyph</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned char character, char bitmap[8][9]</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Looks up the caller's character and, when both the bitmap and glyph are valid, fills an 8x8 dot grid with the 5x7 font rows shifted one column right; the ninth byte of each row is NUL. It returns 1 on rendering and 0 on rejection. stamp_glyph and eyes_recognize_text consume the bitmap for page drawing and matching.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_text_supported</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Scans the caller's NUL-terminated text and returns 0 for a NULL pointer or any byte absent from EYES_FONT; otherwise it returns 1, including for empty text. eyes_load_document applies this check to all three text lines before stamping them. It gates page text to characters the font can render.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>fill_white</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned long pixel_count</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Writes opaque white RGBA bytes for pixel_count pixels in the buffer supplied by its caller. eyes_load_document uses it before drawing a text or color page, and eyes_render_clean_page uses it before stamping recognized characters. It provides the blank canvas shared by both rendering paths.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>stamp_glyph</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned int width, unsigned int height, unsigned int origin_x, unsigned int origin_y, unsigned char character</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Renders the supplied character to an 8x8 bitmap, then changes in-bounds pixels marked # to opaque black in the caller's RGBA image at origin_x and origin_y. It leaves other pixels unchanged. stamp_line places text with it, and eyes_render_clean_page places recognized characters; it is the shared glyph-to-raster step.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>stamp_line</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned int width, unsigned int height, const char *line, unsigned int origin_y</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strlen()
+    </function_remote_call>
+    <function_description>Measures the caller's line, centers it in the image when its 8-pixel glyph cells fit, and otherwise starts at x zero; it sends each character to stamp_glyph at origin_y. eyes_load_document supplies its three validated lines at rows 0, 8, and 16. It lays text onto the page canvas.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>generate_color_pattern</function_name>
+    <function_order>11</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *rgba, unsigned int width, unsigned int height, unsigned long seed</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Fills the caller's RGBA image with opaque RGB bands selected from each x coordinate plus seed modulo the width-derived band count; rows repeat the same pattern. eyes_load_document calls it for kind 1 after checking dimensions and capacity. It creates the deterministic color-page input for later pull and reconstruction stages.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_load_document</function_name>
+    <function_order>12</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned int kind, unsigned int width, unsigned int height, const eyes_text_page_t *text, unsigned long seed, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Validates the caller's RGBA buffer, dimensions, and capacity, then clears it to white. For kind 0 it requires supported text and stamps line1, line2, and line3 at y positions 0, 8, and 16; kind 1 generates a seeded color pattern; other kinds fail. The completed page goes to the caller; downstream consumer unresolved. It builds input images for the eyes pipeline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>channel_saturated</function_name>
+    <function_order>13</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const unsigned char *rgba, unsigned long pixel_index, unsigned int channel</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests the caller's pixel for a full-strength primary in the selected channel: 0 selects red, 1 green, and any other value blue; the selected channel must be 255 while the other two are zero. eyes_pull_color calls it for channels 0 through 2 and uses each result as a pixel bit. It defines which color pixels the pull operation recognizes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_pull_color</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *rgba, unsigned int width, unsigned int height, char *bits, unsigned long bits_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Validates the caller's RGBA image, dimensions, and output capacity, then writes three channel_saturated results per pixel as 0 or 1 and terminates the bits string. It returns 0 on invalid input and 1 on completion. eyes_run_cycles consumes this representation for color reconstruction and repeat pulls; it extracts the primary-channel data.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_pull_mono</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *rgba, unsigned int width, unsigned int height, char *bits, unsigned long bits_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Validates the caller's RGBA image, dimensions, and output capacity, then writes one bit per pixel: luma at least 128 becomes 0 and darker pixels become 1; it NUL-terminates the result. eyes_run_cycles uses the bits for monochrome reconstruction and repeat pulls. It extracts the page's thresholded ink map.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_reconstruct_color</function_name>
+    <function_order>16</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *bits, unsigned int width, unsigned int height, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+    </function_remote_call>
+    <function_description>Checks the caller's three-bit-per-pixel string length, dimensions, capacity, and bit values, then maps each RGB bit to 0 or 255 and sets alpha to 255. It returns 0 on invalid input and 1 on success. eyes_run_cycles passes pulled color bits here before measuring the next pull; this rebuilds an RGBA image from the compact representation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_reconstruct_mono</function_name>
+    <function_order>17</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *bits, unsigned int width, unsigned int height, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+    </function_remote_call>
+    <function_description>Checks the caller's one-bit-per-pixel string length, dimensions, capacity, and bit values, then maps 1 to opaque black and 0 to opaque white in the RGBA output. It returns 0 on invalid input and 1 on success. eyes_run_cycles supplies pulled monochrome bits before measuring another pull; this restores the thresholded image.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_diff</function_name>
+    <function_order>18</function_order>
+    <function_type>unsigned long</function_type>
+    <function_input>const unsigned char *original, const unsigned char *reconstructed, unsigned int width, unsigned int height, int color</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>
+libc: memcmp()
+    </function_remote_call>
+    <function_description>Compares caller-supplied original and reconstructed RGBA pixels and returns the number that differ, or (unsigned long)-1 for null buffers or invalid dimensions. Color mode compares all four bytes with memcmp; monochrome mode compares their thresholded luma bits. No caller appears in this file, so the downstream consumer is unresolved; it measures reconstruction drift.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_recognize_text</function_name>
+    <function_order>19</function_order>
+    <function_type>unsigned long</function_type>
+    <function_input>const unsigned char *mono_rgba, unsigned int width, unsigned int height, eyes_recog_t *out, unsigned long out_capacity</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Scans complete 8x8 cells of the caller's monochrome RGBA image row by row, comparing thresholded pixels against every EYES_FONT glyph. It writes each exact non-space match and cell coordinates while capacity remains, but returns the total found count even if larger than out_capacity. No caller appears in this file, so the downstream consumer is unresolved; it converts raster cells to recognition records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="E">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—E/eyes.c</file_name>
+    <function_name>eyes_render_clean_page</function_name>
+    <function_order>20</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned int width, unsigned int height, const eyes_recog_t *characters, unsigned long character_count, unsigned char *rgba, unsigned long rgba_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Validates the caller's dimensions, RGBA capacity, and character pointer, fills the image white, then stamps each supplied eyes_recog_t character at its recorded 8x8 cell coordinates. It returns 0 for invalid input and 1 after rendering. Its input records match eyes_recognize_text's output; no caller appears here, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-SOL, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-SOL 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
