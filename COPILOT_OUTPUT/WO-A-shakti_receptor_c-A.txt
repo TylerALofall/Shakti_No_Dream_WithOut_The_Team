@@ -1,0 +1,130 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>8</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_init</function_name>
+    <function_order>1</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_receptor_t *receptor</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Receives a receptor from its caller and zeroes the entire structure with memset when non-NULL; a NULL pointer returns without effect. It returns no value. No caller appears in this file, so the downstream consumer is unresolved. It provides a clean initial state before receptor configuration.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_configure</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor, unsigned int width, unsigned int height, unsigned int exposure_ticks, unsigned int gain, unsigned int binning</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Validates the caller's receptor, dimensions, exposure, gain, and binning, then rejects pixel and text-capacity limits that the width-height product would exceed. On success it stores those settings, closes the shutter, clears poll_count and frame_text, and returns 1; invalid input returns 0. No caller appears in this file, so the downstream consumer is unresolved. It establishes settings for capture.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_open_shutter</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor, shakti_tick_clock_t *clock_state</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+shakti_time.c: shakti_tick_next()
+    </function_remote_call>
+    <function_description>Uses the caller's receptor and clock_state to start an exposure, refusing a NULL or unconfigured receptor, an already open shutter, or a failed shakti_tick_next call. On success it stores the exposure start tick, resets poll_count, opens the shutter, and returns 1; refusal returns 0. No caller appears in this file, so the downstream consumer is unresolved. It begins timed capture.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_poll</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives the receptor being exposed, returns 0 if it is NULL or its shutter is closed, and otherwise increments poll_count and returns whether that count has reached exposure_ticks. shakti_receptor_readout uses the count as its readiness gate. The result tells the caller when the configured exposure duration has elapsed.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>collect_cell</function_name>
+    <function_order>5</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>const shakti_receptor_t *receptor, unsigned int row, unsigned int column</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Combines the receptor's exposure-start epoch and frame with its width and the supplied row and column to derive photons, multiplies by gain, divides by binning, and returns the low bit. shakti_receptor_readout supplies each grid coordinate and writes the returned 0 or 1 into frame_text. It generates deterministic binary cells for a captured frame.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_readout</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_receptor_t *receptor</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Requires a non-NULL receptor with an open shutter and poll_count at least exposure_ticks. It visits each configured row and column, calls collect_cell, and appends each binary digit to frame_text with snprintf; a formatting or capacity failure returns 0. On success it closes the shutter and returns 1. shakti_receptor_write_frame_artifact consumes frame_text for persistence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_binarize_frame</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *frame_text, unsigned int cell_count, char *output, unsigned long output_capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Copies cell_count characters from caller-supplied frame_text to output only when both pointers are non-NULL, the count is within the receptor pixel limit, and output_capacity includes a terminator. Any character other than 0 or 1 clears output[0] and returns 0; success terminates the copy and returns 1. No caller appears in this file, so the downstream consumer is unresolved. It validates binary frame text.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_receptor.c</file_name>
+    <function_name>shakti_receptor_write_frame_artifact</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_receptor_t *receptor, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fputc()
+libc: fputc()
+libc: fflush()
+libc: fclose()
+libc: remove()
+shakti_artifact.c: shakti_artifact_validate_written_text()
+    </function_remote_call>
+    <function_description>Writes a closed, nonempty receptor frame to the caller's path as SHAKTI_WRITTEN_TEXT_8X8_V1, its text and cell count, and one character record with eight generated dot/hash rows per cell. It flushes and closes the file, removes it and returns 0 on write failure, then returns shakti_artifact_validate_written_text's result. It serializes captured frame_text as a validated written-text artifact.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
