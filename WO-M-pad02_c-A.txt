@@ -1,0 +1,82 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>2</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="M">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—M/pad02.c</file_name>
+    <function_name>fnv1a</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>fnv1a processes n bytes from p by XORing each into h and multiplying by FNV_PRIME, then returns the updated 64-bit hash. main supplies PCM, file-read buffers, or a completed hash, with h initialized from FNV_BASIS or a prior hash. main uses the result for the ledger and two verification passes. The byte hash gives main a pin for padded audio.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="M">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—M/pad02.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: fopen()
+libc: fseek()
+libc: ftell()
+libc: rewind()
+libc: fread()
+libc: memcmp()
+libc: memcmp()
+libc: fclose()
+libc: fread()
+libc: memcmp()
+libc: fread()
+libc: fseek()
+libc: fclose()
+libc: snprintf()
+libc: fopen()
+libc: memset()
+libc: memcpy()
+libc: memcpy()
+libc: memcpy()
+libc: memcpy()
+libc: fwrite()
+libc: fwrite()
+libc: fwrite()
+libc: fwrite()
+libc: fclose()
+libc: fopen()
+libc: fclose()
+libc: rewind()
+libc: fread()
+libc: fclose()
+libc: fopen()
+libc: fopen()
+libc: fread()
+libc: fwrite()
+libc: fclose()
+libc: fclose()
+libc: remove()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>main reads WAV paths from argv, checks RIFF/WAVE headers, locates each data chunk, and loads up to static pcm's capacity as 16-bit samples. It adds PAD zero samples before and after unless the leading PAD samples are already zero, then writes a 44-byte 16-kHz mono WAV to a temporary path, hashes it twice, and replaces the original. Paths come from argv; updated files, stdout counts and pin, and exit status are outputs, with external consumers unresolved. It pads voice files and checks the resulting bytes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
