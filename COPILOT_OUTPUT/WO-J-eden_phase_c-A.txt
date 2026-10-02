@@ -1,0 +1,151 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>9</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>fnv1a</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the n bytes at p into caller-supplied FNV state h and returns the updated state. load_deck uses it for each deck record's symbol bytes, while she_sees uses it for a symbol's voice bytes. These callers use the result to seed the deterministic deal or extend game_log with spoken-voice data.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>fnv1a_u64</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t v, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight low-to-high bytes of caller-supplied v into FNV state h and returns the updated state. she_sees uses it for a symbol's sight pin, and main uses it for scores, flip counts, and final_pin. It supplies deterministic numeric pin updates for the game log and result.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>lcg</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint32_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Advances file-local lcg_state with the fixed multiply-and-add recurrence and returns its upper shifted value as uint32_t. deal consumes it to shuffle table, and main consumes it to choose RANDOM player's slots. load_deck seeds lcg_state from the deck, making this the shared deterministic choice stream.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>hex2u64</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *s, uint64_t *out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads up to 16 leading hexadecimal digits from caller-supplied s, accepting upper- or lowercase letters, writes the accumulated value through out, and returns -1 only when no digit was read. load_deck uses it to decode each deck record's sight pin into syms. It supplies the deck's numeric pin parser.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>load_deck</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strchr()
+libc: strchr()
+libc: strchr()
+libc: strchr()
+libc: snprintf()
+libc: snprintf()
+libc: strchr()
+libc: fclose()
+libc: strlen()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads the file at the DECK constant and splits each accepted line into symbol, voice, class, and hexadecimal sight pin fields in syms. It hashes each line into a seed, closes the file, initializes lcg_state and deal_seed, and returns 0 only when at least one symbol loaded; otherwise it returns -1. main uses the loaded deck to deal and run the game.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>deal</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Builds file-local table with two slots for each loaded symbol, shuffles the slots using lcg, sets ncard to twice nsym, and marks every card hidden in phase. main calls it after resetting lcg_state from deal_seed on each pass, then uses table and phase while playing. It prepares the deterministic game deck.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>same_rule</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>int a, int b, int class_rule</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Compares the symbols at caller-supplied slots a and b using file-local table: class_rule selects equality of their class_ strings, otherwise their symbol indices must match. main uses the result to search known pairs and decide whether flipped cards match. It implements the game's exact-symbol and shared-class rules.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>she_sees</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>int slot</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strlen()
+    </function_remote_call>
+    <function_description>Uses caller-supplied slot to read its symbol's sight pin and voice from table and syms, increments phase_transitions, and folds the pin and voice bytes into game_log. main calls it whenever SHAKTI flips a card, then updates that card's phase and flip count. It records the sight and spoken-voice inputs used by the game pin.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_phase.c</file_name>
+    <function_name>main</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Loads the deck from the file-local DECK path, then plays two passes for each exact-symbol and class-match rule. It deals the cards, runs SHAKTI's remembered-pair strategy against RANDOM's LCG choices, and reports scores, turns, phase transitions, and final_pin to stdout. It returns 2 when the deck cannot load, 1 when pass scores or turns drift, otherwise 0. No in-file consumer exists, so the downstream consumer is unresolved; main drives the deterministic phase game.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
