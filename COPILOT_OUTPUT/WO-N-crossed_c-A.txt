@@ -57,7 +57,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Builds binary rungs in bin and Fibonacci rungs in fib from LADDER and local seeds 1 and 2, then tests binary rungs through 16 with in_list and stores shared values in agree. It prints both ladders, shared and split rungs, WHEEL and WOMB factorization claims, 7!, two divisions by 5040, its divisor count, and the TET_SLICE_GRID comparison to stdout, then returns 0. This executable checks the stated ladder comparison; no in-file consumer reads its output.</function_description>
+    <function_description>Builds binary rungs in bin and Fibonacci rungs in fib from LADDER and local seeds 1 and 2, then tests binary rungs through 16 with in_list and stores shared values in agree. It prints both ladders, shared and split rungs, WHEEL and WOMB factorization claims, 7!, two divisions by 5040, its divisor count, and the TET_SLICE_GRID reference to stdout, then returns 0. This executable checks the stated ladder comparison; no in-file consumer reads its output.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
