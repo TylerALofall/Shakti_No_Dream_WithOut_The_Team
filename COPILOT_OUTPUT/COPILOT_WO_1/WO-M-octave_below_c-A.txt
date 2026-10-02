@@ -41,7 +41,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Receives a ratio name, numerator, and denominator from main; prints the base ratio, then four forms with the denominator doubled by each octave and reduced through gcd_u. It classifies both terms through on_wheel and prints the results to stdout; downstream consumer unresolved. This displays wheel membership across three octaves below.</function_description>
+    <function_description>Receives a ratio name, numerator, and denominator from main; prints four forms for octaves 0 through 3, doubling the denominator and reducing each through gcd_u. It classifies both terms through on_wheel and prints the results to stdout; downstream consumer unresolved. This displays wheel membership from the base ratio through three octaves below.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 

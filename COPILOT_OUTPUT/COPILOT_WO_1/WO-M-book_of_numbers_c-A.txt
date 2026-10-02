@@ -17,7 +17,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Receives a section title from main and prints it between separator lines on stdout. main calls rule before each derivation section, placing the following calculations and claims under a named heading; the heading is report output, not data passed to another function.</function_description>
+    <function_description>Receives a section title from main and prints it between separator lines on stdout. main calls rule before each derivation section, placing the following calculations and claims under a named heading; no later function or file consumer appears, so downstream consumer unresolved.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
@@ -32,7 +32,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Receives a claim label, computed value, and expected value from main; increments file-local g_checks and, on mismatch, g_failed, then prints the result to stdout. Its verdicts feed main's final process status, and its purpose is to report whether each derived number matches its check.</function_description>
+    <function_description>Receives a claim label, computed value, and expected value from main; increments file-local g_checks and, on mismatch, g_failed, then prints the result to stdout. Its verdicts feed main's final process status; no later function or file consumes the printed output, so downstream consumer unresolved. It reports whether each number matches its check.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
@@ -107,7 +107,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Receives a module, constant name, capacity, and frozen pin from main, hashes the capacity through pin_of, updates file-local check counters, and prints whether the computed pin matches. It verifies the fixed module-capacity pins in the book's pin table.</function_description>
+    <function_description>Receives a module, constant name, capacity, and frozen pin from main, hashes the capacity through pin_of, updates file-local check counters, and prints whether the computed pin matches. The printed row has no later function or file consumer, so downstream consumer unresolved. It verifies fixed module-capacity pins in the book's pin table.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
@@ -284,7 +284,7 @@ libc: printf()
 libc: printf()
 libc: printf()
     </function_remote_call>
-    <function_description>Builds the 80-cell four-prime lattice, computes wheel and organ periods, checks mirror pairs, factorial and womb values, pins, capacities, refusal codes, and build counts using file-local tables and arithmetic. It prints the derived report to stdout and returns whether any claim failed; this program makes the number book reproducible.</function_description>
+    <function_description>With no parameters, main derives the 80-cell four-prime lattice and checks wheel, organ, mirror, factorial, womb, pin, capacity, refusal-code, and build claims from file-local tables and arithmetic. It prints the report to stdout and returns whether g_failed is nonzero; no later function or file consumer appears, so downstream consumer unresolved. This program makes the number book reproducible.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
