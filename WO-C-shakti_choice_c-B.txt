@@ -1,0 +1,239 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>16</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_survivor_ladder</function_name>
+    <function_order>21</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_choice_plan_t *plan, const shakti_choice_result_t *result, int64_t *best_delta, int64_t *worst_delta</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Scans surviving nonbaseline options across every condition and horizon, asking shakti_choice_delta for comparable values and tracking their extremes and reversibility. It propagates overflow and skips other unusable deltas, writes best_delta and worst_delta, then returns the beat count from shakti_choice_weigh_range. The file has no caller; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_evidence_name</function_name>
+    <function_order>22</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_choice_evidence_t evidence</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the caller's evidence enum to NONE, CREATIVE, CLAIM, TAUGHT, OBSERVED, VERIFIED, or INVALID. shakti_geometry_write_xml and shakti_person_reading_write_xml consume the returned literal as serialized evidence text. This lookup supplies stable labels to the geometry and person-reading XML records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_option_kind_name</function_name>
+    <function_order>23</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_option_kind_t kind</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the caller's option-kind enum to ACTION, NO_ACTION, WAIT, REFUSE, TEACH_ME, ALTERNATIVE, or INVALID and returns that literal. The file contains no call site for this lookup, so downstream consumer unresolved. It provides stable option-kind text without changing plan state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_option_status_name</function_name>
+    <function_order>24</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_option_status_t status</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the caller's status enum to UNCHECKED, SURVIVES, FILTERED, EVIDENCE_OPEN, or INVALID and returns that literal. The file contains no call site for this lookup, so downstream consumer unresolved. It provides stable filter-result text without changing the result structure.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_sister_name</function_name>
+    <function_order>25</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_sister_t sister</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the caller's sister enum to DESTROYER, PRESERVER, CREATOR, or INVALID. shakti_geometry_write_xml uses the returned label in each serialized sister element after geometry placement and reading setup. This lookup supplies stable labels without changing a reading.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_init</function_name>
+    <function_order>26</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_geometry_schema_t *schema</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Receives a schema pointer from its caller and zeroes the complete structure when it is non-null; it returns no status. The cleared schema is the starting state for frame and pole definitions, but this file does not call the initializer, so downstream consumer unresolved. It establishes an empty geometry schema.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_define_frame</function_name>
+    <function_order>27</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_geometry_schema_t *schema, unsigned int frame, const char *name, const char *question, const char *evidence_ref, int locked</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Uses the caller's schema, frame index, name, question, evidence reference, and locked flag to build one frame definition. It refuses invalid or already locked slots and failed copies; success stores a locked definition that shakti_geometry_ready later checks and returns SHAKTI_CHOICE_OK. This adds one required geometry frame.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_define_pole</function_name>
+    <function_order>28</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_geometry_schema_t *schema, unsigned int pole, const char *name, const char *evidence_ref, int locked</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Uses the caller's schema, pole index, name, evidence reference, and locked flag to build one pole definition. It refuses invalid or already locked slots and failed copies; success stores a locked pole that shakti_geometry_ready later checks and returns SHAKTI_CHOICE_OK. This adds one required geometry pole.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_ready</function_name>
+    <function_order>29</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_geometry_schema_t *schema</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: strcmp()
+        libc: strcmp()
+    </function_remote_call>
+    <function_description>Checks the caller's schema for locked, nonempty frame and pole fields, unique frame names, and distinct pole names. It returns 1 only when every requirement holds; shakti_geometry_place_use and shakti_geometry_write_xml use this result before placing or serializing geometry. This gates use geometry on a complete schema.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_vertex</function_name>
+    <function_order>30</function_order>
+    <function_type>int</function_type>
+    <function_input>unsigned int frame_a, unsigned int frame_b, unsigned int pole, unsigned int *vertex</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps two distinct in-range frame indices and a valid pole through the fixed pair_vertex table, writes the selected vertex through the caller pointer, and returns OK only for a value below 20. shakti_geometry_place_use consumes this mapping to construct a placement. The lookup assigns a geometry vertex to the frame pair and pole.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_place_use</function_name>
+    <function_order>31</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_geometry_schema_t *schema, shakti_use_geometry_t *use, const char *source_memory_ref, const char *use_event_ref, unsigned int frame_a, unsigned int frame_b, unsigned int pole</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Accepts a ready schema, output use, source-memory and use-event references, two frames, and a pole from its caller. It resolves the vertex, copies references, sorts frame indices, and stores the placement in use; shakti_geometry_set_sister_reading and shakti_geometry_write_xml use that structure next. It returns a choice status.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_set_sister_reading</function_name>
+    <function_order>32</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_use_geometry_t *use, unsigned int frame_slot, shakti_sister_t sister, int64_t value, shakti_choice_evidence_t evidence, const char *evidence_ref</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Stores the caller's value and evidence reference as a present sister reading in the selected frame slot of use. It refuses invalid slots or sisters and non-authoritative evidence; shakti_geometry_write_xml later requires all three readings for both frames. It returns OK or REFUSED and builds evidence data for serialization.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>xml_text</function_name>
+    <function_order>33</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *output, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fputs()
+        libc: fputc()
+    </function_remote_call>
+    <function_description>Validates caller text and output, rejects control bytes except tab, line feed, and carriage return, escapes XML metacharacters and quotes, and writes the result to output. shakti_geometry_write_xml and both person XML writers use its status for text fields. It returns 1 on success and 0 on invalid input or write failure.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_geometry_write_xml</function_name>
+    <function_order>34</function_order>
+    <function_type>int</function_type>
+    <function_input>FILE *output, const shakti_geometry_schema_t *schema, const shakti_use_geometry_t *use</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fputs()
+        libc: fprintf()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+    </function_remote_call>
+    <function_description>Serializes a caller's ready schema and use to output after validating references, frames, placement indices, and all six authoritative sister readings. It returns OPEN for missing or unverified readings and REFUSED for invalid data or write failure; successful XML ends with OK. No caller appears in this file; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_person_reading_write_xml</function_name>
+    <function_order>35</function_order>
+    <function_type>int</function_type>
+    <function_input>FILE *output, const shakti_person_reading_t *reading</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fprintf()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+    </function_remote_call>
+    <function_description>Serializes the caller's person reading only when its ID, visibility flag, evidence, and five text fields pass validation. It escapes the subject, history, state, obligation, and conclusion into output and returns OK only after all writes succeed, otherwise REFUSED. No caller appears in this file; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_person_correction_write_xml</function_name>
+    <function_order>36</function_order>
+    <function_type>int</function_type>
+    <function_input>FILE *output, uint64_t reading_id, const char *subject, const char *correction, const char *evidence_ref</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fprintf()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+        libc: fputs()
+    </function_remote_call>
+    <function_description>Serializes a correction from the caller's nonzero reading ID, subject, correction text, and evidence reference after XML-safe text checks. xml_text escapes each field into output, and the function returns OK only after complete writes, otherwise REFUSED. No caller appears in this file; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

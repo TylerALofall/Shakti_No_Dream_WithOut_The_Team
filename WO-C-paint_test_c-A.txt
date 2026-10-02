@@ -1,0 +1,48 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>1</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/paint_test.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: mkdir()
+        libc: remove()
+        glyph_paint.c: paint_init()
+        glyph_paint.c: paint_swab()
+        libc: snprintf()
+        libc: snprintf()
+        glyph_paint.c: paint_glyph()
+        libc: snprintf()
+        libc: snprintf()
+        glyph_paint.c: paint_glyph()
+        glyph_paint.c: paint_seal()
+        libc: printf()
+        glyph_paint.c: paint_blocks()
+        glyph_paint.c: paint_stream_pin()
+        libc: puts()
+        libc: fopen()
+        libc: fgets()
+        libc: fputs()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Uses fixed color, sound-name, and demo tables with no caller arguments to create 11 8x8 swabs, 73 black-on-white sound-bound glyphs, and four colored letter demos through glyph_paint.c. It seals PAINT.ndx, reports counts and pins, then prints selected ledger records to stdout; return 0 completes the harness.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
