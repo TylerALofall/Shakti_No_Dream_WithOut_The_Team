@@ -187,7 +187,7 @@
         libc: fputs()
         libc: fputs()
     </function_remote_call>
-    <function_description>Serializes a caller's ready schema and use to output after validating references, frames, placement indices, and all six authoritative sister readings. It returns OPEN for missing or unverified readings and REFUSED for invalid data or write failure; successful XML ends with OK. No caller appears in this file; downstream consumer unresolved.</function_description>
+    <function_description>Serializes a caller's ready schema and use to output after validating references, frames, placement indices, and all six authoritative sister readings. It returns OPEN if any reading is absent, non-authoritative, or has invalid reference text; invalid inputs or write failures return REFUSED, and success returns OK. No caller appears in this file; downstream consumer unresolved.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
