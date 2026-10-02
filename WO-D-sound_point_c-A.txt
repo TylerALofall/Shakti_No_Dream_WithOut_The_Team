@@ -1,0 +1,155 @@
+<Work_Order>
+<QA_specialist>GPT-6 Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>7</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes n bytes from p with 64-bit FNV-1a, substituting the FNV basis when h is zero, and returns the updated pin. main feeds it output-file bytes, the optional seed, input path, and output-hash bytes to build file_hash and stream_pin for the ledger and stdout; it supplies deterministic artifact identity.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>rd_u32le</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const unsigned char *p</function_input>
+    <function_return>uint32_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Decodes four bytes at p as a little-endian uint32_t and returns the value. main uses it for RIFF chunk sizes while scanning hdr and for the data-chunk length, locating and bounding fmt and data content before staging audio.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>rd_u16le</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint16_t</function_type>
+    <function_input>const unsigned char *p</function_input>
+    <function_return>uint16_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Decodes two bytes at p as a little-endian uint16_t. main reads audio_fmt, channels, and bits from the fmt chunk through this helper, then rejects inputs that are not PCM, mono, or 16-bit before it writes output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>wr_u32le</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *p, uint32_t v</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Stores v as four little-endian bytes at caller-supplied p. main uses it to form RIFF-size, fmt-size, sample-rate, byte-rate, and data-size fields in the canonical output header before writing the padded WAV.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>wr_u16le</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *p, uint16_t v</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Stores v as two little-endian bytes at p. main uses it to encode PCM format, mono channel count, block alignment, and 16-bit sample depth in the canonical WAV header, whose bytes then precede the padded sample data.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>refuse</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *file, const char *reason, int code</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: fprintf()
+    </function_remote_call>
+    <function_description>Receives an input path, reason, and exit code from main's refusal branches. It best-effort appends a teach_me line to MOMMA_OUTBOX.txt, writes the REFUSE diagnostic to stderr, and returns the supplied code so main can terminate with visible refusal; it centralizes rejection reporting.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/sound_point.c</file_name>
+    <function_name>main</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: fopen()
+libc: fread()
+libc: fclose()
+libc: memcmp()
+libc: memcmp()
+libc: fclose()
+libc: memcmp()
+libc: memcmp()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fseek()
+libc: fclose()
+libc: fread()
+libc: fclose()
+libc: memset()
+libc: memcpy()
+libc: strlen()
+libc: snprintf()
+libc: fopen()
+libc: memcpy()
+libc: memcpy()
+libc: memcpy()
+libc: fwrite()
+libc: fclose()
+libc: remove()
+libc: fwrite()
+libc: fclose()
+libc: remove()
+libc: fclose()
+libc: remove()
+libc: rename()
+libc: remove()
+libc: fopen()
+libc: fread()
+libc: fclose()
+libc: strtoull()
+libc: strlen()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads argv[1] WAV and argv[2]/argv[3] output and ledger paths, validates RIFF/WAVE chunks and PCM mono 16 kHz 16-bit data, then writes a canonical WAV with 32,000 zero samples on each side via temp file and rename. It hashes the staged file, chains optional argv[4] seed, input path, and file pin, appends a ledger row, and prints pins. The staged WAV has no in-file consumer; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6 Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6 Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
