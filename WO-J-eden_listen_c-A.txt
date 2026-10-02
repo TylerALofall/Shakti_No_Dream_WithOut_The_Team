@@ -98,7 +98,7 @@
         libc: printf()
         libc: printf()
     </function_remote_call>
-    <function_description>Opens the argv directory or default Sound_art and visits its .wav entries. It normally calls hear_atom twice per path, rejects unreadable or differing hashes and metadata, folds each pure atom hash into ledger with fnv1a64, and prints admitted atoms and totals. It returns 2 if the directory cannot open, 1 for rejected atoms, otherwise 0; downstream consumer unresolved.</function_description>
+    <function_description>Opens the directory from argv[1] or default Sound_art and visits its .wav entries. It normally calls hear_atom twice per path, rejects unreadable or differing hashes and metadata, folds each pure atom hash into ledger with fnv1a64, and prints admitted atoms and totals. It returns 2 if the directory cannot open, 1 for rejected atoms, otherwise 0; downstream consumer unresolved.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 

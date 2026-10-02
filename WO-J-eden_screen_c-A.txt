@@ -48,7 +48,9 @@
     <function_type>static void</function_type>
     <function_input>const unsigned char *s, unsigned char *b</function_input>
     <function_return>void</function_return>
-    <function_remote_call>libc: memset()</function_remote_call>
+    <function_remote_call>
+        libc: memset()
+    </function_remote_call>
     <function_description>Packs each beat's low three bits from caller buffer s into bitstream b after zeroing sizeof(binbuf) bytes. main supplies screen_a and binbuf, then hashes the packed still or frame; for the still it also passes the bytes to rebuild to test binary round-tripping.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
@@ -89,7 +91,7 @@
         libc: printf()
         libc: printf()
     </function_remote_call>
-    <function_description>Checks on-wheel dimensions, builds and packs a still, rebuilds and compares it, then packs VID_FRAMES generated patterns into a rolling short pin. It repeats the pin calculations, refuses dimension, drift, or rebuild failures, and prints dimensions and three pins. It returns 1 on a failed check and otherwise 0; downstream consumer unresolved.</function_description>
+    <function_description>Checks compile-time dimensions, builds and packs the still in screen_a and binbuf, rebuilds into screen_b and compares it, then packs VID_FRAMES generated patterns into a rolling short pin. It repeats pin calculations, refuses dimension, drift, or rebuild failures, and prints dimensions and three pins. It returns 1 on failure and otherwise 0; downstream consumer unresolved.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
