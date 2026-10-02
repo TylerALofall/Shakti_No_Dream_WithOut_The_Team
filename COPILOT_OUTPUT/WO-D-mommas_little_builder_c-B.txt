@@ -1,0 +1,201 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>12</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and their order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>look_begin</function_name>
+    <function_order>21</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strstr()
+libc: strstr()
+libc: strlen()
+libc: memset()
+libc: memcpy()
+libc: memset()
+libc: strchr()
+libc: strlen()
+libc: strncpy()
+libc: strtok()
+libc: memset()
+libc: strncpy()
+libc: strtok()
+    </function_remote_call>
+    <function_description>Parses the LOOK argument substring and sequence from consume into B.look_name, B.look_key, and up to OPT_MAX entries in B.look_options. It records B.beat and B.look_seq, sets B.deliberating to B.tempo, and folds the name into B.stream_pin. builder_beat counts deliberation down and calls look_finish at zero. This starts auditable selection from explicit candidates.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>look_finish</function_name>
+    <function_order>22</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: strcmp()
+libc: snprintf()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Reads the candidates, key, sequence, and receive beat stored by look_begin. It adds each option to the convergence ring, selects an exact B.look_key match or records a no-match refusal, then passes the result and timing to ticket; no match also calls teach_me. builder_beat invokes it when deliberation expires. It makes the LOOK decision auditable.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>consume</function_name>
+    <function_order>23</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+libc: memset()
+libc: sscanf()
+libc: strtoull()
+libc: snprintf()
+libc: snprintf()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: memset()
+libc: sscanf()
+    </function_remote_call>
+    <function_description>Parses a curriculum line supplied by builder_beat into sequence and command. An out-of-order sequence creates a STUCK ticket, folds the stall, asks for the arrived lesson, and returns 0 so builder_beat restores B.cursor; an in-order sequence advances B.next_seq and dispatches known commands to their handlers. Unknown commands receive a refusal ticket and teach-me request. It keeps lesson execution in sequence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_beat</function_name>
+    <function_order>24</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Advances B.beat once per call. While LOOK is active it decrements B.deliberating, calls look_finish at zero, folds the deliberation marker, and returns; otherwise it increments B.since_consume, trickles before B.tempo, or reads the next curriculum line and passes it to consume. On refusal it restores the pre-read B.cursor. No caller appears in this file, so downstream consumer is unresolved; it schedules each lesson step.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_init</function_name>
+    <function_order>25</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Clears global B, sets tempo to 10 and next sequence to 1, seeds stream and block pins with FNV_BASIS, and registers dry_run_actuator as dry_run. The file has no caller, so downstream consumer is unresolved. It establishes deterministic state for builder_beat and the builder accessors.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_seal</function_name>
+    <function_order>26</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads B.stream_pin and appends its hexadecimal value as the final stream record in TICKETS.log when the file opens; it returns no status and does not change the pin. No caller appears in this file, so downstream consumer is unresolved. It leaves the accumulated event proof in the ledger.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_stream_pin</function_name>
+    <function_order>27</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns B.stream_pin, accumulated by curriculum, lesson, ticket, convergence, and trickle events, without changing state. No caller appears in this file, so downstream consumer is unresolved; the value exposes the builder's running proof to an external reader.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_beat_count</function_name>
+    <function_order>28</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns B.beat, which builder_beat increments once per call, without changing state. No caller appears in this file, so downstream consumer is unresolved; the value exposes the builder's elapsed heartbeat count.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_next_seq</function_name>
+    <function_order>29</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns B.next_seq, the sequence consume expects next and increments after an in-order lesson, without changing state. No caller appears in this file, so downstream consumer is unresolved; the accessor exposes the curriculum's current position.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_blocks</function_name>
+    <function_order>30</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns B.block_count, incremented by ticket whenever BLOCK_TICKETS tickets close a block, without changing state. No caller appears in this file, so downstream consumer is unresolved; the value reports completed ticket blocks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_recall</function_name>
+    <function_order>31</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t block_no, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Passes block_no and the caller's output stream to block_recall, which selects the corresponding ticket lines from TICKETS.log and writes them verbatim to out; it returns that helper's status unchanged. No caller appears in this file, so downstream consumer is unresolved. It exposes whole-block recall.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_register_tool</function_name>
+    <function_order>32</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *name, actuator_fn fn</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Forwards the caller's tool name and actuator callback to builder_register, which stores them in the fixed registry unless REG_MAX capacity is reached. It returns the registration result. No caller appears in this file, so downstream consumer is unresolved; it exposes the actuator seam to the switchboard.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
