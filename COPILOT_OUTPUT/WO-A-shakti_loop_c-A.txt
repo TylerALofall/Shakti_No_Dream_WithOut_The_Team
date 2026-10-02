@@ -1,0 +1,331 @@
+<Work_Order>
+<QA_specialist>Claude</QA_specialist>
+<date>2026-10-01</date>
+<repair>no</repair>
+<total_items>20</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>copy_text__loop_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *destination, size_t destination_size, const char *source</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Copies the caller's string source into the caller's buffer destination, truncating to destination_size minus one bytes and always ending with a NUL; a NULL destination or zero size returns without writing, and a NULL source stores an empty string. parse_menu calls it twice and shakti_loop_set_goal once, so the copied text lands in parse_menu's local buffer, a menu title, or runtime->loop.goal. It exists so the loop never overflows its fixed-size text buffers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>trim_text__loop_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_remote_call>
+libc: isspace()
+libc: strlen()
+libc: isspace()
+    </function_remote_call>
+    <function_description>Takes a writable string from its caller, advances past leading whitespace, overwrites trailing whitespace with a NUL in place, and returns a pointer to the first non-blank character. parse_menu feeds it each line that strtok cuts from the copied menu text, and shakti_loop_run_reflection feeds it each typed answer; both use the returned pointer directly. It exists so menu lines and reflection answers are compared and stored without stray spaces or newlines.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>read_whole_file</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fread()
+libc: ferror()
+libc: feof()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens the file at path, reads up to destination_size minus one bytes into destination, and NUL-terminates it. It returns 1 only when the read reached end of file without error and fclose succeeded; a NULL argument, zero size, or failed open returns 0, and a read error or a file too big for the buffer clears destination and returns 0. shakti_loop_load uses it for the goal, notebook and menu files, and shakti_loop_notebook uses it to reload the notebook after an append.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>write_whole_file</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fputs()
+libc: fputc()
+libc: fflush()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens the file at path for writing, replacing its contents, writes text followed by one newline, flushes, and closes; it returns 1 only if every step succeeds and 0 otherwise, including a failed open. It does not check path or text for NULL. Its only caller here is shakti_loop_set_goal, which passes SHAKTI_GOAL_PATH and the new goal, so the goal is saved on disk before it is copied into memory. It exists as the loop's one whole-file writer.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>parse_menu</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strtok()
+libc: strrchr()
+libc: strlen()
+libc: memset()
+libc: strlen()
+libc: strncat()
+libc: strlen()
+libc: strncat()
+libc: strtok()
+    </function_remote_call>
+    <function_description>Splits state->menu_text, which shakti_loop_load has just read from the menu file, into menu sections: it copies the text to a local buffer, cuts it into lines with strtok, trims each line, and starts a new entry in state->menu_sections for each [Title] line with a usable title, up to SHAKTI_MAX_MENU_SECTIONS; later non-blank lines are joined with single spaces into that section's description. It returns 1 when at least one section exists, which shakti_loop_load requires to succeed.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>append_loop_log</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *path, const char *prefix, const char *section, unsigned int function_order, const char *route, const char *subject, const char *property, const char *value, shakti_tick_t *used_tick</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+shakti_time.c: shakti_tick_next()
+shakti_log.c: shakti_log_append()
+libc: strcmp()
+shakti_log.c: shakti_log_append()
+shakti_memory.c: shakti_memory_remember()
+    </function_remote_call>
+    <function_description>Records one event: it takes the next tick from runtime->clock, appends a record with the caller's section, order, subject, property and value to the file at path, and, when path is not SHAKTI_LEARNED_STREAM_PATH, appends a second LRN1 record there using route as the property. It then stores value in runtime->memory and copies the tick to used_tick if given. It returns 0 if the tick or an append fails. The cycle, goal, notebook, message and reflection functions all log through it.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>heartbeat_is_due</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_loop_state_t *state, time_t now</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Decides whether a heartbeat is due: it returns 1 when state->heartbeat_minutes is 0, and otherwise returns whether now has reached state->next_heartbeat_epoch. It reads the state without changing it. shakti_loop_begin_cycle passes runtime->loop and the current time, and a true result makes it print and log the heartbeat and then call schedule_next_heartbeat. It exists as the check half of the heartbeat timer.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>schedule_next_heartbeat</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>shakti_loop_state_t *state, time_t now</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Sets state->next_heartbeat_epoch to now when heartbeat_minutes is 0, otherwise to now plus heartbeat_minutes times 60 seconds. shakti_loop_load, shakti_loop_begin_cycle (after a due heartbeat) and shakti_loop_set_heartbeat call it, each passing the time it just read with time(NULL). The stored epoch is what heartbeat_is_due compares against. It exists as the scheduling half of the heartbeat timer.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_init</function_name>
+    <function_order>9</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Resets a shakti_loop_state_t supplied by its caller: it zero-fills the whole struct with memset, then sets heartbeat_minutes to 1 and memory_streaming to 1; a NULL state returns without doing anything. It returns no value. No caller appears in this file, so the downstream consumer is unresolved. It exists to give the loop a clean starting state with a one-minute heartbeat and memory streaming on.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_load</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_loop_state_t *state, const char *goal_path, const char *notebook_path, const char *menu_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: time()
+    </function_remote_call>
+    <function_description>Loads the loop's startup text into state from three caller-supplied paths: goal_path into state->goal, notebook_path into state->notebook and menu_path into state->menu_text, all through read_whole_file, then splits the menu with parse_menu, reads the clock and calls schedule_next_heartbeat for the first heartbeat. It returns 1 on success and 0 if state is NULL or any read, the parse, or time() fails. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_begin_cycle</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, shakti_tick_t *cycle_tick</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+shakti_time.c: shakti_tick_next()
+shakti_time.c: shakti_tick_format()
+shakti_log.c: shakti_log_append()
+libc: printf()
+libc: time()
+libc: puts()
+libc: printf()
+libc: puts()
+libc: puts()
+libc: printf()
+    </function_remote_call>
+    <function_description>Starts a cycle on the caller's runtime: takes and formats the next tick, logs a cycle_start record to SHAKTI_LEARNED_STREAM_PATH, copies the tick to cycle_tick if given, increments runtime->loop.cycle_count and prints the epoch. If heartbeat_is_due, it prints and logs a heartbeat and reschedules; it then prints the goal, logs goal, notebook and menu records through append_loop_log, and prints a notice when reflection is due. Returns 1, or 0 on any failure. No caller appears in this file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_finish_cycle</function_name>
+    <function_order>12</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Ends a cycle on the caller's runtime: increments runtime->loop.turns_since_reflection, sets reflection_due to 1 once that count reaches SHAKTI_REFLECTION_INTERVAL, and logs a reflection record through append_loop_log with property due or scheduled and a matching value. It returns that logging result, or 0 for a NULL runtime. shakti_loop_begin_cycle reads the same reflection_due flag to print its notice. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_set_heartbeat</function_name>
+    <function_order>13</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_loop_state_t *state, unsigned int minutes</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: time()
+    </function_remote_call>
+    <function_description>Changes the heartbeat interval to the caller's minutes: it rejects a NULL state or minutes above SHAKTI_HEARTBEAT_MAX_MINUTES, reads the clock, stores minutes in state->heartbeat_minutes, and calls schedule_next_heartbeat so the next due time counts from now. It returns 1 on success and 0 on rejection or a failed time(). A value of 0 makes heartbeat_is_due true on every cycle. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_set_goal</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *goal</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+shakti_memory.c: shakti_memory_reload_goal()
+    </function_remote_call>
+    <function_description>Replaces the loop goal with the caller's goal text: it rejects a NULL runtime or empty goal, writes the goal to SHAKTI_GOAL_PATH with write_whole_file, copies it into runtime->loop.goal with copy_text__loop_h, reloads it into runtime->memory with shakti_memory_reload_goal, and logs a changed goal record (section Gc, order 2) through append_loop_log. It returns 1 only if every step succeeds. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_notebook</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *entry</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fputs()
+libc: strlen()
+libc: fputc()
+libc: fopen()
+libc: fprintf()
+libc: fflush()
+libc: fclose()
+shakti_memory.c: shakti_memory_reload_notebook()
+    </function_remote_call>
+    <function_description>With no entry, prints runtime->loop.notebook to stdout, adding a final newline if missing, and returns 1. With an entry, appends it and a newline to SHAKTI_NOTEBOOK_PATH, rereads that file into runtime->loop.notebook with read_whole_file, reloads it into runtime->memory with shakti_memory_reload_notebook, and logs an entry record (section Gd, order 2) through append_loop_log. Returns 0 on any failure. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_menu_titles</function_name>
+    <function_order>16</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: puts()
+libc: printf()
+    </function_remote_call>
+    <function_description>Prints the line Menu titles: and then the title of each section in state->menu_sections, one per line, in the order parse_menu stored them; a NULL state prints nothing. Its output goes to stdout and it returns no value. It is the first tier of the two-tier menu: it shows titles only, and shakti_loop_menu_section prints one chosen section's description. No caller appears in this file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_menu_section</function_name>
+    <function_order>17</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_loop_state_t *state, const char *title</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: printf()
+    </function_remote_call>
+    <function_description>Searches state->menu_sections, filled earlier by parse_menu, for the section whose title exactly equals the caller's title and prints title: description to stdout, returning 1 when found. It returns 0 for a NULL state, a NULL or empty title, or no match. It is the second tier of the menu after shakti_loop_menu_titles lists the titles. Its output goes to stdout; no caller appears in this file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_record_message</function_name>
+    <function_order>18</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *route, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Routes the caller's message text by route: message_tyler and note_tyler go to section Gg, message_shakti and note_shakti to Gh, with property message or note; message_tyler sets runtime->loop.waiting_for_tyler to 1 and message_shakti sets it to 0, a flag shakti_loop_print_status reports. It logs text to SHAKTI_MESSAGES_PATH with prefix MSG1 through append_loop_log and returns that result; an unknown route, NULL or empty text, or NULL runtime returns 0. No caller appears in this file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_interrupt_tools</function_name>
+    <function_order>19</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Sets state->tools_interrupted to 1 on the caller's loop state, marking the MCP tools as interrupted; a NULL state does nothing and nothing is returned. The flag is read in this file by shakti_loop_tools_available, which then reports the tools unavailable, and by shakti_loop_print_status, which prints interrupted. shakti_loop_resume_tools clears it. No caller appears in this file, so what triggers the interrupt is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loop.c</file_name>
+    <function_name>shakti_loop_resume_tools</function_name>
+    <function_order>20</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_loop_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Sets state->tools_interrupted back to 0 on the caller's loop state, undoing shakti_loop_interrupt_tools; a NULL state does nothing and nothing is returned. After it runs, shakti_loop_tools_available reports the tools available and shakti_loop_print_status prints available. It is the release half of the interrupt and resume pair. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I Claude, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+Claude 2026-10-01
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
