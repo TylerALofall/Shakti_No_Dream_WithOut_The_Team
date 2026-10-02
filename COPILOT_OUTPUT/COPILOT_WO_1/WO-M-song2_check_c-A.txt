@@ -1,0 +1,69 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>3</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="M">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—M/song2_check.c</file_name>
+    <function_name>on_wheel</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t n</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>For the positive numbers main supplies, removes every factor in local P={2,3,5,7,19}, then returns whether the residue is 1. main uses this wheel-membership result to classify the song's listed numbers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="M">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—M/song2_check.c</file_name>
+    <function_name>is_prime</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t n</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests caller-supplied n, rejects values below 2, then checks divisors p from 2 while p squared does not exceed n. It returns 0 on a divisor and 1 otherwise to main. This supplies the primality results for the song's listed numbers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="M">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—M/song2_check.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Uses its integer expressions and song-number literals with on_wheel and is_prime to print the gestation product, ratio notes, chopped duration, prime and wheel checks, week-20 arithmetic, and threshold claims. Its report goes to stdout; no in-file consumer exists, so downstream consumer unresolved. The program presents these numerical checks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

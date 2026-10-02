@@ -1,0 +1,273 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>11</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>consequence</function_name>
+    <function_order>1</function_order>
+    <function_type>static shakti_consequence_t</function_type>
+    <function_input>int64_t value, unsigned int severity, unsigned int confidence, int reversible, int boundary, shakti_truth_t reachable, shakti_choice_evidence_t evidence, const char *evidence_ref</function_input>
+    <function_return>shakti_consequence_t</function_return>
+    <function_remote_call>
+libc: memset()
+libc: strlen()
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Builds a zero-initialized shakti_consequence_t from caller-supplied value, severity, confidence, flags, truth, evidence, and evidence_ref, then copies the reference after asserting it fits. Test fixtures use the returned item in set_one or as the dog consequence. This helper provides consistent consequence data for later plan tests.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>set_one</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>shakti_choice_plan_t *plan, int option, shakti_consequence_t item</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_choice_set_consequence()
+    </function_remote_call>
+    <function_description>Receives a plan, option index, and consequence from local tests, stores the item through shakti_choice_set_consequence with both trailing indices set to zero, and asserts success. Later scenarios close and filter the modified plan; the plan is its downstream output. It standardizes single-consequence fixture setup.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_weigh_and_refusals</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_choice_weigh_range()
+shakti_choice.c: shakti_choice_weigh_range()
+shakti_choice.c: shakti_choice_weigh_range()
+shakti_choice.c: shakti_choice_weigh_range()
+shakti_choice.c: shakti_choice_weigh_range()
+shakti_choice.c: shakti_choice_weigh_range()
+shakti_choice.c: shakti_choice_plan_init()
+shakti_choice.c: shakti_choice_add_condition()
+shakti_choice.c: shakti_choice_add_condition()
+shakti_choice.c: shakti_choice_add_horizon()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_close_enumeration()
+libc: puts()
+    </function_remote_call>
+    <function_description>Uses a local plan to assert range refusal, overflow, valid weights, claim and condition rules, horizon acceptance, baseline uniqueness, and refusal to close an incomplete enumeration. main runs it first and then test_ice_cream; assertions consume the results and puts sends the pass line to stdout. It establishes the harness's basic refusal invariants.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_ice_cream</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_choice_plan_init()
+shakti_choice.c: shakti_choice_add_condition()
+shakti_choice.c: shakti_choice_add_horizon()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_close_enumeration()
+shakti_choice.c: shakti_choice_filter()
+shakti_choice.c: shakti_choice_survivor_ladder()
+libc: printf()
+    </function_remote_call>
+    <function_description>Builds a local plan for staying, crossing a dry line, or crossing mud, with a verified crossing condition and five-beat horizon; consequence supplies the fixtures and set_one stores them. After closing and filtering, assertions require three survivors and a two-beat ladder from -2 to 5. main runs this after refusal tests and before the dog case; printf reports the comparison to stdout.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_dog_and_mud</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_choice_plan_init()
+shakti_choice.c: shakti_choice_add_condition()
+shakti_choice.c: shakti_choice_add_horizon()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_close_enumeration()
+shakti_choice.c: shakti_choice_filter()
+shakti_choice.c: shakti_choice_survivor_ladder()
+libc: printf()
+    </function_remote_call>
+    <function_description>Builds a local plan with a verified dog hazard, a dangerous baseline, and direct, mud, wait, refuse, and teaching options. After consequences are stored, filtering must remove the baseline and inaction paths while preserving direct and mud; the ladder must span 98 to 100. main next runs the severity test, and printf reports the surviving comparison to stdout.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_severity_and_confidence</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_choice_plan_init()
+shakti_choice.c: shakti_choice_add_condition()
+shakti_choice.c: shakti_choice_add_horizon()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_close_enumeration()
+shakti_choice.c: shakti_choice_filter()
+libc: puts()
+    </function_remote_call>
+    <function_description>Builds a local measured-hazard plan with a safe baseline and three severe consequences that differ in confidence, reachability, and evidence. After enumeration closes, filtering must reject supported harm, leave weakly supported harm evidence-open, and preserve the cleared path. main follows with test_pressure_claim; puts reports the gate result to stdout.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_pressure_claim</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_choice_plan_init()
+shakti_choice.c: shakti_choice_add_claim()
+shakti_choice.c: shakti_choice_add_condition()
+shakti_choice.c: shakti_choice_add_horizon()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_add_option()
+shakti_choice.c: shakti_choice_close_enumeration()
+shakti_choice.c: shakti_choice_add_claim()
+shakti_choice.c: shakti_choice_filter()
+libc: puts()
+    </function_remote_call>
+    <function_description>Creates a local plan containing an unverified urgency claim, verified account standing, and baseline and refusal options with safe consequences. It closes enumeration, confirms a late claim is refused, then verifies one unverified claim and that both safe options survive filtering. main next runs the geometry test; puts reports that pressure did not create urgency.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>read_stream</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>FILE *stream, char *buffer, size_t capacity</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fflush()
+libc: fseek()
+libc: fread()
+    </function_remote_call>
+    <function_description>Reads the caller-supplied stream from its beginning into buffer, at most capacity minus one bytes, writes a terminating NUL, and returns no value. The geometry and visible-person tests pass temporary streams and inspect this buffer; it makes serialized XML available to their assertions.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_geometry_and_sisters</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+shakti_choice.c: shakti_geometry_init()
+shakti_choice.c: shakti_geometry_ready()
+shakti_choice.c: shakti_geometry_place_use()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+shakti_choice.c: shakti_geometry_define_frame()
+shakti_choice.c: shakti_geometry_define_pole()
+shakti_choice.c: shakti_geometry_define_pole()
+shakti_choice.c: shakti_geometry_define_frame()
+shakti_choice.c: shakti_geometry_define_pole()
+shakti_choice.c: shakti_geometry_ready()
+shakti_choice.c: shakti_geometry_vertex()
+shakti_choice.c: shakti_geometry_place_use()
+shakti_choice.c: shakti_geometry_set_sister_reading()
+libc: tmpfile()
+shakti_choice.c: shakti_geometry_write_xml()
+libc: strstr()
+libc: strstr()
+libc: strstr()
+libc: fclose()
+libc: puts()
+libc: puts()
+libc: puts()
+    </function_remote_call>
+    <function_description>Initializes local schema and use data, checks that an unlocked schema refuses placement, defines five frames and two poles, rejects replacements, and verifies 20 distinct vertices. It positions a use, stores sister readings, writes XML to a temporary stream, reads it with read_stream, and checks the vertex and role names. main runs it after pressure tests and before person-reading tests; pass lines go to stdout.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>test_visible_person_reading</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+libc: memcpy()
+libc: memcpy()
+libc: memcpy()
+libc: memcpy()
+libc: memcpy()
+libc: tmpfile()
+shakti_choice.c: shakti_person_reading_write_xml()
+shakti_choice.c: shakti_person_reading_write_xml()
+shakti_choice.c: shakti_person_correction_write_xml()
+libc: strstr()
+libc: strstr()
+libc: strstr()
+libc: strstr()
+libc: fclose()
+libc: tmpfile()
+shakti_choice.c: shakti_person_reading_write_xml()
+libc: ftell()
+libc: fclose()
+libc: puts()
+libc: puts()
+    </function_remote_call>
+    <function_description>Builds a local observed reading and confirms XML writing is refused until it is visible; it then writes the reading and a correction, reads the XML through read_stream, and checks visibility, escaping, identifier, and correction text. It also submits a reading with an XML control byte and asserts refusal before output. main runs it after geometry, and puts reports the visibility and validation results.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/choice_test.c</file_name>
+    <function_name>main</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+    </function_remote_call>
+    <function_description>Prints suite banners, calls the seven test functions in source order, prints the final verdict, and returns zero. The tests build local plans, schemas, and readings, assert choice, evidence, geometry, and visibility invariants, and write their pass messages to stdout. As the executable entry point, main orchestrates this choice-test flow and exposes process success.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

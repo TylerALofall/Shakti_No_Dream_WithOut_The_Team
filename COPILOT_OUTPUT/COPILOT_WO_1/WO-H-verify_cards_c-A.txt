@@ -1,0 +1,60 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>2</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/verify_cards.c</file_name>
+    <function_name>extract_text</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, char *out, size_t cap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgetc()
+libc: fgetc()
+libc: strncmp()
+libc: fgetc()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens the caller's SVG path, searches for a text tag, then copies its character data up to the next '&lt;' while space remains in out. VERIFY_CARDS_MAIN passes an answer-card path and txt buffer; the extracted text goes to its answer parser. It returns 0 only when fopen fails, otherwise 1. This helper supplies displayed answer text for arithmetic checks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/verify_cards.c</file_name>
+    <function_name>VERIFY_CARDS_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: fopen()
+libc: printf()
+libc: fclose()
+libc: printf()
+libc: strrchr()
+libc: printf()
+libc: atoi()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Iterates the four file-local OPS and x/y values 1–20, recomputes each operation's expected answer, and builds matching question and answer SVG paths. It checks question existence, extracts answer text, parses the value after the last '=', compares it, and prints errors and totals. Inputs are OPS and the q/ and a/ files; results go to stdout. It returns whether errors occurred and verifies the answer cards.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

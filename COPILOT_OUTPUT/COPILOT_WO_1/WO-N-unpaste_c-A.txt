@@ -1,0 +1,109 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>emit</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f, int c</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fputs()
+libc: fputc()
+    </function_remote_call>
+    <function_description>Receives flow state f and byte c from feed or feed_guarded; at line head it indents by f->depth, dedenting a closing brace, then writes c to f->out and updates at_line_head and prev. The emitted byte becomes part of the current output file. This centralizes indentation and byte emission for reflow.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>newline</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: fputc()</function_remote_call>
+    <function_description>If f is already at line head, returns without writing; otherwise it writes a newline to f->out, sets at_line_head, and increments breaks. feed and main call it at formatting boundaries, and main later reports the break count. This creates output lines without emitting empty ones.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>feed</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f, int c, int next</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes byte c and lookahead next according to f's comment, string, and character-literal state, routing output through emit and newline. In ordinary code it tracks comment and literal starts, reflows directives and braces, breaks after semicolons, and drops leading spaces. feed_guarded supplies bytes from main; this state-aware formatter avoids treating punctuation inside comments or literals as code.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>feed_guarded</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>flow_t *f, int c, int next</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives each byte and lookahead from main and tracks parentheses in file-local g_paren only outside comments and literals. A semicolon inside parentheses is sent to emit directly; other bytes go to feed. This guards parenthesized expressions, including for headers, from feed's semicolon line break while preserving its other reflow rules.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/unpaste.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: fopen()
+libc: fprintf()
+libc: memset()
+libc: fgetc()
+libc: fgetc()
+libc: ftell()
+libc: fgetc()
+libc: strncmp()
+libc: strchr()
+libc: strchr()
+libc: fclose()
+libc: printf()
+libc: snprintf()
+libc: fprintf()
+libc: fclose()
+libc: memset()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+libc: fgetc()
+libc: fseek()
+libc: fprintf()
+libc: fclose()
+libc: fclose()
+libc: printf()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads the paste from argv[1] and uses argv[2] as the output directory. It recognizes marker candidates beginning = FILE and containing a colon, extracts each name, and opens an output path per region. It sends active-region bytes through feed_guarded, closes outputs, and reports paths and byte/break counts to stdout; errors go to stderr. It returns 2 for bad argc, 3 for I/O, path, or seek errors, otherwise files==0. This tool restores layout without changing tokens; no in-file consumer reads the outputs.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

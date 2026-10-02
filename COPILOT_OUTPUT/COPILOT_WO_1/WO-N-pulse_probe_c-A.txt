@@ -1,0 +1,47 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>1</total_items>
+<task_description>Read each destination source file in full. For every function, document its processed data, input origin, downstream output, and purpose from source evidence; list direct external calls and do not modify source files.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/pulse_probe.c</file_name>
+    <function_name>main</function_name>
+    <function_order>1</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+eden_pulse.c: pulse_init()
+libc: printf()
+eden_pulse.c: pulse_verify()
+libc: printf()
+libc: printf()
+eden_pulse.c: pulse_pin()
+libc: printf()
+libc: printf()
+eden_pulse.c: pulse_pin()
+libc: printf()
+libc: printf()
+eden_pulse.c: pulse_organ_at()
+eden_pulse.c: pulse_mesh_count()
+eden_pulse.c: pulse_firing_at()
+libc: printf()
+eden_pulse.c: pulse_firing_at()
+libc: printf()
+eden_pulse.c: pulse_print_state()
+    </function_remote_call>
+    <function_description>Calls pulse_init and returns 1 after printing a failure if initialization fails; otherwise it reports pulse_verify and compares pulse_pin with the fixed KIMI pin, prints organ and mesh values for beats 0–15, reports firing data at beats 0 and 210 when available, and calls pulse_print_state. It sends the probe results to stdout and returns the verification status; downstream consumer unresolved. Its role is to expose observed pulse state for pin comparison.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[left for supervisor — never you]</Supervisor_attestation>
+</Work_Order>

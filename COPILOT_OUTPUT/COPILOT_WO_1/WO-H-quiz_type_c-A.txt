@@ -1,0 +1,67 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>2</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/quiz_type.c</file_name>
+    <function_name>digit_voice</function_name>
+    <function_order>1</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>char c</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>QUIZ_TYPE_MAIN supplies one answer character to c. Digits map to eden_out/Sound_art/&lt;digit&gt;.wav; other characters map to founder_voice:key_&lt;character&gt; in a static buffer. The answer loop uses the returned path in its log entry, providing a spoken asset for each typed key.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/quiz_type.c</file_name>
+    <function_name>QUIZ_TYPE_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: fopen()
+libc: fopen()
+libc: printf()
+libc: fprintf()
+libc: fprintf()
+libc: fopen()
+libc: printf()
+libc: fgets()
+libc: sscanf()
+libc: fprintf()
+libc: snprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>argv supplies the per-operation limit and log path; the file-local TAB array supplies four lesson-5 table paths. For each valid row, up to per rows per table, QUIZ_TYPE_MAIN logs a prompt, computes the operator result, logs each answer key through digit_voice, and compares it with the table value. It writes totals to the requested log, appends a score to school/game/scoreboard.txt, prints status, and returns 0, 1, or 2 for full agreement, setup/table failure, or mismatch. It exists as the table-driven quiz entry point; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

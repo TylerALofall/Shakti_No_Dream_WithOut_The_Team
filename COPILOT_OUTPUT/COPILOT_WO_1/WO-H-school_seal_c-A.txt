@@ -1,0 +1,86 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>2</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_seal.c</file_name>
+    <function_name>fnv_file__school_seal_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const char *path, int *ok</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgetc()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads bytes from the caller's path and folds them into a 64-bit FNV-1a hash. SCHOOL_SEAL_MAIN supplies artifact paths from ART and uses the returned hash in the manifest or stdout self-seal report. The helper sets *ok to 0 before opening and to 1 after a successful read and close; open failure returns the initial basis. It fingerprints school artifacts.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/school_seal.c</file_name>
+    <function_name>SCHOOL_SEAL_MAIN</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fopen()
+libc: fopen()
+libc: fopen()
+libc: printf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: snprintf()
+libc: printf()
+libc: fprintf()
+libc: strncmp()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: fclose()
+libc: printf()
+libc: snprintf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Opens four output files, hashes the 14 artifact paths in ART, and writes the manifest, lesson5 entries, lesson6 OPEN marker, and branch README using fixed ART and DST tables. It then hashes the four seal outputs for a stdout report. Inputs are file-local paths and constants; outputs go to out/ and stdout. It returns 1 on output or artifact failure and 0 on completion; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

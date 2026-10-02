@@ -1,0 +1,274 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>yes</repair>
+<total_items>20</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>text_present</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Checks whether a caller supplied text pointer is non-null and nonempty. The file uses this result as the common presence gate for names, references, claims, and schema labels before copying, accepting, or serializing them.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>copy_checked</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t capacity, const char *source</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Validates destination, capacity, and source text, rejects a source that would not fit, then copies it including the terminator. Plan and geometry builders use its success result before committing fixed-size names and evidence references to their structures.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>xml_value_valid</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Checks nonempty text for XML-safe control content, allowing tab, line feed, and carriage return while rejecting other bytes below 0x20. XML writers call it before emitting stored references or person-reading fields so invalid control text is refused before output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>valid_evidence</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_choice_evidence_t evidence</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests whether an evidence enum lies from SHAKTI_EVIDENCE_NONE through SHAKTI_EVIDENCE_VERIFIED. Consequence, option, and person-reading validation consume the boolean result before accepting evidence values into later choice or XML processing.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>authoritative_evidence</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_choice_evidence_t evidence</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Classifies only TAUGHT, OBSERVED, or VERIFIED evidence as authoritative. Condition creation, consequence comparison, filtering, and geometry sister readings use this gate so claims, creative proposals, and NONE cannot satisfy evidence-required decisions.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>valid_truth</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_truth_t truth</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Accepts only the three defined truth states UNKNOWN, FALSE, or TRUE. consequence_valid uses the returned boolean to reject malformed reachability values before a consequence is stored in the choice matrix.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>valid_option_kind</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_option_kind_t kind</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Checks that an option kind lies within the defined ACTION through ALTERNATIVE enum range. shakti_choice_add_option uses it before allocating an option slot, preventing out-of-range kinds from entering the plan.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>valid_bool</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned char value</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Accepts only byte values 0 or 1. consequence_valid applies it to reversible and protected_boundary_breach so later filtering and weighting operate on canonical boolean state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>consequence_valid</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_consequence_t *consequence</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Validates a proposed consequence before storage: present flag, truth, evidence, confidence bound, boolean flags, and evidence reference must be valid, and NONE or CREATIVE evidence is refused. shakti_choice_set_consequence uses the result before copying the item into the plan matrix.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>subtract_i64</function_name>
+    <function_order>10</function_order>
+    <function_type>static int</function_type>
+    <function_input>int64_t left, int64_t right, int64_t *answer</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Computes left minus right into the caller output only when the pointer is valid and signed 64-bit subtraction cannot overflow. shakti_choice_delta and shakti_choice_weigh_range consume its OK, REFUSED, or OVERFLOW status instead of performing unsafe arithmetic.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_plan_init</function_name>
+    <function_order>11</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_choice_plan_t *plan</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Receives a plan from the caller, clears the entire structure when non-null, and sets baseline_index to -1 to mark that no no-action baseline exists yet. All plan-building tests call it before adding conditions, horizons, options, claims, or consequences.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_add_condition</function_name>
+    <function_order>12</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_choice_plan_t *plan, const char *name, shakti_choice_evidence_t evidence, const char *evidence_ref</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: memset()
+libc: memset()
+    </function_remote_call>
+    <function_description>Adds one named condition to an open plan only with authoritative evidence, a reference, free capacity, and no duplicate name. It safely copies fields, increments condition_count, and returns the new index used later to address consequence cells.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_add_horizon</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_choice_plan_t *plan, uint64_t ticks_from_now, const char *name</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: memset()
+libc: memset()
+    </function_remote_call>
+    <function_description>Adds a future horizon to an open plan from caller supplied ticks and name. It requires capacity and rejects duplicate tick distances or names, stores the values, increments horizon_count, and returns the index later used to place and compare consequences.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_add_option</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_choice_plan_t *plan, shakti_option_kind_t kind, const char *name, shakti_choice_evidence_t discovery_evidence, const char *discovery_ref</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: memset()
+libc: memset()
+    </function_remote_call>
+    <function_description>Adds a uniquely named option to an open plan after validating kind, discovery evidence, reference, capacity, and the single-baseline rule. It copies the option, records baseline_index for NO_ACTION, increments option_count, and returns the new index for consequence assignment.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_add_claim</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_choice_plan_t *plan, const char *text, const char *speaker_ref</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+libc: memset()
+    </function_remote_call>
+    <function_description>Stores caller supplied claim text and speaker reference while enumeration is open and claim capacity remains. It safely copies both fields, increments claim_count, and returns the index; shakti_choice_filter later exposes the accumulated claim count as unverified_claim_count.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_set_consequence</function_name>
+    <function_order>16</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_choice_plan_t *plan, size_t option_index, size_t condition_index, size_t horizon_index, const shakti_consequence_t *consequence</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Places a validated consequence into the selected option, condition, and horizon cell of an open plan. It rejects null plans, closed enumeration, out-of-range indices, or invalid consequence evidence and flags; accepted data becomes the matrix later read by filtering and delta calculations.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_close_enumeration</function_name>
+    <function_order>17</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_choice_plan_t *plan, const char *enumeration_ref</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Locks plan enumeration after requiring at least two options, one condition, one horizon, a no-action baseline, and a nonempty enumeration reference. It copies that reference and sets enumeration_closed so later additions are refused and filtering can begin.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_filter</function_name>
+    <function_order>18</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_choice_plan_t *plan, const shakti_choice_policy_t *policy, shakti_choice_result_t *result</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Evaluates every option consequence in a closed plan against policy severity and confidence gates. Unsupported or unknown cells make an option EVIDENCE_OPEN; reachable authoritative irreversible protected catastrophic harm filters it; otherwise it survives. It returns counts and baseline status in result.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_delta</function_name>
+    <function_order>19</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_choice_plan_t *plan, size_t option_index, size_t condition_index, size_t horizon_index, int64_t *delta</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Compares one option consequence with the no-action baseline at the same condition and horizon. Both cells must be present, reachable TRUE, and authoritative; then subtract_i64 writes choice value minus baseline value to delta. OPEN or arithmetic status returns to survivor analysis.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/shakti_choice.c</file_name>
+    <function_name>shakti_choice_weigh_range</function_name>
+    <function_order>20</function_order>
+    <function_type>int</function_type>
+    <function_input>int64_t best, int64_t worst, int reversible</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Turns caller supplied best and worst deltas into a bounded deliberation-beat count. It validates ordering and the reversible flag, computes spread safely, multiplies irreversible spread by the irreversible factor with overflow protection, then repeatedly applies the ladder divisor up to the deliberation limit.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>function_remote_call added to every record in this file, 2026-10-02, by Kimi K3 under Tyler's GO: the 2026-09-20 fill predates the 2026-09-29 remote_call law. remote_call lists recorded from the current SECTION-C source on main (blob 04917109). No other field touched.</corrections>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

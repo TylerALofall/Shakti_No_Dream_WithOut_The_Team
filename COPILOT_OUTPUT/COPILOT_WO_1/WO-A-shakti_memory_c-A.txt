@@ -1,0 +1,163 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>10</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>copy_text__memory_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *destination, size_t destination_size, const char *source</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Copies caller text into a bounded destination, writing an empty string for null source and truncating to leave room for the terminator. shakti_memory_remember uses it for working and short-term entries. The stored arrays have no text reader in this file, so their downstream consumer is unresolved; this helper provides safe fixed-buffer storage.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>load_text_file</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fread()
+libc: ferror()
+libc: fclose()
+libc: feof()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads the caller's path into its destination, terminates a successful read, and clears the buffer on read failure or when the file exceeds capacity. It returns success only after reaching EOF and closing cleanly. shakti_memory_load_always and the goal and notebook reloaders store its result and text in memory; this helper supplies their file-loading step.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>readable_file_ready</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Attempts to open the caller's path in a+ mode and returns 0 on open failure or the close status otherwise. shakti_memory_load_always stores this result as long_term_ready alongside the loaded text flags. It checks readiness for long-term storage without reading the file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_init</function_name>
+    <function_order>4</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_memory_state_t *memory</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Clears the caller's shakti_memory_state_t with memset when memory is non-null. The zeroed state is ready for the following loaders and remember routine to populate; no caller is defined in this file, so the downstream consumer is unresolved. Initialization establishes a clean memory state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_load_always</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_memory_state_t *memory, const char *goal_path, const char *notebook_path, const char *menu_path, const char *long_term_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Loads the caller's goal, notebook, and menu paths into their locked buffers, then checks long_term_path and stores all four statuses in memory. It returns their conjunction to its caller; shakti_memory_print_status reads these flags. No caller is defined in this file, so the downstream consumer is unresolved; this establishes the always-loaded context.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_reload_notebook</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_memory_state_t *memory, const char *notebook_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reloads the caller's notebook_path into memory->locked_notebook through load_text_file and stores the result in notebook_loaded. It returns that flag to its caller; shakti_memory_print_status can report the updated state. No caller is defined in this file, so the downstream consumer is unresolved; this supports notebook refresh.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_reload_goal</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_memory_state_t *memory, const char *goal_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reloads the caller's goal_path into memory->locked_goal through load_text_file and stores the result in goal_loaded. It returns that flag to its caller; shakti_memory_print_status can report the updated state. No caller is defined in this file, so the downstream consumer is unresolved; this supports goal refresh.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_remember</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_memory_state_t *memory, const shakti_tick_t *tick, const char *text</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Stores caller text with its tick in the working slots, shifting older entries when full, and in the rotating short-term cache; copy_text__memory_h bounds both copies. This retains current and recent events without returning a value. The file has no reader of either text array, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_print_status</function_name>
+    <function_order>9</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_memory_state_t *memory</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: puts()
+    </function_remote_call>
+    <function_description>Reads the caller's memory state and prints working and short-term counts, load/readiness flags, structure size, and a long-term-memory note to stdout; null input produces no output. No caller is defined in this file, so the downstream consumer is unresolved. It provides a diagnostic summary of loaded and retained memory.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_memory.c</file_name>
+    <function_name>shakti_memory_recall_text_file</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, const char *term, unsigned int maximum_matches</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strstr()
+libc: fputs()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>Scans caller-selected file lines for the caller's nonempty term, prints each matching line to stdout, and stops at maximum_matches when it is positive. It closes the file, prints the match count, and returns 1 on success or 0 for invalid input, open failure, or close failure. No caller is defined in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

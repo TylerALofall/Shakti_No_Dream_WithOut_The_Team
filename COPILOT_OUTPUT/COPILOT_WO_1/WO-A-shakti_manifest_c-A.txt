@@ -1,0 +1,281 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>14</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>trim_text__manifest_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_remote_call>libc: strlen()</function_remote_call>
+    <function_description>Trims spaces, tabs, carriage returns, and newlines from both ends of caller-provided text in place, returning a pointer to its first non-whitespace byte. shakti_manifest_load passes lines here before tag checks, and requirements_are_valid passes dependency tokens before find_level. It normalizes parser input for those callers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>xml_unescape__manifest_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *source, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+    </function_remote_call>
+    <function_description>Scans source and replaces the five named XML entities for ampersand, angle brackets, quotation mark, and apostrophe with their single characters; unknown text bytes pass through unchanged. It writes a NUL-terminated result only when destination_size has room and returns success or failure. extract_tag__manifest_h supplies encoded field text and receives the decoded value for manifest parsing.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>extract_tag__manifest_h</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, const char *tag, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: strstr()
+libc: strlen()
+libc: strstr()
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Builds opening and closing tags from tag, finds them in line, requires the closing tag at the line's end, copies the encoded value into a bounded buffer, then decodes it into destination with xml_unescape__manifest_h. shakti_manifest_load uses it for manifest, level, and tablet fields. Its status tells the parser whether a field was extracted and decoded.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>extract_order__manifest_h</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *line, const char *element, unsigned int *order</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: strtoul()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Builds the order-attribute prefix from element, parses following base-10 digits with strtoul, requires the closing quote and angle bracket immediately after them, and rejects values above 4294967295UL. It stores the unsigned result through order. shakti_manifest_load uses this for level and tablet openers to obtain their ordering keys.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>is_absolute_path</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Classifies the caller's path as absolute when it starts with slash or backslash, or with an ASCII letter followed by a colon; NULL and empty paths return 0. resolve_path uses this result to copy absolute paths directly or join relative paths to the manifest directory. It selects the path-resolution branch.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>resolve_path</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *manifest_path, const char *relative, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: strrchr()
+libc: strrchr()
+libc: strlen()
+libc: memcpy()
+libc: strcpy()
+    </function_remote_call>
+    <function_description>Receives manifest_path, relative, and a bounded destination from its caller. It copies absolute paths with snprintf; otherwise it finds the final slash or backslash in manifest_path and appends relative when the combined path fits. shakti_manifest_write_ledger uses the result for artifact_root and tablet paths. The returned status indicates whether a usable path was written.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>find_level</function_name>
+    <function_order>7</function_order>
+    <function_type>static const shakti_manifest_level_t *</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *id</function_input>
+    <function_return>const shakti_manifest_level_t *</function_return>
+    <function_remote_call>libc: strcmp()</function_remote_call>
+    <function_description>Scans manifest->levels in stored order, compares each id with the caller's id, and returns the first matching level pointer or NULL. requirements_are_valid uses it for prerequisite IDs, while validate_manifest uses it for each tablet's level. It connects parsed IDs to the level data and order needed for validation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>requirements_are_valid</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *requirements, unsigned int owner_order</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strlen()
+libc: strcpy()
+libc: strtok()
+libc: strtok()
+    </function_remote_call>
+    <function_description>Accepts the literal none; otherwise it bounds-checks and copies comma-separated requirements, trims each token, and resolves it through find_level. It rejects missing levels and any required level whose order is not earlier than owner_order. validate_manifest uses this result for level and tablet dependencies, enforcing prerequisite order.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>validate_manifest</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const shakti_manifest_t *manifest</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Rejects an empty or unsupported status, missing root or levels, incomplete level fields, duplicate level IDs/orders, invalid prerequisites, tablets without a known level or required fields, unsupported states, invalid dependencies, and duplicate tablet paths/orders. shakti_manifest_load uses its result before marking the parsed structure loaded. It prevents inconsistent manifest data from entering later processing.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_init</function_name>
+    <function_order>10</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_manifest_t *manifest</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Zeroes the caller-supplied shakti_manifest_t when manifest is non-NULL and returns no value. shakti_manifest_load calls it before parsing and after a failed parse or validation, so subsequent use does not receive stale or partial fields. It establishes the empty manifest state used by the loader.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_load</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_manifest_t *manifest, const char *manifest_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: memset()
+libc: memset()
+libc: fgets()
+libc: strchr()
+libc: feof()
+libc: fclose()
+libc: strcmp()
+libc: strncmp()
+libc: fclose()
+libc: strcmp()
+libc: fclose()
+libc: memset()
+libc: strncmp()
+libc: fclose()
+libc: strcmp()
+libc: fclose()
+libc: memset()
+libc: fclose()
+libc: fclose()
+libc: ferror()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads manifest_path into the caller's manifest, recognizing schema, level, and tablet blocks and extracting their fields while rejecting duplicate or incomplete records. It checks stream status, block closure, schema presence, and validate_manifest; failure resets the structure, while success sets loaded and returns 1. No consumer of this loader appears in the file, so downstream consumer unresolved; it parses the manifest for later use.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>write_ledger_text</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fputc()
+libc: fputc()
+    </function_remote_call>
+    <function_description>Copies caller-supplied text to file, replacing tabs, carriage returns, and newlines with spaces; all other bytes are written unchanged. It returns 0 if either fputc call fails and 1 after the full string is written. shakti_manifest_write_ledger uses it for stone text so embedded row delimiters do not split ledger records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_write_ledger</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *manifest_path, const char *ledger_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+shakti_score.c: shakti_score_make()
+libc: fputs()
+libc: fclose()
+libc: fclose()
+libc: strcmp()
+libc: fprintf()
+libc: fclose()
+shakti_tablet.c: shakti_tablet_parse()
+libc: strcmp()
+libc: strcmp()
+shakti_tablet.c: shakti_tablet_audit()
+libc: strcmp()
+libc: fprintf()
+libc: fclose()
+shakti_score.c: shakti_score_add()
+libc: strcmp()
+shakti_asset.c: shakti_asset_key_from_text()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: fprintf()
+libc: fclose()
+libc: fprintf()
+libc: fclose()
+libc: fflush()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Requires a loaded manifest, resolves artifact_root, opens ledger_path, and writes tab-separated rows for planned tablets or parsed and audited tablet stones and summaries. It accumulates scores with shakti_score_make/add, checks artifacts through shakti_tablet_parse/audit, derives each stone key, then writes an Eden summary and flushes/closes the ledger. The caller supplies manifest paths and receives readiness status; downstream consumer unresolved. It exports manifest audit results.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_manifest.c</file_name>
+    <function_name>shakti_manifest_print</function_name>
+    <function_order>14</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_manifest_t *manifest</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: puts()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Receives a manifest from its caller; if it is NULL or not loaded, it prints a fixed notice, otherwise it prints status and level/tablet counts, then each level's order, ID, title, and requirements to stdout. The caller provides the structure and the output supports human inspection; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

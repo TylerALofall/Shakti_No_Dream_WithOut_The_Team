@@ -1,0 +1,211 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>14</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *data, size_t len</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds len bytes from caller-supplied data into incoming FNV state h and returns the updated hash. compute_spine and compute_link supply record fields or serialized spine bytes, then use the result in a record spine or chain link. This helper provides deterministic byte hashing for the witness ledger.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>compute_spine</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const witness_record_t *rec</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: strlen()
+    </function_remote_call>
+    <function_description>Hashes rec->tag, rec->body, body_len, beat, and organ into a spine. witness_record supplies its selected or updated record, and witness_prove_chain supplies stored records; the result becomes the record fingerprint and feeds compute_link. This binds each witness record's content and metadata.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>compute_link</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t prev_spine, uint64_t this_spine</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Encodes prev_spine and this_spine as 16 big-endian bytes, hashes them from the FNV basis, and returns a link. witness_record supplies g_chain.last_spine and a record's new spine; witness_prove_chain supplies its running spine and each stored spine. The link binds records in chain order.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>compute_pin</function_name>
+    <function_order>4</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Encodes WITNESS_MAX_RECORDS as eight big-endian bytes, hashes them from the FNV basis, and returns the capacity pin. witness_init stores the value in chain_pin and frozen_pin; it anchors the witness chain to its configured record capacity.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_init</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+libc: printf()
+    </function_remote_call>
+    <function_description>Initializes g_chain once by zeroing it, clearing counters and last_spine, and setting chain_pin and frozen_pin from compute_pin; it prints the record limit and pin. Public APIs that check g_init call it lazily. Its state supports witness_record and later chain queries.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_record</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *tag, const unsigned char *body, unsigned int body_len, uint64_t beat, unsigned int organ</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: strcmp()
+libc: memcpy()
+libc: printf()
+libc: memset()
+libc: memcpy()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Receives tag, body, body_len, beat, and organ from its caller; it rejects null data or an oversized body, then updates a same-tag record or appends/overwrites a bounded slot and recalculates its spine and link. New entries are proven; replacements are not. Query and proof APIs read g_chain; it returns 1 on storage and 0 on refusal.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_mark_erased</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *tag</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: printf()
+    </function_remote_call>
+    <function_description>Searches g_chain for the caller-supplied tag and sets erased on a match without removing the record; it prints the attempted erasure and returns 1, or returns 0 for a null or absent tag. witness_erased and witness_print_chain expose the mark, preserving attacked records in the witness ledger.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_prove_chain</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Recomputes each stored record's spine and link from g_chain and compares them with the saved values, printing the first mismatch or a successful proof. It returns 1 for an empty or proven chain and 0 on mismatch; callers receive the integrity result used to check the witness ledger.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_find</function_name>
+    <function_order>9</function_order>
+    <function_type>const witness_record_t *</function_type>
+    <function_input>const unsigned char *tag</function_input>
+    <function_return>const witness_record_t *</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Searches initialized g_chain records for the caller-supplied tag and returns the matching record address or NULL. witness_converges uses that pointer to check the proven flag, while other callers can inspect the stored witness record.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_erased</function_name>
+    <function_order>10</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>const witness_record_t **out, unsigned int max_out</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Scans g_chain and writes addresses of erased records into caller-provided out, stopping at max_out; null output or zero capacity returns zero. The returned count tells callers how many records were collected, exposing witness_mark_erased results without deleting ledger entries.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_converges</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>const unsigned char *tag</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a tag from its caller, obtains its record through witness_find, and returns 1 only when the record exists and is proven; otherwise it returns 0. This query exposes whether a named witness has converged into a proven chain entry.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_print_chain</function_name>
+    <function_order>12</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads g_chain, prints its record count and up to 16 entries with beat, organ, spine, erased, and proven flags, then reports extra entries and erased flags among those displayed. It receives state from witness_init and witness_record; stdout lets callers inspect the retained witness history.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_verify</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns 1 if uninitialized; otherwise checks g_chain capacity, nonzero spines and links, body bounds, frozen-pin equality, empty-chain spine, next-slot range, and binary erased/proven flags. It returns zero when valid or the first failure code; callers receive the ledger integrity status, with downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_witness.c</file_name>
+    <function_name>witness_pin</function_name>
+    <function_order>14</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Initializes the witness module if needed and returns g_chain.chain_pin. The pin originates in compute_pin from WITNESS_MAX_RECORDS and is frozen by witness_init; callers receive the configured ledger identity, with downstream consumer unresolved in this file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>Work_Order — total_items — 90 — 14 — This output piece contains fourteen SECTION records.</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

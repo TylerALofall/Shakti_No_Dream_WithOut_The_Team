@@ -1,0 +1,56 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>2</total_items>
+<task_description>Read each destination source file in full. For every function, document its processed data, input origin, downstream output, and purpose from source evidence; list direct external calls and do not modify source files.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/phicheck.c</file_name>
+    <function_name>is_fib</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned int n, unsigned int *which</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Checks whether caller-supplied n equals a term generated from 1, 1, writes its loop index to *which, and returns the equality as 1 or 0. main passes each WOMB_E and WHEEL_E exponent with local w, then uses the result to update the corresponding all-exponents flag and print the test. This helper tests Fibonacci membership.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/phicheck.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Uses its local WOMB_P/WOMB_E and WHEEL_P/WHEEL_E arrays to test both exponent sets through is_fib, update and print their membership results, and report the skipped womb value and wheel counterexample. It then prints integer-scaled Fibonacci ratios from local seeds a and b to stdout and returns 0; downstream consumer unresolved. The comparison tests the stated phi/Fibonacci pattern without floating point.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[left for supervisor — never you]</Supervisor_attestation>
+</Work_Order>

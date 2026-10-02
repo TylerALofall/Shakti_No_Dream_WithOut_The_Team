@@ -1,0 +1,127 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>yes</repair>
+<total_items>8</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Advances module-global g_s through the SplitMix64 sequence and returns the mixed 64-bit value. gestate resets g_s to EAR_SEED; wave calls this twice per endogenous ear wave, first for the center and then for the wheel-radius index. Its output feeds only wave and makes regeneration deterministic.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes n bytes from p with 64-bit FNV-1a. main supplies either the regenerated ear lane or the WAV bytes in g_file. The returned pin is used to refuse a mismatched ear, refuse a mismatched sound atom, record the pre-play ear pin, and report the final ear state after playback.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>pulse</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>uint32_t c, uint32_t r</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Applies one bounded 1D center-surround pulse directly to global lane: cells within radius r of center c rise toward 7, while the surrounding ring out to 2r falls toward 0. Inputs come from wave, gestate heartbeat positions, or voiced WAV blocks in main. It produces no return value; the changed lane is the output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>wave</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Creates one endogenous ear wave. It takes two ordered next_u64 results, deriving a lane center and a radius from wheel, then passes both to pulse. gestate calls it on every non-heartbeat flash. The separate draws deliberately fix generator order so the regenerated ear stream cannot fork from C argument-evaluation order.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>gestate</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Rebuilds the dark-ear substrate from its fixed starting state. It resets g_s to EAR_SEED, clears lane, then runs EAR_FLASHES iterations: every 19th is a radius-19 traveling heartbeat at beats*7 mod CELLS; all others call wave. main consumes the resulting global lane and verifies its pin before allowing sound playback.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>read_whole</function_name>
+    <function_order>6</function_order>
+    <function_type>static size_t</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>size_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fread()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens the path supplied by main from argv[1], reads up to the capacity of global g_file in binary mode, closes the file, and returns the byte count; open failure returns 0. main next hashes those bytes against ATOM13_PIN and, if verified, passes the same buffer and count to find_data for WAV payload discovery.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>find_data</function_name>
+    <function_order>7</function_order>
+    <function_type>static size_t</function_type>
+    <function_input>const unsigned char *f, size_t n, size_t *len</function_input>
+    <function_return>size_t</function_return>
+    <function_remote_call>
+libc: memcmp()
+    </function_remote_call>
+    <function_description>Scans the verified WAV buffer from byte 12 for a data chunk. On a match it decodes the following little-endian 32-bit length, clamps that length to bytes actually present, stores it through len, and returns the payload offset. If none is found it returns 0. main uses the offset and length to form PCM sample blocks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_first_sound.c</file_name>
+    <function_name>main</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Orchestrates first-sound admission and playback. It rebuilds and pin-verifies the ear, reads argv[1] and pin-verifies the sound atom, locates WAV PCM data, averages absolute int16 energy in 64-sample blocks, and sends voiced blocks at energy at least 500 to pulse with deterministic center and radius. It prints before/after pins and refusal status.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>function_remote_call added to every record in this file, 2026-10-02, by Kimi K3 under Tyler's GO: the 2026-09-20 fill predates the 2026-09-29 remote_call law. remote_call lists recorded from the current SECTION-B sources on main (blob-verified at pull). No other field touched.</corrections>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

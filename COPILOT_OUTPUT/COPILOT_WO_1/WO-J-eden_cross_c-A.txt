@@ -1,0 +1,143 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>7</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>fnv1a</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes n bytes from p using FNV-1a starting at caller-supplied state h and returns the updated hash. sound_seq_pin and vision_pin use it for audio payloads and resident SVG bytes; lesson_pin and main fold its results into lesson and run pins. It supplies deterministic byte hashing for the cross-training chain.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>file_exists</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Attempts to open caller-supplied path in binary mode, closes it when successful, and returns 1 for an opened file or 0 otherwise. main supplies paths assembled by mkpath and uses this result to audit sound/vision pairs and select available lesson and actuator assets. It provides the file-presence gate without interpreting contents.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>sound_seq_pin</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *atom_path</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fseek()
+libc: ftell()
+libc: rewind()
+libc: fread()
+libc: memcmp()
+libc: memcmp()
+libc: fread()
+libc: memcmp()
+libc: fread()
+libc: fseek()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Starts from FNV_BASIS and hashes DELAY_BYTES of silence, then, when atom_path opens as RIFF/WAVE and contains a bounded data chunk, hashes that PCM payload from pcmbuf before adding trailing silence. It returns the sequence pin to lesson_pin or the actuator in main; a missing or unusable voice leaves the timed silent beat. This composes voice with the beat.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>vision_pin</function_name>
+    <function_order>4</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fread()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads caller-supplied resident SVG path in chunks into a static buffer and folds each chunk with fnv1a; a null or unopenable path returns FNV_BASIS. lesson_pin and the actuator in main consume the returned pin to compose vision with sound and key tokens. It identifies already-ingested visual assets without re-teaching them.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>lesson_pin</function_name>
+    <function_order>5</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const char *nameA,const char *sndA,const char *visA, const char *nameB,const char *sndB,const char *visB</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: strlen()
+    </function_remote_call>
+    <function_description>Builds a lesson pin from caller-supplied item names and sound/vision paths. It folds four grid corners (A in all corners for solo, or A on TL/BR and B on TR/BL), then available sound-sequence pins and names; main supplies these values from ITEM, VISN, VOICE, and mkpath. The pin returns to main's pass ledger to verify the 15-lesson cross-training layout.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>mkpath</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *out, size_t cap, const char *dir, const char *name, const char *ext</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Formats caller-supplied dir, name, and extension as dir/name.ext into out with capacity cap. main supplies ADIR or VDIR and its item names to build paths for file_exists, sound_seq_pin, and vision_pin. It provides the path assembly seam between configured lesson items and their resident assets.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_cross.c</file_name>
+    <function_name>main</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Audits sound/vision matches for digits and letter cases, then twice builds five solo and ten crossed lessons from ITEM, VOICE, VISN, ADIR, and VDIR, comparing lesson counts and pins for drift. It reports voiced/silent slots and the cross pin, then models the keys “sprout” as sound, vision, and letter-token pins while keeping the word internal. It returns 1 on drift and 0 otherwise; stdout carries the audit and results.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

@@ -1,0 +1,89 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>append_character</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t destination_size, size_t *used, char character</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a character and buffer state from shakti_asset_key_from_text, refuses when the character plus its NUL terminator will not fit, and otherwise appends the character, terminates the string, advances *used, and returns 1. The caller uses the status to continue assembling or reject an asset key. It provides the bounded character-write step for key construction.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>append_text__asset_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *destination, size_t destination_size, size_t *used, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Receives a text token and destination state from shakti_asset_key_from_text, measures the token, and refuses if its bytes and terminator will not fit; otherwise it copies the token, advances *used, and returns 1. The caller uses the status while assembling the key. It appends a complete encoded token without overrunning the destination.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>shakti_asset_key_from_text</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: isalnum()
+libc: snprintf()
+libc: isalnum()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Converts caller text into a bounded asset key: a one-byte value classified as non-alphanumeric becomes ascii_NNN; otherwise letters, digits, and hyphens pass through, one internal space becomes _, and other printable ASCII bytes become uppercase %XX. It rejects NULL text or destination, empty text, zero capacity, edge or repeated spaces, nonprintable bytes in the general path, and insufficient capacity. shakti_asset_filename consumes the key and status. It canonicalizes asset names.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>shakti_asset_filename</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, const char *extension, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Receives text, extension, and output-buffer capacity from its caller, obtains a key from shakti_asset_key_from_text, then writes the key followed by the extension to destination if snprintf fits; it returns 1 on a fitting write and 0 on rejection or truncation. The caller receives the candidate asset filename. No downstream consumer appears in this file, so the downstream consumer is unresolved. It combines key normalization with an extension.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_asset.c</file_name>
+    <function_name>shakti_asset_safe_filename</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *filename</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strstr()
+    </function_remote_call>
+    <function_description>Checks the caller's filename and returns 0 for NULL, empty text, a “..” substring, slash, backslash, control byte, or DEL; otherwise it returns 1. Its result goes to the caller, and no downstream consumer appears in this file, so the downstream consumer is unresolved. After shakti_asset_filename constructs a candidate name, this predicate provides the file's safety check.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

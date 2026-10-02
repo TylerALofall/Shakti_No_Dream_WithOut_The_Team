@@ -1,0 +1,411 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>19</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>write_file</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path, const char *text</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fputs()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives a sandbox path and fixture text from the test cases and state writers, opens the path for writing, writes the text, and closes the file; assertions stop the test if any step fails. The resulting files feed the builder and runtime checks. It returns no value and provides the shared fixture writer for the integration sequence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>read_file</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path, char *buffer, size_t capacity</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fread()
+libc: ferror()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads at most capacity minus one bytes from the caller's path into its buffer, checks for a read error, adds a NUL, and closes the file; assertions require positive capacity and successful I/O. assert_contains and count_lines_with consume this buffer to inspect test artifacts. It returns no value and centralizes bounded fixture reading.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>assert_contains</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path, const char *needle</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strstr()
+libc: fprintf()
+    </function_remote_call>
+    <function_description>Reads the caller's file through read_file and searches its content for needle with strstr. A missing substring prints the path and needle to stderr before an assertion fails; test_builder, test_loop, test_seed, and test_mvp use it to check generated files and runtime output. It returns no value and supplies the suite's content-presence check.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>count_lines_with</function_name>
+    <function_order>4</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>const char *path, const char *needle</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: strchr()
+libc: strlen()
+libc: strncmp()
+    </function_remote_call>
+    <function_description>Reads the caller's file through read_file, scans each line for needle, and returns the number of lines containing it, counting each matching line once. test_seed and test_mvp use the count in assertions on generated ledger and school-state records. It exists to verify persisted record totals without launching a shell command.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>count_dir_entries</function_name>
+    <function_order>5</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>
+libc: opendir()
+libc: readdir()
+libc: strcmp()
+libc: strcmp()
+libc: closedir()
+    </function_remote_call>
+    <function_description>Counts entries directly under the caller's directory with opendir and readdir, excluding the dot and dot-dot entries, then closes the directory and returns the count. test_seed checks generated Visual_text and Visual_art totals with this result. It provides a filesystem count for the seed-generation integration case.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>make_dir</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: mkdir()
+    </function_remote_call>
+    <function_description>Passes the caller's path to mkdir with mode 0777 and ignores the result, allowing an already existing directory as well as newly created components. make_dirs calls it for each constructed path prefix, and copy_tree uses it before copying a directory. It supplies the low-level directory creation step for sandbox setup.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>make_dirs</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strchr()
+libc: strlen()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Splits the caller's slash-separated path into components, appends each component to a fixed local buffer, and calls make_dir for every prefix. It returns no status; reset_dir and the test setup routines use the resulting directories for sandbox files and generated artifacts. It exists to create nested test layouts without a shell.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>remove_path</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: stat()
+libc: opendir()
+libc: readdir()
+libc: strcmp()
+libc: strcmp()
+libc: snprintf()
+libc: closedir()
+libc: rmdir()
+libc: remove()
+    </function_remote_call>
+    <function_description>Uses stat on the caller's path, returns if it is absent, recursively removes directory children, then removes the directory; a non-directory is removed directly. reset_dir and mvp_prepare_sandbox use it to clear prior test state. It returns no status, so failed filesystem operations are asserted rather than passed downstream.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>copy_tree</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *source, const char *destination</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: stat()
+libc: opendir()
+libc: readdir()
+libc: strcmp()
+libc: strcmp()
+libc: snprintf()
+libc: snprintf()
+libc: closedir()
+libc: fopen()
+libc: fopen()
+libc: fread()
+libc: fwrite()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Copies the caller's source tree to destination: stat selects directory recursion or file copying, directory children are visited individually, and file bytes move in 8192-byte chunks. mvp_prepare_sandbox uses it to stage project data and eden_out for runtime checks. It returns no status; assertions stop the test on failed reads, writes, or closes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>reset_dir</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Removes the caller's previous path through remove_path and recreates its directory components through make_dirs. The test cases and mvp_prepare_sandbox call it before writing fixtures, so later runtime and builder checks start with a clean sandbox. It returns no value and combines the suite's filesystem cleanup and setup steps.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>run_shakti</function_name>
+    <function_order>11</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *arg, const char *input_path, const char *output_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fflush()
+libc: fopen()
+libc: fopen()
+main.c: shakti_app_main()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Builds argv from the optional caller argument, saves stdin and stdout, redirects either stream to the caller's paths when supplied, invokes shakti_app_main, restores the original streams, and returns the runtime status. test_builder, test_loop, and test_mvp consume that status and inspect captured output. It runs Shakti in-process without a shell or subprocess.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>write_control_state</function_name>
+    <function_order>12</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *tmp, const char *menu_text</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Uses the caller's tmp directory to form five control-file paths, then writes fixed goal, notebook, message, and reflection contents plus caller-supplied menu_text through write_file. test_builder and test_loop provide these files before run_shakti reads the sandbox state. It returns no value and prepares deterministic control inputs for runtime integration.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>write_eden_state</function_name>
+    <function_order>13</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *tmp</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Uses tmp to write fixed Eden facts, thesaurus, stream, learned, evidence, and school-state files through write_file. test_builder and test_loop call it while preparing their sandboxes, and the builder or runtime consumes those files next. It returns no value and supplies the shared Eden baseline for the integration flow.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>test_builder</function_name>
+    <function_order>14</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *root</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+make_wav_fixture.c: shakti_write_test_wav()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+build_xml.c: shakti_build_xml_file()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+build_ledger.c: shakti_build_ledger_file()
+libc: snprintf()
+libc: snprintf()
+libc: fflush()
+libc: fopen()
+build_ledger.c: shakti_build_ledger_file()
+libc: fclose()
+libc: snprintf()
+libc: getcwd()
+libc: chdir()
+libc: chdir()
+libc: snprintf()
+libc: puts()
+    </function_remote_call>
+    <function_description>Builds temporary SVG, WAV, tablet XML, and Eden manifests, then checks the generated tablet and ledger, including rejection of a manifest with a missing prerequisite. It writes sandbox state and commands, runs Shakti in-process, and checks runtime output; root is unused. TEST_INTEGRATION_MAIN calls it first, before test_loop, to cover builder-to-runtime integration.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>test_loop</function_name>
+    <function_order>15</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *root</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: getcwd()
+libc: chdir()
+libc: chdir()
+libc: snprintf()
+libc: snprintf()
+libc: puts()
+    </function_remote_call>
+    <function_description>Creates Eden and control fixtures plus ten cycle commands, reflection responses, and interrupt/resume requests, then runs Shakti in the sandbox and checks captured messages and the reflection log. root is unused. TEST_INTEGRATION_MAIN calls it after test_builder and before test_seed; it verifies the loop, reflection, and tool-interruption path.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>test_seed</function_name>
+    <function_order>16</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *root</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+build_seed_curriculum.c: shakti_build_seed_curriculum()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+make_wav_fixture.c: shakti_write_test_wav()
+libc: snprintf()
+make_wav_fixture.c: shakti_write_test_wav()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+build_ledger.c: shakti_build_ledger_file()
+libc: puts()
+    </function_remote_call>
+    <function_description>Generates the seed curriculum in a fresh sandbox, checks lesson counts and generated visual artifacts, writes WAV fixtures for letters and number words, then builds and checks the Eden ledger. root is unused. TEST_INTEGRATION_MAIN calls it after test_loop and before test_mvp; it verifies curriculum generation and its artifacts.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>mvp_prepare_sandbox</function_name>
+    <function_order>17</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *tmp</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Resets the caller's sandbox, copies the repository data and eden_out trees into it, removes the temporary staging copy, creates school, learned, and control directories, and writes their log headers. test_mvp calls it before each startup, drill, stop, and quit scenario so each runtime check begins from the same project assets and clean test state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>test_mvp</function_name>
+    <function_order>18</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *root</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: getcwd()
+libc: chdir()
+libc: chdir()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: chdir()
+libc: chdir()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: chdir()
+libc: chdir()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: chdir()
+libc: chdir()
+libc: snprintf()
+libc: snprintf()
+libc: puts()
+    </function_remote_call>
+    <function_description>Uses mvp_prepare_sandbox for four isolated runtime scenarios: check/demo startup, a school drill with status and interrupt controls, stopping a drill, and quitting. It runs each scenario through run_shakti, checks output and school logs, and leaves root unused. TEST_INTEGRATION_MAIN calls it last before the suite's final success message.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="I">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_integration.c</file_name>
+    <function_name>TEST_INTEGRATION_MAIN</function_name>
+    <function_order>19</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: getcwd()
+libc: puts()
+    </function_remote_call>
+    <function_description>Captures the working directory, then runs test_builder, test_loop, test_seed, and test_mvp in that order before printing the suite's success line and returning 0. Its output goes to stdout and its status is returned from the test entry point; no downstream consumer appears in this file, so the downstream consumer is unresolved. It exists to sequence the complete Shakti C99 integration suite.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

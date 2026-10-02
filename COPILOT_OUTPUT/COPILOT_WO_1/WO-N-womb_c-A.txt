@@ -1,0 +1,68 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>2</total_items>
+<task_description>Read each destination source file in full. For every function, document its processed data, input origin, downstream output, and purpose from source evidence; list direct external calls and do not modify source files.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/womb.c</file_name>
+    <function_name>ipow</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned long b, unsigned int e</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives base b and exponent e from main, multiplies b into local v e times, and returns the product. main combines its results for 2^8, 3^3, and 5^2 with 7 and 19 to construct n. This helper supplies exact integer powers for the womb-product calculation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/womb.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Constructs n from integer powers, compares it with TET_WOMB, and reports its factorization, wheel/slice quotients, and divisor count against TET_PYTHAGOREAN. It counts divisors through the square-root bound, retains best_lo, derives best_hi, and prints the innermost pair and related values to stdout. It returns 0; downstream consumer unresolved. The probe checks the stated womb arithmetic using integers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[left for supervisor — never you]</Supervisor_attestation>
+</Work_Order>

@@ -1,0 +1,90 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>fnv1a_text</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>uint32_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes each byte of caller-supplied text with 32-bit FNV-1a, starting at UINT32_C(2166136261) and multiplying by UINT32_C(16777619) after each xor. shakti_log_append supplies its payload and shakti_log_validate_file supplies a record line without its checksum. The returned hash becomes the appended checksum or the validator's comparison value, providing deterministic log integrity checks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>sanitize_field</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *source, char *destination, size_t destination_size</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Copies caller-supplied field bytes into a bounded destination, converts tab, carriage return, and newline to spaces, drops other bytes below 32 and byte 127, and NUL-terminates when the destination has space. shakti_log_append applies it to phase, channel, subject, property, and value before assembling the payload. It keeps those fields on one log line.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>shakti_channel_name</function_name>
+    <function_order>3</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_channel_t channel</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the caller's shakti_channel_t value to the literals text, written_text, visual_art, or sound_art, and returns invalid for every other value. The returned label is available to downstream log callers, but no consumer appears in this file, so the downstream consumer is unresolved. It supplies stable names for channel values.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>shakti_log_append</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, const char *prefix, const shakti_tick_t *tick, const char *section, unsigned int function_order, const char *phase, const char *channel, const char *subject, const char *property, const char *value</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+shakti_time.c: shakti_event_id_format()
+libc: snprintf()
+libc: fopen()
+libc: fprintf()
+libc: fflush()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Builds a tab-separated event payload from the caller's prefix, tick, section, order, phase, channel, subject, property, and value; it formats the event id, sanitizes five fields, and hashes the payload. It appends the payload and eight-digit checksum to path, flushes, and closes the file, returning 1 only if those steps succeed; invalid inputs or any format, open, write, flush, or close failure return 0. No caller appears in this file, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_log.c</file_name>
+    <function_name>shakti_log_validate_file</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, unsigned long *valid_lines, unsigned long *invalid_lines</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strlen()
+libc: strrchr()
+libc: strtoul()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads newline-terminated records from the caller's path, ignores empty and comment lines, parses the hexadecimal field after the final tab, and compares it with fnv1a_text of the preceding line. It writes valid and invalid counts through non-NULL output pointers and returns 1 after a successful open, or 0 for a NULL path or failed open; no caller appears in this file, so the downstream consumer is unresolved. It checks appended log integrity.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

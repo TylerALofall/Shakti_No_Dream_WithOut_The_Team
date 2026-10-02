@@ -1,0 +1,233 @@
+<Work_Order>
+<QA_specialist>GPT-6.1 Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>17</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>tet_pow</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>unsigned long base, unsigned int exp</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Multiplies base by itself exp times and returns 1 when exp is zero. tet_build supplies the exponent tuples from TET_E2, TET_E3, TET_E5, and TET_E7, then uses these prime powers to populate g_tet_periods. This helper supplies the exact factors used to construct the TET wheel.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>tet_build</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Builds g_tet_periods from every exponent combination in TET_E2, TET_E3, TET_E5, and TET_E7, using tet_pow for each prime power. It returns 1 if already built or after filling the wheel, and 0 if a slot exceeds TET_CELLS; pulse_init uses that status before initializing pulse state. It supplies the wheel needed for firing queries.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *data, size_t len</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds data[0..len) into the caller's FNV state h, XORing each byte and multiplying by the FNV prime. compute_pin supplies the big-endian bytes for each organ period and uses the returned state for the next fold. This helper produces the deterministic period-table pin.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>be64</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *out, uint64_t v</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Encodes caller value v as eight big-endian bytes in out. compute_pin supplies each PULSE_ORGAN_PERIODS entry and passes the encoded bytes to fnv1a64. This conversion gives the period-table pin a fixed byte order.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>compute_pin</function_name>
+    <function_order>5</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Starts from the FNV basis and folds every PULSE_ORGAN_PERIODS value after be64 encodes it and fnv1a64 updates the hash. It returns the period-table pin to pulse_init for storage in g_pin and to pulse_verify for comparison. It identifies the configured organ periods deterministically.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_init</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+    </function_remote_call>
+    <function_description>Uses file-local initialization state to build the TET wheel, reset g_beat, compute g_pin, and set g_init; an already initialized engine returns success immediately, while a failed tet_build prints a stop message and returns 0. It prints the initialized pin to stdout and returns status to its callers. This starts pulse queries and advancement.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_advance</function_name>
+    <function_order>7</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads file-local g_init and g_beat, attempts pulse_init when needed, increments g_beat once, and returns the new beat to its caller. No caller appears in this file, so the downstream consumer is unresolved. It provides the single-beat step for the pulse timeline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_advance_n</function_name>
+    <function_order>8</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>unsigned long n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Adds caller-supplied n, converted to uint64_t, to file-local g_beat after attempting pulse_init when needed, then returns the updated beat. No caller appears in this file, so the downstream consumer is unresolved. It advances the pulse timeline by a requested number of beats.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_get_firing</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>pulse_firing_t *out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads the current file-local g_beat and passes it with caller-supplied out to pulse_firing_at. It returns that query's status and the firing data is written through out; pulse_print_state consumes both. This accessor exposes the current beat's TET firing set.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_firing_at</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t beat, pulse_firing_t *out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>For caller beat, attempts pulse_init if needed; when out is non-NULL, it clears out and records each g_tet_periods entry that divides beat, up to PULSE_MAX_DEPTH, in out->cells and out->periods. It returns 0 for a NULL out and 1 after filling the result; pulse_get_firing, pulse_converges, pulse_verify, and pulse_print_state consume that result. It provides the wheel's firing set for a beat.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_organ_now</function_name>
+    <function_order>11</function_order>
+    <function_type>pulse_organ_t</function_type>
+    <function_input>void</function_input>
+    <function_return>pulse_organ_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads file-local g_beat and passes it to pulse_organ_at, returning the selected organ to its caller. pulse_print_state consumes this value to report the current organ. It exposes the organ associated with the current pulse beat.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_organ_at</function_name>
+    <function_order>12</function_order>
+    <function_type>pulse_organ_t</function_type>
+    <function_input>uint64_t beat</function_input>
+    <function_return>pulse_organ_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Attempts pulse_init if needed, checks caller beat against each non-silence period in PULSE_ORGAN_PERIODS, and returns the matching organ with the greatest period, defaulting to PULSE_ORGAN_SILENCE. pulse_organ_now and pulse_verify consume the result. It classifies which configured organ is active at a beat.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_converges</function_name>
+    <function_order>13</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t beat_a, uint64_t beat_b</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Builds firing sets for caller beats beat_a and beat_b with pulse_firing_at, then compares their cell indices and returns 1 on any shared cell or 0 otherwise or if a query fails. pulse_verify consumes this result for its convergence checks. It tests whether two beats share a TET cell.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_mesh_count</function_name>
+    <function_order>14</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>uint64_t beat</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Attempts pulse_init if needed, counts the non-silence entries in PULSE_ORGAN_PERIODS that divide caller beat, and returns the count. pulse_print_state uses it in its mesh report. It measures how many configured organs fire together at that beat.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_verify</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns 1 immediately if g_tet_built is false; otherwise checks that wheel periods are nonzero, divide TET_WHEEL, and are unique, validates organ periods and the cached pin, then checks firing at beat 0, the heart at beat 1, and convergence at beats 0/0 and 1/2. It returns 0 on success or a numbered failure; no caller appears in this file, so the downstream consumer is unresolved. It verifies pulse invariants.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_pin</function_name>
+    <function_order>16</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Attempts pulse_init when the file-local engine is uninitialized, then returns g_pin to its caller. No caller appears in this file, so the downstream consumer is unresolved. It exposes the deterministic pin for the configured organ-period table.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_pulse.c</file_name>
+    <function_name>pulse_print_state</function_name>
+    <function_order>17</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Attempts pulse_init if needed, then prints g_beat, the current firing count and up to eight firing periods, the current organ name and period, and the mesh count to stdout using pulse_get_firing, pulse_organ_now, and pulse_mesh_count. It returns no value; no caller appears in this file, so the downstream consumer is unresolved. It provides a diagnostic view of pulse state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1 Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1 Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

@@ -1,0 +1,164 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>9</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>split_tabs</function_name>
+    <function_order>1</function_order>
+    <function_type>static size_t</function_type>
+    <function_input>char *line, char *fields[SHAKTI_LEDGER_FIELDS]</function_input>
+    <function_return>size_t</function_return>
+    <function_remote_call>
+libc: strchr()
+libc: strlen()
+    </function_remote_call>
+    <function_description>Splits a mutable ledger line at tabs into fields, returns the number found, and removes trailing CR/LF from the last field. shakti_report_read_ledger supplies each non-header line and inspects the resulting 23-column fields. This provides the row parser for ledger aggregation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>parse_ulong</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned long</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>unsigned long</function_return>
+    <function_remote_call>libc: strtoul()</function_remote_call>
+    <function_description>Converts decimal text from EDEN_SUMMARY fields with strtoul; text with no digits or unconsumed trailing characters maps to 0. shakti_report_read_ledger uses the returned values for passed checks, required checks, and confidence. This converts ledger metrics into numeric report state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>count_tablet_state</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>shakti_report_t *report, const char *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Compares the supplied state with planned, staged, and ready and increments the matching report counter; other values do nothing. shakti_report_read_ledger passes field 6 from TABLET and TABLET_SUMMARY rows. The updated totals feed report serialization and printing, so this helper tallies tablet states.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_init</function_name>
+    <function_order>4</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_report_t *report</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: memset()</function_remote_call>
+    <function_description>Clears the caller's report structure with memset when report is non-null. shakti_report_read_ledger calls it before adding values parsed from the ledger, so old metrics cannot carry into the new result. The initialized report is the input to later serialization and printing.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_read_ledger</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *ledger_path, shakti_report_t *report</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: fclose()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: ferror()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens caller ledger_path, clears report, skips its first line, and requires each later row to split into 23 fields. It counts STONE gaps and verification, tablet states and completion, and EDEN_SUMMARY metrics, then derives runnable from required gaps and complete-tablet counts. It returns 0 for invalid input, malformed rows, or I/O failure; otherwise 1. The caller receives the aggregate for report output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>write_report_body</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, const shakti_report_t *report, const shakti_school_state_t *school</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: fprintf()</function_remote_call>
+    <function_description>Formats report metrics and school progress into the fixed SHAKTI STARTUP REPORT V1 lines and writes them to the supplied FILE. shakti_report_write provides the file and structures, then uses this helper's write status to decide whether to flush. It serializes the startup summary to the report file.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_write</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *report_path, const shakti_report_t *report, const shakti_school_state_t *school</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fflush()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens caller report_path for writing and delegates the summary to write_report_body. It flushes only after a successful body write, always closes the opened file, and returns whether writing, flushing, and closing succeeded. shakti_report_run consumes that status; report_path receives the persistent startup metrics.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_print</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>const shakti_report_t *report, const shakti_school_state_t *school</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: puts()
+    </function_remote_call>
+    <function_description>Reads report and school state and prints checks, confidence, stones, tablets, required gaps, deferred sounds, school progress, and runnable status to stdout; null inputs produce no output. shakti_report_run calls it after writing the report, providing a human-readable counterpart to the saved summary.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_report.c</file_name>
+    <function_name>shakti_report_run</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_manifest_t *manifest, const char *manifest_path, const char *ledger_path, const char *report_path, const shakti_school_state_t *school, shakti_report_t *report</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>shakti_manifest.c: shakti_manifest_write_ledger()</function_remote_call>
+    <function_description>Requires a loaded manifest and non-null paths and states, calls shakti_manifest_write_ledger to write the ledger while ignoring its return, reads the ledger into report, writes the report file, and prints the summary. It returns 0 on input, read, or report-write failure and 1 after those steps succeed. Caller inputs produce ledger, file, and stdout outputs; no caller is defined here, so the downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

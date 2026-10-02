@@ -1,0 +1,167 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>7</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>load_glyph_file__svg_pure_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: sscanf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>load_glyphs__svg_pure_h supplies paths under eden_out/Visual_text. The loader reads CHARACTER ASCII records in range 0..127, then stores up to eight rows of # bits in glyph and marks glyph_ok. draw_text consumes those arrays to rasterize labels; the loader supplies the bitmap font from the glyph library.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>load_glyphs__svg_pure_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>SVG_PURE_MAIN calls this loader, which forms paths from the file-local eden_out/Visual_text directory. It requests digit, lowercase, uppercase, and ASCII 32–127 glyph files through load_glyph_file__svg_pure_h, populating glyph and glyph_ok. draw_text reads those arrays to turn SVG text into pixels; this function prepares its font input.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>draw_rect</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>int x, int y, int w, int h, int W, int H</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>render and draw_text supply rectangle bounds and canvas dimensions. draw_rect sets img cells to 1 only when each coordinate falls within [0,W) and [0,H), clipping off-canvas pixels. Its callers use the mutated grid as raster output for black SVG shapes and scaled glyph pixels; it provides the filled-rectangle primitive.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>draw_circle</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>int cx, int cy, int r, int W, int H</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>render supplies the circle center, radius, and canvas dimensions from a black SVG circle. draw_circle scans the bounding square, sets img cells within the canvas whose squared distance from the center is at most r squared, and leaves other cells unchanged. It provides the filled-circle raster primitive for render.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>draw_text</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>int x, int y, int fs, const char *s, int W, int H</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>render supplies extracted text, position, font size, and canvas dimensions; draw_text reads glyph and glyph_ok. It replaces missing glyphs with ?, scales each set glyph bit into a sc-by-sc square through draw_rect, and writes the pixels to img. This rasterizes labels from the local 8x8 font; render consumes the grid.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>render</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, int *Wp, int *Hp, int *unsup</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: sscanf()
+libc: strstr()
+libc: strstr()
+libc: sscanf()
+libc: strstr()
+libc: strstr()
+libc: sscanf()
+libc: strstr()
+libc: strstr()
+libc: sscanf()
+libc: strstr()
+libc: strchr()
+libc: strrchr()
+libc: sscanf()
+libc: strstr()
+libc: strstr()
+libc: strchr()
+libc: fclose()
+    </function_remote_call>
+    <function_description>render reads the path supplied by SVG_PURE_MAIN and parses line-based SVG viewBox, black rects, black circles, and text. It draws onto global img, counts remaining markup lines in unsup, stores valid dimensions through Wp and Hp, and returns 0; open or dimension failures return -1. SVG_PURE_MAIN uses the status, dimensions, and count to decide whether to reject or write a PBM and sight record. It provides the restricted-SVG raster stage.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/svg_pure.c</file_name>
+    <function_name>SVG_PURE_MAIN</function_name>
+    <function_order>7</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: fopen()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: opendir()
+libc: fprintf()
+libc: readdir()
+libc: strlen()
+libc: strcmp()
+libc: strcpy()
+libc: closedir()
+libc: strcmp()
+libc: strcpy()
+libc: strcpy()
+libc: strcpy()
+libc: snprintf()
+libc: snprintf()
+libc: memset()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+libc: snprintf()
+libc: fopen()
+libc: fclose()
+libc: printf()
+libc: fprintf()
+libc: fputc()
+libc: fputc()
+libc: fclose()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>argv supplies the SVG directory, PBM output directory, and sight-log path. It loads glyphs, sorts at most 600 .svg names from the directory, and renders each into global img; unsupported markup or invalid dimensions are logged as unverified. For accepted images it FNV-1a hashes pixels, writes a P1 PBM, and appends the sight record to the log; totals also go to stdout. It returns 2 for bad argc, 1 on setup, write, or drift failure, otherwise 0. It is the pure-image pipeline entry point; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

@@ -1,0 +1,366 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>18</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>text_append__deposit_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *buffer, unsigned long capacity, unsigned long *used, const char *format, ...</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: vsnprintf()</function_remote_call>
+    <function_description>Formats caller-supplied arguments into buffer at used, refusing invalid pointers, exhausted capacity, and truncation; on success it advances used by the bytes written. content_caption__deposit_h, content_image__deposit_h, and write_pdf__deposit_h pass g_content here, which write_pdf__deposit_h later sends to pdf_write_stream_object__deposit_h. This helper builds bounded PDF page-command text.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>date_today__deposit_h</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *out, unsigned long capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: time()
+        libc: localtime()
+        libc: snprintf()
+    </function_remote_call>
+    <function_description>Reads the current clock and converts it to local calendar time, then formats YYYY-MM-DD into the caller's output buffer if it fits. main supplies that buffer and uses the date in deposit headers and dated output paths. The date names this run's artifacts.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>strip_line_end__deposit_h</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *line</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: strlen()</function_remote_call>
+    <function_description>Receives a line read by read_picture_file, read_text_file, or read_deposit and removes all trailing carriage returns and line feeds in place. Those readers then compare or parse the normalized line. It lets the three file readers process line endings without retaining them.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>palette_rgb</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>char letter, unsigned char *red, unsigned char *green, unsigned char *blue</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps a palette letter from a picture row to RGB bytes through the caller's output pointers and returns whether the letter is recognized. read_picture_file consumes that status, stores the RGB bytes in g_original, and sets alpha to 255. This lookup decodes the fixed picture palette into pixel channels.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>read_picture_file</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, unsigned char *rgba, unsigned int *width_out, unsigned int *height_out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: printf()
+        libc: fgets()
+        libc: strcmp()
+        libc: fgets()
+        libc: sscanf()
+        libc: fgets()
+        libc: sscanf()
+        libc: fgets()
+        libc: strncmp()
+        libc: fgets()
+        libc: strcmp()
+        libc: printf()
+        libc: fclose()
+        libc: fgets()
+        libc: printf()
+        libc: fclose()
+        libc: strlen()
+        libc: printf()
+        libc: fclose()
+        libc: printf()
+        libc: fclose()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Reads the picture path supplied by main, validates its header, dimensions, row lengths, and palette letters, and fills rgba with decoded channels and opaque alpha. On success it stores the parsed dimensions through width_out and height_out. main next pulls mono bits from this page; the helper loads the first source document as pixels.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>read_text_file</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, eyes_text_page_t *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: printf()
+        libc: memset()
+        libc: fgets()
+        libc: strlen()
+        libc: printf()
+        libc: fclose()
+        libc: strcpy()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Reads up to three lines from the path main supplies for page2_text.txt, clears the caller's eyes_text_page_t, and copies each line into line1, line2, or line3 after checking its length. main passes the populated text to eyes_load_document, which renders page two. This helper supplies the text document for the second deposited page.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>write_octet</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, unsigned char value</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: fputc()</function_remote_call>
+    <function_description>Writes the caller's unsigned byte to file as eight binary characters, most-significant bit first, and reports a write failure. write_deposit supplies each RGBA channel and then adds separators and the mono bit. This helper preserves each full color-channel value in the deposit.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>write_deposit</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const char *date, unsigned int page_number, unsigned int width, unsigned int height, const unsigned char *rgba, const char *bits</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: printf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fputc()
+        libc: fputc()
+        libc: fputc()
+        libc: fprintf()
+        libc: fflush()
+        libc: fclose()
+        libc: printf()
+    </function_remote_call>
+    <function_description>Writes date, page dimensions, and each pixel's coordinates, four RGBA octets, and mono bit from its caller-supplied buffers to path, followed by END. write_octet formats each channel. main next reads this file through read_deposit; this stage preserves the five marks for every page pixel on disk.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>octet_value</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *marks, unsigned char *value_out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: strlen()</function_remote_call>
+    <function_description>Validates an eight-character 0/1 string from a deposit pixel line, decodes it most-significant bit first, and writes the byte through value_out. read_deposit calls it for each RGBA channel before continuing reconstruction. It converts deposited color marks back into channel values.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>read_deposit</function_name>
+    <function_order>10</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, unsigned int page_number, unsigned int width, unsigned int height, unsigned char *rgba, char *bits</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: printf()
+        libc: fgets()
+        libc: strcmp()
+        libc: fgets()
+        libc: strncmp()
+        libc: fgets()
+        libc: sscanf()
+        libc: fgets()
+        libc: sscanf()
+        libc: fgets()
+        libc: sscanf()
+        libc: fgets()
+        libc: strcmp()
+        libc: printf()
+        libc: fclose()
+        libc: fgets()
+        libc: sscanf()
+        libc: printf()
+        libc: fclose()
+        libc: printf()
+        libc: fclose()
+        libc: fgets()
+        libc: strcmp()
+        libc: printf()
+        libc: fclose()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Reads path written by write_deposit and checks its format, expected page and dimensions, ordered pixel coordinates, bit marks, and END line. It decodes RGBA marks into rgba and stores each mono mark in bits. main sends these outputs to eyes_reconstruct_mono and eyes_diff; this read-back makes the disk deposit the rebuild source.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>pdf_begin_object__deposit_h</function_name>
+    <function_order>11</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, unsigned int number</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: ftell()
+        libc: fprintf()
+    </function_remote_call>
+    <function_description>Receives the PDF stream and object number from the PDF writer helpers, records the current file offset in g_object_offsets, and writes the object's header. write_pdf__deposit_h later uses those offsets for the cross-reference table. This helper starts each bounded PDF object and records its location.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>pdf_escape__deposit_h</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *in, char *out, unsigned long capacity</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Copies the caller's caption text into out, prefixing PDF-special parentheses and backslashes with a backslash and refusing insufficient capacity. content_caption__deposit_h supplies captions and receives the escaped string in g_escaped before adding it to g_content. This helper makes caption text safe inside a PDF literal.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>pdf_write_image_object__deposit_h</function_name>
+    <function_order>13</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, unsigned int number, const unsigned char *rgba, unsigned int width, unsigned int height</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fprintf()
+        libc: fwrite()
+        libc: fprintf()
+    </function_remote_call>
+    <function_description>Converts the caller's RGBA page buffer into RGB triples in g_image, then writes them as an uncompressed PDF image object with the supplied dimensions and object number. write_pdf__deposit_h passes each page's original, deposit-rebuilt, and bit-only images. The object embeds the three comparison images in the final PDF.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>pdf_write_stream_object__deposit_h</function_name>
+    <function_order>14</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *file, unsigned int number, const char *content</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: strlen()
+        libc: fprintf()
+        libc: fwrite()
+        libc: fprintf()
+    </function_remote_call>
+    <function_description>Writes caller-supplied content and its byte length as a PDF stream object, after opening the numbered object with pdf_begin_object__deposit_h. write_pdf__deposit_h passes g_content and then writes a page object that references this stream. It embeds the drawing commands for each page.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>content_caption__deposit_h</function_name>
+    <function_order>15</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned long *used, int y, const char *caption</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a caption and vertical coordinate from write_pdf__deposit_h, escapes the caption into g_escaped, and appends a PDF text command to g_content at used. write_pdf__deposit_h later passes that content to pdf_write_stream_object__deposit_h. This helper labels each page's image comparisons.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>content_image__deposit_h</function_name>
+    <function_order>16</function_order>
+    <function_type>static int</function_type>
+    <function_input>unsigned long *used, int bottom, unsigned int width, unsigned int height, unsigned int local_index</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives image dimensions, placement, and local image index from write_pdf__deposit_h and appends a scaled PDF transformation and image-draw command to g_content. write_pdf__deposit_h later writes that content through pdf_write_stream_object__deposit_h. This helper positions each comparison image on its page.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>write_pdf__deposit_h</function_name>
+    <function_order>17</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: printf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: ftell()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fprintf()
+        libc: fflush()
+        libc: fclose()
+        libc: printf()
+        libc: remove()
+    </function_remote_call>
+    <function_description>Builds a two-page Letter-size PDF at the path supplied by main from g_original, g_rebuilt, g_bitonly, page dimensions, deposit names, and comparison counts. It writes image, content, page, cross-reference, and trailer objects, then returns success or removes a failed output. main reports the completed PDF path.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/binary_deposit.c</file_name>
+    <function_name>main</function_name>
+    <function_order>18</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: printf()
+        eyes.c: eyes_load_document()
+        libc: printf()
+        eyes.c: eyes_pull_mono()
+        libc: printf()
+        libc: snprintf()
+        libc: snprintf()
+        libc: printf()
+        eyes.c: eyes_reconstruct_mono()
+        libc: printf()
+        eyes.c: eyes_diff()
+        eyes.c: eyes_diff()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: snprintf()
+        libc: printf()
+        libc: printf()
+    </function_remote_call>
+    <function_description>Reads today's date and binary/page1_picture.txt, loads binary/page2_text.txt through eyes_load_document, then processes both pages by pulling mono bits, writing and rereading deposits, rebuilding bit-only pages, and counting pixel differences. It prints page results, calls write_pdf__deposit_h to collect the dated comparison PDF, and returns 0 on success or 1 on failure.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

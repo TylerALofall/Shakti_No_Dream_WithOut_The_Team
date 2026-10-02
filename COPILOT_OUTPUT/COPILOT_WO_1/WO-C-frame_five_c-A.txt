@@ -1,0 +1,290 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>18</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and their order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight low-to-high bytes of v into caller-supplied state h, XORing each byte and multiplying by FNV_PRIME. main initializes pin and proof_pin from FNV_BASIS and passes their data through this helper; each returned state feeds the next fold. It supplies deterministic incidence and proof fingerprints.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>zp_of</function_name>
+    <function_order>2</function_order>
+    <function_type>static zp</function_type>
+    <function_input>int64_t a, int64_t b</function_input>
+    <function_return>zp</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Constructs a Z[phi] pair from caller-supplied integer coefficients a and b and returns that pair unchanged. zp_sub, zp_add, and zp_mul pass their computed coefficients here for arithmetic results. This constructor provides the exact representation used by the geometry checks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>zp_sub</function_name>
+    <function_order>3</function_order>
+    <function_type>static zp</function_type>
+    <function_input>zp x, zp y</function_input>
+    <function_return>zp</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Subtracts y's a and b coefficients from x's corresponding coefficients, then returns the pair through zp_of. dist2 supplies vertex-coordinate pairs and uses these differences to form each axis delta. The result starts exact squared-distance calculations for the edge and cube tests.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>zp_add</function_name>
+    <function_order>4</function_order>
+    <function_type>static zp</function_type>
+    <function_input>zp x, zp y</function_input>
+    <function_return>zp</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Adds the a and b coefficients of caller-supplied pairs and returns the sum through zp_of. dist2 combines the three squared coordinate deltas with this helper. Its exact pair result feeds is_edge, check_solid, and is_cube through dist2.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>zp_eq</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>zp x, zp y</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Compares both integer coefficients of x and y and returns whether both match. is_edge, check_solid, and is_cube use that result to classify exact squared distances. It prevents geometric tests from relying on rounded values.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>zp_mul</function_name>
+    <function_order>6</function_order>
+    <function_type>static zp</function_type>
+    <function_input>zp x, zp y</function_input>
+    <function_return>zp</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Multiplies pairs x and y and reduces phi squared using phi^2 = phi + 1, returning the exact coefficients through zp_of. dist2 supplies coordinate deltas; is_cube also receives squared distances from dist2. This keeps all geometry arithmetic exact in Z[phi].</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>build_vertices</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Fills global V with the 20 coordinate triples by iterating all sign combinations for the four vertex forms, using local exact constants ONE, INV, PHI, and ZERO. main calls it before the geometric checks; dist2 reads V for later edge and cube tests. It constructs the solid's deterministic input coordinates.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>dist2</function_name>
+    <function_order>8</function_order>
+    <function_type>static zp</function_type>
+    <function_input>int p, int q</function_input>
+    <function_return>zp</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads vertices p and q from global V, subtracts their x, y, and z coordinates, squares each delta with zp_mul, and adds the three pairs with zp_add. It returns the exact squared distance used by is_edge, check_solid, and is_cube to classify the solid and candidate cubes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>is_edge</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>int p, int q</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives vertex indices p and q, rejects identical indices, then compares dist2's result with EDGE2 through zp_eq. check_faces and check_solid use the returned adjacency result to build face counts and traverse the coordinate graph. It derives edges from exact coordinates.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>check_faces</function_name>
+    <function_order>10</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>libc: printf()</function_remote_call>
+    <function_description>Enumerates every five-vertex subset, uses is_edge to retain induced five-cycles, and counts face membership per vertex and edge. It prints the face and incidence totals, then returns whether there are 12 faces, three faces per vertex, and two per edge. check_solid consumes this result to validate the solid.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>check_solid</function_name>
+    <function_order>11</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Counts EDGE2 neighbors for each V vertex, counts edges, traverses the is_edge graph from vertex 0, and calls check_faces. It prints degree errors and the edge, reachability, and face checks; returns true only when every degree is three, there are 30 edges, all vertices are reached, and faces pass. main uses this gate before the cube search.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>is_cube</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>const int *s</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests the eight vertex indices in s by measuring pair distances with dist2 and classifying them with zp_eq. It requires each vertex to have three edge, three face-diagonal, and one space-diagonal neighbor, with totals of 12, 12, and 4 pairs. search uses the result to recognize cube subsets.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>search</function_name>
+    <function_order>13</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Enumerates every increasing eight-index subset of NV, calls is_cube, stores up to CUBE_MAX matches in global CUBE, and increments cube_count and cube_matches. It returns the number of subsets tried; main uses that count and the stored cubes for incidence and overlap checks. This performs the exhaustive cube search without shortcuts.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>check_pairs</function_name>
+    <function_order>14</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Compares each pair of retained CUBE entries by counting shared vertex indices, prints each overlap and the pair total, and marks any overlap other than two as bad. It returns whether all pairs pass; main uses this result in the final verdict. It verifies the frame-pair overlap rule.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>is_antipodal</function_name>
+    <function_order>15</function_order>
+    <function_type>static int</function_type>
+    <function_input>int p, int q</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Compares all six integer coefficients of V[p] and V[q], returning true only when each coefficient in q is the negation of its counterpart in p. check_poles applies this test to the two shared vertices of each cube pair. It establishes exact geometric opposition rather than inferring it from overlap.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>check_poles</function_name>
+    <function_order>16</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>For every pair of retained cubes, collects shared indices from CUBE and reports pairs that do not share exactly two vertices. For valid pairs it calls is_antipodal, prints the result, and returns whether any pair failed. main uses this status for its verdict; the check tests the pole law over the searched frames.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>print_zp</function_name>
+    <function_order>17</function_order>
+    <function_type>static void</function_type>
+    <function_input>zp z</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Formats caller-supplied pair z as its integer a, its b coefficient followed by phi, or a plus signed b-phi term, according to which coefficients are zero. main passes each V coordinate and writes separators around it. The formatted exact coordinate goes to stdout for the vertex report.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="C">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—C/frame_five.c</file_name>
+    <function_name>main</function_name>
+    <function_order>18</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: putchar()
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: putchar()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: puts()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>With no parameters, builds global V, runs check_solid and the exhaustive search, then checks vertex incidence, cube-pair overlap, and antipodal poles. It hashes retained cube indices and proof data with fnv1, prints coordinates, checks, and pins to stdout, and returns 0 only when all stated conditions pass (otherwise 1). Fixed constants and helper results drive this exact-arithmetic proof; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[left for supervisor — never you]</Supervisor_attestation>
+</Work_Order>

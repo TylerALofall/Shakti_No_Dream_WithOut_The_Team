@@ -1,0 +1,75 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>yes</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>next_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Advances global g_s, initialized from EAR_SEED, through the SplitMix64 sequence and returns the mixed 64-bit value. wave calls it twice for each non-heartbeat flash to choose the lane center and wheel-radius index. Those outputs drive deterministic endogenous ear waves throughout main's gestation loop.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>fnv</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Computes a 64-bit FNV-1a pin over n bytes from p. main supplies the completed 12,000-cell lane after all dark-ear flashes and heartbeats. The returned hash is printed as the ear substrate pin, providing the deterministic identity of the trained lane.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>pulse</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *lane, uint32_t c, uint32_t r</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Mutates the supplied cochlear lane with one bounded center-surround pulse centered at c: cells within r rise toward 7 and the ring from r to 2r falls toward 0. wave supplies endogenous centers and radii; main supplies traveling heartbeat centers with radius 19. The modified lane itself is the output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>wave</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>unsigned char *lane</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Creates one endogenous non-heartbeat ear wave on the lane supplied by main. Two next_u64 draws select a center in CELLS and a radius from wheel, then pulse applies the center-surround change. It returns nothing; its purpose is to provide the ordinary dark-ear activity between the explicitly traveling heartbeat pulses.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_dark_ear.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Builds the dark-ear lane across EAR_FLASHES. Every 19th iteration applies a radius-19 heartbeat whose center advances by beats*7 mod CELLS; every other iteration calls wave on the same global lane. It counts heartbeats, prints flash and beat totals, hashes the final lane with fnv, prints the ear substrate pin, and returns success.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>function_remote_call added to every record in this file, 2026-10-02, by Kimi K3 under Tyler's GO: the 2026-09-20 fill predates the 2026-09-29 remote_call law. remote_call lists recorded from the current SECTION-B sources on main (blob-verified at pull). No other field touched.</corrections>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

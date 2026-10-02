@@ -1,0 +1,175 @@
+<Work_Order>
+<QA_specialist>GPT-6 Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>9</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>fnv1a</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes the caller-supplied bytes p[0..n) with seed h, XORing each byte and multiplying by FNV_PRIME; it returns the updated hash. purify_sound hashes PCM blocks, purify_number hashes wheel exponents, and main folds accepted pins into ledger. This helper supplies deterministic pins for the ingest lanes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>purify_vision</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, uint64_t *pin_out, uint32_t *grids_out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: rewind()
+        libc: fgetc()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Reads path twice, collecting only . and # bytes into eight-byte rows and hashing each complete row. On identical passes it writes the hash to pin_out and the accumulated grid count to grids_out; that counter is not reset between passes, so it includes both. main folds the pin into ledger, but does not consume grids, whose downstream consumer is unresolved; this is the vision-lane purifier.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>rd32</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const unsigned char *b</function_input>
+    <function_return>uint32_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Combines four bytes from b into a little-endian uint32_t. purify_sound passes chunk-header bytes to it for the WAV chunk size and format sample rate; the decoded values control chunk traversal and the format fields main checks. It supplies the 32-bit reader for WAV purification.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>rd16</function_name>
+    <function_order>4</function_order>
+    <function_type>static uint16_t</function_type>
+    <function_input>const unsigned char *b</function_input>
+    <function_return>uint16_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Combines two bytes from b into a little-endian uint16_t. purify_sound uses it for the WAV encoding tag, channel count, and bit depth, then main checks the returned format fields. It supplies the 16-bit reader needed to decide whether a sound atom is accepted.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>purify_sound</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, uint64_t *pin_out, uint32_t *rate, uint16_t *bits, uint16_t *chans</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: fseek()
+        libc: ftell()
+        libc: rewind()
+        libc: fread()
+        libc: fclose()
+        libc: memcmp()
+        libc: memcmp()
+        libc: fclose()
+        libc: fseek()
+        libc: fread()
+        libc: fclose()
+        libc: memcmp()
+        libc: fread()
+        libc: fclose()
+        libc: fclose()
+        libc: fseek()
+        libc: memcmp()
+        libc: fread()
+        libc: fclose()
+        libc: fseek()
+        libc: fseek()
+        libc: fclose()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Reads a WAV file at path, checks RIFF/WAVE and PCM format, extracts rate, bit depth, and channels, and hashes each data payload in two passes. It writes pin_out only when both hashes match; return codes distinguish open failure, drift, and malformed input. main receives the pin and format fields to admit only 16 kHz, 16-bit, mono sound atoms.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>is_fib_u64</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t n</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests caller-supplied n against the generated Fibonacci sequence beginning 1, 1, returning true for 1 or when the first sequence value not below n equals n. purify_number applies it to n after removing factors of 2 to classify a binary-lane core; this keeps that recognition separate from wheel factorization.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>purify_number</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t n, uint64_t *pin_out, int *wheel_ok, int *bin_ok</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Factors n over WHEEL, writes whether the remainder is one to wheel_ok, strips factors of 2 and tests the core with is_fib_u64 for bin_ok, then hashes the five exponents and, for a Fibonacci core, its bytes into pin_out. main uses these outputs to fold on-wheel or binary-lane pins into ledger; the function returns 0 and classifies rather than rejecting the number itself.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>ends_with</function_name>
+    <function_order>8</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *s, const char *suf</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: strlen()
+        libc: strlen()
+        libc: strcmp()
+    </function_remote_call>
+    <function_description>Compares the final b characters of s with suffix suf after measuring both strings, returning true only when s is long enough and strcmp finds an exact match. main uses it to route .8x8.txt and .wav arguments to their lane purifiers; it provides the filename test for ingest dispatch.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_ingest.c</file_name>
+    <function_name>main</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fprintf()
+        libc: strcmp()
+        libc: fopen()
+        libc: printf()
+        libc: fscanf()
+        libc: printf()
+        libc: printf()
+        libc: fclose()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+    </function_remote_call>
+    <function_description>Dispatches argv files to number lists marked -N, .8x8.txt visions, or .wav sounds; helpers purify each item and accepted pins advance ledger while rejects and off-wheel numbers are reported. It prints lane counts and the final pin, returning 2 for missing arguments, 1 when rejects occurred, and 0 otherwise; off-wheel counts alone do not set rejects. It coordinates the unified ingest pipeline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6 Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6 Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

@@ -1,0 +1,100 @@
+<Work_Order>
+<QA_specialist>ChatGPT</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight low-to-high bytes of v into incoming FNV state h, supplied by callers from a basis or prior hash. fnv_str, load_all, and main use the returned state to build deterministic stream and case-key pins. This primitive makes ledger selection and sealed answers reproducible.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Processes NUL-terminated bytes from s, passing each unsigned byte and current hash to fnv1; its caller supplies h. load_all uses it for ledger lines, and main uses it for case text and verdicts. The returned hash feeds their stream and answer-key pins, providing deterministic text hashing for replay.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>verdict</function_name>
+    <function_order>3</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>const char *line</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: strstr()
+libc: strstr()
+libc: strstr()
+libc: strstr()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+libc: strncmp()
+    </function_remote_call>
+    <function_description>Classifies the line selected by main as DAMAGE when it is shorter than eight bytes or has an unknown shape, TEACH_GAP for teach_me, RETEACH for recognize-fail or spell-fail, DORMANT for wav NONE, and HEALTHY for recognized opening words. It returns the verdict for main to hash and print beside each case, implementing the clinic's ear-test taxonomy.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>load_all</function_name>
+    <function_order>4</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strlen()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads nonempty lines from filenames in SRC into LINES up to MAX_LINES, trims trailing CR/LF, and folds each line with its source index into an FNV stream. main receives the count through nlines and the returned pin, then selects cases from LINES. This loader builds the clinic's deterministic replay set from available ledgers.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/momma_clinic.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Loads the ledgers and reports their count and stream pin. With no lines it prints a notice and returns 1; otherwise it derives a walk and hop, classifies 12 selected lines with verdict, folds each case and verdict into a key pin, and prints the cases and final pin. It returns 0; stdout is the output and downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I ChatGPT, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+ChatGPT 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

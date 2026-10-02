@@ -1,0 +1,179 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>13</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *data, size_t len</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes len bytes from data by XORing each into h and multiplying by the FNV prime, then returns the updated 64-bit state. compute_pin supplies its local four-byte big-endian BIND_MAX_BINDINGS value. The returned state becomes the binding-table pin, making this helper the file's configuration hash step.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>hash_to_cell</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned int</function_type>
+    <function_input>uint64_t a, uint64_t b</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Mixes hashes a and b with XOR, shifts, and two 64-bit multipliers, then reduces the result modulo TET_CELLS and returns that cell index. bind_converges and bind_create supply the hashes; the former returns the index and the latter stores it in a binding moment. This maps a sensory pair into the fixed binding grid.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>compute_pin</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Encodes BIND_MAX_BINDINGS as four big-endian bytes in local be and hashes them from the FNV basis with fnv1a64. It returns the resulting configuration pin to bind_init, which stores it in g_table. This ties the initialized table's capacity constant to its reported pin.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_init</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+libc: printf()
+    </function_remote_call>
+    <function_description>Uses file-local g_init and g_table: if already initialized it returns 1; otherwise it clears the table, resets count and next_victim, stores compute_pin's result, sets g_init, prints the slot count and pin to stdout, and returns 1. Other public operations call it for lazy initialization, establishing the binding table before use.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_converges</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t sight_hash, uint64_t sound_hash, unsigned int *cell_out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives sight_hash and sound_hash plus an optional cell_out from its caller, lazily initializes the table, and writes hash_to_cell's result when cell_out is non-null. It returns 1. No caller appears in this file, so the downstream consumer is unresolved; this operation exposes the cell where the two hashes converge.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_create</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t sight_hash, uint64_t sound_hash, uint64_t beat</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a sight/sound hash pair and beat, initializes the table if needed, and maps the pair to a cell. A matching slot gains strength and its beat is replaced; otherwise a new slot is appended or the circular next_victim slot is replaced. It returns 1. Later lookups, cell queries, verification, and printing read g_table; this records the binding.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_lookup_sight</function_name>
+    <function_order>7</function_order>
+    <function_type>const bind_moment_t *</function_type>
+    <function_input>uint64_t sight_hash</function_input>
+    <function_return>const bind_moment_t *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Searches initialized g_table in slot order for the first moment whose sight_hash equals the caller's value and returns its address, or NULL if none matches. The caller receives the stored pair, cell, strength, and beat; no caller appears in this file, so the downstream consumer is unresolved. This exposes bindings by sight identity.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_lookup_sound</function_name>
+    <function_order>8</function_order>
+    <function_type>const bind_moment_t *</function_type>
+    <function_input>uint64_t sound_hash</function_input>
+    <function_return>const bind_moment_t *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Searches initialized g_table in slot order for the first moment whose sound_hash equals the caller's value and returns its address, or NULL if none matches. The caller receives the stored pair, cell, strength, and beat; no caller appears in this file, so the downstream consumer is unresolved. This exposes bindings by sound identity.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_reinforce</function_name>
+    <function_order>9</function_order>
+    <function_type>int</function_type>
+    <function_input>uint64_t sight_hash, uint64_t sound_hash</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Searches initialized g_table for a slot matching both caller-supplied hashes, increments its strength and returns 1 on a match, or returns 0 otherwise. The changed strength remains in g_table for later queries and printing; no caller appears in this file, so the downstream consumer is unresolved. This reinforces an existing pair without changing its beat.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_at_cell</function_name>
+    <function_order>10</function_order>
+    <function_type>unsigned int</function_type>
+    <function_input>unsigned int cell, const bind_moment_t **out, unsigned int max_out</function_input>
+    <function_return>unsigned int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Scans initialized g_table for moments whose cell equals the caller's cell, stores at most max_out matching addresses in out, and returns the number stored; a null out or zero capacity returns 0. No caller appears in this file, so the downstream consumer is unresolved. This provides bounded retrieval of all bindings at one geometric cell.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_verify</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Checks file-local g_table and g_init, returning 1 when uninitialized, 2 for excess count, 3 for an out-of-range cell, 4 for zero strength, 5 for an invalid next_victim, 6 for a zero pin, or 0 when initialized state passes all checks. No caller appears in this file, so the downstream consumer is unresolved; it supplies a table-integrity status.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_pin</function_name>
+    <function_order>12</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Ensures g_table is initialized, then returns its file-local pin, which bind_init derives from BIND_MAX_BINDINGS through compute_pin. No caller appears in this file, so the downstream consumer is unresolved. This accessor exposes the configuration identity of the binding table without changing it.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/eden_bind.c</file_name>
+    <function_name>bind_print_bindings</function_name>
+    <function_order>13</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Ensures g_table is initialized, prints its active count and details for the first 16 slots to stdout, then prints the number of remaining slots when count exceeds 16. It reads moments created or updated by binding operations and returns no value; no caller appears in this file, so the downstream consumer is unresolved. This provides a bounded diagnostic view of stored bindings.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

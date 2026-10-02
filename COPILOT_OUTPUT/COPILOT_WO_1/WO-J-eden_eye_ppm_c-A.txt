@@ -1,0 +1,96 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>3</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_eye_ppm.c</file_name>
+    <function_name>fnv1a</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>const unsigned char *p, size_t n, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes the n bytes at p into incoming FNV state h, applying FNV_PRIME after each xor, and returns the updated 64-bit state. main supplies packed 3-bit pixel bytes with FNV_BASIS, then folds the returned color pin into its per-pass ledger. It provides the deterministic content identity used to compare the two directory passes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_eye_ppm.c</file_name>
+    <function_name>see_ppm</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, int *ow, int *oh</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fscanf()
+libc: strcmp()
+libc: fclose()
+libc: fscanf()
+libc: fclose()
+libc: fgetc()
+libc: fgetc()
+libc: fgetc()
+libc: fgetc()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens the path constructed by main, requires a P6 header with 64x64 dimensions, and maps each RGB pixel to three bits using the per-channel 0x80 threshold in global pix. It writes dimensions through ow and oh and returns 0 for main's pack-and-rebuild pass, or -1 on read or header failure; it loads the color grid for the audit.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_eye_ppm.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: opendir()
+libc: fopen()
+libc: closedir()
+libc: rewinddir()
+libc: readdir()
+libc: strstr()
+libc: snprintf()
+libc: memset()
+libc: memcmp()
+libc: strlen()
+libc: fwrite()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fputc()
+libc: fwrite()
+libc: fwrite()
+libc: printf()
+libc: closedir()
+libc: closedir()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>main scans /tmp/tri_ppm twice, reads each matching PPM through see_ppm, packs each grid into 3-bit bytes, verifies exact reconstruction, and folds color pins into a pass ledger. On pass two it appends VSN1 records to OUTPATH; it reports counts and drift status on stdout, returns a status to the runtime, and audits stable triangle-color retention.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

@@ -1,0 +1,287 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>15</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>trim_text__school_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static char *</function_type>
+    <function_input>char *text</function_input>
+    <function_return>char *</function_return>
+    <function_remote_call>
+libc: strlen()
+    </function_remote_call>
+    <function_description>Trims caller-owned text in place by advancing the returned pointer past leading spaces or tabs and overwriting trailing spaces, tabs, carriage returns, or newlines with NUL. shakti_school_load uses it on ledger lines and shakti_school_run_drill uses it on typed input. It prepares text for parsing and control or answer handling; append_school_line next persists school events.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>append_school_line</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, const shakti_tick_t *tick, const char *event, const char *symbol, unsigned int pass, unsigned int streak</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strchr()
+shakti_time.c: shakti_tick_format()
+libc: fopen()
+libc: fprintf()
+libc: fflush()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives path, tick, event, symbol, pass, and streak from its caller, rejects a pipe in symbol or a tick that shakti_tick_format cannot format, then appends and flushes one SCH1 line at path and returns success. shakti_school_set_pass and shakti_school_record_trial use it to persist state changes that shakti_school_load can later restore. It is the school's event-ledger writer.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_init</function_name>
+    <function_order>3</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_school_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Receives a state pointer, zeroes the structure, then sets pass to 1 and mastery_target to SHAKTI_DEFAULT_MASTERY_TARGET; a NULL pointer leaves state untouched. shakti_school_load calls it before restoring ledger data, and subsequent School operations consume the initialized state. It establishes a fresh training baseline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_load</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_school_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: sscanf()
+libc: strcmp()
+libc: fclose()
+libc: strlen()
+libc: fclose()
+libc: strcmp()
+libc: memcpy()
+libc: strcmp()
+libc: strcmp()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads SCH1 lines from the caller's path into the supplied state. It resets state, skips comments and blank lines, requires six parsed fields, tag SCH1, and pass 1–4, then restores pass, streak, and symbol totals from RIGHT/WRONG events. It returns 0 on open or parse failure and 1 after reading; no caller appears in this file, so downstream consumer unresolved. It restores saved School progress.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_set_pass</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_school_state_t *state, const char *path, const shakti_tick_t *tick, unsigned int pass</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives state, path, tick, and pass from its caller; rejects bad inputs or pass outside 1–4, appends a PASS record with current streak, then stores pass and clears streak and active_symbol for pass 1. shakti_school_run_drill reads state->pass; no setter caller or status consumer appears here, so downstream consumer unresolved. It persists pass changes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_record_trial</function_name>
+    <function_order>6</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_school_state_t *state, const char *path, const shakti_tick_t *tick, const char *symbol, int correct</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: strcmp()
+libc: memcpy()
+    </function_remote_call>
+    <function_description>Records a caller's trial after validating state, path, tick, symbol, and pass 2–4. A new symbol resets counters; each result increments attempts and updates correct/error totals and streak (capped at mastery_target or reset on error), then appends RIGHT/WRONG with the streak. shakti_school_run_drill uses its status. It scores and persists practice trials.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>reward_for_streak</function_name>
+    <function_order>7</function_order>
+    <function_type>static const char *</function_type>
+    <function_input>unsigned int streak</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps a caller's streak to a fixed reward string: zero returns an empty string, values above 10 are capped at 10, and values 1–10 select the corresponding array entry. show_trial_progress consumes the returned string for successful-answer output. It supplies the visible reward for the drill's progress display.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>show_trial_progress</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>const shakti_school_state_t *state, int correct</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: fputc()
+libc: printf()
+    </function_remote_call>
+    <function_description>Receives the current School state and trial result from its caller, computes remaining successes, then prints the streak reward and progress for a correct trial or the reset streak and history for an incorrect one. shakti_school_run_drill calls it after recording a trial; its report goes to stdout before the mastery reward stage. It provides immediate feedback during practice.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>show_mastery_reward</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>const shakti_school_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: puts()
+libc: puts()
+libc: fputs()
+libc: printf()
+libc: printf()
+libc: fputc()
+libc: fflush()
+    </function_remote_call>
+    <function_description>Receives the state after mastery and prints the celebration, one reward string per target count, the streak and history, then emits a bell and flushes stdout. shakti_school_run_drill calls it before writing the completion reward records to the learned stream. It provides the visible completion reward for a successful drill.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_show_written_text_pixels</function_name>
+    <function_order>10</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+shakti_handwriting.c: shakti_handwriting_supports_text()
+shakti_handwriting.c: shakti_handwriting_render_char()
+libc: fputs()
+libc: fputc()
+libc: fputc()
+    </function_remote_call>
+    <function_description>Receives text from its caller, checks handwriting support, then renders each character into an 8x8 glyph and prints each row with spacing and a newline to stdout. It returns 0 if the text or any glyph is unsupported and 1 after rendering. shakti_school_draft_snapshots uses it for each growing text prefix. It makes supported written text visible during drafting.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_draft_snapshots</function_name>
+    <function_order>11</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *text</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strlen()
+shakti_time.c: shakti_tick_next()
+libc: printf()
+libc: puts()
+shakti_log.c: shakti_log_append()
+shakti_memory.c: shakti_memory_remember()
+    </function_remote_call>
+    <function_description>Receives runtime and text from its caller, rejects NULL, empty, or oversized input, then builds each successive prefix, takes a tick, prints the frame, renders its pixels, appends a LRN1 written_text snapshot record, and remembers the prefix in runtime memory. shakti_school_run_drill passes each typed answer and stops if this process fails. It captures incremental written-text learning in output and memory.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>print_drill_status</function_name>
+    <function_order>12</function_order>
+    <function_type>static void</function_type>
+    <function_input>const shakti_runtime_t *runtime</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+shakti_loop.c: shakti_loop_print_status()
+    </function_remote_call>
+    <function_description>Receives the runtime and prints its School pass, active symbol or “none,” streak, target, and trial totals, then asks shakti_loop_print_status to print loop state. handle_drill_control calls it for /status/ and continues the drill. Its stdout report combines School and loop progress for the operator.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>print_drill_controls</function_name>
+    <function_order>13</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+libc: puts()
+    </function_remote_call>
+    <function_description>Prints the fixed /status/, /help/, /interrupt/, /resume/, /stop/, and /quit/ control descriptions to stdout. handle_drill_control calls it for /help/ and returns CONTINUE to shakti_school_run_drill. It explains the commands available during an interactive drill without changing state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>handle_drill_control</function_name>
+    <function_order>14</function_order>
+    <function_type>static shakti_drill_input_result_t</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *input</function_input>
+    <function_return>shakti_drill_input_result_t</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+shakti_loop.c: shakti_loop_interrupt_tools()
+libc: puts()
+libc: strcmp()
+shakti_loop.c: shakti_loop_resume_tools()
+libc: puts()
+libc: strcmp()
+libc: strcmp()
+libc: puts()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Receives the runtime and trimmed input, matches exact control strings, prints status or help, interrupts or resumes loop tools, and returns CONTINUE, STOP, QUIT, or ANSWER; unrecognized text is treated as an answer. shakti_school_run_drill consumes that result before scoring input. It separates drill controls from trial text.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_school.c</file_name>
+    <function_name>shakti_school_run_drill</function_name>
+    <function_order>15</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_runtime_t *runtime, const char *symbol</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: puts()
+libc: printf()
+libc: printf()
+libc: fflush()
+libc: fgets()
+libc: strcmp()
+shakti_time.c: shakti_tick_next()
+libc: snprintf()
+shakti_log.c: shakti_log_append()
+shakti_time.c: shakti_tick_next()
+shakti_log.c: shakti_log_append()
+shakti_log.c: shakti_log_append()
+    </function_remote_call>
+    <function_description>Runs a drill for caller-supplied runtime and symbol, rejecting missing inputs; pass 1 prints a stateless-witness notice and succeeds. Otherwise it prompts on stdin until mastery, dispatches controls, snapshots and logs each answer, then prints and logs the reward. It returns 1 for pass 1, stop, or mastery and 0 for quit or failure. No caller appears in this file, so downstream consumer unresolved. It drives interactive School practice.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

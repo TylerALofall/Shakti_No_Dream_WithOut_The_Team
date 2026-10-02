@@ -1,0 +1,81 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>4</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>shakti_loader_kind_name</function_name>
+    <function_order>1</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_loader_kind_t kind</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the kind enum supplied by its caller to text, written_text, visual_art, or sound_art; an unrecognized value returns text. The returned literal goes to the caller. No caller or consumer appears in this file, so the downstream consumer is unresolved. This provides a stable textual name for loader kinds.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>shakti_loader_kind_from_text</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *text, shakti_loader_kind_t *kind</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Compares caller-supplied text with the four supported kind names and writes the matching enum through kind, returning 1; NULL inputs or unmatched text return 0 without a match. The output enum and status go to the caller. No consumer appears in this file, so the downstream consumer is unresolved. This parses textual loader kinds.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>safe_path</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strstr()
+libc: strrchr()
+shakti_asset.c: shakti_asset_safe_filename()
+    </function_remote_call>
+    <function_description>Checks the path received from shakti_loader_load, rejects any path containing .., then checks the basename after the final slash with shakti_asset_safe_filename. Its boolean result returns to shakti_loader_load as the path-admission gate. It exists to reject unsafe loader paths before opening them.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_loader.c</file_name>
+    <function_name>shakti_loader_load</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const char *path, shakti_loader_kind_t kind, shakti_loader_result_t *result</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: memset()
+libc: fopen()
+libc: fread()
+libc: ferror()
+libc: fclose()
+libc: fclose()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Receives a path, kind, and result structure from its caller; it rejects invalid arguments or an unsafe path, clears result, stores kind, reads up to SHAKTI_LOADER_DATA_CAPACITY bytes, validates the kind, then stores size and path. It returns 1 on completion or 0 on failure. The filled structure goes back to the caller; no consumer appears in this file, so the downstream consumer is unresolved. It loads bounded asset bytes.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

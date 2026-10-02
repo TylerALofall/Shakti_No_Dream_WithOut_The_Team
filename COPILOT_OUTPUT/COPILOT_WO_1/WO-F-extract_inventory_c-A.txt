@@ -1,0 +1,146 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>8</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>is_ident0</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>int c</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests whether caller-supplied integer c is an ASCII letter or underscore and returns the boolean result. scan_file calls it when accepting a candidate function name and declaration prefix; is_ident calls it before allowing identifier digits. This supplies the start-character rule used by the scanner.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>is_ident</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>int c</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Tests c from the scanner as a letter or underscore through is_ident0, or as a digit, and returns the identifier-character decision. scan_file uses it to step over function names, while collect_calls uses it to consume body identifiers. This extends the start-character rule to full identifier recognition.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>kw</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *s</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Compares caller-supplied token s with the file-local keyword list K and returns 1 for a listed token or 0 otherwise. scan_file uses it to exclude keyword names from definition candidates, and collect_calls uses it to skip keywords. This filters tokens before function and child-call records are formed.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>norm</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *out, size_t cap, const char *in, long n</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Copies up to n bytes from in to out, collapsing each run of whitespace to one space while leaving room for a terminator within cap. scan_file supplies a synthesized declaration and stores this normalized result in fn_t.sig for main's FN inventory output. This gives declarations a stable form while raw parameters remain in fn_t.params.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>scan_file</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *path</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strchr()
+libc: strchr()
+libc: snprintf()
+libc: snprintf()
+libc: strlen()
+libc: snprintf()
+libc: snprintf()
+libc: strlen()
+    </function_remote_call>
+    <function_description>Scans file-local g_buf for brace-depth-zero function definitions while ignoring comments and quoted text. main supplies path after loading that file into g_buf; scan_file stores each accepted definition's file, name, return prefix, raw parameters, normalized signature, and byte span in g_fn. main later re-reads source to collect calls and emit records; this is the definition-discovery pass.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>fn_index</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *name</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Searches g_fn for caller-supplied name and returns the first matching function index or -1. collect_calls supplies each body identifier followed by an opening parenthesis and uses a match to determine whether the name belongs to a known function. This resolves candidate call syntax to inventory records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>collect_calls</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>fn_t *f</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Scans f's source byte range in g_buf while skipping comments, string literals, and character literals. main supplies a function record after reloading its file; collect_calls stores distinct identifier calls in f->calls only when fn_index finds a definition and the name is not f->name. main serializes these known in-project calls on the FN record for package assembly.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="F">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—F/extract_inventory.c</file_name>
+    <function_name>main</function_name>
+    <function_order>8</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: fopen()
+libc: printf()
+libc: fread()
+libc: fclose()
+libc: fopen()
+libc: fread()
+libc: fclose()
+libc: strcmp()
+libc: fopen()
+libc: printf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads source paths from argv[2] onward into g_buf and calls scan_file to populate g_fn. It rereads each source for collect_calls, then writes FN records and known call names to argv[1]. argv supplies the output path and source files; errors and completion status go to stdout, with return 1 on failure and 0 after writing. assemble_packages.c main reads this FN inventory when given its path, advancing extraction to package assembly.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

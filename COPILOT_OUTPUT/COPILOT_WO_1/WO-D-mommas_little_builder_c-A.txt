@@ -1,0 +1,330 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>20</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Callers provide hash state h and value v. It folds v's eight bytes least-significant first into h with XOR and FNV_PRIME multiplication, then returns the updated state. fnv_str and ticket pass the result into their next hash step. This helper supplies deterministic integer folding for builder pins.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Callers provide initial state h and a NUL-terminated string s. It passes each unsigned byte to fnv1 and returns the accumulated hash. converge, ticket, teach_me, and command handlers use the result to extend B.stream_pin or a ticket pin. It provides string folding for deterministic builder records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_register</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *name, actuator_fn fn</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+    libc: memset()
+    libc: strncpy()
+    </function_remote_call>
+    <function_description>builder_init or builder_register_tool supplies name and actuator_fn fn. The function stores a bounded name and fn in the next g_registry slot, increments g_registry_count, and returns 1; it returns 0 when REG_MAX is reached. builder_lookup later reads these entries, and builder_register_tool returns the status to its caller. It establishes the registration gate for actuator dispatch.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>builder_lookup</function_name>
+    <function_order>4</function_order>
+    <function_type>static actuator_fn</function_type>
+    <function_input>const char *name</function_input>
+    <function_return>actuator_fn</function_return>
+    <function_remote_call>
+    libc: strcmp()
+    </function_remote_call>
+    <function_description>do_use supplies a tool name, and builder_lookup compares it with each registered name in g_registry. It returns the matching actuator_fn or NULL when no registration matches. do_use consumes that pointer or selects dry_run_actuator as a fallback. This lookup enforces the file's actuator registration seam.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>dry_run_actuator</function_name>
+    <function_order>5</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tool, const char *args, char *reply, size_t cap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+    libc: snprintf()
+    </function_remote_call>
+    <function_description>do_use supplies tool, args, reply, and cap. The actuator formats a dry-run command into reply and returns 1; do_use then converges and tickets that reply. It provides the default recorder without executing the requested tool.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>brand_lookup</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tool, uint64_t *epoch_out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fgets()
+    libc: sscanf()
+    libc: strcmp()
+    libc: fclose()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>brand_write and do_use supply tool; callers may also supply epoch_out. brand_lookup scans BRANDS_PATH for a matching tool and stores its epoch when found, returning 1; open failure or no match returns 0. brand_write uses the result to refuse repeat training, and do_use uses it to gate dispatch. It enforces the stored training brand.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>brand_write</function_name>
+    <function_order>7</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *tool, uint64_t epoch</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fprintf()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>do_train supplies a tool and lesson epoch. brand_write refuses an existing brand, otherwise appends the pair to BRANDS_PATH and returns whether fclose succeeds; do_train uses that status to accept or refuse TRAIN. It makes a tool's training brand persistent and prevents rebranding.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>converge</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *text</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: memset()
+    libc: strncpy()
+    </function_remote_call>
+    <function_description>Callers supply text, which converge copies into the current B.conv_text slot and pairs with B.beat in B.conv_beat before advancing the ring index. It also folds the convergence marker and text into B.stream_pin, later exposed by builder_stream_pin and persisted by builder_seal. No reader of the ring fields appears in this file, so their downstream consumer is unresolved. It implements stage-one convergence memory.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>ticket</function_name>
+    <function_order>9</function_order>
+    <function_type>static void</function_type>
+    <function_input>uint64_t seq, const char *cmd, uint64_t recv_beat, uint64_t waited, uint64_t delib, const char *result</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fprintf()
+    libc: fclose()
+    libc: fopen()
+    libc: fprintf()
+    libc: fclose()
+    libc: fopen()
+    libc: fprintf()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>Handlers supply the sequence, command, receive beat, wait and deliberation counts, and result. ticket hashes the ticket fields, always folds the pin into B.stream_pin and B.block_pin, then appends a TICKETS.log row when open succeeds. Every BLOCK_TICKETS entries it attempts a block seal and, when B.hb_report is set, an outbox heartbeat; a failed ledger open calls teach_me. These records make command outcomes and stream blocks auditable.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>teach_me</function_name>
+    <function_order>10</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *what, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fprintf()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>Refusing handlers supply what and seq; teach_me takes the current beat from B. It appends a request to MOMMA_OUTBOX.txt when open succeeds, then folds the teach-me marker and what into B.stream_pin regardless of the file write. The pin later reaches builder_stream_pin or builder_seal. It makes refusals auditable and requests the missing lesson.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>tag_write</function_name>
+    <function_order>11</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *tag</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fprintf()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>do_learn supplies tag. tag_write appends the tag and B.block_count plus one to TAGS.ndx, identifying the block now forming; an open failure produces no entry. No TAGS.ndx reader appears in this file, so the downstream consumer is unresolved. It provides the tag-to-block index for stage-three memory.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>block_recall</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint64_t block_no, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fclose()
+    libc: fgets()
+    libc: sscanf()
+    libc: fputs()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>builder_recall supplies block_no and the output stream out. block_recall opens TICKETS_PATH, selects non-seal rows whose ordinal falls in that block's BLOCK_TICKETS range, and writes them to out. It returns 0 for open failure or an invalid block number, and 1 after scanning; builder_recall returns that status to its caller. It provides block-indexed ledger recall.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>trickle</function_name>
+    <function_order>13</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>builder_beat calls trickle while waiting for B.tempo or when the curriculum has no line. It hashes B.beat modulo 60 with the trickle marker and folds that hum into B.stream_pin, which builder_stream_pin exposes and builder_seal persists. It records an idle beat so the stream continues while no lesson is consumed.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>curriculum_take</function_name>
+    <function_order>14</function_order>
+    <function_type>static int</function_type>
+    <function_input>char *buf, size_t cap</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+    libc: fopen()
+    libc: fseek()
+    libc: fclose()
+    libc: fgetc()
+    libc: fclose()
+    libc: fgetc()
+    libc: ftell()
+    libc: fclose()
+    libc: fclose()
+    </function_remote_call>
+    <function_description>builder_beat supplies buf and cap, and curriculum_take reads from CURRICULUM_PATH at B.cursor. It seeks to that offset, copies at most cap minus one bytes up to a newline, terminates buf, and advances B.cursor to ftell. It returns 0 on open or seek failure or when no data remains; otherwise it returns 1, and builder_beat passes buf to consume. It implements the append-only lesson queue.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_tempo</function_name>
+    <function_order>15</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: sscanf()
+    </function_remote_call>
+    <function_description>consume supplies the text after TEMPO. do_tempo accepts a parsed value from 1 through 3600, sets B.tempo, records TEMPO set in convergence, and folds the new tempo into B.stream_pin; invalid values leave those states unchanged. consume writes the command ticket after this helper returns. It controls the beat spacing between lessons.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_hb</function_name>
+    <function_order>16</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: strncmp()
+    libc: strncmp()
+    </function_remote_call>
+    <function_description>consume supplies the text after HB. Prefixes on and off update B.hb_report and record the corresponding convergence text; every input then folds the hb marker and current toggle into B.stream_pin. consume writes an on or off ticket, and ticket uses the toggle to control block heartbeat messages. It controls return messages to Momma.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_speak</function_name>
+    <function_order>17</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>consume supplies the text after SPEAK. do_speak records it in the convergence ring and folds the speak marker and text into B.stream_pin; consume then writes the SPEAK ticket. It preserves spoken lesson text in the builder's memory stream without invoking an actuator.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_learn</function_name>
+    <function_order>18</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: strncmp()
+    libc: strchr()
+    libc: strlen()
+    libc: memcpy()
+    </function_remote_call>
+    <function_description>consume supplies the LEARN text and sequence. do_learn extracts an optional tag= value and treats the remaining text, or the full argument without a tag, as the lesson; it records the text in convergence, indexes a nonempty tag, folds the text into B.stream_pin, and tickets the result as the tag or untagged. It stores and categorizes learned text.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_train</function_name>
+    <function_order>19</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: sscanf()
+    </function_remote_call>
+    <function_description>consume supplies the TRAIN payload and sequence. do_train parses a tool and nonzero epoch; an invalid lesson or failed brand_write is ticketed as a refusal and sent to teach_me, while a new brand is recorded in convergence and B.stream_pin and ticketed as branded. The brand lets later do_use require training before tool dispatch.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/mommas_little_builder.c</file_name>
+    <function_name>do_use</function_name>
+    <function_order>20</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *arg, uint64_t seq</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+    libc: strchr()
+    libc: strlen()
+    libc: memcpy()
+    libc: memset()
+    dynamic: fn()
+    </function_remote_call>
+    <function_description>consume supplies the USE payload and sequence; do_use splits tool from args and requires its brand in BRANDS_PATH. It selects a registered actuator or dry_run_actuator, clears reply, and invokes the selected function pointer; refusal is ticketed and sent to teach_me. On success it converges reply, folds tool, reply, and brand epoch into B.stream_pin, and tickets the reply. A registered callback may be defined outside this file; the function-pointer target is not statically determined here.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

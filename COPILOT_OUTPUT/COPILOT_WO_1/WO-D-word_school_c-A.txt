@@ -1,0 +1,275 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>19</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight low-to-high bytes of caller value v into incoming FNV state h and returns the updated state. fnv_str, ticket, make_options, and school_step use it to build deterministic text and numeric pins for words, options, events, and blocks. It is the byte-stable hash primitive for the school ledger.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>fnv_str</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const char *s</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Consumes caller-provided NUL-terminated s from incoming hash h, feeding each byte to fnv1 until the terminator and returning the resulting state. outbox, ticket, make_options, school_load, and school_step pass its result into stream or ticket-pin updates. It extends the numeric FNV fold to word and event text.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>outbox</function_name>
+    <function_order>3</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *kind, const char *what</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Receives kind and what from teach_me_shape, school_step, or ticket; if MOMMA_OUTBOX.txt opens, appends both strings with the global beat, then always folds them into stream_pin. No status is returned; the file append is best-effort but the in-memory notification remains in the hash. It carries teach_me and known events into the output stream.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>teach_me_shape</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *shape</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: snprintf()</function_remote_call>
+    <function_description>Receives shape from school_step, formats `shape:<shape>` in a local buffer, increments teach_count, and submits it to outbox as `teach_me`. outbox appends it when possible and folds the request into stream_pin. Failed recognition and spelling attempts call this helper, so teaching requests carry the shape token rather than a spelling.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>ticket</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *event, const word_t *w, size_t widx, const char *detail</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Consumes event, detail, word pointer, and index from school_step; advances tseq and hashes the sequence, event, spelling, beat, and detail into a ticket pin. It folds that pin into stream_pin and block_pin, updates other_tno, and appends the event or a ledger-failure notification; every ten tickets it records and reseeds a block. This makes each learning transition auditable and deterministic.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>make_options</function_name>
+    <function_order>6</function_order>
+    <function_type>static void</function_type>
+    <function_input>const word_t *w, size_t self, size_t opts[OPTS], size_t *correct_slot</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses w->shape and self, the word's corpus index, to hash-select the correct slot, initializes opts with the empty marker, and fills other available slots with distinct corpus indices. It writes the correct slot through correct_slot for school_step's recognition choice; small corpora may leave slots empty. Hash-chosen distractors make each word's test replayable.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_step</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>word_t *w, size_t idx</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: strlen()
+libc: snprintf()
+libc: snprintf()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Processes the selected W entry's spelling, shape, strength, stage, and pass state; school_beat supplies the pointer and index. It exposes bindings, tests deterministic four-option recognition (strong succeeds; weak returns to EXPOSE and requests teaching), then emits one SPELL letter per beat. ticket records transitions; only SPELL passes at SPELL_NEED strength in later blocks after another word's ticket count. PASSES_NEED counted passes mark known, notify outbox, and append MASTERY.txt, advancing the binding-to-word pipeline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_beat</function_name>
+    <function_order>8</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Consumes global beat, round-robin cursor rr, word_count, and W set by initialization, loading, and prior beats. It increments beat, folds `empty` or `all-known` into stream_pin when appropriate, or advances rr and calls school_step on the next unfinished word. It performs one deterministic learning micro-step per heartbeat; no caller appears in this file, so downstream consumer is unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_load</function_name>
+    <function_order>9</function_order>
+    <function_type>size_t</function_type>
+    <function_input>void</function_input>
+    <function_return>size_t</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: memset()
+libc: sscanf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads WORDLIST_PATH, resets word_count, and parses each line's spelling and shape into W up to WORD_MAX. Valid pairs start at ST_EXPOSE and their tokens fold into stream_pin; the returned word_count reports loaded entries, or zero when open fails. school_beat advances those entries, but no caller of school_load appears here, so downstream consumer is unresolved. It imports the teacher's corpus.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_init</function_name>
+    <function_order>10</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+libc: memset()
+    </function_remote_call>
+    <function_description>Clears W and other_tno with memset, resets word_count, rr, beat, tseq, pins, ticket and block counts, known_count, teach_count, and last_ticket_word. It returns no value; a caller can then load WORDLIST_PATH and begin school_beat, but no caller appears here, so downstream consumer is unresolved. It establishes deterministic initial school state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_seal</function_name>
+    <function_order>11</function_order>
+    <function_type>void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Appends the current stream_pin as `stream %016llX` to SCHOOL_LOG when the file opens, then closes it; failed open produces no status. No caller appears in this file, so downstream consumer is unresolved. It leaves the ledger with a best-effort final proof of the complete school event stream.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_stream_pin</function_name>
+    <function_order>12</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns the current stream_pin accumulated by word loading, outbox events, tickets, and heartbeat markers without changing it. Its value goes to the caller; no caller appears in this file, so downstream consumer is unresolved. It exposes deterministic whole-run activity for reporting or comparison.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_beat_count</function_name>
+    <function_order>13</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global beat, incremented by school_beat for each heartbeat, without changing school state. The count goes to its caller; no caller appears in this file, so downstream consumer is unresolved. This accessor exposes how many learning beats the school has processed.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_blocks</function_name>
+    <function_order>14</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global block_count, which ticket increments whenever ten tickets complete a block, without changing ledger state. The count goes to its caller; no caller appears in this file, so downstream consumer is unresolved. It exposes completed blocks for tracking the spaced-learning sequence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_known</function_name>
+    <function_order>15</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global known_count, incremented when school_step marks a word ST_KNOWN after enough counted spelling passes. The value goes to its caller; no caller appears in this file, so downstream consumer is unresolved. It exposes the number of words completed in the learning pipeline.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_teach_count</function_name>
+    <function_order>16</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>void</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global teach_count, incremented by teach_me_shape whenever the school requests teaching for a shape. The count goes to its caller; no caller appears in this file, so downstream consumer is unresolved. It exposes how often weak recognition or spelling prompted a teach_me event.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_word_count</function_name>
+    <function_order>17</function_order>
+    <function_type>size_t</function_type>
+    <function_input>void</function_input>
+    <function_return>size_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Returns global word_count, set by school_load as valid spelling-shape pairs are accepted from WORDLIST_PATH. The size goes to its caller; no caller appears in this file, so downstream consumer is unresolved. This accessor exposes the size of the loaded teaching corpus.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_word_stage</function_name>
+    <function_order>18</function_order>
+    <function_type>int</function_type>
+    <function_input>size_t i</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses caller index i to return W[i].stage when i is below word_count, or -1 outside the loaded corpus. The caller receives the stage without mutating the word; no caller appears in this file, so downstream consumer is unresolved. It exposes each word's position in the expose-recognize-spell-known sequence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="D">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—D/word_school.c</file_name>
+    <function_name>school_word_strength</function_name>
+    <function_order>19</function_order>
+    <function_type>uint64_t</function_type>
+    <function_input>size_t i</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Uses caller index i to return W[i].strength when it is below word_count, or zero outside the loaded corpus. The strength goes to the caller without changing the binding; no caller appears in this file, so downstream consumer is unresolved. It exposes the progress of each word's shape-to-spelling binding.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>

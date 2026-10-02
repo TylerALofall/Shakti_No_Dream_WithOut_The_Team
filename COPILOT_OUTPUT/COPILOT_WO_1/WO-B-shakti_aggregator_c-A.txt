@@ -1,0 +1,41 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>yes</repair>
+<total_items>2</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_aggregator.c</file_name>
+    <function_name>fnv1</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, uint64_t v</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight bytes of 64-bit value v, least-significant byte first, into incoming FNV state h and returns the updated state. main uses it for every semantic fold: event kind, value and beat ordinal into attention; response or trickle markers into stream; substrate pins into hum; and hum back into attention.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="B">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—B/shakti_aggregator.c</file_name>
+    <function_name>main</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: puts()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Runs a deterministic 3600-beat attention stream. Scripted events on their beat fold kind, value and beat mod 60 into attention, then response state into stream. Empty beats build a hum from the ordinal plus eye, ear and womb pins, fold it into stream, and fold it back into attention as self-heard input. It verifies all events were consumed and prints final pins.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>function_remote_call added to every record in this file, 2026-10-02, by Kimi K3 under Tyler's GO: the 2026-09-20 fill predates the 2026-09-29 remote_call law. remote_call lists recorded from the current SECTION-B sources on main (blob-verified at pull). No other field touched.</corrections>
+
+<QA_Specialist_attestation>[UNSIGNED: QA must review and attest]</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
