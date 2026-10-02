@@ -16,6 +16,7 @@
     <function_description>Receives the reconstructed mono RGBA image, dimensions, recognition array, and text buffer from TEST_ROUNDTRIP_MAIN. eyes.c: eyes_recognize_text() fills character and cell records; this helper inserts `|` between rows and one space across a skipped column, terminates the text, and returns the recognized count. The caller compares this text across 20 render-and-pull passes to check text stability.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
+
 <SECTION id="I">
     <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—I/test_roundtrip.c</file_name>
     <function_name>TEST_ROUNDTRIP_MAIN</function_name>
@@ -40,11 +41,11 @@ libc: fflush()
 libc: strcpy()
 libc: printf()
     </function_remote_call>
-    <function_description>The entry point loads the fixed `page` text "HI" into a 32×16 RGBA buffer, pulls mono bits, reconstructs RGBA, and requires zero initial drift before `recognize_text` sets reference text. For 20 passes it reconstructs, recognizes, renders a clean page, measures drift against `original`, pulls next bits, and compares text; arrays and dimensions are file-local. It prints each pass and requires cumulative drift zero, reporting stability to stdout and returning 0 to the test runner.</function_description>
+    <function_description>The entry point loads the fixed `page` text "HI" into a 32×16 RGBA buffer, pulls mono bits, reconstructs RGBA, and requires zero initial drift before `recognize_text` sets reference text. For 20 passes it reconstructs, recognizes, renders a clean page, measures drift against `original`, pulls next bits, and compares text; the page and buffers are declared in this function, with dimensions from file macros. It prints each pass and requires cumulative drift zero, reporting stability to stdout and returning 0 to the test runner.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
-<corrections>work-order header — total_items — 33 — 2 — this output contains exactly two SECTION records</corrections>
+<corrections>work-order header — total_items — 33 — 2 — ticket piece 1 selects function_order 1 to 2 (2 records)</corrections>
 
 <QA_Specialist_attestation>
 I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
