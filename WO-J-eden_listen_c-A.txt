@@ -1,0 +1,113 @@
+<Work_Order>
+<QA_specialist>GPT-6.1 Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>5</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_listen.c</file_name>
+    <function_name>fnv1a64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t h, const unsigned char *p, size_t n</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Consumes n bytes from p into FNV-1a state h and returns the updated 64-bit hash. hear_atom supplies PCM chunks, while main folds each verified atom hash into its ledger. The returned state pins the payload and then the ordered set of admitted atoms.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_listen.c</file_name>
+    <function_name>rd32le</function_name>
+    <function_order>2</function_order>
+    <function_type>static uint32_t</function_type>
+    <function_input>const unsigned char *p</function_input>
+    <function_return>uint32_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Combines four bytes at p in little-endian order and returns the resulting 32-bit value. hear_atom supplies WAV chunk-size and sample-rate bytes; it uses the decoded values to advance through chunks and report audio metadata to main.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_listen.c</file_name>
+    <function_name>rd16le</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint16_t</function_type>
+    <function_input>const unsigned char *p</function_input>
+    <function_return>uint16_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Combines two bytes at p in little-endian order and returns the resulting 16-bit value. hear_atom supplies the channel-count and bit-depth fields from a WAV fmt chunk; it reports those decoded values through output parameters for main's repeat-hearing comparison.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_listen.c</file_name>
+    <function_name>hear_atom</function_name>
+    <function_order>4</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, uint64_t *h, uint32_t *rate, uint16_t *bits, uint16_t *ch, uint32_t *dlen</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: fopen()
+        libc: fread()
+        libc: fclose()
+        libc: memcmp()
+        libc: memcmp()
+        libc: fclose()
+        libc: fread()
+        libc: memcmp()
+        libc: fread()
+        libc: fclose()
+        libc: fseek()
+        libc: memcmp()
+        libc: ftell()
+        libc: fseek()
+        libc: fseek()
+        libc: fseek()
+        libc: fclose()
+        libc: fseek()
+        libc: fclose()
+        libc: fread()
+        libc: fclose()
+        libc: fclose()
+    </function_remote_call>
+    <function_description>Opens path, verifies RIFF/WAVE, finds fmt and data chunks, decodes rate, bit depth, and channels, hashes the data payload with fnv1a64, and writes metadata, hash, and length through caller pointers. It returns 0 on success or -1 on malformed or unreadable input; main uses the outputs to compare two hearings before admission.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_listen.c</file_name>
+    <function_name>main</function_name>
+    <function_order>5</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+        libc: opendir()
+        libc: fprintf()
+        libc: printf()
+        libc: readdir()
+        libc: strlen()
+        libc: strcmp()
+        libc: snprintf()
+        libc: printf()
+        libc: printf()
+        libc: printf()
+        libc: closedir()
+        libc: printf()
+        libc: printf()
+    </function_remote_call>
+    <function_description>Opens the argv directory or default Sound_art and visits its .wav entries. It normally calls hear_atom twice per path, rejects unreadable or differing hashes and metadata, folds each pure atom hash into ledger with fnv1a64, and prints admitted atoms and totals. It returns 2 if the directory cannot open, 1 for rejected atoms, otherwise 0; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1 Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1 Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
