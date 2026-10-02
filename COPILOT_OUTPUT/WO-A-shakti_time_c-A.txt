@@ -1,0 +1,71 @@
+<Work_Order>
+<QA_specialist>GPT-6.1-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>4</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_tick_clock_init</function_name>
+    <function_order>1</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_tick_clock_t *clock_state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Initializes the caller-supplied clock state by setting last_epoch_seconds and next_frame to zero; a NULL pointer returns without changes. The initialized fields remain in the caller's struct for shakti_tick_next to advance. No caller appears in this file, so the downstream consumer is unresolved. It establishes the tick clock's starting state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_tick_next</function_name>
+    <function_order>2</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_tick_clock_t *clock_state, shakti_tick_t *tick</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: time()
+libc: time()
+    </function_remote_call>
+    <function_description>Uses the caller's clock state and current time to form a tick: a new epoch resets frame to zero, while an exhausted frame range waits for a later epoch. It writes epoch_seconds and frame to tick, advances next_frame, and returns 1; invalid pointers or clock failure return 0. The tick goes to the caller. No caller appears in this file, so the downstream consumer is unresolved. It generates sequenced timestamps.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_tick_format</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_tick_t *tick, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Formats the caller's tick as decimal epoch seconds, a colon, and a four-digit-minimum frame value in the caller's destination buffer. It returns 1 only when pointers and capacity are valid and snprintf's result fits; otherwise it returns 0. shakti_event_id_format uses this text as its timestamp prefix. It supplies a stable tick representation.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_time.c</file_name>
+    <function_name>shakti_event_id_format</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>const shakti_tick_t *tick, const char *section, unsigned int function_order, char *destination, size_t destination_size</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: snprintf()
+    </function_remote_call>
+    <function_description>Combines a caller tick, section, and function order into the identifier form [tick]-[section]-[order], using shakti_tick_format for the tick text and snprintf for the caller's destination. It returns 0 for a NULL section, failed tick formatting, or an output that does not fit; otherwise it returns 1. The identifier goes to the caller. No caller appears in this file, so the downstream consumer is unresolved. It formats event identity.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
