@@ -1,0 +1,80 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>4</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_gears.c</file_name>
+    <function_name>fnv1a_u64</function_name>
+    <function_order>1</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>uint64_t v, uint64_t h</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Folds the eight low-to-high bytes of v into incoming hash h with xor and FNV_PRIME multiplication, then returns the new state. main hashes heartbeat indices, folds each heartbeat pin into short_pin, and hashes gear ticks into the per-pass pin. It supplies deterministic motion proofs without storing beat records.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_gears.c</file_name>
+    <function_name>on_wheel</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>uint32_t n</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a number from main and repeatedly removes factors 2, 3, 5, 7, and 19 from it, returning true only when the positive input is reduced to 1. main uses the result to check the separated day values, ratios, and 40-times-360 count against the file's wheel law.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_gears.c</file_name>
+    <function_name>gear_ticks</function_name>
+    <function_order>3</function_order>
+    <function_type>static uint64_t</function_type>
+    <function_input>int g, uint64_t beats</function_input>
+    <function_return>uint64_t</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Computes beats multiplied by GEARS[g].n and divided by GEARS[g].d using integer arithmetic. main supplies valid gear indices and each world's beat count, then uses the returned ticks for hashing, printed rates, and the 40-to-60 BPM ratio check; this helper applies each organ's fixed gear ratio.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="J">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—J/eden_gears.c</file_name>
+    <function_name>main</function_name>
+    <function_order>4</function_order>
+    <function_type>int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>main uses WHEEL, GEARS, and source constants to print and check the separated-number ratios, then simulates 60 and 40 BPM worlds twice, folds beat and gear ticks into pins, and counts failures of the exact 2/3 gear slowdown. It prints laws and the pin to stdout, returns fails?1:0 to the runtime, and has no in-file downstream consumer; downstream consumer unresolved. It audits ratio-exact motion without retaining beats.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
