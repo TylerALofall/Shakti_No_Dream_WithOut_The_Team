@@ -187,6 +187,16 @@ libc: printf()
 Study the difference. The filled copies state provenance, name identifiers, admit the unresolved consumer instead of hiding it, and every sentence would still be true if you re-read the source. The `<function_remote_call>` element is always present, always before `<function_description>`. Each actual call gets its own line before the closing tag; when there are no outside calls the content is the single word `NONE` — never `NULL`, never empty.
 
 ---
+**CRITICAL NAMING LAW:** At the top of your ticket, one or more output filenames are listed. Copy each filename exactly; otherwise, one model's work may overwrite another model's work.
+
+**EACH FILE MUST BE SAVED EXACTLY AS YOUR TICKET DIRECTS**
+You must output each piece into its own strictly named file exactly as requested in the work order header. You will NOT combine files. The naming format is strictly `WO-[SECTION_ID]-[filename_with_underscores]-A.txt`.
+* `WO` stands for Work Order.
+* `[SECTION_ID]` is the section letter (e.g., `M`).
+* `[filename_with_underscores]` is the exact source filename, but with the dot replaced by an underscore (e.g., `day_push.c` becomes `day_push_c`).
+* `-A.txt` is A, B, C ordering on files over 20 functions long get more than one WO.
+
+Example: Section M, file `day_push.c` MUST be named `WO-M-day_push_c-A.txt`. If you deviate by even one character, or invent your own filenames, the automated branch merge will fail and overwrite critical data.
 
 ## VI. STANDARDS — RULES AND EXPECTATIONS
 
@@ -201,6 +211,22 @@ Study the difference. The filled copies state provenance, name identifiers, admi
 9. **Temperature zero, fixed instruction block, one section per call.** Determinism starts with you.
 
 ---
+#** SUMMARY **# 
+IN SUM YOUR STEPS WILL BE AS FOLLOWS:
+1. YOU ARE GIVEN A TICKET…
+2. YOU READ THE FIRST LINE AND IT SENDS YOU HERE!
+3. YOU READ THIS ENTIRE DOCUMENT, [QA_specialist_Instruction.md];
+4. Now you read your Ticket and see what files you will be working on!;
+5. TAKE SPECIAL NOTE ON THE FILE NAME(s) YOU WILL BE CREATING!
+6. put exactly ! those functions inside those files!
+7. Record every correction to an issued fixed field in the existing `<corrections>` element after all `<SECTION>` records, including the record, field, previous value, corrected value, and source evidence. Do not report values filled into initially empty `<function_remote_call>`, `<function_description>`, or `<function_complete>` fields as corrections.
+8. one blank line between elements
+9. one file per file (max 20 functions)
+10. Files are named on your tickets!
+11. add all names to the [COPILOT_OUTPUT] dir in root make sure the numbers are correct!
+12. if you find a skipped function and you have the one above and below it! write it at the end of the fill wrap the whole xml object in correction block!
+13. Sign the bottom of each submission using the exact attestation in Part VII, substituting only your model name and completion date.
+14. once submitted! HAVE A GREAT DAY! and THANK YOU! 🙏 
 
 ## VII. CONCLUSION AND ATTESTATION
 
