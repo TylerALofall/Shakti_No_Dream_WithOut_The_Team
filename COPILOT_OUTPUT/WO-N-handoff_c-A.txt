@@ -1,0 +1,95 @@
+<Work_Order>
+<QA_specialist>GPT-6.1 Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>3</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/handoff.c</file_name>
+    <function_name>measure</function_name>
+    <function_order>1</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, long *bytes, long *lines</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgetc()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens caller path in binary mode, counts every byte and each newline, closes the file, and stores the totals through bytes and lines; it returns 0 if fopen fails and 1 after the measurement. main uses the counts to print the list index and, in bundle mode, add file-size metadata. It measures listed handoff files.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/handoff.c</file_name>
+    <function_name>copy_into</function_name>
+    <function_order>2</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *path, FILE *out</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgetc()
+libc: fputc()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens caller path in binary mode and copies each input byte to caller stream out, then closes the input; it returns 0 if the input cannot be opened and 1 after the copy loop. main calls it when bundle mode is active to append each listed file after its delimiters. It transfers file contents into the handoff bundle.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="N">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—N/handoff.c</file_name>
+    <function_name>main</function_name>
+    <function_order>3</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: strcmp()
+libc: fprintf()
+libc: fopen()
+libc: fprintf()
+libc: fopen()
+libc: fprintf()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: fgets()
+libc: strchr()
+libc: printf()
+libc: printf()
+libc: strchr()
+libc: strlen()
+libc: printf()
+libc: strcpy()
+libc: printf()
+libc: printf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fclose()
+libc: printf()
+libc: fclose()
+libc: printf()
+libc: printf()
+libc: printf()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads the list path from argv[1] and, when argc is 4 and argv[2] is --bundle, the bundle path from argv[3]. It parses blank lines, headings, and tab-separated paths, using measure to print byte and line counts. Bundle mode writes entry delimiters and copies present files with copy_into. Totals go to stdout and contents to the bundle; it returns 2 for usage, 3 for I/O failure, 1 for missing entries, or 0 when complete. No in-file consumer exists, so the downstream consumer is unresolved; it generates the handoff index and optional bundle.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-6.1 Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-6.1 Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
