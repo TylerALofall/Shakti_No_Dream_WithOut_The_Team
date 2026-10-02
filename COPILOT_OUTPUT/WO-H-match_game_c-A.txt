@@ -1,0 +1,260 @@
+<Work_Order>
+<QA_specialist>ChatGPT</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>14</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>fnv1a64__match_game_h</function_name>
+    <function_order>1</function_order>
+    <function_type>static unsigned long long</function_type>
+    <function_input>const unsigned char *s, size_t n</function_input>
+    <function_return>unsigned long long</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Hashes n bytes from s with 64-bit FNV-1a and returns the hash. MATCH_GAME_MAIN supplies each card symbol and class as seed material before multiplying the accumulated seed; that seed initializes rng_state for lcg and deterministic deck shuffling. The helper makes the shuffle reproducible from deck contents.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lcg</function_name>
+    <function_order>2</function_order>
+    <function_type>static unsigned</function_type>
+    <function_input>void</function_input>
+    <function_return>unsigned</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Advances static rng_state by the fixed LCG multiplier and increment, then returns its shifted high bits as unsigned. MATCH_GAME_MAIN seeds the state from deck symbols and classes before shuffling; random_turn later uses the same stream for card positions. This generator supplies repeatable game choices.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_known</function_name>
+    <function_order>3</function_order>
+    <function_type>static int</function_type>
+    <function_input>const char *s, const char *c</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Searches nlt entries in ltsym and ltcls for an exact symbol-and-class pair using strcmp, returning 1 on a match and 0 otherwise. lt_add uses the result to avoid duplicate long-term entries, while MATCH_GAME_MAIN checks it to mark cards already known at game start. This centralizes long-term membership checks.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>bcopy</function_name>
+    <function_order>4</function_order>
+    <function_type>static void</function_type>
+    <function_input>char *dst, const char *src, size_t cap</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Copies src to dst until it reaches a null byte or cap minus one bytes, then appends a terminator. File-local loaders, learners, and board setup call it for bounded symbols, classes, voices, image paths, and hashes. These destination buffers supply the game state without unbounded copying.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_add</function_name>
+    <function_order>5</function_order>
+    <function_type>static void</function_type>
+    <function_input>const char *s, const char *c</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives a symbol and class, adds the pair to ltsym and ltcls only when capacity remains and lt_known finds no duplicate, then increments nlt. MATCH_GAME_MAIN calls it for cards seen during the game, and lt_save later persists the list. It keeps cross-game learning bounded and unique.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_load</function_name>
+    <function_order>6</function_order>
+    <function_type>static int</function_type>
+    <function_input>void</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strchr()
+libc: strcspn()
+libc: strcspn()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Opens fixed school/game/memory_long.txt, reads symbol|class lines while nlt is below MAXMEM, splits each at '|', trims line endings, and copies pairs into ltsym and ltcls. MATCH_GAME_MAIN calls it before checking which cards are already known; the loaded entries feed those lookups. It restores prior-game knowledge.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>lt_save</function_name>
+    <function_order>7</function_order>
+    <function_type>static void</function_type>
+    <function_input>void</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: fopen()
+libc: fgets()
+libc: fclose()
+libc: rename()
+    </function_remote_call>
+    <function_description>Writes each ltsym/ltcls pair to a temporary file, reopens it, counts readable lines, and renames it to memory_long.txt only when the count equals nlt. MATCH_GAME_MAIN calls it after adding cards seen in the game; the resulting file supplies later lt_load calls. It persists long-term learning after checking the temporary output.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>speak</function_name>
+    <function_order>8</function_order>
+    <function_type>static void</function_type>
+    <function_input>FILE *log, int pos</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>libc: fprintf()</function_remote_call>
+    <function_description>Receives a log stream and card position from turn handlers, then writes the flip number, image path or symbol fallback, sight hash or '-', and voice to log. shakti_turn, random_turn, and MATCH_GAME_MAIN call it for revealed cards. The line records what SHAKTI sees and hears during play.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>facedown</function_name>
+    <function_order>9</function_order>
+    <function_type>static int</function_type>
+    <function_input>int pos</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Reads global up[pos] and returns its negation. shakti_turn, random_turn, and MATCH_GAME_MAIN use the result to find cards that are not taken. It exposes card availability without changing state, allowing turn logic to skip matched pairs.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>cards_match</function_name>
+    <function_order>10</function_order>
+    <function_type>static int</function_type>
+    <function_input>int a, int b</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: strcmp()
+libc: strcmp()
+    </function_remote_call>
+    <function_description>Compares cls[a] and cls[b] when class_rule is set; otherwise it compares sym[a] and sym[b], returning the equality result. shakti_turn uses it for newly learned pairs, while random_turn and MATCH_GAME_MAIN's TEACH search also use it. It applies the selected CLASS or EXACT rule.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>learn</function_name>
+    <function_order>11</function_order>
+    <function_type>static void</function_type>
+    <function_input>int pos</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Marks seen[pos] and copies sym[pos] and cls[pos] into memsym[pos] and memcls[pos]. Turn handlers and TEACH setup call it when a card is revealed; shakti_turn uses those remembered values to find later pairs, and MATCH_GAME_MAIN adds seen cards to long-term memory after play. It retains each observed card in short-term memory.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>shakti_turn</function_name>
+    <function_order>12</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *log, int turn</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: strcmp()
+libc: strcmp()
+libc: fprintf()
+libc: fprintf()
+libc: strcmp()
+libc: strcmp()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+    </function_remote_call>
+    <function_description>Uses turn from MATCH_GAME_MAIN and log to search face-down cards for a known pair under class_rule; otherwise it learns an unknown card, checks remembered cards, then learns a second unknown card. Matches expose both cards and return 1; misses return 0 while retaining learned values. It logs the turn and results and gives SHAKTI a memory-based turn.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>random_turn</function_name>
+    <function_order>13</function_order>
+    <function_type>static int</function_type>
+    <function_input>FILE *log, int turn</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+    </function_remote_call>
+    <function_description>Collects face-down positions from the global board, uses lcg to pick two distinct cards, then calls learn and speak for both and tests cards_match. A match marks them face-up and returns 1; otherwise it logs a miss and returns 0. MATCH_GAME_MAIN supplies log and turn and updates RANDOM's score; this models random picks while preserving SHAKTI's observations.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="H">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—H/match_game.c</file_name>
+    <function_name>MATCH_GAME_MAIN</function_name>
+    <function_order>14</function_order>
+    <function_type>int</function_type>
+    <function_input>int argc, char **argv</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: printf()
+libc: fopen()
+libc: printf()
+libc: strcmp()
+libc: fgets()
+libc: strchr()
+libc: strchr()
+libc: strchr()
+libc: strchr()
+libc: strcspn()
+libc: strcspn()
+libc: strcspn()
+libc: strcspn()
+libc: fclose()
+libc: printf()
+libc: strlen()
+libc: strlen()
+libc: fopen()
+libc: printf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: strcmp()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fprintf()
+libc: fopen()
+libc: fprintf()
+libc: fclose()
+libc: fclose()
+libc: printf()
+    </function_remote_call>
+    <function_description>Reads deck rows from argv[1], rule/mode from argv[2]/argv[3], and log path from argv[4]; parses cards, duplicates and deterministically shuffles them, loads prior memory, optionally demonstrates a pair, and runs SHAKTI and RANDOM turns. It writes the log to argv[4], saves learned pairs, appends scoreboard.txt, and prints status; errors return 1, completed games 0. It runs the memory game; downstream consumer unresolved.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I ChatGPT, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+ChatGPT 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
