@@ -69,7 +69,7 @@ libc: fprintf()
 libc: fclose()
 libc: printf()
     </function_remote_call>
-    <function_description>Builds the 80-cell period and mirror arrays from exponent tuples, counts failures of reflection, product, and doubling claims, and reports results to stdout. It then writes three wheel-chord panels to wheel_cardioid.svg using the file-local organ data and SVG coordinates. No in-file downstream consumer appears, so the downstream consumer is unresolved; the program verifies the lattice maps and renders their chord patterns.</function_description>
+    <function_description>Builds the 80-cell period and mirror arrays from exponent tuples, counts failures of reflection, product, and doubling claims, and reports results to stdout. It then writes three wheel-chord panels to wheel_cardioid.svg using the file-local organ data and SVG coordinates. It returns 1 if the SVG cannot open or any check fails, otherwise 0. No in-file consumer appears; downstream consumer is unresolved. It verifies the lattice maps and renders their chord patterns.</function_description>
     <function_complete>yes</function_complete>
 </SECTION>
 
