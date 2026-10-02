@@ -1,0 +1,100 @@
+<Work_Order>
+<QA_specialist>GPT-5.6-Sol</QA_specialist>
+<date>2026-10-02</date>
+<repair>no</repair>
+<total_items>6</total_items>
+<task_description>Read the whole destination file. For each function state what is processed, where inputs originate, where outputs go next, and its purpose. Use at most 512 characters. Only fill function_description and function_complete; preserve every other field and its order. Leave uncertainty incomplete. Run shakti_work_order validate before returning this to the assigned supervisor. Never edit destination sources. Import into the parsed list before running shakti_diff; compare rendered lists, never this work order.</task_description>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>load_evidence</function_name>
+    <function_order>21</function_order>
+    <function_type>static int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>
+libc: fopen()
+libc: fgets()
+libc: strcmp()
+libc: strcmp()
+libc: strcmp()
+libc: fclose()
+libc: fclose()
+    </function_remote_call>
+    <function_description>Reads EV1 lines from the caller's path, skips blank and comment lines, splits each remaining line into six fields, checks its tag, tick, source, and ADD or REJECT event, then applies it to the caller's state. It returns 0 on open, parse, or apply failure and 1 after reading the file; shakti_reason_load calls it after facts and synonyms load. It replays persisted evidence into the reasoning state.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_init</function_name>
+    <function_order>22</function_order>
+    <function_type>void</function_type>
+    <function_input>shakti_reason_state_t *state</function_input>
+    <function_return>void</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Receives a reasoning state from its caller and zeroes its entire structure with memset; a NULL state is left untouched. shakti_reason_load calls it before loading files and again to clear partial state after a load failure. It returns no value and provides the empty state required for a new reasoning load.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_load</function_name>
+    <function_order>23</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *facts_path, const char *thesaurus_path, const char *evidence_path</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Loads the caller's facts_path, thesaurus_path, and evidence_path into state, first resetting it, then loading facts, synonyms, and evidence in that order. It resets state and returns 0 if state is NULL or any load fails; otherwise it returns 1 with the loaded records. No caller appears in this file, so the downstream consumer is unresolved. It assembles the data used by later reasoning.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_record_evidence</function_name>
+    <function_order>24</function_order>
+    <function_type>int</function_type>
+    <function_input>shakti_reason_state_t *state, const char *evidence_path, const shakti_tick_t *tick, const char *question, const char *answer, shakti_source_t source, int contradiction</function_input>
+    <function_return>int</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Receives state, evidence_path, tick, question, answer, source, and contradiction from its caller; it rejects NULL required pointers and CREATIVE or EDEN sources. It first appends the event to evidence_path, then applies it to state only if the append succeeds, returning 0 on either failure. No caller appears in this file, so the downstream consumer is unresolved. It persists and incorporates new evidence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_reason_answer</function_name>
+    <function_order>25</function_order>
+    <function_type>shakti_decision_t</function_type>
+    <function_input>const shakti_reason_state_t *state, const char *question</function_input>
+    <function_return>shakti_decision_t</function_return>
+    <function_remote_call>
+libc: memset()
+    </function_remote_call>
+    <function_description>Normalizes the caller's question and evaluates exact grounded answers in state; an invalid state or question returns an UNKNOWN decision. If exact evaluation is UNKNOWN, it tries the approved synonym rewrite and evaluates again, then counts facts sharing tokens with the rewritten or basic question. It returns the resulting decision to its caller, using exact evidence first and related candidates only as a diagnostic.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<SECTION id="A">
+    <file_name>/mnt/data/SHAKTI_CH_ONLY/SECTION—A/shakti_reason.c</file_name>
+    <function_name>shakti_source_name</function_name>
+    <function_order>26</function_order>
+    <function_type>const char *</function_type>
+    <function_input>shakti_source_t source</function_input>
+    <function_return>const char *</function_return>
+    <function_remote_call>NONE</function_remote_call>
+    <function_description>Maps the caller's source enum to the literals observed, curriculum, verified, eden, or creative, and returns unknown for any other value. append_evidence_event uses the returned label when writing EV1 evidence lines. It supplies a stable text representation of evidence sources for persistence.</function_description>
+    <function_complete>yes</function_complete>
+</SECTION>
+
+<corrections>NONE</corrections>
+
+<QA_Specialist_attestation>
+I GPT-5.6-Sol, on the date below, attest: I read every destination source file in this work order with my own eyes, in full; every description was written by me from that reading; every remote_call list was recorded by me from that reading, direct calls only; I used no Python and no terminal drafting or extraction to produce any description; every fixed-field correction is listed in corrections with evidence; and everything stated above is true and correct to the best of my knowledge.
+
+GPT-5.6-Sol 2026-10-02
+</QA_Specialist_attestation>
+<Supervisor_attestation>[UNSIGNED: independent supervisor required]</Supervisor_attestation>
+</Work_Order>
