@@ -1,0 +1,187 @@
+--- junzip_nomalloc.c (original, sha256 babd3c671d6ee5ff...)
++++ junzip_nomalloc.c (patched P1-P3, v1.1 candidate)
+@@ -129,6 +129,14 @@
+  * Decode a 22-byte end-record image (already validated for position and
+  * comment length) into host-endian form, then apply layout checks.
+  */
++/* Byte j of the scan window W = scan[0..want) ++ tail[0..tailLen).
++ * Every window byte goes through here, so no pointer crosses an array end. */
++static unsigned jzWindowByte(const unsigned char *scan, size_t want,
++        const unsigned char *tail, size_t j)
++{
++    return (j < want) ? (unsigned)scan[j] : (unsigned)tail[j - want];
++}
++
+ static int jzEndRecordFromImage(const unsigned char *r, JZEndRecord *out)
+ {
+     out->signature = jz_rd32(r + 0);
+@@ -169,7 +177,7 @@
+     for (;;) {
+         size_t want = (base > (JZOffset)JZ_SCAN_CHUNK)
+             ? (size_t)JZ_SCAN_CHUNK : (size_t)base;
+-        size_t span = tailLen + want;
++        size_t span = want + tailLen;
+         size_t i;
+ 
+         if (zip->seek(zip, (int64_t)(base - (JZOffset)want), SEEK_SET))
+@@ -179,48 +187,48 @@
+         base -= (JZOffset)want;
+ 
+         /*
+-         * Virtual window W = tail[0..tailLen) ++ scan[0..want).
+-         * Absolute position of W[i] is (base - tailLen + i).
++         * Window W = scan[0..want) ++ tail[0..tailLen): the chunk just read,
++         * followed by the first bytes of the previous (higher) window, which
++         * sit directly above it in the file. Absolute position of W[i] is
++         * (base + i). A record needs 22 bytes, so i stops at span - 22.
+          */
+-        for (i = span - (JZ_END_RAW - 1u); i-- > 0; ) {
+-            const unsigned char *sig =
+-                (i < tailLen) ? &tail[i] : &s->scan[i - tailLen];
+-            JZOffset candPos = base - (JZOffset)tailLen + (JZOffset)i;
+-            uint16_t comment;
+-            JZOffset trailer;
+-
+-            if (sig[0] != 0x50u || sig[1] != 0x4Bu || sig[2] != 0x05u ||
+-                    sig[3] != 0x06u)
+-                continue;
+-            if (candPos < floorPos || candPos < 0)
+-                continue;
+-
+-            {
+-                const unsigned char *cl =
+-                    (i + 20u < tailLen) ? &tail[i + 20u]
+-                                        : &s->scan[i + 20u - tailLen];
+-                comment = jz_rd16(cl);
+-            }
+-            trailer = (JZOffset)JZ_END_RAW + (JZOffset)comment;
+-            if (candPos + trailer == fileSize) {
+-                found = 1;
+-                foundPos = candPos;
+-                break;
++        if (span >= (size_t)JZ_END_RAW) {
++            for (i = span - ((size_t)JZ_END_RAW - 1u); i-- > 0; ) {
++                JZOffset candPos = base + (JZOffset)i;
++                uint16_t comment;
++
++                if (jzWindowByte(s->scan, want, tail, i) != 0x50u ||
++                        jzWindowByte(s->scan, want, tail, i + 1u) != 0x4Bu ||
++                        jzWindowByte(s->scan, want, tail, i + 2u) != 0x05u ||
++                        jzWindowByte(s->scan, want, tail, i + 3u) != 0x06u)
++                    continue;
++                if (candPos < floorPos)
++                    continue;
++
++                comment = (uint16_t)(jzWindowByte(s->scan, want, tail, i + 20u) |
++                        (jzWindowByte(s->scan, want, tail, i + 21u) << 8));
++                if (candPos + (JZOffset)JZ_END_RAW + (JZOffset)comment ==
++                        fileSize) {
++                    found = 1;
++                    foundPos = candPos;
++                    break;
++                }
+             }
+         }
+ 
+-        if (found || base == 0)
++        /* Below floorPos no legal record can start: stop (bounded work). */
++        if (found || base == 0 || base <= floorPos)
+             break;
+ 
+-        /* Carry the last JZ_TAIL_OVERLAP bytes of W into the next pass. */
++        /* Carry the FIRST JZ_TAIL_OVERLAP bytes of W: they sit directly
++         * above the next (lower) chunk and complete any straddling record. */
+         {
++            unsigned char next[JZ_TAIL_OVERLAP];
+             size_t keep = span < JZ_TAIL_OVERLAP ? span : JZ_TAIL_OVERLAP;
+-            size_t src = span - keep;
+             size_t k;
+-            for (k = 0; k < keep; k++) {
+-                size_t w = src + k;
+-                tail[k] = (w < tailLen) ? tail[w] : s->scan[w - tailLen];
+-            }
++            for (k = 0; k < keep; k++)
++                next[k] = (unsigned char)jzWindowByte(s->scan, want, tail, k);
++            memcpy(tail, next, keep);
+             tailLen = keep;
+         }
+     }
+@@ -239,6 +247,9 @@
+         jzEndRecordFromImage(raw, endRecord);
+     }
+ 
++    if (endRecord->signature != JZ_SIG_END)
++        return JZ_ERR_CORRUPT; /* re-read bytes must still be a record */
++
+     if (endRecord->diskNumber || endRecord->centralDirectoryDiskNumber ||
+             endRecord->numEntries != endRecord->numEntriesThisDisk)
+         return JZ_ERR_UNSUPPORTED; /* multi-disk */
+@@ -393,20 +404,33 @@
+     if ((size_t)nameLen + 1u > (size_t)JZ_FILENAME_CAP)
+         return JZ_ERR_SIZE;
+ 
+-    if (nameLen > 0u &&
+-            zip->read(zip, s->filename, nameLen) < (size_t)nameLen)
+-        return JZ_ERR;
+-    if (memchr(s->filename, 0, nameLen) != NULL)
+-        return JZ_ERR_CORRUPT; /* embedded NUL */
+-    s->filename[nameLen] = '\0';
++    /* Compare the local name against the central name in pieces through
++     * s->scan. s->filename is never written here: callers commonly pass
++     * s->filename itself as centralFilename, and overwriting it would make
++     * the comparison check the buffer against itself. */
++    if ((size_t)nameLen != centralLen)
++        return JZ_ERR_CORRUPT;
++    {
++        size_t done = 0;
++        while (done < centralLen) {
++            size_t n = centralLen - done;
++            if (n > (size_t)JZ_SCAN_CHUNK)
++                n = (size_t)JZ_SCAN_CHUNK;
++            if (zip->read(zip, s->scan, n) < n)
++                return JZ_ERR;
++            if (memchr(s->scan, 0, n) != NULL)
++                return JZ_ERR_CORRUPT; /* embedded NUL */
++            if (memcmp(s->scan, centralFilename + done, n) != 0)
++                return JZ_ERR_CORRUPT;
++            done += n;
++        }
++    }
+ 
+     if (zip->seek(zip, (int64_t)extraLen, SEEK_CUR))
+         return JZ_ERR;
+ 
+     /* Verification only: central values are never modified. */
+-    if ((size_t)nameLen != centralLen ||
+-            memcmp(s->filename, centralFilename, centralLen) != 0 ||
+-            version != centralHeader->versionNeededToExtract ||
++    if (version != centralHeader->versionNeededToExtract ||
+             flags != centralHeader->generalPurposeBitFlag ||
+             method != centralHeader->compressionMethod)
+         return JZ_ERR_CORRUPT;
+@@ -634,8 +658,8 @@
+         return -1;
+ #else
+     {
+-        off_t p = ftello(h->fp);
+-        if (p < 0)
++        long p = ftell(h->fp); /* ISO C99; tanks are far below LONG_MAX */
++        if (p < 0L)
+             return -1;
+         position = (JZOffset)p;
+     }
+@@ -651,10 +675,11 @@
+     return _fseeki64(h->fp, offset, whence);
+ #else
+     {
+-        off_t converted = (off_t)offset;
+-        if ((int64_t)converted != offset)
++        /* Range-check first: converting an out-of-range value is
++         * implementation-defined in C99, so refuse instead of converting. */
++        if (offset < (int64_t)LONG_MIN || offset > (int64_t)LONG_MAX)
+             return -1;
+-        return fseeko(h->fp, converted, whence);
++        return fseek(h->fp, (long)offset, whence);
+     }
+ #endif
+ }
