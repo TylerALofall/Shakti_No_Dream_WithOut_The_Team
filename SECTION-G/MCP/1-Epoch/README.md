@@ -1,9 +1,8 @@
 # EPOCH — Slot 1 of 9
 
-**Lineage:** Ga — EPOCH
-**What lands here:** The clock of record. Everything is stored by epoch.
+Lineage: Ga. The C clock seeds once, then advances from the shared heartbeat.
+Events retain epoch plus event ordinal. Checked records preserve the epoch
+watermark across restart; an existing recording refuses a backward --epoch.
 
-**Log/address contract:** `[epoch]:[frame/subsecond]-[function identity]`
-
-**Status:** structure only — no code yet. Code arrives by work order,
-built C99 strict, zero heap, deterministic.
+Implementation: SECTION-A/shakti_time.c and shakti_log.c.
+Controller contract and remaining integration: SECTION-A/Runtime.Flow.txt at repo root.

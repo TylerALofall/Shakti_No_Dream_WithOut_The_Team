@@ -426,11 +426,11 @@ int shakti_school_draft_snapshots(
             return 0;
         }
 
-        shakti_memory_remember(
+        if (!shakti_memory_remember(
             &runtime->memory,
             &tick,
             snapshot
-        );
+        )) return 0;
     }
 
     return 1;
@@ -472,7 +472,7 @@ static void print_drill_controls(void)
     puts("/interrupt/  Stop the drill and MCP tools; Shakti remains awake.");
     puts("/resume/     Restore MCP tools and continue the drill.");
     puts("/stop/       Stop the drill without changing the School pass.");
-    puts("/quit/       Stop the drill and close Shakti safely.");
+    puts("/quit/       Hold tools and stop this drill; Shakti keeps cycling.");
 }
 
 static shakti_drill_input_result_t handle_drill_control(
@@ -510,156 +510,85 @@ static shakti_drill_input_result_t handle_drill_control(
     }
 
     if (strcmp(input, "/quit/") == 0) {
-        puts("Quit requested. The active drill stopped safely.");
-        return SHAKTI_DRILL_INPUT_QUIT;
+        shakti_loop_interrupt_tools(&runtime->loop);
+        puts("Tools held; the active drill stopped. The heartbeat continues.");
+        return SHAKTI_DRILL_INPUT_STOP;
     }
 
     return SHAKTI_DRILL_INPUT_ANSWER;
 }
 
-int shakti_school_run_drill(
-    shakti_runtime_t *runtime,
-    const char *symbol
-)
+int shakti_school_run_drill(shakti_runtime_t *runtime, const char *symbol)
 {
-    char input[SHAKTI_INPUT_CAPACITY];
-
-    if (runtime == NULL ||
-        symbol == NULL ||
-        symbol[0] == '\0') {
-        return 0;
-    }
-
-    if (runtime->school.pass == 1U) {
-        puts(
-            "Pass 1 is stateless witness. Set School to Pass 2, 3, or 4 "
-            "before using the actuator."
-        );
+    size_t size;
+    if (runtime == NULL || symbol == NULL || symbol[0] == '\0') return 0;
+    size = strlen(symbol);
+    if (size >= sizeof(runtime->school.active_symbol)) {
+        fputs("BENCH handwriting symbol capacity\n", stderr);
         return 1;
     }
-
-    printf(
-        "Type \"%s\" until mastery reaches %u.\n",
-        symbol,
-        runtime->school.mastery_target
-    );
-
-    while (runtime->school.current_streak <
-           runtime->school.mastery_target) {
-        char *answer;
-        int correct;
-        shakti_tick_t tick;
-        char status[SHAKTI_TEXT_CAPACITY];
-
-        printf(
-            "Pass %u. Progress %u of %u. Type %s: ",
-            runtime->school.pass,
-            runtime->school.current_streak,
-            runtime->school.mastery_target,
-            symbol
-        );
-        fflush(stdout);
-
-        if (fgets(input, sizeof(input), stdin) == NULL) {
-            return 0;
-        }
-
-        answer = trim_text__school_h(input);
-
-        {
-            shakti_drill_input_result_t control_result;
-
-            control_result = handle_drill_control(runtime, answer);
-
-            if (control_result == SHAKTI_DRILL_INPUT_CONTINUE) {
-                continue;
-            }
-
-            if (control_result == SHAKTI_DRILL_INPUT_STOP) {
-                return 1;
-            }
-
-            if (control_result == SHAKTI_DRILL_INPUT_QUIT) {
-                return 0;
-            }
-        }
-
-        if (!shakti_school_draft_snapshots(runtime, answer)) {
-            return 0;
-        }
-
-        correct = strcmp(answer, symbol) == 0;
-
-        if (!shakti_tick_next(&runtime->clock, &tick) ||
-            !shakti_school_record_trial(
-                &runtime->school,
-                SHAKTI_SCHOOL_PATH,
-                &tick,
-                symbol,
-                correct)) {
-            return 0;
-        }
-
-        snprintf(
-            status,
-            sizeof(status),
-            "%s symbol=%s streak=%u",
-            correct ? "right" : "wrong",
-            symbol,
-            runtime->school.current_streak
-        );
-
-        if (!shakti_log_append(
-                SHAKTI_LEARNED_STREAM_PATH,
-                "LRN1",
-                &tick,
-                "Jb",
-                1U,
-                "SCHOOL",
-                "text",
-                symbol,
-                correct ? "right" : "wrong",
-                status)) {
-            return 0;
-        }
-
-        show_trial_progress(&runtime->school, correct);
+    if (runtime->school.pass == 1U) {
+        puts("Pass 1 is stateless witness; the handwriting actuator is not active.");
+        return 1;
     }
+    if (strcmp(symbol, runtime->school.active_symbol) != 0) {
+        memcpy(runtime->school.active_symbol, symbol, size + 1U);
+        runtime->school.current_streak = 0U;
+        runtime->school.total_attempts = 0U;
+        runtime->school.total_correct = 0U;
+        runtime->school.total_errors = 0U;
+    }
+    if (runtime->school.current_streak >= runtime->school.mastery_target) {
+        puts("This handwriting lesson is already mastered.");
+        return 1;
+    }
+    runtime->school.drill_active = 1U;
+    printf("Handwriting lesson active: %s. Submit one /trial/ ANSWER at a time.\n", symbol);
+    print_drill_controls();
+    return 1;
+}
 
-    {
-        shakti_tick_t reward_tick;
-
-        if (!shakti_tick_next(&runtime->clock, &reward_tick)) {
-            return 0;
-        }
-
+int shakti_school_submit_trial(shakti_runtime_t *runtime, const char *input)
+{
+    char buffer[SHAKTI_INPUT_CAPACITY], status[SHAKTI_TEXT_CAPACITY];
+    char *answer;
+    int correct;
+    shakti_tick_t tick;
+    shakti_drill_input_result_t control;
+    if (runtime == NULL || input == NULL) return 0;
+    if (!runtime->school.drill_active || !shakti_loop_tools_available(&runtime->loop)) {
+        puts("No handwriting trial is currently available.");
+        return 1;
+    }
+    if (strlen(input) >= sizeof(buffer)) {
+        fputs("BENCH handwriting input capacity\n", stderr);
+        return 1;
+    }
+    memcpy(buffer, input, strlen(input) + 1U);
+    answer = trim_text__school_h(buffer);
+    control = handle_drill_control(runtime, answer);
+    if (control == SHAKTI_DRILL_INPUT_CONTINUE) return 1;
+    if (control != SHAKTI_DRILL_INPUT_ANSWER) {
+        runtime->school.drill_active = 0U;
+        return 1;
+    }
+    if (!shakti_school_draft_snapshots(runtime, answer)) return 0;
+    correct = strcmp(answer, runtime->school.active_symbol) == 0;
+    if (!shakti_tick_next(&runtime->clock, &tick) ||
+        !shakti_school_record_trial(&runtime->school, SHAKTI_SCHOOL_PATH,
+            &tick, runtime->school.active_symbol, correct)) return 0;
+    (void)snprintf(status, sizeof(status), "%s symbol=%s streak=%u",
+        correct ? "right" : "wrong", runtime->school.active_symbol, runtime->school.current_streak);
+    if (!shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
+        "Jb", 1U, "SCHOOL", "text", runtime->school.active_symbol,
+        correct ? "right" : "wrong", status)) return 0;
+    show_trial_progress(&runtime->school, correct);
+    if (runtime->school.current_streak >= runtime->school.mastery_target) {
+        runtime->school.drill_active = 0U;
         show_mastery_reward(&runtime->school);
-
-        if (!shakti_log_append(
-                SHAKTI_LEARNED_STREAM_PATH,
-                "LRN1",
-                &reward_tick,
-                "Kn",
-                1U,
-                "SCHOOL",
-                "visual_art",
-                symbol,
-                "reward",
-                "happy_face") ||
-            !shakti_log_append(
-                SHAKTI_LEARNED_STREAM_PATH,
-                "LRN1",
-                &reward_tick,
-                "Kn",
-                2U,
-                "SCHOOL",
-                "actuator",
-                symbol,
-                "sound_request",
-                "terminal_bell_coin_adapter_pending")) {
-            return 0;
-        }
+        if (!shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
+            "Kn", 1U, "SCHOOL", "visual_art", runtime->school.active_symbol,
+            "reward", "happy_face")) return 0;
     }
-
     return 1;
 }

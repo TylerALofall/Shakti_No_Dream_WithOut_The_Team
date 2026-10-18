@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <limits.h>
 
 void shakti_tick_clock_init(shakti_tick_clock_t *clock_state)
 {
@@ -9,40 +10,37 @@ void shakti_tick_clock_init(shakti_tick_clock_t *clock_state)
         return;
     }
 
-    clock_state->last_epoch_seconds = (time_t)0;
+    clock_state->last_epoch_seconds = time(NULL);
     clock_state->next_frame = 0U;
+}
+
+void shakti_tick_clock_seed(shakti_tick_clock_t *clock_state, time_t epoch)
+{
+    if (clock_state != NULL) {
+        clock_state->last_epoch_seconds = epoch;
+        clock_state->next_frame = 0U;
+    }
+}
+
+int shakti_tick_clock_beat(shakti_tick_clock_t *clock_state)
+{
+    if (clock_state == NULL || clock_state->last_epoch_seconds < (time_t)0 ||
+        clock_state->last_epoch_seconds >= (time_t)LONG_MAX) {
+        return 0;
+    }
+    clock_state->last_epoch_seconds++;
+    clock_state->next_frame = 0U;
+    return 1;
 }
 
 int shakti_tick_next(shakti_tick_clock_t *clock_state, shakti_tick_t *tick)
 {
-    time_t now;
-
     if (clock_state == NULL || tick == NULL) {
         return 0;
     }
-
-    now = time(NULL);
-
-    if (now == (time_t)-1) {
+    if (clock_state->last_epoch_seconds < (time_t)0 ||
+        clock_state->next_frame == UINT_MAX) {
         return 0;
-    }
-
-    if (clock_state->last_epoch_seconds == (time_t)0 ||
-        now > clock_state->last_epoch_seconds) {
-        clock_state->last_epoch_seconds = now;
-        clock_state->next_frame = 0U;
-    } else if (clock_state->next_frame >= SHAKTI_FRAME_LIMIT) {
-        do {
-            now = time(NULL);
-        } while (now != (time_t)-1 &&
-                 now <= clock_state->last_epoch_seconds);
-
-        if (now == (time_t)-1) {
-            return 0;
-        }
-
-        clock_state->last_epoch_seconds = now;
-        clock_state->next_frame = 0U;
     }
 
     tick->epoch_seconds = clock_state->last_epoch_seconds;

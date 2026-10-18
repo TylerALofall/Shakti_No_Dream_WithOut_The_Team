@@ -1,6 +1,8 @@
 #include "shakti_log.h"
 
 #include <inttypes.h>
+#include <errno.h>
+#include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +26,7 @@ static uint32_t fnv1a_text(const char *text)
     return hash;
 }
 
-static void sanitize_field(
+static int sanitize_field(
     const char *source,
     char *destination,
     size_t destination_size
@@ -33,15 +35,17 @@ static void sanitize_field(
     size_t index;
 
     if (destination_size == 0U) {
-        return;
+        return 0;
     }
 
     index = 0U;
 
-    while (*source != '\0' && index + 1U < destination_size) {
+    while (*source != '\0') {
         unsigned char character;
 
         character = (unsigned char)*source;
+
+        if (index + 1U >= destination_size) return 0;
 
         if (character == '\t' ||
             character == '\r' ||
@@ -55,6 +59,7 @@ static void sanitize_field(
     }
 
     destination[index] = '\0';
+    return 1;
 }
 
 const char *shakti_channel_name(shakti_channel_t channel)
@@ -96,7 +101,7 @@ int shakti_log_append(
     char safe_channel[SHAKTI_TEXT_CAPACITY];
     char safe_subject[SHAKTI_TEXT_CAPACITY];
     char safe_property[SHAKTI_TEXT_CAPACITY];
-    char safe_value[SHAKTI_TEXT_CAPACITY];
+    char safe_value[SHAKTI_INPUT_CAPACITY];
     char payload[SHAKTI_LINE_CAPACITY];
     uint32_t checksum;
     int written;
@@ -123,11 +128,11 @@ int shakti_log_append(
         return 0;
     }
 
-    sanitize_field(phase, safe_phase, sizeof(safe_phase));
-    sanitize_field(channel, safe_channel, sizeof(safe_channel));
-    sanitize_field(subject, safe_subject, sizeof(safe_subject));
-    sanitize_field(property, safe_property, sizeof(safe_property));
-    sanitize_field(value, safe_value, sizeof(safe_value));
+    if (!sanitize_field(phase, safe_phase, sizeof(safe_phase)) ||
+        !sanitize_field(channel, safe_channel, sizeof(safe_channel)) ||
+        !sanitize_field(subject, safe_subject, sizeof(safe_subject)) ||
+        !sanitize_field(property, safe_property, sizeof(safe_property)) ||
+        !sanitize_field(value, safe_value, sizeof(safe_value))) return 0;
 
     written = snprintf(
         payload,
@@ -171,84 +176,90 @@ int shakti_log_append(
     return success;
 }
 
-int shakti_log_validate_file(
-    const char *path,
-    unsigned long *valid_lines,
-    unsigned long *invalid_lines
-)
+int shakti_log_read_record(FILE *file, char *line, size_t capacity,
+    char *fields[7], shakti_tick_t *tick)
+{
+    if (file == NULL || line == NULL || fields == NULL || tick == NULL ||
+        capacity < 2U || capacity > (size_t)INT_MAX) return -1;
+    for (;;) {
+        char *checksum, *end, *cursor;
+        unsigned long stored, frame;
+        long epoch;
+        size_t size, i;
+        if (fgets(line, (int)capacity, file) == NULL) return ferror(file) ? -1 : 0;
+        size = strlen(line);
+        if (!size || line[size - 1U] != '\n') {
+            int c;
+            while ((c = fgetc(file)) != EOF && c != '\n') { }
+            return -1;
+        }
+        line[size - 1U] = '\0';
+        if (!line[0] || line[0] == '#') continue;
+        checksum = strrchr(line, '\t');
+        if (checksum == NULL || strlen(checksum + 1U) != 8U) return -1;
+        *checksum++ = '\0';
+        errno = 0;
+        stored = strtoul(checksum, &end, 16);
+        if (errno || *end || stored > UINT32_MAX ||
+            (uint32_t)stored != fnv1a_text(line)) return -1;
+        cursor = line;
+        for (i = 0U; i < 7U; ++i) {
+            fields[i] = cursor;
+            end = strchr(cursor, '\t');
+            if (i < 6U) {
+                if (end == NULL) return -1;
+                *end = '\0';
+                cursor = end + 1U;
+            } else if (end != NULL) return -1;
+        }
+        if (fields[1][0] != '[') return -1;
+        errno = 0;
+        epoch = strtol(fields[1] + 1U, &end, 10);
+        if (errno || end == fields[1] + 1U || epoch < 0L || *end != ':') return -1;
+        cursor = end + 1U;
+        errno = 0;
+        frame = strtoul(cursor, &end, 10);
+        if (errno || end == cursor || frame > UINT_MAX || strncmp(end, "]-[", 3U) != 0) return -1;
+        tick->epoch_seconds = (time_t)epoch;
+        tick->frame = (unsigned int)frame;
+        return 1;
+    }
+}
+
+int shakti_log_latest_epoch(const char *path, time_t *latest)
 {
     FILE *file;
-    char line[SHAKTI_LINE_CAPACITY];
-    unsigned long valid;
-    unsigned long invalid;
+    char line[SHAKTI_LINE_CAPACITY], *fields[7];
+    shakti_tick_t tick;
+    time_t candidate;
+    int result, ok;
+    if (path == NULL || latest == NULL) return 0;
+    file = fopen(path, "rb");
+    if (file == NULL) return errno == ENOENT;
+    candidate = *latest;
+    while ((result = shakti_log_read_record(file, line, sizeof(line), fields, &tick)) > 0)
+        if (tick.epoch_seconds > candidate) candidate = tick.epoch_seconds;
+    ok = fclose(file) == 0 && result == 0;
+    if (ok) *latest = candidate;
+    return ok;
+}
 
-    if (path == NULL) {
-        return 0;
+int shakti_log_validate_file(const char *path,
+    unsigned long *valid_lines, unsigned long *invalid_lines)
+{
+    FILE *file;
+    char line[SHAKTI_LINE_CAPACITY], *fields[7];
+    shakti_tick_t tick;
+    unsigned long valid = 0UL, invalid = 0UL;
+    int result, failed = 0;
+    if (path == NULL || (file = fopen(path, "rb")) == NULL) return 0;
+    while ((result = shakti_log_read_record(file, line, sizeof(line), fields, &tick)) != 0) {
+        if (result > 0) ++valid;
+        else ++invalid;
+        if (ferror(file)) { failed = 1; break; }
     }
-
-    file = fopen(path, "r");
-
-    if (file == NULL) {
-        return 0;
-    }
-
-    valid = 0UL;
-    invalid = 0UL;
-
-    while (fgets(line, sizeof(line), file) != NULL) {
-        char *checksum_text;
-        char *end;
-        unsigned long stored_checksum;
-        uint32_t calculated_checksum;
-        size_t length;
-
-        length = strlen(line);
-
-        if (length == 0U || line[length - 1U] != '\n') {
-            invalid++;
-            continue;
-        }
-
-        line[length - 1U] = '\0';
-
-        if (line[0] == '\0' || line[0] == '#') {
-            continue;
-        }
-
-        checksum_text = strrchr(line, '\t');
-
-        if (checksum_text == NULL) {
-            invalid++;
-            continue;
-        }
-
-        *checksum_text = '\0';
-        checksum_text++;
-        stored_checksum = strtoul(checksum_text, &end, 16);
-
-        if (end == checksum_text || *end != '\0') {
-            invalid++;
-            continue;
-        }
-
-        calculated_checksum = fnv1a_text(line);
-
-        if ((uint32_t)stored_checksum == calculated_checksum) {
-            valid++;
-        } else {
-            invalid++;
-        }
-    }
-
-    fclose(file);
-
-    if (valid_lines != NULL) {
-        *valid_lines = valid;
-    }
-
-    if (invalid_lines != NULL) {
-        *invalid_lines = invalid;
-    }
-
-    return 1;
+    if (fclose(file) != 0) failed = 1;
+    if (valid_lines != NULL) *valid_lines = valid;
+    if (invalid_lines != NULL) *invalid_lines = invalid;
+    return !failed;
 }

@@ -1,0 +1,11 @@
+FAMILY: Cycle
+TOOL: Run
+VERSION: 1.0.0
+DATE: 2026-10-18
+INTRODUCTION: Run the real Section-A C runtime against new synthetic fixtures for continuous scheduling, whole memory, full-size convergence and restart recovery.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-A/*.c SECTION-G/MCP/5-Menu/TOOLS/Cycle/Cycle-Run-v1.0.0-2026-10-18/Cycle.Run.c -o shakti-cycle-run
+COMMAND: ./shakti-cycle-run --run "{new_fixture_directory}"
+EXAMPLE: ./shakti-cycle-run --run /tmp/shakti-cycle-fixture-001
+ENTRY_KIND: single
+ENTRY: Cycle.Run.c
+REQUIRED: Cycle.Run.c

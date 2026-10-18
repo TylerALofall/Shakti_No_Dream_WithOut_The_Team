@@ -1,0 +1,43 @@
+CYCLE RUN — native C99, synthetic fixtures only
+
+Build from the repository root with the BUILD line in this package record.
+The source links the actual SECTION-A modules and include/ interfaces.
+They are repository dependencies, not copied replacements inside this package.
+
+Run:
+./shakti-cycle-run --run NEW_FIXTURE_DIRECTORY
+
+The directory must not already exist. The tool creates a small synthetic
+Eden fact, empty learned records and a one-level empty curriculum manifest.
+Its startup data is only a fixture, not a completed real curriculum.
+It never reads personal data, contacts a network or drives a phone.
+
+The run exercises quiet cycles at every heartbeat rate, exact aggregate
+pacing and PCM sample counts, tool interruption, required thirteen-answer
+reflection, compiled nonblocking fixture answers, whole memory recall,
+permanent lessons/recent decay, a known independent binary-plane layout,
+1920x1080 RGB with two PCM microclips per sight frame, missing/mismatched
+source lanes, expected-hash and single-bit failures, fractional 44100 Hz
+microclips, incomplete/damaged memory, and restart recovery without duplicate
+reflection containers.
+
+The fixture reasoning callback supplies explicit RUN-only answers. It is
+not the production reasoning adapter and does not prove semantic reasoning.
+
+Expected BENCH lines are deliberate refusal cases. An unmet REQUIRE prints
+BENCH RUN and exits 1. Any missing PASS or nonzero final exit is a failure.
+Throughput time is a Linux observation without display or speaker playback;
+it is not an iOS frame-rate claim.
+
+The restart case truncates only its newly created fixture reflection log at
+an exact checked boundary to model a missing final receipt. The corruption
+cases alter only newly created fixture files. No existing directory is
+accepted, removed or overwritten by the entry point.
+
+--seed NEW_FIXTURE_DIRECTORY creates the same fixture without the core RUN,
+for separately reviewed console-host runs. The default runtime itself cycles
+forever; use its explicit --cycles option for bounded console observations.
+
+For repeatability, use two different new directories. Compare their
+data/learned/memory_containers.bin, learned_stream.log and control records.
+The RUN timing printed to stdout is intentionally an observed duration.

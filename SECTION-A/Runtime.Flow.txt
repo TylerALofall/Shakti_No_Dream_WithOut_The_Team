@@ -1,0 +1,164 @@
+SHAKTI RUNTIME FLOW — 2026-10-18
+
+This change implements the C loop behind the agreed flow. It does not supply
+a Swift application, a media codec, speaker playback, or a trained ML model.
+
+BUILD FROM THE REPOSITORY ROOT
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c -o shakti-runtime
+
+The console host uses POSIX nonblocking input and monotonic pacing. The
+controller-facing API is include/shakti_app.h. One owner serializes calls;
+initialize once with the existing Eden/control/manifest data. Do not call
+cycle or reuse leased buffers concurrently from different threads.
+
+FOREVER LOOP
+A quiet shakti_app_cycle(runtime, NULL) needs neither input nor a reply.
+The console runs forever by default, including after stdin EOF. /quit/ and
+/interrupt/ hold MCP tools; they do not stop heartbeat, recall or reasoning.
+The native controller must keep scheduling cycles while its tool gate is held.
+--cycles N is an explicit bounded local RUN, never the default lifetime.
+
+CLOCK AND HEARTBEAT
+Resting rate is one beat per second. Each logical beat contains 64 hearing
+slots and 32 sight slots. /heartbeat/ accepts 1, 2, 4, 8, 16, 32 or 64 beats
+per physical second. Every channel follows the same rate; 2:1 is retained.
+Integer remainder pacing avoids accumulated rounding loss.
+
+The clock seeds once from the host epoch, then advances one logical second
+per beat. The frame suffix is an event ordinal, not a camera frame number.
+Startup checks existing epoch records and resumes beyond the latest stored
+epoch. Explicit --epoch N is for repeatable local RUNs and refuses a backward
+origin on an existing recording. Cycle counters and rate restart at their
+initial values; recorded epochs and actual tool counts survive restart.
+
+shakti_loop_heartbeat_audio() exposes a mono signed 16-bit PCM frame at
+48,000 samples/second. Consume exactly its returned sample count after each
+cycle. Sample counts scale with rate so a faster beat does not build a PCM
+backlog. The first slot carries a pulse. The native audio adapter must play
+these frames; this C source does not open a speaker.
+
+LOADING, TAKING, AND VALIDATING
+The Swift/native decoder deposits full decoded RGB/RGBA pixels or PCM clips
+through shakti_app_queue_frame(), which records the accepted deposit.
+A queue refusal transfers no ownership and changes no caller bytes.
+Four complete-source-window descriptors can wait in the loading zone.
+
+A movie window requires:
+  lane 0: full sight frame at even position64
+  lane 1: first audio microclip at that same position64
+  lane 2: second microclip at position64 + 1
+
+position64 is the source timeline measured in 1/64 of a source second.
+A picture/rendered document page uses mask 1. A sound-only pair uses mask 6.
+A movie uses mask 7. Pair by source_id and position64 / 2, never by arrival
+time. At sample rates such as 44,100 Hz, clip lengths retain the fractional
+sample boundary; no source samples are silently discarded.
+
+Queueing borrows input bytes unchanged until the item is taken. Keep all
+caller-owned storage alive and disjoint until release or explicit cancel.
+Taking immediately copies every lane into independent reference and
+processing buffers. The processing copy is broken into eight binary bit
+planes for byte-exact rebuilding. These are bit planes, not an 8x8 image.
+There is no spatial reduction, thresholding or color quantization.
+RGB/RGBA sample values and channel bits are retained, including alpha.
+
+Sight and first audio are checked on an even slot, second audio on the next
+odd slot. Each reconstructed byte must match the held reference, and any
+supplied expected hash must also match. Incomplete or bad windows cannot
+enter the current sensory view. A bad window stays held for explicit cancel
+or recovery while the rest of the loop continues.
+
+The oldest incomplete window applies backpressure to later windows. A
+validated current view leases its buffers until shakti_media_release().
+Do not recycle those buffers earlier. This bounded queue does not silently
+drop or resize frames when the native producer is faster than consumption.
+
+CONVERGENCE AND MEMORY
+shakti_app_convergence_view() exposes validated sensory lanes, their source
+context, resident Eden, complete working containers, and the current thought.
+The view is borrowed until the next serialized cycle. Consume only after a
+successful cycle. Pixels and audio remain in caller buffers until release.
+
+Long term is an append-only SMC1 container file. A record has lengths,
+origin epoch, immutable id, tags, full text, checksum and a DONE footer.
+Startup audits existing records before further writes. A damaged or
+incomplete record holds writes and is not admitted as a partial memory.
+A checksum detects accidental corruption; it is not a cryptographic seal.
+
+Short term is RAM with 64 whole-container slots. Working memory is a bounded
+set of whole active containers; index zero is the current focus. A lookup
+checks at most one complete stored container per cycle and installs matches
+whole into RAM and working memory. No text fragments stand in for the item.
+Successful live recall logs the source id, original epoch, size and checksum.
+
+Permanent training containers reload into RAM at startup and never expire.
+Eden remains resident alongside the loop. Unused recent events can expire
+from RAM after /memory_decay/ BEATS. Zero leaves timed expiry unchosen.
+LRU may replace a recent nonfocused item when RAM is full. Expiry/eviction
+also removes working copies and never deletes the long-term record.
+All-permanent RAM exhaustion is a visible refusal; lessons are not discarded.
+
+Each text container holds at most 16,383 bytes, tags 255 bytes and id 63
+bytes. Overflow refuses the whole item. These are configured fixed limits.
+Store and immutable-id checks scan the authoritative file synchronously;
+startup and persistence costs grow with the recording. This is soft host
+scheduling, not a proven hard real-time or device-performance guarantee.
+
+MCP memory actions:
+  recall trigger words
+  remember id | tags | recent|training | complete text
+  activate id
+
+The command line itself is limited to 1,023 bytes. Native memory_store()
+supports the full container limit. Generic log lines are not automatically
+installed into active memory. Completed reflections, accepted text, changed
+internal thoughts and validated sensory metadata can become whole memories.
+Raw movie pixels/PCM are not copied into long-term memory by this loop.
+
+REASONING AND REFLECTION
+The existing Eden/evidence reasoner revisits the current focus on sight
+slots, quietly. Changed thoughts are logged and stored as whole artifacts.
+Repeated evaluation checks deterministic agreement; it does not prove
+semantic correctness. The existing reasoner does not infer meaning from raw
+pixels, PCM, or arbitrary episodic prose. Those inputs are available together
+through the convergence view for the native reasoning/ML adapter.
+
+After ten recognized dispatched MCP tool calls, another tool waits for
+thirteen actual answers. Quiet cycles, messages, refusals and unknown tool
+names do not count as dispatched calls. Handwriting trials are explicit
+continuations of an already dispatched lesson.
+
+shakti_loop_set_reflection_provider() registers compiled nonblocking
+reasoning code. It receives one unanswered question per cycle. Return zero
+when an answer is not ready; return one with a complete NUL-terminated actual
+answer when ready. The default is NULL and leaves reflection pending.
+There are no fixed production answers and no stdin prompt.
+
+A native adapter can also use shakti_loop_answer_reflection(); the console
+control is /reflection/answer/ 1..13 actual answer. This is a control route,
+not another tool call. /reflection/ displays status without asking for input.
+The gate opens only after all thirteen answers are stored together.
+
+Question 12 supplies trigger words for recall. Up to fifteen complete words
+fit the bounded tag field; its full original answer stays in the reflection.
+A pending recall is kept until the current lookup ends. All answers and
+actual tool counts restore from checked epoch records after restart.
+Multiline answer bytes are preserved. The reflection id identifies the tool
+batch, so retrying after a committed container but missing receipt reuses
+that whole container instead of creating another copy.
+Restoration uses the new actual_call and complete_13_answers records. Older
+response-count reflection records are not reinterpreted as these tool batches.
+
+SCOPE STILL OUTSIDE THIS CHANGE
+The branch contains no Swift source/project to connect native decoding,
+display, audio playback, lifecycle, and the compiled reasoning adapter.
+The source window API and PCM output are ready for that integration.
+No camera, video codec, speaker, phone, or trained model was exercised.
+
+The Section-A handwriting font/receptor remains an 8x8 teaching surface.
+The old SECTION-E eyes/font demonstration is separate and is not used by
+the new full-size native media queue. It must not be used as full vision.
+
+The prenatal programs in SECTION-B were not migrated or retrained here.
+The requested 19-week sound, 25-week colors and 22,982,400 stateless beats
+remain a separate training integration; this change does not claim them.

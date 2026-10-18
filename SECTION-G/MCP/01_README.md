@@ -13,7 +13,7 @@ Canon: Library guide, Chapter 6. Lineage letters Ga–Gi kept for the record.
 | 6 | Shell/ | SHELL | Gf | The shell she lives in; tool calls execute here. |
 | 7 | Outbound_Mail/ | OUTBOUND MAIL | Gg | Her to Tyler. |
 | 8 | Inbound_Mail/ | INBOUND MAIL | Gh | Tyler to her. |
-| 9 | Self_Reflection/ | SELF-REFLECTION | Gi | 13 questions every 10-13 responses, stored by epoch. |
+| 9 | Self_Reflection/ | SELF-REFLECTION | Gi | 13 actual answers after 10 dispatched tool calls, stored by epoch. |
 
 Log/address contract for every slot:
 `[epoch]:[frame/subsecond]-[function identity]`
@@ -22,3 +22,8 @@ Function identity = (file_name, function_name, function_order).
 Build law for anything that lands here: C99 strict
 (`cc -std=c99 -pedantic -Wall -Wextra -Werror -O2`), zero heap,
 deterministic, no Python, own tokenizer. Code arrives by work order.
+
+The portable C runtime is in SECTION-A; these directories remain the nine-slot
+map. See SECTION-A/Runtime.Flow.txt at the repository root for the
+controller contract, full-size sensory queue, resident Eden/whole-memory loop,
+and the Swift/ML pieces that still require integration.
