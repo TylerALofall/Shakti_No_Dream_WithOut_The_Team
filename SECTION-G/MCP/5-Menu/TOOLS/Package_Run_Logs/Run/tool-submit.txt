@@ -1,0 +1,3 @@
+SHAKTI TOOL SUBMISSION 1.0 -- OFFLINE PREPARER
+PASS: SHA-256, base64, all 256 byte values, exclusive create and rename.
+LOCAL COMPATIBILITY PASS. No credentials or GitHub are needed.

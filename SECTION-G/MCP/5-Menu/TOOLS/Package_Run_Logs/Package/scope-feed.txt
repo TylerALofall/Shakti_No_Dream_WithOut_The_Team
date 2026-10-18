@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Scope/Scope-Feed-v1_local1-2026-10-17
+DIRECTORY SHA256: 6b51a1786764ae6fd6c4ecdc5ef81cce84755212a594e4a478c3720f6508428f
+LEDGER: appended

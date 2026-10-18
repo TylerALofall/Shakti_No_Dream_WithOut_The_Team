@@ -1,0 +1,88 @@
+SOURCE AND SCOPE RECORD -- Tool-Submit 1.0
+Modified: 2026-10-03
+QA specialist: GPT-6 Astra Pro
+Environment: OpenAI Linux working container, x86_64
+Independent supervisor: Kimi K3 -- not performed, acceptance not asserted.
+Phone target supplied by Tyler: C Code Develop 5.2.0 (502000009).
+
+INPUT ACTUALLY INSPECTED
+Tool_Assembler-README_builder_2026-10-03.zip
+  Tool_Assembler-README_builder/README.md
+  Tool_Assembler-README_builder/Tool.Assembler.c
+  Tool_Assembler-README_builder/Tool_Assembler.README_builder.c
+
+The first source calls itself Tool.Assembler.c v4 and declares SIX slots:
+FILES, FORMAT, NAMES MEAN, RELATED TO, RUN, CHANGED. It packages a flat bank
+of family directories and states that it never builds a tool.
+
+The second source declares FILE SETS, SCRIPT FILES and the headings:
+I. INTRODUCTION, II. REQUIREMENTS, III. RUNNING NOTES, IV. REFERENCES.
+Its admission checks also require specific family/script/binary names.
+Those requirements are not silently treated as identical to the first
+assembler's rules. This delivery does not claim to pass its full admission
+check without a required binary, or alter its existing implementation.
+
+The README in the supplied archive uses the six-slot format. That is the
+default in the two new forms. FOUR is an explicit alternative. Existing
+README bytes can be supplied directly and are never rewritten by this tool.
+Generated FILES / SCRIPT FILES are limited to the explicit staged submission.
+No complete remote directory inventory is inferred from a partial file list.
+
+NEW IMPLEMENTATION
+The submission program is new C source, not an edited copy of either old
+assembler. Its formats follow those inspected contracts. It performs no
+hidden invocation of either assembler or a newly uploaded tool. The public
+C entry and optional check registry are present but not wired into the old
+assembler. The original archive and original sources were not overwritten.
+
+The new destination root was not established from an authoritative path map
+in the available material. ROOT therefore remains a required owner-filled
+field. Example_Tools and Demo-Example are illustrative, not your new home.
+
+Dates in forms are deliberately owner-declared metadata. No attempt is made
+to substitute release date, source date, filesystem mtime and upload time.
+
+SAFETY BOUNDARY
+The program is an offline producer/checker of user-carried requests and
+responses. It does not verify TLS itself and cannot authenticate the origin
+of pasted JSON. Your HTTPS app and the account credential supply that trust.
+The SHA-256 snapshot and approval records bind local contents and decisions;
+they are not signatures against a malicious operator who can edit all files.
+
+Runtime exclusive-create support is mandatory. The probe uses disposable
+files, including .txt.tmp, and checks all byte values. The program has no
+unsafe compatibility fallback. Outputs are intended for one operator in a
+private app project; this is not a hostile shared-directory security API.
+The C library and app may allocate memory internally. Program buffers are
+fixed, with no explicit malloc/calloc/realloc/free calls.
+
+No uploaded payload is compiled or executed. No repository, account,
+credential, permission, branch or file was changed remotely during this work.
+
+TOOLS USED FOR THIS LOCAL DELIVERY
+Read-only archive inspection/extraction: unzip.
+Compilation: GCC 14.2.0 and Clang 17.0.0, explicit named source inputs.
+Local synthetic runs: Run.Suite.c (source included as .c.txt to avoid another
+main() accidentally entering the phone build).
+Draft editing: a local C literal-replacement utility, not project code.
+Release inventory, copy, comparison and ZIP production: Release.Check.c.
+No Python or shell program is part of the supplied program or workflow.
+Compiler invocations and run invocations were separate from archive discovery.
+
+PROTOCOL REFERENCES CHECKED 2026-10-03
+GitHub: createRef, FileAddition, CommittableBranch, Blob, TreeEntry:
+https://docs.github.com/en/graphql/reference/git
+GitHub: createCommitOnBranch, expectedHeadOid, Commit.file:
+https://docs.github.com/en/graphql/reference/commits
+GraphQL HTTP request formation:
+https://docs.github.com/en/graphql/guides/forming-calls-with-graphql
+C Code Develop developer listing (5.2.0 and expanded file APIs):
+https://apps.apple.com/us/app/c-code-develop/id1503486606
+iCurlHTTP source and app design:
+https://github.com/jasonacox/iCurlHTTP
+https://raw.githubusercontent.com/jasonacox/iCurlHTTP/master/DESIGN.md
+
+Actual iOS runtime and live GitHub end-to-end execution remain unverified.
+The source compiles in strict C99 mode but uses the explicitly documented
+exclusive-create stdio runtime extension. No extension support is assumed
+merely because the compiler accepts C99.

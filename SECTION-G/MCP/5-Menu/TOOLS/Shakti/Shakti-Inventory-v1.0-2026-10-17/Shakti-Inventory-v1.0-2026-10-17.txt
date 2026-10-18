@@ -1,0 +1,11 @@
+FAMILY: Shakti
+TOOL: Inventory
+VERSION: 1.0
+DATE: 2026-10-17
+INTRODUCTION: Join a function list and call records by file, function name and order, then emit function-inventory XML.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_inventory.c -o shakti_inventory
+COMMAND: ./shakti_inventory "{function_list}" "{call_records}" "{inventory_output}"
+EXAMPLE: ./shakti_inventory Example.List.md Example.Calls.txt Example.Inventory.xml
+ENTRY_KIND: single
+ENTRY: shakti_inventory.c
+REQUIRED: shakti_inventory.c

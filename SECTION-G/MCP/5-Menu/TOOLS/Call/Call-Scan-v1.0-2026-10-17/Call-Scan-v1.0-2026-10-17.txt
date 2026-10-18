@@ -1,0 +1,11 @@
+FAMILY: Call
+TOOL: Scan
+VERSION: 1.0
+DATE: 2026-10-17
+INTRODUCTION: Scan C call sites from a section manifest in a disposable copy. The supplied publisher requires Linux renameat2; it is not an iOS port.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_call_scan_v1_0.c -o shakti_call_scan
+COMMAND: ./shakti_call_scan "{section_manifest}" "{new_calls_output}"
+EXAMPLE: ./shakti_call_scan tests/sections.manifest Example.Calls.txt
+ENTRY_KIND: single
+ENTRY: shakti_call_scan_v1_0.c
+REQUIRED: shakti_call_scan_v1_0.c

@@ -1,0 +1,221 @@
+TYLER'S PHONE WALKTHROUGH -- Tool-Submit 1.0
+Target: C Code Develop 5.2.0 (502000009), plus your iCurlHTTP app.
+
+START WITH THE OFFLINE CHECK. DO NOT SET UP GITHUB YET.
+This package was built and run in Linux. Your installed phone runtime has
+not been run-verified here. The first check is intended to establish that
+boundary without touching your Shakti files.
+
+1. PUT THE NEW PROGRAM IN ITS OWN PROJECT
+
+Save and expand the ZIP in Files. Keep your existing assembler project.
+Create a separate C Code Develop project named Tool.Submit.
+Add the following TWO C files and ALL SEVEN headers from the new package:
+
+Tool.Submit.c       This is the only file defining main().
+Tool.Support.c      Helper implementations; it has no main().
+Tool.Submit.h       Shared data and function declarations.
+Tool.Hash.h         SHA-256 and base64 source.
+Tool.Json.h         Strict response/snapshot parser source.
+Tool.Forms.h        Two-form reader and README generation source.
+Tool.Plan.h         Frozen file snapshot and inventory source.
+Tool.Git.h          Read-only GitHub requests and response checks.
+Tool.Requests.h     Approval and write-request generation source.
+
+The seven headers contain visible project code, not downloaded libraries.
+Do not put Tool.Assembler.c, Tool_Assembler.README_builder.c, or a separate
+Hello World main() in this new build. If the app supplies a starter main,
+replace that starter in this NEW project with Tool.Submit.c, rather than
+keeping both. Leave every original project unchanged.
+
+Import these using the file-add/import controls you already used for your
+assembler. A prebuilt .ccdproj is not included: its format was not supplied
+or verified, so this is an ordinary source package, not a guessed project.
+
+2. PROJECT SETTINGS
+
+C language standard: C99, when offered. C11 can compile this C99 source for
+the compatibility check. The source does not use C11 syntax.
+Use Legacy Interpreter: OFF.
+Enabled Predefined stdin: OFF.
+Predefined stdin box: empty.
+Invoke main() args: empty.
+Linker command line: empty for this project; no -lrt is needed.
+CodePaws: not needed; keep OFF for this workflow.
+Auto Code Format: OFF is recommended while preserving delivered source.
+The C++ setting does not matter; these are .c files.
+
+3. FIRST RUN -- ONLY THIS STEP AT FIRST
+
+Tap the green Run triangle.
+The first line should say:
+
+SHAKTI TOOL SUBMISSION 1.0 -- OFFLINE PREPARER
+
+When the menu asks for a number, type 1 and press Return.
+Expected successful ending:
+
+PASS: SHA-256, base64, all 256 byte values, exclusive create and rename.
+LOCAL COMPATIBILITY PASS. No credentials or GitHub are needed.
+
+This creates and removes only a disposable probe in the project workspace.
+It checks raw bytes, exclusive creation, a temporary filename, and rename.
+
+If you see BENCH or a compiler/linker error, STOP at that screen.
+Keep the exact output. Do not change your existing tools, lower the safety
+checks, or start connecting GitHub in order to get past the error.
+
+The special fopen mode "wbx" is an exclusive-create runtime extension.
+It is intentionally required, and is not silently replaced with unsafe
+"wb". Support for C99 syntax alone does not prove support for this mode.
+If the phone ignores or rejects it, the probe stops. Only its disposable
+probe can be affected when a broken runtime ignores exclusivity.
+
+4. HARMLESS OFFLINE EXAMPLE -- AFTER THE CHECK PASSES
+
+Run again. Choose 2, then Return.
+The program creates:
+Demo.Source.c.txt
+Demo.Sample.txt
+Demo.Single.txt
+
+Those files are data, not additional code in the compiler build.
+Run again. Choose 3. At Form filename, enter:
+Demo.Single.txt
+
+Expected ending: PREPARED LOCALLY. No upload request exists yet.
+You should now have:
+demo_001.plan.txt
+demo_001.family-1.README.txt
+demo_001.inventory.txt
+demo_001.01-check.txt
+
+Open the README and inventory as text to see the result.
+DO NOT SEND THIS DEMONSTRATION REQUEST TO GITHUB.
+The example repository and destination are illustrative, not your project.
+Running the demonstration again under the same names is refused, not an
+instruction to delete anything. Choose another batch name for new work.
+
+5. YOUR REAL FORM
+
+Copy Form.Single.txt for one family, or Form.Set.txt for a set.
+Give the copy a short name such as Tyler.Submission.txt.
+Replace CHANGE_ME fields. Keep MODE, HASHER and LOGGER as supplied.
+Leave CHECK=none unless a real additional C check has been registered.
+
+OWNER and REPOSITORY are separate names, not a full URL.
+BASE is the existing branch to inspect, ordinarily main.
+BRANCH must be NEW and start with submit/, for example submit/tools-001.
+BATCH is a NEW local prefix, for example tools_001.
+ROOT is the exact NEW repository directory where you intend these families
+to live. It has no leading slash. The tool does not assume your old home.
+
+Destination = ROOT / FAMILY / the destination part of the FILE line.
+Example only:
+ROOT=New_Tools
+FAMILY=Tool-Example
+FILE=Source.Copy.c.txt|Tool.Example.c|UNKNOWN
+would submit Source.Copy.c.txt as New_Tools/Tool-Example/Tool.Example.c.
+The .c.txt name prevents accidental compilation on the phone; the remote
+extension is explicitly .c. No content conversion or renaming is guessed.
+
+Use local project copies of the chosen tool and example files as data.
+Do not add their .c versions to the program's compilation list.
+Never use a source path beginning with / or containing parent traversal.
+
+README_SOURCE=GENERATE generates a new README from the form.
+README_STYLE=SIX matches the six-slot assembler layout in your upload.
+README_STYLE=FOUR explicitly selects your other builder's four sections.
+To retain an existing README instead, set README_SOURCE to its local copy,
+such as Family.README.md.txt. Its bytes are preserved, not regenerated.
+Do not add another FILE row for the family's root README.md.
+
+DATE is the declared release date. Each FILE row has its own declared
+source-modification date, or UNKNOWN. These are not falsified OS timestamps.
+RUN must contain actual supplied evidence, or the honest empty statement.
+An example and an expected result do NOT become a claimed successful run.
+
+Every listed file must be valid UTF-8 text, at most 128 KiB.
+The entire frozen payload is limited to 1 MiB, including string terminators.
+The maximum is 40 files including generated/copied READMEs, and 8 families.
+Use smaller batches on the phone. Binary executables, images and PDFs are
+not admitted by this version; send their source/text documentation instead
+or obtain a separate reviewed binary-file adapter. No silent skipping occurs.
+
+6. PREPARE THE REAL BATCH
+
+Run, choose 3, enter your completed form filename.
+The program reads each original twice, creates a frozen snapshot and
+inventory, then creates the read-only GitHub check request.
+It does not build or run the tools being packaged.
+It does not run either original assembler program behind your back.
+
+7. CHECK WITH ICURLHTTP
+
+Use HTTP.Settings.txt. Every request uses POST to GitHub's GraphQL endpoint;
+a POST containing a query can still be read-only. The request file and the
+program's wording identify which steps change the repository.
+
+Send BATCH.01-check.txt. Return only the JSON body as BATCH.01-response.txt.
+Do not paste headers, timing information or logging around that JSON.
+Then run the C program, choose 4, and enter your batch name.
+
+NEW means the path is absent in the checked base commit.
+UNCHANGED means the returned text has the same SHA-256.
+CONFLICT means different content already exists at that file path.
+UNKNOWN, missing response fields, permissions errors and truncated contents
+stop the operation rather than masquerading as absent files.
+
+For a conflict, it prints the full path and both hashes. Type exactly the
+REPLACE number it shows to allow that replacement on the NEW review branch.
+Any other answer, empty input or end of input cancels the operation.
+To change a destination instead, revise your form, choose a fresh batch and
+review-branch name, and prepare again. Existing staged work is not deleted.
+
+Finally, type PREPARE followed by your batch name when asked.
+That prepares a branch request. It still sends nothing automatically.
+
+8. CREATE THE REVIEW BRANCH
+
+Send BATCH.02-branch.txt in iCurlHTTP.
+Save its response body as BATCH.02-response.txt.
+Run the C program, choose 5, enter the batch name.
+It verifies the returned branch identity and starting commit, then creates
+BATCH.03-upload.txt. The base branch is never a mutation target.
+
+9. SEND THE FILE SET
+
+Send BATCH.03-upload.txt in iCurlHTTP.
+This is the step that commits the approved new/changed files together.
+Unchanged files are not included in the write set.
+The request includes expectedHeadOid. A review branch that changed since
+approval must not accept a commit against that stale expected head.
+
+Save the response body as BATCH.03-response.txt.
+Run, choose 6, enter the batch name.
+The program checks the reported commit, branch and parent, then creates the
+read-only request BATCH.04-readback.txt for that exact commit.
+
+10. VERIFY WHAT ARRIVED
+
+Send BATCH.04-readback.txt in iCurlHTTP.
+Save the JSON body as BATCH.04-response.txt.
+Run, choose 7, enter the batch name.
+A successful run writes BATCH.receipt.txt after matching every listed
+returned text file to its frozen SHA-256 and checking the branch still
+points to the returned commit.
+
+The receipt records the returned GitHub commit time separately from source
+and release dates. It verifies the listed files, not all unlisted repo data.
+No merge, deletion, force-push or automatic pull-request approval occurs.
+K3 supervision remains separate from these local and returned-byte checks.
+
+KEEP THESE BOUNDARIES
+
+The offline program cannot authenticate the origin of pasted responses.
+Use only bodies you obtained from the correct GitHub HTTPS endpoint in
+ICurlHTTP with certificate verification enabled. Keep the saved requests,
+snapshot and approval unedited. Hash records are not digital signatures.
+Use one operator in a private app workspace, not a hostile shared directory.
+The app handoff is manual. Automatic clipboard integration or one-tap import
+has not been claimed or verified.

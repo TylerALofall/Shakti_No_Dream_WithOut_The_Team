@@ -1,0 +1,15 @@
+FAMILY: Tool
+TOOL: Assembler
+VERSION: 7.1.0
+DATE: 2026-10-17
+INTRODUCTION: Package an explicitly supplied tool with a uniform README, content seal and append-only ledger entry; never compile or run the submitted tool.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Tool.Assembler.c Tool.README_builder.c -o shakti-assembler
+COMMAND: ./shakti-assembler "{bank_dir}" "{tool_dir}" Tool.Assembler.v7.1.0-2026-10-17.manifest.txt
+EXAMPLE: ./shakti-assembler ../bank . Tool.Assembler.v7.1.0-2026-10-17.manifest.txt
+ENTRY_KIND: manifest
+ENTRY: Tool.Assembler.v7.1.0-2026-10-17.manifest.txt
+REQUIRED: Tool.Assembler.c
+REQUIRED: Tool.README_builder.c
+REQUIRED: Tool.Assembler.h
+REQUIRED: Tool.Hash.h
+REQUIRED: Tool.Assembler.v7.1.0-2026-10-17.manifest.txt

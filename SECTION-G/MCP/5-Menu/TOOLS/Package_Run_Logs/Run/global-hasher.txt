@@ -1,0 +1,2 @@
+SHA-256 self-test passed.
+SUMMARY dirs=2 files=2 ok=2 fail=0 unreg=0 missing=0

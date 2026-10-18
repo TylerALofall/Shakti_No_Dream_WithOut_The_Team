@@ -1,0 +1,6 @@
+shakti-ticket-dealer v2
+records: 24  checkpoints: 5  pieces: 5 (full: 0)
+tickets: 2  floor: 2  MINIMUM PROVEN
+TICKET-01  20 units: WO-B-shakti_first_sound_c-A.txt (8), WO-B-shakti_aggregator_c-A.txt (2), WO-B-shakti_dark_ear_c-A.txt (5), WO-B-shakti_color_seeds_c-A.txt (5)
+TICKET-02  4 units: WO-B-shakti_womb_c-A.txt (4)
+wrote 2 tickets and 1 log to .

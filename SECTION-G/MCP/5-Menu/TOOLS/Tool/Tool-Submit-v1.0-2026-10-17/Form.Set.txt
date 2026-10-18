@@ -1,0 +1,48 @@
+# TOOL SET. Edit a COPY. Repeat complete FAMILY ... END_FAMILY blocks.
+# One batch, one reviewed commit. Maximum 8 families and 40 total files,
+# counting the README that is included automatically for each family.
+# Do not put credentials in this form. Choose your actual NEW destination.
+MODE=SET
+BATCH=CHANGE_ME
+OWNER=CHANGE_ME
+REPOSITORY=CHANGE_ME
+BASE=main
+BRANCH=submit/CHANGE_ME
+ROOT=CHANGE_ME
+HASHER=sha256
+LOGGER=inventory
+CHECK=none
+
+FAMILY=Tool-First
+VERSION=1.0
+DATE=2026-10-03
+README_STYLE=SIX
+README_SOURCE=GENERATE
+DESCRIPTION=CHANGE_ME
+RELATED=CHANGE_ME
+RUN=(empty - no proven runs recorded)
+CHANGED=CHANGE_ME
+REQUIREMENTS=CHANGE_ME
+EXAMPLE=CHANGE_ME
+EXPECTED=CHANGE_ME
+REFERENCES=CHANGE_ME
+FILE=CHANGE_ME.first.c.txt|Tool.First.c|UNKNOWN
+FILE=CHANGE_ME.first.example.txt|example.txt|UNKNOWN
+END_FAMILY
+
+FAMILY=Tool-Second
+VERSION=1.0
+DATE=2026-10-03
+README_STYLE=SIX
+README_SOURCE=GENERATE
+DESCRIPTION=CHANGE_ME
+RELATED=CHANGE_ME
+RUN=(empty - no proven runs recorded)
+CHANGED=CHANGE_ME
+REQUIREMENTS=CHANGE_ME
+EXAMPLE=CHANGE_ME
+EXPECTED=CHANGE_ME
+REFERENCES=CHANGE_ME
+FILE=CHANGE_ME.second.c.txt|Tool.Second.c|UNKNOWN
+FILE=CHANGE_ME.second.example.txt|example.txt|UNKNOWN
+END_FAMILY

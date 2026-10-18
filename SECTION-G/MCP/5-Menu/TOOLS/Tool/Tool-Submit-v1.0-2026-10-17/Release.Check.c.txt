@@ -1,0 +1,111 @@
+/* Release.Check.c v1.0 -- explicit-file audit and stored-ZIP writer in C.
+ * This QA utility is not compiled into the phone project.
+ * No directory discovery, shell, heap, network, or live project edits.
+ */
+#include "Tool.Submit.h"
+static const char *files[]={
+    "Tool.Submit.c","Tool.Support.c","Tool.Submit.h","Tool.Hash.h",
+    "Tool.Json.h","Tool.Forms.h","Tool.Plan.h","Tool.Git.h","Tool.Requests.h",
+    "README.md","PHONE_START_HERE.txt","Form.Single.txt","Form.Set.txt",
+    "HTTP.Settings.txt","SOURCE_NOTES.txt","RUN_REPORT.txt",
+    "GCC_RUNS.txt","CLANG_RUNS.txt","SANITIZER_RUNS.txt",
+    "Run.Suite.c.txt","Release.Check.c.txt","SHA256_INVENTORY.txt"
+};
+static unsigned char bytes[4u*1024u*1024u];
+static char hashes[32][65];
+static unsigned sizes[32],lines[32],crc[32],offsets[32];
+static unsigned long get(const char *path)
+{
+    FILE *f=fopen(path,"rb"); size_t n; int extra;
+    if (!f) { fprintf(stderr,"Missing %s\n",path); exit(2); }
+    n=fread(bytes,1,sizeof bytes,f); extra=fgetc(f);
+    if (ferror(f)||extra!=EOF||fclose(f)) exit(2);
+    return (unsigned long)n;
+}
+static void put(const char *path,unsigned long n)
+{
+    FILE *f=fopen(path,"wbx");
+    if (!f||fwrite(bytes,1,n,f)!=n||fclose(f)) exit(2);
+}
+static unsigned crc32(unsigned long n)
+{
+    uint32_t c=0xffffffff; unsigned long i; unsigned k;
+    for (i=0;i<n;++i) {
+        c^=bytes[i];
+        for (k=0;k<8;++k) c=(c>>1)^((c&1)?0xedb88320u:0);
+    }
+    return c^0xffffffff;
+}
+static void le(FILE *f,unsigned v,unsigned n)
+{
+    while (n--) { if (fputc((int)(v&255),f)==EOF) exit(2); v>>=8; }
+}
+static void zip_files(const char *root,const char *destination)
+{
+    unsigned i,count=(unsigned)(sizeof files/sizeof files[0]),start,end;
+    char path[1024],name[256]; FILE *f=fopen(destination,"wbx");
+    if (!f) exit(2);
+    for (i=0;i<count;++i) {
+        unsigned len;
+        snprintf(path,sizeof path,"%s/%s",root,files[i]); sizes[i]=(unsigned)get(path); crc[i]=crc32(sizes[i]);
+        snprintf(name,sizeof name,"Tool-Submit/%s",files[i]); len=(unsigned)strlen(name);
+        offsets[i]=(unsigned)ftell(f);
+        le(f,0x04034b50,4); le(f,20,2); le(f,0,2); le(f,0,2); le(f,0,2); le(f,23875,2);
+        le(f,crc[i],4); le(f,sizes[i],4); le(f,sizes[i],4); le(f,len,2); le(f,0,2);
+        if (fwrite(name,1,len,f)!=len||fwrite(bytes,1,sizes[i],f)!=sizes[i]) exit(2);
+    }
+    start=(unsigned)ftell(f);
+    for (i=0;i<count;++i) {
+        unsigned len;
+        snprintf(name,sizeof name,"Tool-Submit/%s",files[i]); len=(unsigned)strlen(name);
+        le(f,0x02014b50,4); le(f,20,2); le(f,20,2); le(f,0,2); le(f,0,2); le(f,0,2); le(f,23875,2);
+        le(f,crc[i],4); le(f,sizes[i],4); le(f,sizes[i],4); le(f,len,2); le(f,0,2); le(f,0,2);
+        le(f,0,2); le(f,0,2); le(f,0,4); le(f,offsets[i],4);
+        if (fwrite(name,1,len,f)!=len) exit(2);
+    }
+    end=(unsigned)ftell(f);
+    le(f,0x06054b50,4); le(f,0,2); le(f,0,2); le(f,count,2); le(f,count,2);
+    le(f,end-start,4); le(f,start,4); le(f,0,2);
+    if (ferror(f)||fclose(f)) exit(2);
+    printf("Created %s with %u explicit entries\n",destination,count);
+}
+static void audit(const char *root)
+{
+    unsigned i,pass,count=(unsigned)(sizeof files/sizeof files[0])-1;
+    char path[1024],h[65]; FILE *report;
+    for (pass=0;pass<2;++pass) for (i=0;i<count;++i) {
+        unsigned long n,k; unsigned l=0;
+        snprintf(path,sizeof path,"%s/%s",root,files[i]); n=get(path); ts_sha256(bytes,n,h);
+        for (k=0;k<n;++k) if (bytes[k]=='\n') ++l;
+        if (!pass) { strcpy(hashes[i],h); sizes[i]=(unsigned)n; lines[i]=l; }
+        else if (strcmp(hashes[i],h)) { fprintf(stderr,"CHANGED %s %s | %s\n",files[i],hashes[i],h); exit(2); }
+        if (i<2 && l>=300) { fprintf(stderr,"C file too long\n"); exit(2); }
+    }
+    snprintf(path,sizeof path,"%s/SHA256_INVENTORY.txt",root);
+    report=fopen(path,"wbx"); if (!report) exit(2);
+    fputs("Produced by Release.Check.c v1.0\nQA SPECIALIST: GPT-6 Astra Pro\nLOCATION: Linux working container\nDECLARED RELEASE DATE: 2026-10-03\nSUPERVISOR: Kimi K3, not performed\n\n",report);
+    for (i=0;i<count;++i) fprintf(report,"1 %s\n  bytes=%u lines=%u\n  SHA-256 %s\n",files[i],sizes[i],lines[i],hashes[i]);
+    fprintf(report,"\nSecond independent read: %u/%u files unchanged. Change list: none.\n",count,count);
+    fputs("The inventory itself and outer ZIP are excluded to avoid a self-referential hash.\n",report);
+    if (fclose(report)) exit(2);
+    printf("Two-pass audit: %u unchanged files; C lines %u and %u.\n",count,lines[0],lines[1]);
+}
+static void compare(const char *a,const char *b)
+{
+    static const char *names[]={"plan.txt","family-1.README.txt","inventory.txt","01-check.txt","approval.txt","02-branch.txt","03-upload.txt","04-readback.txt","receipt.txt"};
+    unsigned i; char pa[1024],pb[1024],ha[65],hb[65]; unsigned long na,nb;
+    for (i=0;i<sizeof names/sizeof names[0];++i) {
+        snprintf(pa,sizeof pa,"%s/happy/demo_001.%s",a,names[i]); na=get(pa); ts_sha256(bytes,na,ha);
+        snprintf(pb,sizeof pb,"%s/happy/demo_001.%s",b,names[i]); nb=get(pb); ts_sha256(bytes,nb,hb);
+        if (na!=nb||strcmp(ha,hb)) { fprintf(stderr,"BYTE DIFFERENCE %s\n",names[i]); exit(2); }
+        printf("IDENTICAL %s SHA-256 %s\n",names[i],ha);
+    }
+}
+int main(int argc,char **argv)
+{
+    if (argc==4 && !strcmp(argv[1],"copy")) { unsigned long n=get(argv[2]); put(argv[3],n); return 0; }
+    if (argc==4 && !strcmp(argv[1],"compare")) { compare(argv[2],argv[3]); return 0; }
+    if (argc==3 && !strcmp(argv[1],"audit")) { audit(argv[2]); return 0; }
+    if (argc==4 && !strcmp(argv[1],"zip")) { zip_files(argv[2],argv[3]); return 0; }
+    return 2;
+}

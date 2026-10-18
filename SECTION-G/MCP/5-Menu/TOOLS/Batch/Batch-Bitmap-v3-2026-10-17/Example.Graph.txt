@@ -1,0 +1,39 @@
+NODE
+section=A
+address=A:A.c:3
+file=A.c
+order=1
+name=alpha
+type=int
+input=int x
+return=int
+input_addresses=B:B.c:3
+complete=yes
+description=CALL BETA THEN ADD ONE
+END
+NODE
+section=A
+address=A:A.c:4
+file=A.c
+order=2
+name=beta
+type=int
+input=int x
+return=int
+input_addresses=A:A.c:3 B:B.c:3
+complete=yes
+description=DOUBLE INPUT
+END
+NODE
+section=B
+address=B:B.c:3
+file=B.c
+order=1
+name=from_b
+type=int
+input=int x
+return=int
+input_addresses=NULL
+complete=yes
+description=SUM ALPHA AND BETA
+END

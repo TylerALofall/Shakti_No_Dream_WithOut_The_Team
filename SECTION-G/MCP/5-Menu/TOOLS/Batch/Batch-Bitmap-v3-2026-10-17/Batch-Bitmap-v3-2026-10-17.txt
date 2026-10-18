@@ -1,0 +1,11 @@
+FAMILY: Batch
+TOOL: Bitmap
+VERSION: 3
+DATE: 2026-10-17
+INTRODUCTION: Render explicit graph records into section BMP files and a cross-section link BMP using native C pixels; scale is 750 through 1500.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_batch_bitmap_v3.c -o shakti_batch_bitmap_v3
+COMMAND: ./shakti_batch_bitmap_v3 "{graph_input}" "{output_prefix}" "{scale_750_to_1500}"
+EXAMPLE: ./shakti_batch_bitmap_v3 Example.Graph.txt Example.Map 1500
+ENTRY_KIND: single
+ENTRY: shakti_batch_bitmap_v3.c
+REQUIRED: shakti_batch_bitmap_v3.c

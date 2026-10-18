@@ -1,0 +1,11 @@
+FAMILY: Scope
+TOOL: Feed
+VERSION: 1_local1
+DATE: 2026-10-17
+INTRODUCTION: Convert filled work orders into scope XML using recorded direct calls; absent remote-call fields remain pending.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Scope.Feed.c -o shakti-feed
+COMMAND: ./shakti-feed "{scope_output}" "{work_order}"
+EXAMPLE: ./shakti-feed Example.Scope.xml Example.Work.xml
+ENTRY_KIND: single
+ENTRY: Scope.Feed.c
+REQUIRED: Scope.Feed.c

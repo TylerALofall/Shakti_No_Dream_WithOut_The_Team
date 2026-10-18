@@ -1,0 +1,11 @@
+FAMILY: Tool
+TOOL: Legacy_Assembler
+VERSION: 4
+DATE: 2026-10-17
+INTRODUCTION: Preserve the supplied v4 flat-bank README fixer as a separate tool; --write replaces disk-truth README fields in the explicitly selected bank.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Tool.Assembler.c -o shakti-assembler-v4
+COMMAND: ./shakti-assembler-v4 "{tools_dir}" --write
+EXAMPLE: ./shakti-assembler-v4 Example.Bank --write
+ENTRY_KIND: single
+ENTRY: Tool.Assembler.c
+REQUIRED: Tool.Assembler.c

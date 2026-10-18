@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Batch/Batch-Bitmap-v3-2026-10-17
+DIRECTORY SHA256: 858895ca0a3603600c940df7544711ed710ea9cd2e3b36bb0b0ff0c3bc2296b0
+LEDGER: appended

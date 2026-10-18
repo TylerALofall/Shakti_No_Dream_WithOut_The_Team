@@ -1,0 +1,11 @@
+FAMILY: Batch
+TOOL: Extract
+VERSION: 2
+DATE: 2026-10-17
+INTRODUCTION: Read work-order records with explicit function and upstream addresses and write exact graph records.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_batch_extract_v2.c -o shakti_batch_extract_v2
+COMMAND: ./shakti_batch_extract_v2 "{xml_or_manifest}" "{graph_output}"
+EXAMPLE: ./shakti_batch_extract_v2 Example.Work.xml Example.Graph.txt
+ENTRY_KIND: single
+ENTRY: shakti_batch_extract_v2.c
+REQUIRED: shakti_batch_extract_v2.c

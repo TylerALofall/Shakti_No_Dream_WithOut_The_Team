@@ -1,0 +1,1 @@
+SCANNED: 3 files, 5 definitions, 4 prototypes, 6 call sites (2 same-file, 2 cross-file, 2 external)

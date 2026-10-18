@@ -1,0 +1,11 @@
+FAMILY: Section
+TOOL: Hash_watch
+VERSION: 1_local1
+DATE: 2026-10-17
+INTRODUCTION: Report NEW, EDITED and REMOVED files under SECTION-A through SECTION-O. Changes are advisory and return success; this original tool uses UTC log dates.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 section_hash_watch.c -o section_hash_watch
+COMMAND: ./section_hash_watch "{root_dir}" --all-files
+EXAMPLE: ./section_hash_watch Example.Tree --all-files
+ENTRY_KIND: single
+ENTRY: section_hash_watch.c
+REQUIRED: section_hash_watch.c

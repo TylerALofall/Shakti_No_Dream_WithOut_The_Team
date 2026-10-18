@@ -1,0 +1,13 @@
+RECORD_STAMP = <SECTION
+CHECKPOINT = file_name
+UNIT_MARKER = function_order
+UNIT_START = 1
+TOTAL_MARK = total_items
+MAX_UNITS = 20
+INPUT = Example.Work.xml
+INSTRUCTIONS = Example.Instructions.txt
+TEMPLATE = Example.Template.txt
+PREFIX = WO
+SOURCE_PREFIX = SECTION-
+OUT_DIR = .
+DATE = 2026-10-17

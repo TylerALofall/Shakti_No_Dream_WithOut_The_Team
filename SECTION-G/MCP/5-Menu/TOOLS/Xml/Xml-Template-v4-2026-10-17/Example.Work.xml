@@ -1,0 +1,43 @@
+<Work_Order>
+<total_items>3</total_items>
+<SECTION id="A">
+<file_name>A.c</file_name>
+<function_name>alpha</function_name>
+<function_address>A:A.c:3</function_address>
+<function_order>1</function_order>
+<function_type>int</function_type>
+<function_input>int x</function_input>
+<function_return>int</function_return>
+<function_input_address>B:B.c:3</function_input_address>
+<function_remote_call>A.c: beta()</function_remote_call>
+<function_complete>yes</function_complete>
+<function_description>CALL BETA THEN ADD ONE</function_description>
+</SECTION>
+<SECTION id="A">
+<file_name>A.c</file_name>
+<function_name>beta</function_name>
+<function_address>A:A.c:4</function_address>
+<function_order>2</function_order>
+<function_type>int</function_type>
+<function_input>int x</function_input>
+<function_return>int</function_return>
+<function_input_address>A:A.c:3 B:B.c:3</function_input_address>
+<function_remote_call>NONE</function_remote_call>
+<function_complete>yes</function_complete>
+<function_description>DOUBLE INPUT</function_description>
+</SECTION>
+<SECTION id="B">
+<file_name>B.c</file_name>
+<function_name>from_b</function_name>
+<function_address>B:B.c:3</function_address>
+<function_order>1</function_order>
+<function_type>int</function_type>
+<function_input>int x</function_input>
+<function_return>int</function_return>
+<function_input_address>NULL</function_input_address>
+<function_remote_call>A.c: alpha()
+A.c: beta()</function_remote_call>
+<function_complete>yes</function_complete>
+<function_description>SUM ALPHA AND BETA</function_description>
+</SECTION>
+</Work_Order>

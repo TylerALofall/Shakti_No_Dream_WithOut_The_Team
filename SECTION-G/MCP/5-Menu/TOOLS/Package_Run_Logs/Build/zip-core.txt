@@ -1,0 +1,4 @@
+/workspace/scratch/68e6233eccf5/assembler-runs/menu-all/source/SECTION-G/MCP/5-Menu/TOOLS/jz/junzip_nomalloc.c:6:10: fatal error: junzip_nomalloc.h: No such file or directory
+    6 | #include "junzip_nomalloc.h"
+      |          ^~~~~~~~~~~~~~~~~~~
+compilation terminated.

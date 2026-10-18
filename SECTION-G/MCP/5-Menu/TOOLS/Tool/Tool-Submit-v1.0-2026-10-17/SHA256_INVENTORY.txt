@@ -1,0 +1,72 @@
+Produced by Release.Check.c v1.0
+QA SPECIALIST: GPT-6 Astra Pro
+LOCATION: Linux working container
+DECLARED RELEASE DATE: 2026-10-03
+SUPERVISOR: Kimi K3, not performed
+
+1 Tool.Submit.c
+  bytes=7985 lines=146
+  SHA-256 c3406f5c23bf05d0c924d0b584a60eef8019d5de77d7df5feaa74756b34f7152
+1 Tool.Support.c
+  bytes=7777 lines=183
+  SHA-256 317870dfb6a553c5d94bba5cbb3c9c7ba084f2a9d4d0cb30c51fe829a2a1f1ef
+1 Tool.Submit.h
+  bytes=3802 lines=100
+  SHA-256 b89083d7c9c7dea04cd51c8cf613a94a62043a4d545be16a26482fe75ca2aaea
+1 Tool.Hash.h
+  bytes=4110 lines=93
+  SHA-256 b4f403fa20904420e76694fedc9abc432870c155f71c868242b8b81d1628e79f
+1 Tool.Json.h
+  bytes=8048 lines=194
+  SHA-256 e98ea0cecad86c27f8abc6112b237cd8199e29703b2db67ba8c533489122fe51
+1 Tool.Forms.h
+  bytes=8779 lines=160
+  SHA-256 3c184e9f2af6861ce43485b03fafb35f2b657ec31b31f3828798e146cbd7f1a5
+1 Tool.Plan.h
+  bytes=8635 lines=166
+  SHA-256 f530287cf8fb578b42ba4e6b5dbaf5fa4dc91a9595f25fd034b1f6d2447e1ac0
+1 Tool.Git.h
+  bytes=5960 lines=120
+  SHA-256 57486f2a1b3768ae5e5e1a602decfb7c88720d57c14aba16aff549e611c6c753
+1 Tool.Requests.h
+  bytes=4711 lines=88
+  SHA-256 99305565873bb1b29314c07ea32e313dae1fe6d588ebd7494098ee743462f0ab
+1 README.md
+  bytes=6176 lines=135
+  SHA-256 d12f95a341bb31f2289dead7a796e37ee06229cf0c49228e7caca57ee0a2d45f
+1 PHONE_START_HERE.txt
+  bytes=10131 lines=221
+  SHA-256 a43f932974f85c66d4d641b3fd21c1ff5f8a23738ff0311047bf05d44802f15a
+1 Form.Single.txt
+  bytes=1432 lines=40
+  SHA-256 48c7fde1d91dee525f2331abb5d304aa32565dd6bb67c6e687a4b535fffb64e0
+1 Form.Set.txt
+  bytes=1198 lines=48
+  SHA-256 c50c58d40dcbdefff31dd2ce653bcf2f152f991e81def100446f038e07e85a55
+1 HTTP.Settings.txt
+  bytes=2963 lines=67
+  SHA-256 85ea47b36a88d74eb9c97b5b35d876d39c7c95b920139e5f8d4a0b543bf6be85
+1 SOURCE_NOTES.txt
+  bytes=4753 lines=88
+  SHA-256 1103481dddc0cc456b4a6d239cb506c3bbc3ee0c8e8f735424942a62650d030a
+1 RUN_REPORT.txt
+  bytes=7755 lines=141
+  SHA-256 bd356d3ff5a37a66aec0b7bebf7f6157164bd8155481880787e8e4d5c3557811
+1 GCC_RUNS.txt
+  bytes=2980 lines=81
+  SHA-256 860f0f82e08115084b2cef170c45e072c0ca54963a034d544647cced85f3059e
+1 CLANG_RUNS.txt
+  bytes=2980 lines=81
+  SHA-256 860f0f82e08115084b2cef170c45e072c0ca54963a034d544647cced85f3059e
+1 SANITIZER_RUNS.txt
+  bytes=2980 lines=81
+  SHA-256 860f0f82e08115084b2cef170c45e072c0ca54963a034d544647cced85f3059e
+1 Run.Suite.c.txt
+  bytes=12983 lines=240
+  SHA-256 ad056bab521f07d06eeba1d057ffbb2f4550d7fcc13c3db2af352f19ee343dc5
+1 Release.Check.c.txt
+  bytes=5671 lines=111
+  SHA-256 362aad3bacff430251964332b2423583ec68c6462e767fe3b3f3d53d8807321c
+
+Second independent read: 21/21 files unchanged. Change list: none.
+The inventory itself and outer ZIP are excluded to avoid a self-referential hash.

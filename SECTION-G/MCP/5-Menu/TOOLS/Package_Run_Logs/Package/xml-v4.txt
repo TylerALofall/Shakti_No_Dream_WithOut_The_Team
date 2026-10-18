@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Xml/Xml-Template-v4-2026-10-17
+DIRECTORY SHA256: 145e2b24f27fc3fc60ba4ec311fbf6d2868492ab3483f59fb15c4be7ca5e0aa0
+LEDGER: appended

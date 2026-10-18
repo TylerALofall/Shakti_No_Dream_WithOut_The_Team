@@ -1,0 +1,22 @@
+<Work_Order lvl="0">
+<QA_specialist lvl="1">[work_order.QA_specialist]</QA_specialist>
+<date lvl="1">[work_order.date]</date>
+<repair lvl="1">[work_order.repair]</repair>
+<total_items lvl="1">[work_order.total_items]</total_items>
+<task_description lvl="1">[work_order.task_description]</task_description>
+<SECTION lvl="1" id="SECTION">
+<file_name lvl="2">[section.file_name]</file_name>
+<function_name lvl="2">[section.function_name]</function_name>
+<function_order lvl="2">[section.function_order]</function_order>
+<function_type lvl="2">[section.function_type]</function_type>
+<function_input lvl="2">[section.function_input]</function_input>
+<function_return lvl="2">[section.function_return]</function_return>
+<function_description lvl="2">[section.function_description]</function_description>
+<function_complete lvl="2">[section.function_complete]</function_complete>
+</SECTION>
+<QA_Specialist_attestation lvl="1">[work_order.QA_Specialist_attestation]</QA_Specialist_attestation>
+<Supervisor_attestation lvl="1">[work_order.Supervisor_attestation]</Supervisor_attestation>
+</Work_Order>
+<!-- two-match CONFIRMED: <SECTION> level=1 repeats=24; repeat written once; no variants -->
+
+<!-- documents walked: 1; distinct forms: 1 -->

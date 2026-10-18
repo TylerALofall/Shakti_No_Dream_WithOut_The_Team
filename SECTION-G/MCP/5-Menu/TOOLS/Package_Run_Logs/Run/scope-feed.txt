@@ -1,0 +1,1 @@
+FEED: functions=24 edges=0 resolved=0 external=0 -> Example.Scope.xml

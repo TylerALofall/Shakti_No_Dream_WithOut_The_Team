@@ -1,0 +1,14 @@
+FAMILY: Xml
+TOOL: Template
+VERSION: 4
+DATE: 2026-10-17
+INTRODUCTION: Build XML templates with the supplied v4 wrap collector and template maker; preserve their paired header and C modules.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti-xml-wrap-v4.c shakti-xml-template-v4.c -o shakti-xml-template-v4
+COMMAND: ./shakti-xml-template-v4 "{input_file}" "{report_output}" "{names_output}" "{template_output}" "{master_file}"
+EXAMPLE: ./shakti-xml-template-v4 Example.Work.xml Example.Report.txt Example.Names.txt Example.Template.xml Example.Master.txt
+ENTRY_KIND: manifest
+ENTRY: Xml.Template.v4-2026-10-17.manifest.txt
+REQUIRED: shakti-xml-wrap-v4.c
+REQUIRED: shakti-xml-template-v4.c
+REQUIRED: shakti-xml-wrap-v4.h
+REQUIRED: Xml.Template.v4-2026-10-17.manifest.txt
