@@ -1,0 +1,15 @@
+FAMILY: Cycle
+TOOL: Run
+VERSION: 2.0.0
+DATE: 2026-10-18
+INTRODUCTION: Run native synthetic full-size convergence, static five-reflection memory, fixed movie arena, transcript retention and restart recovery with the actual Section-A modules.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-A/*.c SECTION-G/MCP/5-Menu/TOOLS/Cycle/Cycle-Run-v2.0.0-2026-10-18/Cycle.Run.c -o shakti-cycle-run
+COMMAND: ./shakti-cycle-run --run "{new_fixture_directory}"
+EXAMPLE: ./shakti-cycle-run --run /tmp/shakti-cycle-v2-001
+ENTRY_KIND: manifest
+ENTRY: Cycle.Run.v2.0.0-2026-10-18.manifest.txt
+REQUIRED: Cycle.Run.c
+REQUIRED: Memory.Run.c
+REQUIRED: Retention.Run.c
+REQUIRED: Sensory.Run.c
+REQUIRED: Cycle.Run.v2.0.0-2026-10-18.manifest.txt

@@ -42,24 +42,6 @@ int shakti_binary_encode(const unsigned char *input, size_t bytes, unsigned char
     return 1;
 }
 
-int shakti_binary_rebuild(const unsigned char *binary, size_t bytes, unsigned char *out, size_t capacity)
-{
-    size_t group, plane, stride, required = shakti_binary_capacity(bytes);
-    if (binary == NULL || out == NULL || bytes == 0U || required == 0U || capacity < bytes ||
-        overlap(binary, required, out, bytes)) return 0;
-    stride = required / 8U;
-    for (group = 0U; group < stride; ++group) {
-        uint64_t packed = 0U;
-        size_t i;
-        for (plane = 0U; plane < 8U; ++plane)
-            packed |= (uint64_t)binary[plane * stride + group] << (plane * 8U);
-        packed = transpose_bits(packed);
-        for (i = 0U; i < 8U && group * 8U + i < bytes; ++i)
-            out[group * 8U + i] = (unsigned char)(packed >> (i * 8U));
-    }
-    return 1;
-}
-
 uint64_t shakti_media_hash(const unsigned char *bytes, size_t size)
 {
     uint64_t hash = UINT64_C(14695981039346656037);
@@ -216,12 +198,19 @@ int shakti_media_take(shakti_media_state_t *state)
     for (lane = 0U; lane < 3U; ++lane) if (state->pending[chosen].required_mask & (1U << lane)) {
         shakti_media_frame_t *frame = &state->pending[chosen].parts[lane];
         memcpy(frame->reference, frame->input, frame->bytes);
-        memcpy(frame->rebuilt, frame->input, frame->bytes);
-        if (!shakti_binary_encode(frame->rebuilt, frame->bytes, frame->binary, frame->binary_capacity)) {
+        if (!shakti_binary_encode(frame->input, frame->bytes, frame->binary, frame->binary_capacity)) {
             state->pending[chosen].held = 1U;
             (void)reject(state, "binary breakdown failed; item held");
             return -1;
         }
+    }
+    /* No original pixels or samples seed the output. Every output byte starts
+     * different from its reference; a skipped or partial decoder cannot pass. */
+    for (lane = 0U; lane < 3U; ++lane) if (state->pending[chosen].required_mask & (1U << lane)) {
+        shakti_media_frame_t *frame = &state->pending[chosen].parts[lane];
+        size_t byte;
+        for (byte = 0U; byte < frame->bytes; ++byte)
+            frame->rebuilt[byte] = (unsigned char)~frame->reference[byte];
     }
     state->pending[chosen].taken = 1U;
     state->active = (unsigned int)chosen;
@@ -262,6 +251,24 @@ int shakti_media_step(shakti_media_state_t *state, unsigned int heartbeat_slot)
     }
     if (group->checked_mask == group->required_mask) {
         state->current = *group;
+        memset(&state->sensory, 0, sizeof(state->sensory));
+        state->sensory.checked_mask = group->checked_mask;
+        for (lane = 0U; lane < 3U; ++lane) if (group->checked_mask & (1U << lane)) {
+            const shakti_media_frame_t *from = &group->parts[lane];
+            shakti_sensory_frame_t *to = &state->sensory.parts[lane];
+            memcpy(to->source_id, from->source_id, strlen(from->source_id) + 1U);
+            memcpy(to->context, from->context, strlen(from->context) + 1U);
+            to->position64 = from->position64;
+            to->lane = from->lane;
+            to->width = from->width;
+            to->height = from->height;
+            to->channels = from->channels;
+            to->sample_bytes = from->sample_bytes;
+            to->sample_rate = from->sample_rate;
+            to->data = from->rebuilt;
+            to->bytes = from->bytes;
+            to->validated_hash = from->validated_hash;
+        }
         state->current_ready = 1U;
         group->in_use = 0U;
         state->active = SHAKTI_MEDIA_GROUPS;
@@ -278,7 +285,10 @@ const shakti_media_group_t *shakti_media_current(const shakti_media_state_t *sta
 
 void shakti_media_release(shakti_media_state_t *state)
 {
-    if (state != NULL) state->current_ready = 0U;
+    if (state != NULL) {
+        state->current_ready = 0U;
+        memset(&state->sensory, 0, sizeof(state->sensory));
+    }
 }
 
 int shakti_media_cancel(shakti_media_state_t *state, const char *source_id, uint64_t window)
@@ -297,4 +307,11 @@ int shakti_media_cancel(shakti_media_state_t *state, const char *source_id, uint
         }
     }
     return 0;
+}
+
+/* Every consumer receives pointers to these same rebuilt shared buffers.
+ * The view exposes no input, reference, or binary-work pointer. */
+const shakti_sensory_group_t *shakti_media_perception(const shakti_media_state_t *state)
+{
+    return state != NULL && state->current_ready ? &state->sensory : NULL;
 }

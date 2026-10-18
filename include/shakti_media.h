@@ -12,7 +12,8 @@
 
 /* The native controller deposits decoded pixels/PCM in caller-owned storage.
  * Queueing borrows these buffers until release/cancel. Take immediately makes
- * an independent reference and processing copy, then encodes every byte.
+ * an independent reference and a complete binary processing copy.
+ * Output is built solely by the binary decoder, never by copying the input.
  * No resizing, quantization, codec, allocation, or outward communication. */
 typedef struct {
     char source_id[SHAKTI_MEDIA_ID_BYTES];
@@ -38,8 +39,23 @@ typedef struct {
 } shakti_media_group_t;
 
 typedef struct {
+    char source_id[SHAKTI_MEDIA_ID_BYTES];
+    char context[SHAKTI_MEDIA_CONTEXT_BYTES];
+    uint64_t position64;
+    unsigned int lane, width, height, channels, sample_bytes, sample_rate;
+    const unsigned char *data; /* Actual rebuilt bytes in the shared arena. */
+    size_t bytes;
+    uint64_t validated_hash;
+} shakti_sensory_frame_t;
+typedef struct {
+    shakti_sensory_frame_t parts[3];
+    unsigned int checked_mask;
+} shakti_sensory_group_t;
+
+typedef struct {
     shakti_media_group_t pending[SHAKTI_MEDIA_GROUPS];
     shakti_media_group_t current;
+    shakti_sensory_group_t sensory;
     uint64_t next_order, submitted, validated_parts, published, rejected;
     unsigned int active;
     unsigned char current_ready;
@@ -54,6 +70,9 @@ int shakti_media_queue(shakti_media_state_t *state, const shakti_media_frame_t *
 int shakti_media_take(shakti_media_state_t *state);
 /* -1 held bad item, 1 continuing/waiting, 2 complete synchronized publication. */
 int shakti_media_step(shakti_media_state_t *state, unsigned int heartbeat_slot);
+/* Intake diagnostics only. Perception consumers use perception(), which
+ * exposes only the reconstructed data shared with convergence. */
+const shakti_sensory_group_t *shakti_media_perception(const shakti_media_state_t *state);
 const shakti_media_group_t *shakti_media_current(const shakti_media_state_t *state);
 void shakti_media_release(shakti_media_state_t *state);
 int shakti_media_cancel(shakti_media_state_t *state, const char *source_id, uint64_t window);

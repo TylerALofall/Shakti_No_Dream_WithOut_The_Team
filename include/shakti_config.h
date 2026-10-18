@@ -8,7 +8,10 @@
 #define SHAKTI_SCHOOL_PATH "data/school/school_state.log"
 #define SHAKTI_EDEN_MANIFEST_PATH "data/eden/manifest.xml"
 #define SHAKTI_EDEN_LEDGER_PATH "data/eden/manifest_ledger.txt"
-#define SHAKTI_CONTAINER_PATH "data/learned/memory_containers.bin"
+#define SHAKTI_LEGACY_CONTAINER_PATH "data/learned/memory_containers.bin"
+#define SHAKTI_CONTAINER_PATH "data/learned/memory_capsules_v2.bin"
+#define SHAKTI_MEMORY_CHECKPOINT_PATH "data/learned/memory_pending_v2.bin"
+#define SHAKTI_REFLECTION_CAPSULE_PATH "data/learned/reflection_capsules_v2.bin"
 #define SHAKTI_GOAL_PATH "data/control/goal.txt"
 #define SHAKTI_NOTEBOOK_PATH "data/control/notebook.log"
 #define SHAKTI_MENU_PATH "data/control/menu.txt"
@@ -58,7 +61,11 @@
 #define SHAKTI_HEARTBEAT_MAX_RATE 64U
 #define SHAKTI_HEARING_SLOTS 64U
 #define SHAKTI_VISION_SLOTS 32U
-#define SHAKTI_MEMORY_BYTES 16384U
+#define SHAKTI_MEMORY_BYTES 65536U
+#define SHAKTI_MEMORY_CONTENT_BYTES 16384U
+#define SHAKTI_MEMORY_MIN_REFLECTIONS 5U
+#define SHAKTI_WORKING_BEATS 60U
+#define SHAKTI_RECENT_DECAY_BEATS 600UL
 #define SHAKTI_MEMORY_TAG_BYTES 256U
 #define SHAKTI_MEMORY_ID_BYTES 64U
 #define SHAKTI_REFLECTION_QUESTIONS 13U

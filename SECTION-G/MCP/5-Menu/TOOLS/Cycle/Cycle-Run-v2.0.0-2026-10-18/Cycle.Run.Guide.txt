@@ -1,0 +1,77 @@
+CYCLE RUN v2 — NATIVE C99 / SYNTHETIC FIXTURES ONLY
+
+The primary BUILD line is manual, from the repository root. The assembler
+packages source and README records; it never builds or runs these tools.
+The sources link the real SECTION-A modules and include/ interfaces.
+Every runtime buffer/pool has a fixed size. No external process, network,
+camera, device account, Python, Node, Perl or supplied model is used.
+
+Primary entry:
+./shakti-cycle-run --run NEW_DIRECTORY
+
+NEW_DIRECTORY must not exist. The RUN creates its own tiny synthetic Eden,
+empty control records and one-level manifest. It cannot process an existing
+directory. It is not a real curriculum or user recording.
+
+It exercises 1920x1080 RGB and paired 48kHz PCM through the receipted native
+MCP queue and real binary rebuild, shared perception pointers, Eden, the
+512MiB static arena, audio pinning/backpressure, native transcript input,
+restart recovery, five distinct timed thirteen-answer reviews without
+inventing tool calls, covered-source release, all shared clock rates, actual
+tool-count gates, and mixed timed/tool reflection chronology on restart.
+
+The reduced 64KiB ACTIVE history budget forces storage pressure in a short
+RUN. The native arena reservation remains 512MiB. Supplied fixture speech
+text exercises the native ASR-output contract; this program does NOT recognize
+speech. Its compiled reflection callback supplies explicit synthetic answers;
+it is NOT production reasoning, semantic learning or proof of cognition.
+
+Companion sources have separate manual BUILD/RUN commands. Set the shell
+variable below only to shorten these manual paths; no delivered tool launches
+a compiler or subprocess:
+
+task_cycle_dir=SECTION-G/MCP/5-Menu/TOOLS/Cycle/Cycle-Run-v2.0.0-2026-10-18
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-A/*.c "$task_cycle_dir/Memory.Run.c" -o shakti-memory-run
+./shakti-memory-run --run NEW_DIRECTORY
+
+Memory.Run proves whole working demotion at twenty heartbeat seconds despite
+activation, no premature library admission after four reviews, incomplete
+answers refused, duplicate reflection ids not counted twice, fifth-review
+promotion, organization/review restart, recent decay, whole recall and a
+deliberately damaged NEW fixture checkpoint being held without fragments.
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/shakti_media.c SECTION-A/shakti_rebuild.c SECTION-A/shakti_retention.c "$task_cycle_dir/Retention.Run.c" -o shakti-retention-run
+./shakti-retention-run --run NEW_DIRECTORY
+
+Retention.Run uses native-size 32x24 synthetic frames to exercise byte-budget
+thinning, retained first/latest pixels, journal restart and deliberate partial
+fixture records. Sparse timestamp probes check the 20/40-minute policy
+boundaries; they do NOT claim that forty minutes of a movie were processed.
+Full-HD reconstruction is separately exercised by the primary and sensory RUNs.
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/shakti_media.c SECTION-A/shakti_rebuild.c "$task_cycle_dir/Sensory.Run.c" -o shakti-sensory-real
+./shakti-sensory-real
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_RUN_NOOP -Iinclude SECTION-A/shakti_media.c "$task_cycle_dir/Sensory.Run.c" -o shakti-sensory-noop
+./shakti-sensory-noop
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_RUN_PARTIAL -Iinclude SECTION-A/shakti_media.c "$task_cycle_dir/Sensory.Run.c" -o shakti-sensory-partial
+./shakti-sensory-partial
+
+The sensory source has an independent known binary-plane layout and 32 full-HD
+solid-blue frames with 64 synchronized PCM clips. Every output byte starts
+different from the expected byte. Source mutation after take cannot change
+perception. Eyes and mind get the identical rebuilt data pointers, without a
+text color hint. No-op and half-writing decoders are separate RUN linkages;
+the production media module has NO decoder-bypass/fault switch.
+
+Expected BENCH lines are deliberate refusal/corruption cases, followed by a
+specific PASS. Missing PASS, BENCH RUN or nonzero exit means failure. Read and
+review source before compiling, and RUN only in a separately reviewed action.
+
+For deterministic repeatability, run the primary entry in two NEW directories
+and compare their native epoch logs, capsule files, checkpoint and journal.
+No real voice, full prenatal replay, learned categories, speaker/display, iOS
+frame rate, power-loss recovery or ML mastery is claimed by these RUNs.
+The sealed v1.0 package remains unchanged as a historical artifact.
