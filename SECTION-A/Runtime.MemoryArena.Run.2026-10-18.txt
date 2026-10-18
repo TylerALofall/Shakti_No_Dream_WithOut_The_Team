@@ -85,3 +85,22 @@ separate pending step; it was not run, skipped with counters, or prewritten
 into Eden here. Per-window persistence and frame rate were not qualified on
 iOS. Native process restart was exercised, not a power-cut/device-filesystem
 guarantee. Legacy SMC1 files remain intact and uncurated for five-review import.
+
+FOLLOW-UP: ACCURATE RECALL PROVENANCE
+Review found that whole-container recall appended the recalled item to the
+working set while its receipt still read working[0]. With another item already
+working, the receipt could name that other item and its epoch/hash. The receipt
+now reads the actual validated recall candidate, preserving its original id,
+epoch, size and stored checksum independently of working-set order.
+
+The native console reproduced this in two isolated synthetic fixtures. Both
+started with the reviewed movie-capsule library record and empty pending/control
+history, then admitted focus-a and requested BLUE. Before the fix the recall
+receipt incorrectly named focus-a. After the fix it named movie-capsule with
+origin 2140000000:133, 6,286 bytes and checksum 390ea3e3cc90eadb. Both bounded
+16-cycle runs processed two actual tool calls and continued through stdin EOF.
+The updated host and primary Cycle RUN compiled under the same strict flags;
+the complete integration RUN also passed after the correction. Packaged RUN
+sources and their content seal remain unchanged.
+Two new complete integration fixtures after the correction also matched
+byte-for-byte across all fifteen files and stdout/stderr.

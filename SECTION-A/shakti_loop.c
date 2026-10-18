@@ -487,7 +487,7 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
         !shakti_memory_step(&runtime->memory, runtime->memory.current_slot + 1U))
         runtime->loop.tools_interrupted = 1U;
     else if (runtime->memory.recalled_count > recalled && runtime->memory.working_count) {
-        const shakti_memory_item_t *item = &runtime->memory.working[0];
+        const shakti_memory_item_t *item = &runtime->memory.recall_candidate;
         n = snprintf(event, sizeof(event), "id=%s origin=%ld:%u bytes=%lu hash=%016" PRIx64,
             item->id, (long)item->tick.epoch_seconds, item->tick.frame,
             (unsigned long)item->size, item->checksum);
