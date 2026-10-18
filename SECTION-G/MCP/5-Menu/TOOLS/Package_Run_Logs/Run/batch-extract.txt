@@ -1,0 +1,2 @@
+DIRECT *: 3 functions from Example.Work.xml
+RECORDED: 3 exact function records, 3 exact address links across 1 file(s)

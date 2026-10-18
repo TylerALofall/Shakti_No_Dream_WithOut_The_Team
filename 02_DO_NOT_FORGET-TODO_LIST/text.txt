@@ -1,0 +1,954 @@
+iCurlHTTP v1.19
+
+URL: https://rdm.mcmaster.ca/readme-data-file-overview
+Date: Friday 2 Oct 2026, 9:30 PM
+
+HTTP/2 200 
+cache-control: max-age=300, public
+content-language: en
+content-type: text/html; charset=utf-8
+date: Sat, 03 Oct 2026 04:26:07 GMT
+etag: "1791001567-gzip"
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+last-modified: Sat, 03 Oct 2026 04:26:07 GMT
+server: Apache
+strict-transport-security: max-age=31536000
+vary: Cookie,Accept-Encoding
+x-content-type-options: nosniff
+x-drupal-cache: HIT
+x-frame-options: SAMEORIGIN
+x-generator: Drupal 11 (https://www.drupal.org)
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" prefix="og: https://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="Data &amp; File Overview 3.1 File list List all files (or folders, as appropriate for dataset organization) contained in the dataset, with a brief description of each file. If your dataset uses a folder structure, explain it here." />
+<link rel="canonical" href="http://rdm.mcmaster.ca/readme-data-file-overview" />
+<meta name="Generator" content="Drupal 11 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/themes/rdm_mcmaster/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <title>README Generator | Research Data Management</title>
+    <!-- Brighter World CSS -->
+    <!-- <link rel="stylesheet" href="https://documents.mcmaster.ca/www/cdn/css/1.0/mcm-bw.css"> -->
+ <!-- Brighter World Fonts -->
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i|Roboto:300,300i,400,400i,700,700i');
+  </style>
+    <link rel="stylesheet" media="all" href="/themes/contrib/stable/css/system/components/align.module.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="/themes/contrib/stable/css/system/components/container-inline.module.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="/themes/contrib/stable/css/system/components/clearfix.module.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="/themes/contrib/stable/css/system/components/hidden.module.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="/themes/contrib/stable/css/system/components/js.module.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="/themes/contrib/stable/css/views/views.module.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" />
+<link rel="stylesheet" media="all" href="https://use.fontawesome.com/releases/v5.13.1/css/v4-shims.css" />
+<link rel="stylesheet" media="all" href="/themes/rdm_mcmaster/bootstrap-5.3.8-dist/css/bootstrap.min.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="/themes/rdm_mcmaster/assets/css/flickity.css?tmbdlp" />
+<link rel="stylesheet" media="all" href="https://documents.mcmaster.ca/www/cdn/css/1.0/mcm-bw.css" />
+<link rel="stylesheet" media="all" href="/themes/rdm_mcmaster/assets/css/local.css?tmbdlp" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+        <header>
+      <div id="skiptocontent"><a href="#mcm-global-navbar" tabindex="0">Skip to McMaster Navigation</a><a href="#siteMenu" tabindex="0">Skip to Site Navigation</a><a href="#main-content" tabindex="0">Skip to main content</a>
+      </div>
+	</header>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+      <nav id="site-nav2" class="navbar navbar-expand-lg navbar-light flex-wrap px-0 py-0 border-bottom navbar-lg">
+    <div class="d-flex flex-column flex-md-row flex-grow-1 border-bottom">			
+      <a href="/" class="ps-3 py-3 pe-3 pe-md-0 d-flex flex-column flex-md-row flex-grow-0 ps-3 py-3 pe-3 pe-md-0" id="site-logo">
+	    <img src="/themes/rdm_mcmaster/assets/globalheaderfooter/mcm.svg" alt="" class="me-sm-0 border-end border-dark pe-3 align-self-start logo mt-0">
+		<span class="sr-only">McMaster logo</span>
+        <h1 id="site-name" class="mb-0 ms-0 ms-md-3 me-0 me-md-4 align-self-center tall">Research Data Management</h1>
+	  </a>
+    </div>
+	  <button class="navbar-toggler site-toggler collapsed col-12 col-sm-auto mt-2 mt-sm-0 border-0 bg-secondary-subtle d-flex d-xl-none justify-content-between py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#siteMenu" aria-controls="siteMenu" aria-expanded="false" aria-label="Toggle navigation" style="min-height:40px;">Home</button>
+
+
+      <div class="collapse navbar-collapse px-3" id="siteMenu">
+	    <div>
+          
+
+                       <ul class="navbar-nav nav--padding-md nav mr-auto">                           	        	  	  
+	  
+      <li class='nav-item dropdown home-icon '>        		
+		
+		   <a href="/" class="nav-link" data-drupal-link-system-path="&lt;front&gt;">Home</a>
+		
+		
+    
+              </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/secure" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/66">Secure</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/secure" class="dropdown-item" data-drupal-link-system-path="node/66">Data Security</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/secure#tab-sensitive-data-risk-assessment" class="dropdown-item" data-drupal-link-system-path="node/66">Sensitive Data Risk Assessment</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/secure#tab-cyber-security" class="dropdown-item" data-drupal-link-system-path="node/66">Cyber Security</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/secure#tab-human-participant-data" class="dropdown-item">Human Participant Data</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/secure#tab-data-anonymization" class="dropdown-item" data-drupal-link-system-path="node/66">Data Anonymization</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/secure#tab-encryption" class="dropdown-item" data-drupal-link-system-path="node/66">Encryption</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/plan" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/68">Plan</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/plan" class="dropdown-item" data-drupal-link-system-path="node/68">Data Management Plans</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/plan#tab-building-your-dmp" class="dropdown-item" data-drupal-link-system-path="node/68">Building your DMP</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/plan#tab-funder-requirements" class="dropdown-item" data-drupal-link-system-path="node/68">RDM Funder Requirements</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/dmps" class="dropdown-item" data-drupal-link-system-path="node/485">DMP Database</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/plan#tab-budgeting" title="Cost out research data management resources" class="dropdown-item">Budgeting</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/find" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/70">Find</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/find" class="dropdown-item" data-drupal-link-system-path="node/70">Research Data</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/find#tab-aggregate-microdata" class="dropdown-item" data-drupal-link-system-path="node/70">Aggregate &amp; Microdata</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/find/#tab-gis-geospatial-data" class="dropdown-item">GIS and Geospatial Data</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/organize" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/72">Organize</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/organize#tab-file-folder-organization" class="dropdown-item" data-drupal-link-system-path="node/72">File &amp; Folder Organization</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/organize#tab-data-documentation" class="dropdown-item" data-drupal-link-system-path="node/72">Data Documentation</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/organize#tab-metadata" class="dropdown-item" data-drupal-link-system-path="node/72">Metadata</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/organize#tab-research-project-management" class="dropdown-item" data-drupal-link-system-path="node/72">Research Project Management</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/store" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/120">Store</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/store" class="dropdown-item" data-drupal-link-system-path="node/120">Data Storage</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/store#tab-backup-strategies" class="dropdown-item" data-drupal-link-system-path="node/120">Backup Strategies</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/finder" class="dropdown-item" data-drupal-link-system-path="finder">Research Data Storage Finder</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/store/sections/estimating-storage-needs/text/estimating-storage-needs" class="dropdown-item" data-drupal-link-system-path="node/598">Estimating Storage Needs</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/deposit" class="dropdown-toggle nav-link " data-bs-toggle="dropdown">Deposit</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/publish" class="dropdown-item" data-drupal-link-system-path="node/74">Publishing Data</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/publish#tab-mcmaster-dataverse" class="dropdown-item" data-drupal-link-system-path="node/74">McMaster Dataverse</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/publish#tab-data-licensing" class="dropdown-item" data-drupal-link-system-path="node/74">Data Licensing</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/readme" class="dropdown-item">README Generator</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/publish#tab-readmes" class="dropdown-item">READMEs</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/publish#tab-links-and-keywords" class="dropdown-item">Links and Keywords</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/archive" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/76">Archive</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/archive" class="dropdown-item" data-drupal-link-system-path="node/76">Archiving Data</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/archive#tab-sustainable-file-formats" class="dropdown-item" data-drupal-link-system-path="node/76">Sustainable File Formats</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/node/76#tab-data-retention" class="dropdown-item">Data Retention</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="https://rdm.mcmaster.ca/node/76#tab-research-records" class="dropdown-item">Research Records</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>                      	   
+      	  
+      	  
+	  
+      <li class='nav-item dropdown '>        		
+		
+		   <a href="/about" class="dropdown-toggle nav-link " data-bs-toggle="dropdown" data-drupal-link-system-path="node/18">About</a>
+		
+		
+    
+                                   	  <!-- second level -->
+      <div class="dropdown-menu">                           	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/about" class="dropdown-item" data-drupal-link-system-path="node/18">About us</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/news" class="dropdown-item" data-drupal-link-system-path="node/59">News</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/rdm-strategy" class="dropdown-item" data-drupal-link-system-path="node/197">McMaster&#039;s RDM Institutional Strategy</a>
+		
+		
+    
+                                    	         	
+	  
+	   	  
+	  
+              		
+		
+		   <a href="/faq" class="dropdown-item" data-drupal-link-system-path="node/78">FAQ</a>
+		
+		
+    
+                  		</div>
+    	
+                 </li>    		
+    </ul>
+		
+   
+
+  
+
+  </div>
+
+	        </div>
+  </nav>
+
+
+  <section class="hero">
+      <div>
+    <div id="block-views-block-page-banners-block-1">
+  
+    
+      <div class="views-element-container"><div class="js-view-dom-id-9993b2bad10c1dc5c380535fcd257805460e5420cfa02a8e1f3bdc90fc9609d1">
+  
+  
+  
+
+  
+  
+  
+
+    
+
+  
+  
+
+  
+  
+</div>
+</div>
+
+  </div>
+
+  </div>
+
+  </section>
+
+<div style="display: block;" id="main-content" role="main" class="mb-5">
+      <section class="technology">
+      <div class="container section__header">
+        <div class="row">
+          <!-- implement breadcrumbs feature -->
+            <div>
+    <div id="block-rdm-mcmaster-breadcrumbs">
+  
+    
+        <nav role="navigation" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">Breadcrumb</h2>
+    <ol class="breadcrumb mb-2">
+          <li class='breadcrumb-item'>
+                  <a href="/">Home</a>
+              </li>
+          <li class='breadcrumb-item'>
+                  README Generator
+              </li>
+        </ol>
+  </nav>
+
+  </div>
+
+  </div>
+
+                      <div class="views-element-container"><div class='col-md-12 pr-0'>
+  <div class="row mt-4">   
+    
+
+
+
+
+<div class="col-md-12">
+  <h1>
+    README Generator
+  </h1>
+    
+  <div class='lead'>
+    
+  </div>
+
+  </div>
+
+
+
+      </div>
+</div>
+</div>
+
+                  </div>
+      </div>
+    </section>
+  
+  
+  <section>
+    <div class="container">
+            
+            <div class="row">
+	    <div class="col-md-2">
+	        <div>
+    <nav role="navigation" aria-labelledby="block-rdm-mcmaster-readmegenerator-menu" id="block-rdm-mcmaster-readmegenerator">
+            
+  <h2 class="visually-hidden" id="block-rdm-mcmaster-readmegenerator-menu">README Generator</h2>
+  
+
+        
+              <ul>
+              <li>
+        <a href="/readme" class="nav-list-link" data-drupal-link-system-path="node/1573">Start</a>
+              </li>
+          <li>
+        <a href="/readme-general" class="nav-list-link" data-drupal-link-system-path="node/1575">General Information</a>
+              </li>
+          <li>
+        <a href="/readme-sharing-access-info" class="nav-list-link" data-drupal-link-system-path="node/1577">Sharing/Access Information</a>
+              </li>
+          <li>
+        <a href="/readme-data-file-overview" class="nav-list-link is-active" data-drupal-link-system-path="node/1579" aria-current="page">Data &amp; File Overview</a>
+              </li>
+          <li>
+        <a href="/readme-output" class="nav-list-link" data-drupal-link-system-path="node/1581">Output</a>
+              </li>
+        </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+		</div><div class="col-md-10">
+      
+        <div>
+    <div data-drupal-messages-fallback class="hidden"></div><div id="block-rdm-mcmaster-page-title">
+  
+    
+      
+  <h1><span>README Generator</span>
+</h1>
+
+
+  </div>
+<div id="block-rdm-mcmaster-content">
+  
+    
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field__item"><div class="row" style="display: flex;  width: 100%;" id="rdm-readme"> 
+<div class="col-md-6">
+
+<!--                                            -->
+<!-- Everything above this shouldn't be touched -->
+<!--                                            -->
+
+
+<!-- Subheaders can be made with multiple #. -->
+<h2>Data & File Overview</h2>
+<h3>3.1 File list</h3>
+List all files (or folders, as appropriate for dataset organization) contained in the dataset, with a brief description of each file. If your dataset uses a folder structure, explain it here. If your dataset is supporting a research article, list which data was used for each table and figure in your article.
+<div class="input_container">
+<p class="mb-0 info-label ml-1">File list<button data-toggle="modal" data-target="#modalfilelist" class="border-0 bg-transparent"><img src="/themes/rdm_mcmaster/assets/img/svg/info-icon.svg" alt="Information on file list" style="width: .9em;"></button></p>
+<textarea class="form-control" id="$FILE_LIST" rows=4 onInput="logFileText();" aria-label="File list"></textarea>
+</div>
+
+<hr>
+<h3>3.2 File formats</h3>
+Provide a brief organized list of the file formats you use. Wherever possible, <a href="https://rdm.mcmaster.ca/archive#tab-sustainable-file-formats" target="_blank">sustainable file formats</a> are best for archiving.
+<div class="input_container">
+<p class="input_placeholder">File formats </p>
+<textarea  class="form-control"  id="$FILE_FORMATS" rows=4 onInput="logFileText();" aria-label="File formats"></textarea>
+</div>
+
+<hr>
+<h3>3.3 File abbreviations</h3>
+Include description for any abbreviations used in your file names.
+<div class="input_container">
+<p class="mb-0 info-label ml-1">File  abbreviations<button data-toggle="modal" data-target="#modalfileabbrev" class="border-0 bg-transparent"><img src="/themes/rdm_mcmaster/assets/img/svg/info-icon.svg" alt="Information on file abbreviation" style="width: .9em;"></button></p>
+<textarea id="$FILE_ABBREVIATIONS"  class="form-control"  rows=4 onInput="logFileText();" placeholder="YYYY-MM-DD_FileName_Version##" aria-label="File abbreviations "></textarea>
+</div>
+
+<hr>
+<h3>3.4 File relationships</h3>
+Include a description of the relationships between files, if important. <i>For example, if you have a file named 202X-08-01_ProjectCodebook.csv that explains the variables in 202X-08-01ProjectDatafile.csv, state that here. Or, if you have both raw data files and processed data files, explain how they are related.</i>
+<div class="input_container">
+<p class="input_placeholder">File relationships</p>
+<textarea id="$FILE_RELATIONSHIPS" rows=4 onInput="logFileText();"  class="form-control" aria-label="File relationships"></textarea>
+</div>
+
+<hr>
+<h3>3.5 Additional related data</h3>
+Mention any data that was collected but not included in the current data package.
+<div class="input_container">
+<p class="input_placeholder">Additional related data</p>
+<textarea id="$UNINCLUDED_DATA_COLLECTION" rows=4 onInput="logFileText();"  class="form-control" aria-label="Additional related data" ></textarea>
+</div>
+
+<hr>
+<h3>3.6 Dataset version</h3>
+NOTE: This section will not be completed for your first version of this README file. We suggest keeping this section for future use and updating it if you change files within your dataset.
+
+<div class="input_container">
+<p class="input_placeholder">Dataset Version</p>
+<textarea id="$DATASET_VERSION" rows=1 onInput="logFileText();"  class="form-control" aria-label="Dataset Version"></textarea>
+</div>
+<hr>
+<h3>3.7 Changelog</h3>
+NOTE: This section will not be completed for your first version of this README file. If/When you update the version of your dataset, include information on what you have changed here. Which file(s) did you update? Why was/were the file(s) updated? When was the file updated? Repeat this section for each dataset, folder or file, as appropriate.
+<div class="input_container">
+<p class="input_placeholder">Changelog</p>
+<textarea id="$DATASET_CHANGELOG" rows=4 onInput="logFileText()" placeholder="YYYY-MM-DD - FILENAME - Description of update and reason."  class="form-control" aria-label="Changelog"></textarea>
+</div>
+
+<hr>
+
+<div class="button_container">
+<a class="" href="/readme-sharing-access-info">
+    <button type="button" name="button" class="btn btn-info btn-arrow-left">Previous </button>
+</a>
+
+<a class="tooltip" href="/readme-output" style="position:relative; overflow: visible">
+    <span class="tooltiptext" style="visibility: hidden; width: max-content; max-width: 300px; top: -29.76px; left: -75.3583px;" role="tooltip" id="tooltip-error">There are empty required fields on this page.</span>
+ <button id="nextButton" type="button" name="button" class="btn btn-primary btn-arrow" aria-describedby="tooltip-error">
+        Next </button>
+</a>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!--                                            -->
+<!-- Everything below this shouldn't be touched except tooltip text which is below--> 
+<!--                                            -->
+
+<div class="col-md-6">
+<h2>Preview</h2>
+<div> 
+<div class="language-plaintext highlighter-rouge">
+<div class="highlight">
+<pre class="highlight">
+<code id="readmeOutput" style="display: block; white-space: pre-wrap">
+JavaScript is disabled :(.
+</code>
+</pre>
+</div>
+<button type="button" aria-label="Copy code to clipboard"  onclick="copyClipboard()">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+</svg> Copy to clipboard
+</button>
+</div>
+</div>
+<!-- Load in the script for the README builder -->
+
+
+<script>
+localStorage.setItem("pageCutoff", 4);
+localStorage.setItem("pageCutoffMax", Math.max(4, localStorage.getItem("pageCutoffMax")));
+</script>
+
+<script src="/themes/rdm_mcmaster/assets/js/readme_builder.js"></script>
+</div>
+</div>
+
+<div id="modalfilelist" class="modal fade" role="dialog"  tabindex="-1">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title mt-0">File list</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="tooltiptext mb-0"><strong>Help:</strong> For a standardized folder structure, you can follow the <a href=https://www.projecttier.org/tier-protocol/protocol-4-0/root/>TIER Protocol</a>. You can use <a href="https://tree.nathanfriend.io/" target="_blank">Tree</a>, a free webtool, to create a plain text file/folder tree diagram and copy it here.</p>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+       </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalfileabbrev" class="modal fade" role="dialog"  tabindex="-1">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title mt-0">File abbreviations</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="tooltiptext mb-0"><strong>Help:</strong>Visit the <a href="https://rdm.mcmaster.ca/organize#tab-file-folder-organization" target="_blank">McMaster RDM webpage on File and Folder organization</a> for tips on file naming and abbreviating.</p>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+       </div>
+    </div>
+  </div>
+</div>
+</div>
+      
+<div  data-history-node-id="1579" class="node node--type-page node--id-1579 node--view-mode-full clearfix">
+     
+    
+    <div class="content-sidebar--no-tabs">
+      
+  <div class="row">
+    <div class="col-md-12">
+ 
+ 
+  <h2 ><span>README Generator Overview</span>
+</h2>
+			
+	
+
+
+  </div>
+</div>
+
+    </div>
+  </div>
+<div class="text-center mt-3">Last modified Jan 29, 2026</div>
+  </div>
+
+  </div>
+
+
+      	    </div></div>
+                </div>
+  </section>
+  </div>
+
+    <div>
+    <div id="block-rdm-mcmaster-rdmreadmegeneratorfooter">
+  
+    
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field__item"><div id="site-footer" class="grey py-4 equal-row mt-4" role="complementary" aria-label="RDM readme generator footer">
+  <div class="container">
+    <div class="row equal-row">
+      <div class="col-lg-12 col--logo">
+<p class="pb-4">McMaster README Generator developed by: Richie Motorgeanu, Debbie Lawlor, Rebeca Gaston Jothyraj, Danica Evering and Isaac Pratt. Adaptable under a Creative Commons Attribution License <a href-="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Inspired by the Citation File Format tool: https://citation-file-format.github.io/cffinit</p>
+
+ <div class="mt-2 p-2 mb-4 border text-center">
+	<p>McMaster University is committed to providing websites that are accessible to the widest possible audience.</p><p>If you require any content on this website in an alternative format, please complete the <svg style="width:16px; height:auto; fill: #fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M423.9 255.8L411 413.1c-3.3 40.7-63.9 35.1-60.6-4.9l10-122.5-41.1 2.3c10.1 20.7 15.8 43.9 15.8 68.5 0 41.2-16.1 78.7-42.3 106.5l-39.3-39.3c57.9-63.7 13.1-167.2-74-167.2-25.9 0-49.5 9.9-67.2 26L73 243.2c22-20.7 50.1-35.1 81.4-40.2l75.3-85.7-42.6-24.8-51.6 46c-30 26.8-70.6-18.5-40.5-45.4l68-60.7c9.8-8.8 24.1-10.2 35.5-3.6 0 0 139.3 80.9 139.5 81.1 16.2 10.1 20.7 36 6.1 52.6L285.7 229l106.1-5.9c18.5-1.1 33.6 14.4 32.1 32.7zm-64.9-154c28.1 0 50.9-22.8 50.9-50.9C409.9 22.8 387.1 0 359 0c-28.1 0-50.9 22.8-50.9 50.9 0 28.1 22.8 50.9 50.9 50.9zM179.6 456.5c-80.6 0-127.4-90.6-82.7-156.1l-39.7-39.7C36.4 287 24 320.3 24 356.4c0 130.7 150.7 201.4 251.4 122.5l-39.7-39.7c-16 10.9-35.3 17.3-56.1 17.3z"></path></svg> <a id="report-issue" href="https://library.mcmaster.ca/forms/report-accessibility-issue?link_url=https%3A%2F%2Frdm.mcmaster.ca/readme" style="font-size: 16px;">Report an Accessibility Issue</a> form and we will respond as promptly as possible.</p>
+</div>
+
+      </div>
+
+   
+    </div>
+  </div>
+</div></div>
+      
+  </div>
+
+  </div>
+
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/1579","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"user":{"uid":0,"permissionsHash":"057228419f9938bc9e964bad274943b6df46c4948be39520bf8c2012ee6296c1"}}</script>
+<script src="/core/assets/vendor/jquery/jquery.min.js?v=4.0.0"></script>
+<script src="/core/assets/vendor/once/once.min.js?v=1.0.1"></script>
+<script src="/core/misc/drupalSettingsLoader.js?v=11.4.7"></script>
+<script src="/core/misc/drupal.js?v=11.4.7"></script>
+<script src="/core/misc/drupal.init.js?v=11.4.7"></script>
+<script src="/themes/rdm_mcmaster/assets/js/flickity.pkgd.min.js?tmbdlp"></script>
+<script src="/core/misc/jquery.form.js?v=4.3.0"></script>
+<script src="/themes/rdm_mcmaster/assets/js/maclibrary.js?tmbdlp"></script>
+
+
+    <!-- Brighter World JS -->
+    <!-- <script src="https://documents.mcmaster.ca/www/cdn/js/1.0/mcm-bw.js"></script> -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N64Q18GJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7N64Q18GJW');
+    </script>
+	<!-- <script src="/themes/rdm_mcmaster/assets/globalheaderfooter/global-nav.js" search-url="rdm.mcmaster.ca"></script> -->
+	 <script src="/themes/rdm_mcmaster/assets/globalheaderfooter/global-nav.js" search-url="rdm.mcmaster.ca"></script>
+  </body>
+</html>
+
+

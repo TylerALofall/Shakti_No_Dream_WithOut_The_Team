@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Global/Global-Hasher-v1_local1-2026-10-17
+DIRECTORY SHA256: 9c2a8374e09e8ad88a71055c261de13459e27f56749725563875db5be5ecf4f0
+LEDGER: appended

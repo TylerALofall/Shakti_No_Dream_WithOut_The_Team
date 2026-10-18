@@ -95,7 +95,7 @@ int shakti_loader_load(
 
     size = fread(result->data, 1U, SHAKTI_LOADER_DATA_CAPACITY, file);
 
-    if (ferror(file) != 0) {
+    if (ferror(file) != 0 || fgetc(file) != EOF || ferror(file) != 0) {
         fclose(file);
         return 0;
     }

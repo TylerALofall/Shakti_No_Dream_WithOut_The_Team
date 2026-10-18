@@ -1,0 +1,240 @@
+/* Synthetic local RUNS only. No network, live repo, or user file mutations.
+ * Build separately from phone files; this QA source is not part of its app.
+ */
+#define _POSIX_C_SOURCE 200809L
+#include "Tool.Submit.h"
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+static int runs,failures;
+static const char *oid1="1111111111111111111111111111111111111111";
+static const char *oid2="2222222222222222222222222222222222222222";
+static void write_text(const char *path,const char *s)
+{
+    FILE *f=fopen(path,"wb");
+    if (!f || fwrite(s,1,strlen(s),f)!=strlen(s) || fclose(f)) exit(90);
+}
+static int action(const char *label,const char *op,const char *arg,const char *input,int want)
+{
+    pid_t pid; int fd[2],status; char log[80];
+    ++runs; snprintf(log,sizeof log,"run-%02d.txt",runs);
+    fflush(NULL);
+    if (pipe(fd)) exit(90);
+    pid=fork(); if (pid<0) exit(90);
+    if (!pid) {
+        int out=open(log,O_WRONLY|O_CREAT|O_EXCL,0600);
+        close(fd[1]); dup2(fd[0],0); close(fd[0]); dup2(out,1); dup2(out,2); close(out);
+        exit(shakti_submit_action(op,arg));
+    }
+    close(fd[0]);
+    if (input && write(fd[1],input,strlen(input))!=(ssize_t)strlen(input)) exit(90);
+    close(fd[1]); if (waitpid(pid,&status,0)!=pid) exit(90);
+    if (!WIFEXITED(status) || WEXITSTATUS(status)!=want) {
+        ++failures; printf("FAIL %02d %s status=%d expected=%d\n",runs,label,status,want);
+    } else printf("PASS %02d %s exit=%d\n",runs,label,want);
+    return WIFEXITED(status)?WEXITSTATUS(status):255;
+}
+static void begin_case(const char *name)
+{
+    if (mkdir(name,0700) || chdir(name)) exit(90);
+    action("create offline fixture","demo","","",0);
+    action("prepare fixture","prepare","Demo.Single.txt","",0);
+    ts_plan_load("demo_001");
+}
+static void end_case(void) { if (chdir("..")) exit(90); }
+static void entry(int i,const char *override,int flag)
+{
+    SubmitFile *f=&ts.files[i]; const char *content=override?override:ts_pool+f->offset;
+    ts_add("{\"path\":"); ts_quote(f->path);
+    ts_printf(",\"mode\":%d,\"type\":\"blob\",\"object\":{\"__typename\":\"Blob\",\"oid\":\"%s\",",flag==5?40960:33188,oid1);
+    ts_printf("\"byteSize\":%lu,\"isBinary\":%s,\"isTruncated\":%s,\"text\":",(unsigned long)strlen(content),flag==3?"null":"false",flag==4?"true":"false");
+    ts_quote(content); ts_add("}}");
+}
+/* flag 0=new,1=same,2=one changed,3=unknown encoding,4=truncated,
+ * 5=symlink,6=missing alias,7=occupied branch,8=wrong repo,9=unsafe ancestor. */
+static void response(int readback,int flag)
+{
+    int i;
+    ts_reset(); ts_add("{\"data\":{\"repo\":{\"id\":\"R_SYNTHETIC\",\"nameWithOwner\":");
+    ts_quote(flag==8?"Wrong/Repository":"ExampleOwner/OfflineExample");
+    if (readback) ts_printf(",\"snapshot\":{\"__typename\":\"Commit\",\"oid\":\"%s\"",oid2);
+    else ts_printf(",\"base\":{\"name\":\"main\",\"prefix\":\"refs/heads/\",\"target\":{\"__typename\":\"Commit\",\"oid\":\"%s\"",oid1);
+    for (i=0;i<ts.count;++i) {
+        if (flag==6 && i==0) continue;
+        ts_printf(",\"f%d\":",i);
+        if (!readback && flag==0) ts_add("null");
+        else entry(i,flag==2 && i==0?"Remote different bytes\n":NULL,flag);
+    }
+    for (i=0;i<ts.dir_count;++i) {
+        ts_printf(",\"d%d\":{\"path\":",i); ts_quote(ts.dirs[i]);
+        ts_printf(",\"mode\":%d,\"type\":\"%s\"}",flag==9?40960:16384,flag==9?"blob":"tree");
+    }
+    if (readback) ts_printf("},\"published\":{\"name\":\"submit/demo-001\",\"prefix\":\"refs/heads/\",\"target\":{\"oid\":\"%s\"}}",oid2);
+    else ts_printf("}},\"taken\":%s",flag==7?"{\"id\":\"EXISTING\"}":"null");
+    ts_add("}}}"); write_text(readback?"demo_001.04-response.txt":"demo_001.01-response.txt",ts_output);
+}
+static void branch_reply(int wrong)
+{
+    ts_reset(); ts_add("{\"data\":{\"createRef\":{\"clientMutationId\":"); ts_quote(ts.approval_sha);
+    ts_printf(",\"ref\":{\"name\":\"submit/demo-001\",\"prefix\":\"refs/heads/\",\"repository\":{\"nameWithOwner\":\"ExampleOwner/OfflineExample\"},\"target\":{\"oid\":\"%s\"}}}}}",wrong?oid2:oid1);
+    write_text("demo_001.02-response.txt",ts_output);
+}
+static void upload_reply(int wrong)
+{
+    ts_reset(); ts_add("{\"data\":{\"createCommitOnBranch\":{\"clientMutationId\":"); ts_quote(ts.approval_sha);
+    ts_printf(",\"commit\":{\"oid\":\"%s\",\"committedDate\":\"2026-10-03T12:34:56Z\",",oid2);
+    ts_add("\"repository\":{\"nameWithOwner\":\"ExampleOwner/OfflineExample\"},\"parents\":{\"totalCount\":1,\"nodes\":[{\"oid\":");
+    ts_quote(wrong?oid2:oid1);
+    ts_printf("}]}},\"ref\":{\"name\":\"submit/demo-001\",\"prefix\":\"refs/heads/\",\"target\":{\"oid\":\"%s\"}}}}}",oid2);
+    write_text("demo_001.03-response.txt",ts_output);
+}
+static void to_branch(void)
+{
+    response(0,0);
+    action("explicit new-file approval","approve","demo_001","PREPARE demo_001\n",0);
+    ts_plan_load("demo_001"); ts_approval_load(); branch_reply(0);
+}
+static void validate_upload(void)
+{
+    static unsigned char decoded[TS_FILE_BYTES+1];
+    static const char alphabet[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    int root,vars,in,changes,adds,p,i=0; const char *s;
+    root=ts_json_read("demo_001.03-upload.txt");
+    vars=ts_get(root,"variables"); in=ts_get(vars,"input");
+    ts_expect(ts_get(in,"expectedHeadOid"),oid1);
+    changes=ts_get(in,"fileChanges");
+    ts_need(ts_optional(changes,"deletions")<0,"unexpected deletion command");
+    adds=ts_get(changes,"additions");
+    for (p=ts_json[adds].child;p>=0 && p<ts_json[adds].next;p=ts_json[p].next) {
+        size_t out=0,k; unsigned v=0,bits=0; char hash[65];
+        while (i<ts.count && !ts.state[i]) ++i;
+        ts_need(i<ts.count,"extra upload file"); ts_expect(ts_get(p,"path"),ts.files[i].path);
+        s=ts_string(ts_get(p,"contents"));
+        for (k=0;s[k] && s[k]!='=';++k) {
+            const char *at=strchr(alphabet,s[k]); ts_need(at!=NULL,"bad base64");
+            v=(v<<6)|(unsigned)(at-alphabet); bits+=6;
+            if (bits>=8) { bits-=8; decoded[out++]=(unsigned char)(v>>bits); }
+        }
+        ts_sha256(decoded,out,hash); ts_need(!strcmp(hash,ts.files[i].sha),"base64 round-trip mismatch"); ++i;
+    }
+    ts_need(i==ts.count,"upload omitted files");
+    ++runs; printf("PASS %02d independent base64 decode / exact paths / expected-head / no deletions\n",runs);
+}
+static void change(const char *file,const char *needle,const char *replacement)
+{
+    static char input[TS_BUFFER+1],output[TS_BUFFER+1];
+    size_t n=ts_read(file,input,sizeof input),a,b; char *at=strstr(input,needle);
+    if (!at) exit(91);
+    a=(size_t)(at-input); b=strlen(needle);
+    if (n-b+strlen(replacement)>=sizeof output) exit(91);
+    memcpy(output,input,a); strcpy(output+a,replacement); strcpy(output+a+strlen(replacement),at+b);
+    write_text(file,output);
+}
+static void json_case(const char *label,const char *text,int expected)
+{
+    pid_t child; int status;
+    ++runs; fflush(NULL); child=fork(); if (child<0) exit(90);
+    if (!child) { FILE *f=freopen("json-negative.txt","a",stderr); (void)f; strcpy(ts_input,text); ts_json_parse(); exit(0); }
+    waitpid(child,&status,0);
+    if (!WIFEXITED(status) || WEXITSTATUS(status)!=expected) { ++failures; printf("FAIL %02d %s\n",runs,label); }
+    else printf("PASS %02d %s\n",runs,label);
+}
+int main(void)
+{
+    int flag; char label[80],hash[65]; static char million[1000000];
+    memset(million,'a',sizeof million); ts_sha256(million,sizeof million,hash);
+    ts_need(!strcmp(hash,"cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0"),"million-a SHA-256");
+    printf("PASS million-a SHA-256 vector\n");
+    begin_case("happy"); to_branch();
+    write_text("Demo.Source.c.txt","Changed editor source AFTER snapshot\n");
+    action("snapshot ignores later source edits","commit","demo_001","",0);
+    validate_upload(); upload_reply(0);
+    action("make pinned readback query","readback","demo_001","",0);
+    response(1,1); action("verify full text SHA256 receipt","verify","demo_001","",0);
+    action("refuse existing receipt","verify","demo_001","",2);
+    response(1,2); action("reject changed readback bytes","verify","demo_001","",2);
+    end_case();
+    for (flag=3;flag<=9;++flag) {
+        snprintf(label,sizeof label,"reject-%d",flag); begin_case(label); response(0,flag);
+        action(label,"approve","demo_001","PREPARE demo_001\n",2); end_case();
+    }
+    begin_case("unchanged"); response(0,1);
+    action("all same -> no branch request","approve","demo_001","",0); end_case();
+    begin_case("conflict"); response(0,2);
+    action("empty approval is not consent","approve","demo_001","",2);
+    action("generic yes is not consent","approve","demo_001","yes\n",2);
+    action("specific replacement approved","approve","demo_001","REPLACE 1\nPREPARE demo_001\n",0);
+    ts_plan_load("demo_001"); ts_approval_load(); branch_reply(1);
+    action("wrong branch starting commit","commit","demo_001","",2);
+    branch_reply(0); action("replacement commit request","commit","demo_001","",0);
+    upload_reply(1); action("wrong commit parent","readback","demo_001","",2);
+    end_case();
+    begin_case("tampered"); to_branch();
+    change("demo_001.01-response.txt","1111111111111111111111111111111111111111","3333333333333333333333333333333333333333");
+    action("approval bound to original response","commit","demo_001","",2); end_case();
+    begin_case("local-safety");
+    action("batch overwrite refused","prepare","Demo.Single.txt","",2);
+    change("Demo.Single.txt","BATCH=demo_001","BATCH=badpath");
+    change("Demo.Single.txt","Demo.Example.c","../Escaped.c");
+    action("parent traversal refused","prepare","Demo.Single.txt","",2); end_case();
+    begin_case("hook");
+    change("Demo.Single.txt","BATCH=demo_001","BATCH=hook001");
+    change("Demo.Single.txt","CHECK=none","CHECK=source_reviewer");
+    action("unconnected required C hook","prepare","Demo.Single.txt","",2); end_case();
+    begin_case("four");
+    change("Demo.Single.txt","BATCH=demo_001","BATCH=four001"); change("Demo.Single.txt","README_STYLE=SIX","README_STYLE=FOUR");
+    action("four-section explicit template","prepare","Demo.Single.txt","",0); end_case();
+    begin_case("preserve"); write_text("Handwritten.txt","# Existing\r\nDo not rewrite this.\n\xE2\x9C\x93\n");
+    change("Demo.Single.txt","BATCH=demo_001","BATCH=keep001"); change("Demo.Single.txt","README_SOURCE=GENERATE","README_SOURCE=Handwritten.txt");
+    action("existing README bytes preserved","prepare","Demo.Single.txt","",0);
+    ts_plan_load("keep001");
+    for (flag=0;flag<ts.count;++flag) if (!strcmp(ts.files[flag].source,"Handwritten.txt")) {
+        size_t n=ts_read("Handwritten.txt",ts_input,TS_BUFFER+1);
+        ts_sha256(ts_input,n,hash); ts_need(!strcmp(hash,ts.files[flag].sha),"README preservation mismatch");
+    }
+    end_case();
+    begin_case("set");
+    change("Demo.Single.txt","BATCH=demo_001","BATCH=set001");
+    change("Demo.Single.txt","MODE=SINGLE","MODE=SET");
+    {
+        const char *body;
+        (void)ts_read("Demo.Single.txt",ts_input,TS_BUFFER+1);
+        body=strstr(ts_input,"FAMILY=Demo-Example\n");
+        ts_need(body!=NULL,"set fixture header");
+        body+=strlen("FAMILY=Demo-Example\n");
+        ts_reset(); ts_add(ts_input); ts_add("\nFAMILY=Demo-Second\n"); ts_add(body);
+        write_text("Demo.Single.txt",ts_output);
+    }
+    action("two-family set form","prepare","Demo.Single.txt","",0);
+    ts_plan_load("set001"); ts_need(ts.count==6 && ts.family_count==2,"set did not preserve both families");
+    end_case();
+    begin_case("capacity");
+    change("Demo.Single.txt","BATCH=demo_001","BATCH=large001");
+    {
+        FILE *f=fopen("Demo.Source.c.txt","wb"); unsigned k;
+        if (!f) exit(90);
+        for (k=0;k<TS_FILE_BYTES+1;++k) fputc(65,f);
+        fclose(f);
+    }
+    action("oversized file benches without truncation","prepare","Demo.Single.txt","",2);
+    end_case();
+    begin_case("plan-change"); to_branch();
+    change("demo_001.plan.txt","2026-10-03","2026-10-04");
+    action("changed snapshot invalidates approval","commit","demo_001","",2); end_case();
+    begin_case("api-errors");
+    write_text("demo_001.01-response.txt","{\"errors\":[{\"message\":\"denied\"}],\"data\":{}}");
+    action("API errors are not empty destinations","approve","demo_001","",2);
+    end_case();
+    json_case("duplicate JSON keys","{\"x\":1,\"x\":2}",2);
+    json_case("duplicate escaped keys","{\"x\":1,\"\\u0078\":2}",2);
+    json_case("unpaired surrogate","{\"x\":\"\\ud800\"}",2);
+    json_case("trailing JSON junk","{} unexpected",2);
+    json_case("trailing comma","{\"x\":1,}",2);
+    json_case("invalid number","{\"x\":01}",2);
+    json_case("escaped NUL","{\"x\":\"\\u0000\"}",2);
+    json_case("Unicode surrogate pair","{\"x\":\"\\ud83d\\ude00\",\"n\":1}",0);
+    printf("SUMMARY %d run checks, %d failures; synthetic only, no HTTP performed.\n",runs,failures);
+    return failures?1:0;
+}

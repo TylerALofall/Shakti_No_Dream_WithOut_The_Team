@@ -1,0 +1,1 @@
+OK: 8 decoded bytes -> Base64.Sample.Output.bin

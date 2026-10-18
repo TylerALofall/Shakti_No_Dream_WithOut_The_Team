@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Call/Call-Scan-v1.0-2026-10-17
+DIRECTORY SHA256: 5e8b1fc5f5b2b85378af8a7f1d21d85c7ded2eecdd55bcccec61e38bde44b889
+LEDGER: appended

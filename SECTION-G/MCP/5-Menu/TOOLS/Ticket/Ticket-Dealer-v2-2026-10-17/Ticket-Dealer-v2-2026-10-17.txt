@@ -1,0 +1,11 @@
+FAMILY: Ticket
+TOOL: Dealer
+VERSION: 2
+DATE: 2026-10-17
+INTRODUCTION: Deal work-order record clusters into bounded tickets using an explicit configuration and template; original configurations are retained under Source.Configs.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Ticket.Dealer.c -o shakti-ticket-dealer
+COMMAND: ./shakti-ticket-dealer "{config_file}"
+EXAMPLE: ./shakti-ticket-dealer Example.Config.txt
+ENTRY_KIND: single
+ENTRY: Ticket.Dealer.c
+REQUIRED: Ticket.Dealer.c

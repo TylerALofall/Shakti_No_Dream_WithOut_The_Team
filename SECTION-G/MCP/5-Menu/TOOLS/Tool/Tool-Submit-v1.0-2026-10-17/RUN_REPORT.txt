@@ -1,0 +1,141 @@
+TOOL-SUBMIT 1.0 -- LOCAL RUN REPORT
+MODIFIED: 2026-10-03
+QA SPECIALIST: GPT-6 Astra Pro
+LOCATION: OpenAI x86_64 Linux working container
+SUPERVISOR QA: Kimi K3 -- not performed; independent acceptance pending
+SUPERVISOR QA LOCATION: Not supplied
+
+DELIVERY BOUNDARY
+This is a working offline preparer, response checker and request generator.
+It has no networking code and has not uploaded anything to GitHub.
+The target phone is C Code Develop 5.2.0 (502000009), with iCurlHTTP as the
+user-operated HTTPS transport. Neither installed app was executed here.
+No original assembler source, live project or repository was modified.
+All behavioral runs below used disposable synthetic files and responses.
+
+COMPILERS AND BUILD MODES
+GCC: cc (Debian 14.2.0-19) 14.2.0
+Clang: clang version 17.0.0; x86_64-unknown-linux-gnu
+
+Production build, performed independently with both compilers:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 \
+  Tool.Submit.c Tool.Support.c -o shakti-submit
+
+Sanitizer run build:
+clang -std=c99 -pedantic -Wall -Wextra -Werror -O1 -g \
+  -fsanitize=address,undefined -fno-omit-frame-pointer \
+  -DSHAKTI_SUBMIT_NO_MAIN -I. Tool.Submit.c Tool.Support.c \
+  Run.Suite.c -o run-suite
+
+Run.Suite.c.txt is included as readable source DATA, not an additional
+phone compilation unit. Its desktop harness uses Linux process facilities
+to isolate expected refusals. Those facilities are not in the production
+program. Rename a separate copy to Run.Suite.c for a desktop reproduction.
+Release.Check.c.txt similarly contains the separate C release/audit helper.
+
+FINAL RELEASE RUN RESULTS
+GCC:                  79 run checks, 0 failures.
+Clang:                79 run checks, 0 failures.
+Clang ASan and UBSan:  79 run checks, 0 failures.
+Each also passed the million-'a' SHA-256 reference vector.
+No AddressSanitizer or UndefinedBehaviorSanitizer failure was reported.
+The 79 checks include setup and positive runs; they are not 79 different
+adversarial scenarios. The same suite was repeated for each build mode.
+
+The raw summary records are GCC_RUNS.txt, CLANG_RUNS.txt and
+SANITIZER_RUNS.txt. An exit of 2 is the expected result for a refused input,
+not an unexplained crash. The harness checks the expected exit explicitly.
+
+WHAT THE RUNS EXERCISED
+The complete new-file route: prepare; inspect a synthetic GitHub response;
+approve; validate a synthetic branch response; generate a multi-file
+commit request; validate its synthetic response; generate a pinned readback
+query; compare returned file contents; emit the verified-byte receipt.
+
+An independent base64 decoder checked the generated upload contents,
+explicit destination paths, expected-head field, and absence of deletions.
+Changing an original file after preparation did not change the frozen
+contents in the eventual upload request.
+
+Existing README text with CRLF and UTF-8 was preserved exactly. Both the
+six-slot format and the explicitly selected four-section format were
+exercised, as was a two-family SET form. Example results did not become
+claims of successful execution of the packaged tool.
+
+Conflict cases required the particular REPLACE number and final PREPARE
+batch phrase. Empty input and generic 'yes' were refused. All-unchanged
+content did not produce a branch request. Existing local outputs were
+refused rather than overwritten.
+
+Remote-response checks covered wrong repository identity, absent aliases,
+an occupied review branch, unknown or truncated content, wrong file mode,
+symlink/ancestor conflicts, wrong new-branch starting commit, wrong commit
+parent, and API errors. An error was never treated as an empty destination.
+Changing the saved inspection response or snapshot invalidated approval.
+
+Local validation rejected parent traversal, an unconnected required C hook,
+and over-capacity input instead of silently truncating or skipping it.
+JSON cases covered duplicate keys, duplicate keys spelled using escapes,
+unpaired surrogates, trailing content, trailing commas, invalid numbers,
+escaped NUL, and a valid Unicode surrogate pair.
+
+REPEATED-OUTPUT COMPARISON
+The separate C release helper compared the byte length and SHA-256 of
+nine generated artifacts between GCC and Clang, and then between GCC and
+the sanitizer build. All nine matched in both comparisons:
+plan.txt; family-1.README.txt; inventory.txt; 01-check.txt; approval.txt;
+02-branch.txt; 03-upload.txt; 04-readback.txt; receipt.txt.
+
+The corresponding final SHA-256 values, in that order, were:
+5abf0b2712daf9ae450b2d11175c53165c18e9d7425552768cddaa9ec6ce9db8
+b097417d51396040551d6b142077d3719c3cecc6ba31783d8d17d304d07efbf0
+5d4ce0733c32ec986b279243f6430d01a68dd366fc7050b58f3b33de3b7c388e
+a99ef17167dcc2cfeffa7c2c63c31315fb0228d2ef23eacc05f704d9f36cc050
+1b4f8d7be1b458c5ce4619e348ccd6204d4a5321e6ff0a9b81a84aaa0ba226f1
+6dc4c07ade080420605850ee0be19b3d59ba67f5e410e7793e07ad7ac6a076d0
+25822ef212691615b06694d1ac84c2b5dace6c1d4e604988dcbf535465c8f4e0
+431092a67e3ac3cdb81e7809bfd67de70c4af25699500787c99941e407e16477
+de7bf716099fcb84df3270533c17f0caaba44931ea49c565e8a5a7f06d665004
+
+RELEASE INVENTORY
+SHA256_INVENTORY.txt is generated by the included C release helper after
+this report. It reads each listed release file twice, reports its byte and
+physical-line counts and SHA-256, and refuses any change between passes.
+The inventory excludes itself and the surrounding ZIP to avoid circular
+self-hash claims. Its MODIFIED date is the declared release date, not an
+assertion about a phone filesystem timestamp.
+
+KNOWN AND UNVERIFIED BOUNDARIES
+1. C99 syntax was compiled strictly. The exclusive-create fopen mode 'wbx'
+   is an additional stdio runtime requirement, not guaranteed by C99.
+   The phone compatibility probe must pass before real files are processed.
+   There is no fallback to ordinary overwrite-capable 'wb'.
+2. No actual iPhone runtime, iCurlHTTP clipboard handoff, GitHub credentials,
+   live GraphQL mutation or remote readback was used in these runs.
+   The request shape was checked against official GitHub documentation;
+   synthetic responses are not evidence of successful live API execution.
+3. This version admits bounded UTF-8 text: 128 KiB per file, 1 MiB combined
+   frozen payload, 40 files including READMEs, and 8 families. It does not
+   silently admit binary executables, images or PDF files.
+4. The offline checker trusts the origin of manually returned HTTPS response
+   bodies. It cannot authenticate a fabricated paste. Hashes provide byte
+   comparison, not a digital signature or a universal security guarantee.
+5. Work in a private app directory with one operator. Protection against
+   hostile concurrent filesystem changes, compromised apps, or a changed
+   request body after manual copying is not established by these runs.
+6. Branch creation and the later file-set commit are distinct HTTP requests.
+   A failed commit can leave a new review branch. The tool does not delete
+   it automatically. No base-branch write, merge or force operation exists.
+7. This delivery follows the uploaded documentation formats but does not
+   install an assembler hook, execute the original builders, or certify
+   their stricter naming/binary admission checks. Supplied README copying
+   preserves it; generated README content inventories this submission only.
+8. The program has no explicit heap allocation. That does not assert that
+   the C library, compiler engine or iPhone apps never allocate memory.
+9. Optional C checks require real registered implementations. A missing
+   selected hook blocks preparation; it never reports a placeholder pass.
+
+ACCEPTANCE
+Local run evidence only. K3 supervision and the owner's acceptance are
+separate. Start with menu 1 on the phone; report its actual terminal result
+before advancing to live submission setup.

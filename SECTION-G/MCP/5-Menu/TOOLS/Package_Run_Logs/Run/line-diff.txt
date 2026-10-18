@@ -1,0 +1,4 @@
+shakti-line-diff: 2 lines compared, 1 flagged
+FLAG line=2 col=1
+  - two
+  + changed

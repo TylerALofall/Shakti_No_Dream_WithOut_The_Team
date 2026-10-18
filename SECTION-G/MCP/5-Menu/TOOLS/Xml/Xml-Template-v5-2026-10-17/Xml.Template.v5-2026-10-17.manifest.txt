@@ -1,0 +1,14 @@
+FAMILY: Xml
+TOOL: Template
+VERSION: 5
+DATE: 2026-10-17
+INTRODUCTION: Build XML templates and retain attribute values with the supplied v5 wrap collector and template maker.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti-xml-wrap-v5.c shakti-xml-template-v5.c -o shakti-xml-template-v5
+COMMAND: ./shakti-xml-template-v5 "{input_file}" "{report_output}" "{names_output}" "{template_output}" "{master_file}"
+EXAMPLE: ./shakti-xml-template-v5 Example.Work.xml Example.Report.txt Example.Names.txt Example.Template.xml Example.Master.txt
+ENTRY_KIND: manifest
+ENTRY: Xml.Template.v5-2026-10-17.manifest.txt
+REQUIRED: shakti-xml-wrap-v5.c
+REQUIRED: shakti-xml-template-v5.c
+REQUIRED: shakti-xml-wrap-v5.h
+REQUIRED: Xml.Template.v5-2026-10-17.manifest.txt

@@ -1,0 +1,11 @@
+FAMILY: Global
+TOOL: Hasher
+VERSION: 1_local1
+DATE: 2026-10-17
+INTRODUCTION: Hash and log a local tree and compare registered file hashes. This source writes hash logs; its older seal-edition README describes a different interface.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Global.Hasher.c -o shakti-hasher
+COMMAND: ./shakti-hasher "{root_dir}" "{registry_file}"
+EXAMPLE: ./shakti-hasher Example.Tree Example.Registry.txt
+ENTRY_KIND: single
+ENTRY: Global.Hasher.c
+REQUIRED: Global.Hasher.c

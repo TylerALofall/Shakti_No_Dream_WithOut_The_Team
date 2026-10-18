@@ -1,0 +1,1 @@
+Local tool-run fixture. The records are copied inputs; this run assigns no work order and sends no messages.

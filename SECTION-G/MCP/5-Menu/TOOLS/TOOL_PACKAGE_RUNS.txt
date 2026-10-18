@@ -1,0 +1,99 @@
+SHAKTI MENU PACKAGE RUNS -- 2026-10-18
+
+17 programs built, ran on local examples, and were packaged by the same
+C99 assembler. Two ZIP libraries are incomplete because junzip_nomalloc.h
+was not supplied. They have no completed package or success registration.
+
+PACKAGES
+Family/Family-Tool-vVersion-Date/ holds each completed package. README.md
+starts with required files and records identity, build command, runtime
+command, concrete example, introduction, add-ons and payload SHA-256 hashes.
+Multi-module packages carry their supplied text manifest. The assembler
+writes README last, seals paths and contents, and appends TOOLS_LEDGER.txt.
+No ordering or tool-selection policy is imposed on the menu user.
+Existing DROP_HERE folders without source are placeholders, not runnable
+tools, and are outside these 19 source-entry results.
+
+The published bank is the complete 17-package output of the Menu run.
+Earlier two-package drafts remain separately saved in the working session.
+Existing tool sources were preserved; package records and examples supply
+the documentation. The assembler source is v7.1.0. Package versions marked
+1_local1 identify this packaging revision, not an inferred upstream release.
+
+RUN RESULTS
+Base64 / Decode v1.1.0: BUILD 0; RUN 0; PACKAGE 0.
+  Decoded the supplied input to eight bytes matching Expected.bin exactly.
+Spiral / Template_make v1_local1: BUILD 0; RUN 0; PACKAGE 0.
+  Emitted one distinct template from the supplied filled work-order example.
+Scope / Feed v1_local1: BUILD 0; RUN 0; PACKAGE 0.
+  Emitted 24 functions; this fixture has no recorded call edges.
+Global / Hasher v1_local1: BUILD 0; RUN 0; PACKAGE 0.
+  Compared two registered files: two matched, no failures or missing files.
+Shakti / Inventory v1.0: BUILD 0; RUN 0; PACKAGE 0.
+  Joined five functions and six calls: four direct and two external.
+Ticket / Dealer v2: BUILD 0; RUN 0; PACKAGE 0.
+  Dealt the supplied 24 records into two tickets and one log.
+Batch / Extract v2: BUILD 0; RUN 0; PACKAGE 0.
+  Produced three exact function records and three address links.
+Batch / Bitmap v3: BUILD 0; RUN 0; PACKAGE 0.
+  Produced SECTION A and B bitmaps and a separate cross-section link map.
+Call / Scan v1.0: BUILD 0; RUN 0; PACKAGE 0.
+  Scanned supplied fixtures: five definitions, four prototypes, six calls;
+  two same-file, two cross-file, two external. Includes a distant call.
+Xml / Template v4: BUILD 0; RUN 0; PACKAGE 0.
+  One wrapped object, 14 unique names and two repeated shapes confirmed.
+Xml / Template v5: BUILD 0; RUN 0; PACKAGE 0.
+  One wrapped object, 14 unique names and two repeated shapes confirmed.
+Line / Diff v2: BUILD 0; RUN 0; PACKAGE 0.
+  Compared two lines and reported the deliberately changed second line.
+Section / Hash_watch v1_local1: BUILD 0; RUN 0; PACKAGE 0.
+  Reported 15 NEW fixture paths across SECTION-A through SECTION-O.
+Tool / Legacy_Assembler v4: BUILD 0; RUN 0; PACKAGE 0.
+  Ran --write on a disposable example bank; retained as its own tool.
+Tool / Legacy_README_builder v1_local1: BUILD 0; RUN 0; PACKAGE 0.
+  Created the Base64-Decode README in its disposable example bank.
+Tool / Submit v1.0: BUILD 0; RUN 0; PACKAGE 0.
+  Its local check passed hashing, Base64, all byte values and file operations.
+  No network request was sent by this tool.
+Tool / Assembler v7.1.0: BUILD 0; RUN 0; PACKAGE 0.
+  Packaged its own modules through its supplied manifest/package record.
+Zip / Core v1_local1: BUILD 1; RUN NOT AVAILABLE; PACKAGE 2.
+  Compiler and assembler both reported missing junzip_nomalloc.h.
+Zip / Vault v0.1: BUILD 1; RUN NOT AVAILABLE; PACKAGE 2.
+  Compiler and assembler both reported missing junzip_nomalloc.h.
+  The separately supplied zip_vault.c and zip_vault.h are byte-identical to
+  the existing vault files; they do not replace that missing ZIP header.
+
+Raw build, run and packaging output is in Package_Run_Logs. Empty build
+logs indicate a successful compiler invocation without diagnostics. The
+runtime commands and examples are recorded in each package's README.
+
+VERIFICATION
+All successful builds used:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2
+All 17 directory seals and every README payload hash independently matched
+using the host SHA-256 utility. The saved assembler rebuilt cleanly and its
+new executable matched the executable used for the full Menu package run.
+The packaged assembler source also matches that saved source byte for byte.
+Repeat packaging preserves identical packages and the ledger. Repository
+change reporting remains with the existing hash tools; it does not gate
+packaging another tool. No submitted tool is built or run by the assembler.
+
+LIMITS
+These are actual example runs on isolated Linux copies, not proof of every
+possible input or an iOS validation. Call Scan currently uses Linux
+renameat2; its existing source needs a native iOS publication path before
+an iOS build can be claimed. The other successful builds use the native C
+library and, where needed, native POSIX file/directory APIs. No downloaded
+dependency was installed for these runs. The missing ZIP header was not
+invented or replaced with an external library.
+
+No explicit malloc/calloc/realloc/free calls were found in the packaged C
+sources. The assembler uses fixed buffers; native library internals may
+allocate, so whole-process zero-heap operation is not established here.
+Packaging checks declared file presence and metadata; it does not prove
+that an undeclared companion file is unnecessary.
+
+User device and account testing is not part of these program runs. Source
+review and source edits remained separate actions. The original frontend
+and shell are outside this change. Main is not modified.

@@ -1,0 +1,4 @@
+SECTION A: 2 functions, 1 internal links, 2 cross-link connectors, descriptions drawn, Example.Map_A.bmp (1500x229)
+SECTION B: 1 functions, 0 internal links, 2 cross-link connectors, descriptions drawn, Example.Map_B.bmp (1500x229)
+LINK MAP: 2 cross-section links drawn between 2 section bitmaps, Example.Map_links.bmp (3000x303)
+TOTAL: 3 functions, 3 exact address links

@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Line/Line-Diff-v2-2026-10-17
+DIRECTORY SHA256: 94860c914d9592c297353322e999a1d9e850f11d8ba9ef295bfa570539fdd5ee
+LEDGER: appended

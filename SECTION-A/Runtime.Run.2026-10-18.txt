@@ -1,0 +1,60 @@
+SHAKTI C RUNTIME — NATIVE RUN RECORD, 2026-10-18
+
+Scope: the C backend for the agreed continuous convergence loop.
+Branch target: shakti/menu-moved-2026-10-15. Main is not the target.
+
+Both the console host and reusable Cycle.Run source built with:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2
+The RUN build adds -DSHAKTI_APP_NO_MAIN and links the actual Section-A modules.
+Its answers come from an explicit synthetic fixture callback. This verifies
+the reflection interface and gate; the production reasoning adapter is pending.
+No explicit heap, subprocess construction, network client or external asset
+was added to the runtime or RUN tool.
+
+Final isolated native RUNs 006 and 007 exited 0. Every fixture file compared
+byte-for-byte identical between those two directories. The measured duration
+printed to stdout is an observation and is not part of that byte comparison.
+
+Observed results in both runs:
+  core PASS: 8,685 cycles, 8,685 hearing slots, 4,343 sight slots;
+             22 dispatched tools and two complete actual-answer reflections.
+  every supported heartbeat rate: aggregate delay 1,000,000 microseconds;
+             48,000 PCM samples and the selected number of pulses per second.
+  whole-memory PASS: maximum-size container, cold recall, permanent lessons,
+             recent RAM decay, no stale working copy, cold immutable-id refusal.
+  full-size convergence PASS: 32 RGB windows at 1920x1080x3 plus 64 audio clips.
+             Every pixel/channel byte rebuilt exactly. Native durations were
+             0.770289 and 0.770917 seconds without display or speaker playback.
+  validation holds PASS: four deliberately rejected media cases; 34 accepted
+             windows including the initial movie and fractional-rate audio pair.
+  incomplete-container hold PASS; damaged-checksum hold PASS.
+  restart PASS: pending multiline answers preserved, zero duplicate reflection
+             containers after an interrupted final receipt, monotonic epoch.
+
+BENCH lines in these runs are deliberate bad-input refusals. No BENCH RUN
+assertion failed in either final run. Earlier troubleshooting exposed a RUN
+assertion on a hearing-only slot and a tool-record field mismatch in restart
+restoration. Those were corrected before the final passing runs.
+
+Console observations on synthetic empty-curriculum fixtures:
+  stdin EOF: 128 cycles, 128 hearing slots, 64 sight slots, exit 0.
+  open terminal without a completed command: 256 cycles, 128 sight slots,
+             zero dispatched tools, exit 0.
+  default unbounded host: recording continued beyond 1,000 quiet cycles.
+The terminal Ctrl-C adapter ended an execution session; delivery of native
+OS signals was not established by that observation. MCP /interrupt/ and
+/quit/ were exercised directly and preserved the cycling loop.
+
+The existing README assembler packaged Cycle/Run v1.0.0 and appended its
+registration. Its first attempt used an unresolved relative record path and
+refused; the corrected absolute record path succeeded. The assembler did not
+compile or execute the submitted tool. Existing ledger lines were retained.
+
+The new collector archive and shakti_walk.c were inspected for their roles:
+source/history collection and code navigation. They are separate from the
+live heartbeat/sensory runtime and were not modified by this patch.
+
+Remaining integration is explicit in Runtime.Flow.txt: native Swift media
+decoding/display/speaker playback, the actual reflection reasoning adapter,
+and the requested prenatal training schedule/model. These were not run or
+claimed complete. No phone, camera, speaker or real curriculum was exercised.

@@ -1,0 +1,11 @@
+FAMILY: Line
+TOOL: Diff
+VERSION: 2
+DATE: 2026-10-17
+INTRODUCTION: Flag differing lines and columns in two local files and optionally append a log; ordinary differences return success.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 shakti_line_diff.c -o shakti-line-diff
+COMMAND: ./shakti-line-diff "{old_file}" "{new_file}" "{append_log}"
+EXAMPLE: ./shakti-line-diff Example.Old.txt Example.New.txt Example.Diff.txt
+ENTRY_KIND: single
+ENTRY: shakti_line_diff.c
+REQUIRED: shakti_line_diff.c

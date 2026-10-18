@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Tool/Tool-Legacy_Assembler-v4-2026-10-17
+DIRECTORY SHA256: 1d4d313047dd5533564a02e49611f8880e40227806de65478b065b46564a5b75
+LEDGER: appended

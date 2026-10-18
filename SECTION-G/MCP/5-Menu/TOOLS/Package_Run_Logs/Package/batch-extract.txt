@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Batch/Batch-Extract-v2-2026-10-17
+DIRECTORY SHA256: 82c4d17b7e443239549f296d74686d905ab97600e61b44545d7e5686b72aa9b8
+LEDGER: appended

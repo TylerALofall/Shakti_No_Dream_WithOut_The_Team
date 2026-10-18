@@ -1,0 +1,135 @@
+# Tool-Submit
+
+Offline C99 submission preparer for C Code Develop 5.2.0 and user-operated
+iCurlHTTP. Start with PHONE_START_HERE.txt and menu option 1. This is a
+source package, not a prebuilt iOS app or a fabricated .ccdproj.
+
+FILES:
+  Tool.Submit.c
+  Tool.Support.c
+  Tool.Submit.h
+  Tool.Hash.h
+  Tool.Json.h
+  Tool.Forms.h
+  Tool.Plan.h
+  Tool.Git.h
+  Tool.Requests.h
+  Form.Single.txt
+  Form.Set.txt
+  PHONE_START_HERE.txt
+  HTTP.Settings.txt
+  SOURCE_NOTES.txt
+  RUN_REPORT.txt
+  GCC_RUNS.txt
+  CLANG_RUNS.txt
+  SANITIZER_RUNS.txt
+  Run.Suite.c.txt
+  Release.Check.c.txt
+  SHA256_INVENTORY.txt
+  README.md
+FORMAT: .c, .h, .txt, .md
+NAMES MEAN: family dir First-Name; source First.Name.c; binary shakti-<name> - a file that breaks the law is drift, flag it.
+
+RELATED TO: Reads one explicit single-tool or tool-set form, local source
+and document copies, and saved GitHub GraphQL response bodies. Produces a
+frozen text snapshot, README(s), two-pass source inventory, controlled HTTP
+request bodies, approval record and returned-byte receipt. iCurlHTTP is the
+separate, user-operated transport. Neither original assembler is modified,
+compiled, run or silently linked by this program.
+
+RUN: See RUN_REPORT.txt and the three captured run logs. Synthetic local
+runs establish the implemented behavior on Linux, not a live GitHub upload,
+an iPhone execution result, or independent K3 acceptance.
+
+CHANGED: 2026-10-03, version 1.0. New submission adapter. Existing READMEs are
+preserved byte-for-byte. A generated README explicitly selects SIX (the
+assembler's six slots) or FOUR (the other builder's four sections). It lists
+this submission, not a guessed complete inventory of a remote directory.
+
+## Build
+
+There are two C translation units and seven supporting headers. The headers
+are visible implementation source, not precompiled libraries. Only
+Tool.Submit.c defines main(). Both .c files are below 300 lines; see the
+release inventory for exact counts. The whole program is larger than those
+two entry files: read the headers as part of any code inspection.
+
+    cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Tool.Submit.c Tool.Support.c -o shakti-submit
+
+No Python, shell invocation, git executable, HTTP library, subprocess, or
+explicit heap allocation is used by the submitted program. Its own storage
+is fixed. The compiler/app/C runtime has its own memory use; this is not a
+claim that libc or the iOS app performs no allocation.
+
+C99 source syntax is used. Exclusive file creation requires the runtime's
+fopen "x" extension; it is not part of portable C99 stdio. The disposable
+compatibility probe must succeed. There is no fallback to an overwriting
+fopen mode. Writes use exclusive temporary creation, reserve an absent final
+name exclusively, rename over that owned reservation, and verify bytes.
+Use one operator in a private workspace, not a hostile shared filesystem.
+An interrupted write may leave an empty reservation and/or .tmp file. The
+program refuses to reuse them rather than treating them as a successful run.
+
+## Run
+
+On the phone, start with no arguments and use the numbered menu.
+Optional desktop invocations (each is a separate operation):
+
+    shakti-submit check
+    shakti-submit demo
+    shakti-submit prepare Demo.Single.txt
+    shakti-submit prepare Tyler.Submission.txt
+    shakti-submit approve tools_001
+    shakti-submit commit tools_001
+    shakti-submit readback tools_001
+    shakti-submit verify tools_001
+
+The last four require the corresponding saved response bodies described in
+the phone guide. A command named commit GENERATES a request; it does not
+send it. The entire program is offline. An exit status of 2 is BENCH.
+
+The example never constitutes a real repository check. The program does not
+authenticate manually supplied responses; their origin depends on your
+correct use of iCurlHTTP and GitHub HTTPS. Do not edit snapshots, approvals,
+or generated requests. Hashes bind the local stages; they are not signatures.
+
+## Limits and exact scope
+
+Maximum 8 families, 40 total files including READMEs, 128 KiB per file, and
+1 MiB total frozen payload including string terminators. Saved JSON and
+request buffers are bounded at 4 MiB. JSON depth is limited to 32 and tokens
+to 16,384. Capacity overflow is an error, never truncation.
+
+UTF-8 source and text documents only. NUL/binary payloads, remote binary or
+truncated text, symlinks, non-regular remote files, directories at file paths,
+unsafe ancestors, unknown response fields required by the schema, and
+uncertain access conditions stop the relevant operation. This version does
+not transport compiled executables, images or PDFs.
+
+The root is explicit and required. No old directory location is inferred.
+The upload destination is always a NEW submit/... review branch. Existing
+content changes require a specific REPLACE number. Unchanged text is skipped.
+There are no deletion, force-update, merge or pull-request approval commands.
+A new branch and a file-set commit are two separate remote operations; a
+failed commit can leave the branch behind. The commit includes the checked
+expectedHeadOid. Read-back checks selected file text against SHA-256.
+
+The tool does not certify an uploaded tool's correctness, run user tools, or
+claim to reproduce the original builder's full binary/naming-law admission
+rules. Declared dates remain declared; unknown source dates remain UNKNOWN.
+Examples and expected outputs do not become fabricated run evidence.
+
+## C integration
+
+A reviewed assembler integration can compile Tool.Submit.c with
+SHAKTI_SUBMIT_NO_MAIN defined and call:
+
+    shakti_submit_action("prepare", "Tyler.Submission.txt");
+
+That integration has not been installed in either original assembler.
+Refusals call exit(2), so callers must account for that process-level stop.
+For an additional reviewed in-process C check, register a SubmitCheck with
+ts_register_check(name, callback) and set CHECK to that exact name. The
+callback receives const plan/payload inputs and must return zero on success.
+Unknown required checks BENCH. HASHER=sha256 and LOGGER=inventory are actual
+built-ins; the program never loads or executes a command from configuration.

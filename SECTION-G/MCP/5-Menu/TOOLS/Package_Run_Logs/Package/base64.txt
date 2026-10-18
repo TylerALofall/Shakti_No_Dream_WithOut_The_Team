@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Base64/Base64-Decode-v1.1.0-2026-10-17
+DIRECTORY SHA256: cca67433ba6f02498b8b43f7d3c61d0cc413eedaea7f6e1eaf3f84f564246397
+LEDGER: appended

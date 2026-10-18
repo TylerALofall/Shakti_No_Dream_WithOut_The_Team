@@ -1,0 +1,11 @@
+FAMILY: Spiral
+TOOL: Template_make
+VERSION: 1_local1
+DATE: 2026-10-17
+INTRODUCTION: Walk XML or XML fences and emit distinct template forms to standard output; package revision 1 preserves the supplied source.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 Spiral.Template_make.c -o shakti-template-make
+COMMAND: ./shakti-template-make "{input_file}"
+EXAMPLE: ./shakti-template-make Example.Work.xml
+ENTRY_KIND: single
+ENTRY: Spiral.Template_make.c
+REQUIRED: Spiral.Template_make.c

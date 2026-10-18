@@ -1,0 +1,4 @@
+HASH: three standard vectors PASS
+PASS: packaged Spiral/Spiral-Template_make-v1_local1-2026-10-17
+DIRECTORY SHA256: a80efdf97203feeb5570f26e05ad46667ce6f19a10c79714b6678ef54fe2b013
+LEDGER: appended
