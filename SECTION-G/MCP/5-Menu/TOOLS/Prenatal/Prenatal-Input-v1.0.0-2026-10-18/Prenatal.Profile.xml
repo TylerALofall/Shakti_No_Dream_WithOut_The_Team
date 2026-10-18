@@ -1,0 +1,9 @@
+<prenatal_loader>
+  <width>1920</width>
+  <height>1080</height>
+  <pulse_on_numerator>2</pulse_on_numerator>
+  <pulse_on_denominator>3</pulse_on_denominator>
+  <voice_to_pulse_ratio>4</voice_to_pulse_ratio>
+  <monitor_enabled>0</monitor_enabled>
+  <density>1 2 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3 2 1 0 0 0 0 0 0 0 0 0 0 0</density>
+</prenatal_loader>

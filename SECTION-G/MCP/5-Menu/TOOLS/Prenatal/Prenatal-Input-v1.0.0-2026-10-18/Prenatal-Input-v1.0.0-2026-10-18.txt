@@ -1,0 +1,29 @@
+FAMILY: Prenatal
+TOOL: Input
+VERSION: 1.0.0
+DATE: 2026-10-18
+INTRODUCTION: Prepare bounded prenatal sight and sound inputs, preserve original voice samples, and deposit into the existing native intake. The existing workflow owns binary reconstruction, convergence, progression, memory and release. Includes eight original color recordings, one quiet reusable heartbeat atom, an adjustable XML profile, source bindings and native qualification evidence. Native host bridge, simultaneous independent heartbeat port and device output remain integration work.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude -ISECTION-A {package_dir}/Prenatal.Run.c SECTION-B/shakti_prenatal_loader.c SECTION-A/shakti_*.c -o prenatal-run
+COMMAND: ./prenatal-run --run {assets_dir} {profile} {new_fixture}
+EXAMPLE: ./prenatal-run --run SECTION-G/MCP/5-Menu/TOOLS/Prenatal/Prenatal-Input-v1.0.0-2026-10-18/Assets SECTION-G/MCP/5-Menu/TOOLS/Prenatal/Prenatal-Input-v1.0.0-2026-10-18/Prenatal.Profile.xml /tmp/shakti-prenatal-new-fixture
+ENTRY_KIND: manifest
+ENTRY: Prenatal.Input.manifest.txt
+REQUIRED: Prenatal.Input.manifest.txt
+REQUIRED: Prenatal.Run.c
+REQUIRED: Prenatal.Profile.xml
+REQUIRED: Catalog.xml
+REQUIRED: Source.Bindings.xml
+REQUIRED: Guide.md
+REQUIRED: Build_Run_Record.txt
+REQUIRED: Intake.Receipts.txt
+REQUIRED: Run.stdout.txt
+REQUIRED: Run.stderr.txt
+REQUIRED: Assets/black.wav
+REQUIRED: Assets/red.wav
+REQUIRED: Assets/green.wav
+REQUIRED: Assets/yellow.wav
+REQUIRED: Assets/blue.wav
+REQUIRED: Assets/magenta.wav
+REQUIRED: Assets/cyan.wav
+REQUIRED: Assets/white.wav
+REQUIRED: Assets/pulse.wav

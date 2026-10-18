@@ -1,0 +1,17 @@
+PROGRAM: prenatal-run
+RUN_SOURCE: Prenatal.Run.c
+MODULE: SECTION-B/shakti_prenatal_loader.c
+MODULE_HEADER: include/shakti_prenatal_loader.h
+EMBEDDED_NATIVE_SOURCE: SECTION-A/main.c
+LINK_NATIVE_SOURCES: SECTION-A/shakti_*.c
+NATIVE_HEADERS: include/*.h
+BASE_COMMIT: ff5a03a0a809bff86b3bb2b5f433dc3ca2860a30
+SOURCE_BINDINGS: Source.Bindings.xml
+PROFILE: Prenatal.Profile.xml
+ASSET_CATALOG: Catalog.xml
+GUIDE: Guide.md
+BUILD_AND_RUN_RECORD: Build_Run_Record.txt
+RECEIPTS: Intake.Receipts.txt
+STDOUT: Run.stdout.txt
+STDERR: Run.stderr.txt
+SCOPE: input preparation and real intake handoff; workflow owns advancement

@@ -1,0 +1,11 @@
+BENCH prenatal loader: whole native sight frame exceeds input capacity
+BENCH prenatal loader: incomplete/invalid profile
+BENCH prenatal loader: complete RIFF/WAVE required
+BENCH prenatal loader: 16 kHz signed 16-bit mono PCM required
+BENCH prenatal loader: audio input arguments/capacity/ownership
+BENCH media: current view must be released before its buffers are reused
+BENCH media: current view must be released before its buffers are reused
+BENCH media: current view must be released before its buffers are reused
+BENCH media: loading zone full; item not taken
+BENCH prenatal loader: empty prenatal context required
+BENCH media: reconstruction mismatch; whole source window held

@@ -1,0 +1,103 @@
+PRENATAL INPUT LOADER — NATIVE BUILD / RUN RECORD — 2026-10-18
+
+BASE
+TylerALofall/Shakti_No_Dream_WithOut_The_Team
+ff5a03a0a809bff86b3bb2b5f433dc3ca2860a30
+Work branch: shakti/clean-start-2026-10-18
+Forty fresh baseline source/header/ledger files matched their pinned Git blob
+ids byte-for-byte. Earlier 66-file local copies were excluded from this build.
+Original runtime, media, reconstruction and memory source files were unchanged.
+
+BUILD — actual commands, each exited 0 without diagnostics
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -I/workspace/scratch/f991c68037e2/shakti-clean/include -I/workspace/scratch/f991c68037e2/native-base/include -I/workspace/scratch/f991c68037e2/native-base/SECTION-A /workspace/scratch/f991c68037e2/prenatal-incoming/Prenatal.Run.c /workspace/scratch/f991c68037e2/shakti-clean/SECTION-B/shakti_prenatal_loader.c /workspace/scratch/f991c68037e2/native-base/SECTION-A/shakti_*.c -o /workspace/scratch/f991c68037e2/prenatal-run
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -Wmissing-prototypes -O2 -I/workspace/scratch/f991c68037e2/shakti-clean/include -I/workspace/scratch/f991c68037e2/native-base/include -c /workspace/scratch/f991c68037e2/shakti-clean/SECTION-B/shakti_prenatal_loader.c -o /workspace/scratch/f991c68037e2/prenatal-loader.o
+
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 /workspace/scratch/f991c68037e2/assembler-base/Tool.Assembler.c /workspace/scratch/f991c68037e2/assembler-base/Tool.README_builder.c -o /workspace/scratch/f991c68037e2/shakti-assembler
+
+The existing assembler's four source files also matched their pinned Git blob
+ids. Source reads/reviews, edits, compilations and executions were separate.
+The final complete source passed both the strict RUN build and the additional
+public-prototype object check.
+
+PULSE PREPARATION — exited 0
+
+/workspace/scratch/f991c68037e2/prenatal-run --prepare /workspace/scratch/f991c68037e2/prenatal-incoming/Prenatal.Profile.xml /workspace/scratch/f991c68037e2/heartbeat-source-16k.wav /workspace/scratch/f991c68037e2/prenatal-incoming/Assets/magenta.wav /workspace/scratch/f991c68037e2/pulse-reproduced.wav
+
+The reproduced pulse compared byte-identical to Assets/pulse.wav. Original voice files
+were copied intact from the supplied archive. The prepared atom is 16,000
+samples, active interval 10,667 samples, zero tail 5,333 samples, peak 2,110.
+Reference magenta peak is 8,441. Profile monitor_enabled is 0. No speaker opened.
+Source/original and derived SHA-256 values are in Catalog.xml.
+
+FINAL QUALIFICATION — both exited 0
+
+/workspace/scratch/f991c68037e2/prenatal-run --run /workspace/scratch/f991c68037e2/prenatal-incoming/Assets /workspace/scratch/f991c68037e2/prenatal-incoming/Prenatal.Profile.xml /workspace/scratch/f991c68037e2/prenatal-fixture-11
+
+/workspace/scratch/f991c68037e2/prenatal-run --run /workspace/scratch/f991c68037e2/prenatal-incoming/Assets /workspace/scratch/f991c68037e2/prenatal-incoming/Prenatal.Profile.xml /workspace/scratch/f991c68037e2/prenatal-fixture-12
+
+Actual checks:
+- Whole 16 kHz signed 16-bit mono WAV parsing, including metadata chunks.
+- Original samples preserved through every 250-sample chunk and final padding.
+- Black's 17,280-sample tail and all other recording tails retained across beats.
+- Exact quarter/half/three-quarter/full pixel populations; exact eight RGB
+  corners; native 0x80 brightness retained; paired hearing slots share density.
+- Full-frame capacity refusal before output writes, invalid/incomplete XML,
+  truncated/unsupported WAV and aliased borrowed source refusal.
+- Configurable quieter 100:1 gain and declared 1597/2584 phi approximation
+  producing 9,889 active samples. These are input-parameter checks.
+- 32 consecutive full-HD frames plus 64 actual founder-blue sound chunks
+  through the real MCP intake, actual binary encoder and actual reconstructor.
+- Separate pulse atom through 64 sound chunks / 32 audio-pair windows.
+- Two externally driven beats of black voice with 64 native-size 32x24 sight
+  frames and 128 audio chunks, preserving the longer-than-one-beat recording.
+- Deposit itself leaves binary-validation and publication counters unchanged.
+- Every rebuilt byte begins different from its reference. Original input is
+  overwritten after take, and only binary reconstruction passes validation.
+- App convergence view and sensory consumers borrow identical rebuilt pointers;
+  prenatal context remains empty. Release/reuse is driven by the RUN workflow.
+- Premature leased-buffer reuse and full loading-zone intake refuse.
+- Nonempty prenatal context refuses before intake. A deliberately flipped
+  binary bit holds the complete window and publishes no sensory view.
+- Native memory object remains byte-identical during input-boundary tests.
+
+COMPLETE RECEIPTS
+Each final process read/validated exactly 357 complete native intake records,
+with zero invalid records, then exported them through fsync + atomic rename.
+Both audit.complete.txt files, stdout and stderr compared byte-for-byte equal.
+The included Intake.Receipts.txt is that complete native export:
+  lines: 357
+  bytes: 60525
+  fnv1a64: 70762ca0b0cdb05b
+  sha256: 441d83871b90949f36ce72d3e5a6d2f7bf3ae2fb5cdd738bddc7515815d609e9
+Included Run.stdout.txt and Run.stderr.txt are from the first final process.
+The BENCH messages are expected outcomes of the explicit negative fixtures.
+
+OBSERVED LIVE-LOG LIMIT — retained, not concealed
+Some earlier post-process workspace reads exposed only 93 or 96 rows of the
+live append log, despite successful in-process validation of 357 records.
+Two foreground runs before atomic export also compared complete and equal;
+that did not establish reliable later workspace mirroring of the live file.
+The root cause of this workspace/live-log discrepancy is unqualified here.
+The existing production logger was not modified. Final qualification includes
+the separately checked, atomically exported 357-row native receipt artifacts;
+it does not assert reliable live-log mirroring, power-loss or device persistence.
+
+IMPLEMENTED / QUALIFIED BOUNDARY
+Implemented: bounded input preparation, complete recording loads, exact pixel
+density/RGB generation, one reusable quiet pulse and real intake handoff.
+Qualification: native synthetic external driver and minimal seeded runtime;
+actual core intake/binary/view functions, real supplied WAV data, fixed buffers.
+The test driver owns processing/release calls. The loader owns no progression.
+
+REMAINING INTEGRATION
+The supplied HTML file picker currently stores names/text locally. Native
+Swift/WKWebView source to hand its files into C was not supplied. The existing
+media group has sight plus two consecutive audio chunks; an independent
+simultaneous pulse/voice/sight connection needs the native heartbeat input port.
+Validated vision display and honoring muted monitor output need the real host.
+The production 22,982,400-beat scheduler, epoch-driven replay, learned memory,
+reflections and release policies remain under their existing workflow owner.
+This RUN is not a full runtime boot, device/speaker qualification or completed
+prenatal training. Existing sealed Cycle RUN packages remain unchanged.

@@ -1,0 +1,27 @@
+<prenatal_input_catalog version="1">
+  <ownership loader="prepare-and-deposit" progression="existing-workflow" trigger="external-heart" prenatal_context="empty" />
+  <ratios hearing_slots="64" sight_frames="32" pulse_atoms="1" default_logical_seconds="1" />
+  <total_beats value="22982400" expression="2^8 * 3^3 * 5^2 * 7 * 19" owner="workflow" />
+  <profile path="Prenatal.Profile.xml" />
+  <black_white cycles="5040" count_grid="64-master-slots" owner="workflow">
+    <black first="1" last="32" sight_frames="16" rgb="000000" />
+    <white first="33" last="64" sight_frames="16" rgb="FFFFFF" />
+  </black_white>
+  <voices role="host-catalog-only" source_directory="eden 3/media/voice69/">
+    <voice bits="0" rgb="000000" path="Assets/black.wav" samples="17280" sha256="74b3263c961c5b370f26ffe71615db9d969483c398e97f1599573f6344133ed1" />
+    <voice bits="1" rgb="FF0000" path="Assets/red.wav" samples="10560" sha256="0e08c0d5c038921f0d930652aee951016305be2abe739143bfa3c98c57f90aae" />
+    <voice bits="2" rgb="00FF00" path="Assets/green.wav" samples="10880" sha256="c23995bd33e296498100c1a02114ea5b81e220f24bd41bd6f354b73e88c8afc8" />
+    <voice bits="3" rgb="FFFF00" path="Assets/yellow.wav" samples="11520" sha256="bc04437c3a58291045ccddc4248ffbc5ddd77297ee4e5d8f34d499b3703e158f" />
+    <voice bits="4" rgb="0000FF" path="Assets/blue.wav" samples="10880" sha256="c49d49982dcafa88ec1bffdd87b6a91a0d940b3266084b996126d0c026b95872" />
+    <voice bits="5" rgb="FF00FF" path="Assets/magenta.wav" samples="17600" sha256="28acb2bc60b4b85a4936837770c6dbe4ae3ebee2b4c6399ce4af96ee4dfb8538" />
+    <voice bits="6" rgb="00FFFF" path="Assets/cyan.wav" samples="13760" sha256="7cf7f86829fe96b62f709b14e3f528c08341ced12ac0810d01d82ec703885a38" />
+    <voice bits="7" rgb="FFFFFF" path="Assets/white.wav" samples="8640" sha256="73c6d5c769f785c96e94dbd97662ab0e509b8eadedca3a5b893ba4a2d797815e" />
+  </voices>
+  <pulse path="Assets/pulse.wav" samples="16000" sample_rate="16000" on_numerator="2" on_denominator="3" active_samples="10667" zero_tail_samples="5333" peak="2110" reference="Assets/magenta.wav" reference_peak="8441" reference_ratio="4" monitor_enabled="0" sha256="8905ce8c277fcdbf9a3730d1b4b72b80b98c4c6630e9a960216036e0453a5554" />
+  <provenance>
+    <archive path="shakti_used_only_2026-08-17.zip" sha256="183c00ea57ae784f759b236c750cb2312bef71afd5ece66fe6879072b9f3c7a6" />
+    <source_heart path="heartbeat_phi7_90s_16k_mono.wav" sha256="1299a77058ee9fd6761b0a692796eebfff3daf1b99a18c27d129d47b54b5c8ee" />
+    <host_reference path="shakti_host.html" sha256="49a5b9820ffb128eb11f039d41cf5ad1f0383aaa6341b8bab08cadfe4d5715b8" />
+  </provenance>
+  <integration_pending native_file_picker_bridge="required" separate_simultaneous_heartbeat_port="required" validated_vision_display_binding="required" muted_monitor_binding="required" />
+</prenatal_input_catalog>

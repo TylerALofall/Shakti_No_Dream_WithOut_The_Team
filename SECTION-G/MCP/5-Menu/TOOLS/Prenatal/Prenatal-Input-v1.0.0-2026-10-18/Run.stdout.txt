@@ -1,0 +1,19 @@
+asset,samples,rate_hz,peak
+black,17280,16000,18971
+red,10560,16000,25916
+green,10880,16000,25987
+yellow,11520,16000,25995
+blue,10880,16000,25857
+magenta,17600,16000,8441
+cyan,13760,16000,14009
+white,8640,16000,11222
+pulse,16000,16000,2110
+INPUT PASS: exact density/RGB, shared 2:1 profile, XML bounds, whole WAVs and complete voice tails
+BINARY PASS: sight=32 audio=64 windows=32 beats=1
+BINARY PASS: sight=0 audio=64 windows=32 beats=1
+BINARY PASS: sight=64 audio=128 windows=64 beats=2
+HOLD PASS: queue pressure, context labels, leased reuse and damaged binary
+AUDIT PASS: valid=357 invalid=0
+AUDIT BYTES: 60525 fnv1a64=70762ca0b0cdb05b
+PASS: input-only loader; actual native intake/binary/shared-view checks; no speaker opened
+BOUNDARY: synthetic external driver; separate simultaneous heartbeat port/native HTML bridge remain integration work

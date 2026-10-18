@@ -1,0 +1,12 @@
+<source_bindings version="1">
+  <repository name="TylerALofall/Shakti_No_Dream_WithOut_The_Team" base_commit="ff5a03a0a809bff86b3bb2b5f433dc3ca2860a30" base_tree="dcceaa36fe479c36e4d87e3c84f42e3cfa371f23" />
+  <new_source path="SECTION-B/shakti_prenatal_loader.c" sha256="48608e6c5e143541634add3bf42aef84be2397dc4bb07cea056e2da936a0e98b" />
+  <new_header path="include/shakti_prenatal_loader.h" sha256="0e55ab6b5aa54ac9d383fd6f8ae8cb7f8a71e385b7ece97765736b87eb51d843" />
+  <run_source path="Prenatal.Run.c" sha256="ae6974caa55c9bbf887352dc021405b69a3bf83bd1aea1756e59d7f39d63d886" />
+  <input_boundary call="shakti_app_queue_frame" source="SECTION-A/main.c" processing_owner="existing-workflow" />
+  <binary_encode source="SECTION-A/shakti_media.c" call="shakti_binary_encode" />
+  <binary_rebuild source="SECTION-A/shakti_rebuild.c" call="shakti_binary_rebuild" />
+  <view source="SECTION-A/main.c" call="shakti_app_convergence_view" />
+  <native_baseline copied_files="40" git_blob_matches="40" existing_source_edits="0" />
+  <qualification receipt_lines="357" receipt_bytes="60525" receipt_sha256="441d83871b90949f36ce72d3e5a6d2f7bf3ae2fb5cdd738bddc7515815d609e9" independent_runs="2" />
+</source_bindings>
