@@ -1,0 +1,43 @@
+SENSES_ASSEMBLY_RUN_V1
+host_epoch_anchor=1792444449
+logical_epoch_seed=2140000000 (synthetic)
+input_format=RGB8 width=384 height=128
+clocks=64-hearing:32-sight:1-heart
+image_file_hash=db994b996793ed3f wave_file_hash=0000000000000000 atlas_file_hash=c0bb7101bc181d47 windows=1
+source=source-1 window=0 pos64=0 lane=0 format=RGB8 bytes=147456 stage=DECOMPOSED_AND_REBUILT_UNPUBLISHED hash=810592bc30f2758d
+  plane=0 offset=0 length=18432 file=Planes.bin
+  plane=1 offset=18432 length=18432 file=Planes.bin
+  plane=2 offset=36864 length=18432 file=Planes.bin
+  plane=3 offset=55296 length=18432 file=Planes.bin
+  plane=4 offset=73728 length=18432 file=Planes.bin
+  plane=5 offset=92160 length=18432 file=Planes.bin
+  plane=6 offset=110592 length=18432 file=Planes.bin
+  plane=7 offset=129024 length=18432 file=Planes.bin
+  byte=0 source=255 planes_to_byte=255 rebuilt=255
+  byte=1 source=255 planes_to_byte=255 rebuilt=255
+  byte=2 source=255 planes_to_byte=255 rebuilt=255
+  byte=3 source=255 planes_to_byte=255 rebuilt=255
+  byte=4 source=255 planes_to_byte=255 rebuilt=255
+  byte=5 source=255 planes_to_byte=255 rebuilt=255
+  byte=6 source=255 planes_to_byte=255 rebuilt=255
+  byte=7 source=255 planes_to_byte=255 rebuilt=255
+  byte=8 source=255 planes_to_byte=255 rebuilt=255
+  byte=9 source=255 planes_to_byte=255 rebuilt=255
+  byte=10 source=255 planes_to_byte=255 rebuilt=255
+  byte=11 source=255 planes_to_byte=255 rebuilt=255
+  byte=12 source=255 planes_to_byte=255 rebuilt=255
+  byte=13 source=255 planes_to_byte=255 rebuilt=255
+  byte=14 source=255 planes_to_byte=255 rebuilt=255
+  byte=15 source=255 planes_to_byte=255 rebuilt=255
+  byte=16 source=255 planes_to_byte=255 rebuilt=255
+  byte=17 source=255 planes_to_byte=255 rebuilt=255
+  byte=18 source=0 planes_to_byte=0 rebuilt=0
+  byte=19 source=0 planes_to_byte=0 rebuilt=0
+  byte=20 source=0 planes_to_byte=0 rebuilt=0
+  byte=21 source=0 planes_to_byte=0 rebuilt=0
+  byte=22 source=0 planes_to_byte=0 rebuilt=0
+  byte=23 source=0 planes_to_byte=0 rebuilt=0
+window=0 stage=HEARTBEAT_PUBLISHED rate=1 logical_slot=0 epoch=2140000000:2 visual_hash=810592bc30f2758d
+window=0 stage=OCR lines=3 characters=11 text=[ABC
+2+2=4
+123]

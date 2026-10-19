@@ -1,0 +1,20 @@
+RECORDED SOURCE — NATIVE QUALIFICATION 2026-10-19
+
+Repository source:
+SECTION-G/MCP/5-Menu/TOOLS/Prenatal/Prenatal-Loader-v2.0.0-2026-10-19/Assets/black.wav
+
+Original file: 34604 bytes, PCM16 little-endian mono at 16000 Hz.
+Recorded payload: 34560 bytes / 17280 sample frames.
+Complete native file execution: 35 visual windows / 70 audio clips.
+Final clip: 30 recorded sample frames plus 220 confirmed EOF-padding frames.
+Output: Recorded-Voice-Rebuilt.wav, 35044 bytes / 17500 sample frames.
+
+The RUN compared every recorded PCM byte in order, then required all trailing
+padding bytes to be zero. It passed exact reconstruction, heartbeat publication,
+supplied-font OCR and the isolated synthetic five-review memory exercise.
+This check uses the same compiled code and image/atlas as the primary evidence.
+The diagnostic source image is held across the recorded sound's whole duration.
+
+The primary Frames.txt / Planes.bin pair describes the 44100 Hz synthetic
+one-second run. It does not describe this separate recorded voice execution.
+No speech recognition, learned color association or real-time speed is claimed.

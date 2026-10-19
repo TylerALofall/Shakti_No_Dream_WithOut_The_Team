@@ -5,54 +5,6 @@
 
 static int overlap(const void *a, size_t na, const void *b, size_t nb);
 
-/* Portable bit transpose: each source byte contributes one bit to each of
- * eight planes. This groups bytes for packing; it never groups spatial pixels. */
-static uint64_t transpose_bits(uint64_t value)
-{
-    uint64_t swap;
-    swap = (value ^ (value >> 7)) & UINT64_C(0x00AA00AA00AA00AA);
-    value ^= swap ^ (swap << 7);
-    swap = (value ^ (value >> 14)) & UINT64_C(0x0000CCCC0000CCCC);
-    value ^= swap ^ (swap << 14);
-    swap = (value ^ (value >> 28)) & UINT64_C(0x00000000F0F0F0F0);
-    return value ^ swap ^ (swap << 28);
-}
-
-size_t shakti_binary_capacity(size_t bytes)
-{
-    if (bytes > SIZE_MAX - 7U) return 0U;
-    return ((bytes + 7U) / 8U) * 8U;
-}
-
-int shakti_binary_encode(const unsigned char *input, size_t bytes, unsigned char *binary, size_t capacity)
-{
-    size_t group, plane, stride, required = shakti_binary_capacity(bytes);
-    if (input == NULL || binary == NULL || bytes == 0U || required == 0U || capacity < required ||
-        overlap(input, bytes, binary, required)) return 0;
-    stride = required / 8U;
-    for (group = 0U; group < stride; ++group) {
-        uint64_t packed = 0U;
-        size_t i;
-        for (i = 0U; i < 8U && group * 8U + i < bytes; ++i)
-            packed |= (uint64_t)input[group * 8U + i] << (i * 8U);
-        packed = transpose_bits(packed);
-        for (plane = 0U; plane < 8U; ++plane)
-            binary[plane * stride + group] = (unsigned char)(packed >> (plane * 8U));
-    }
-    return 1;
-}
-
-uint64_t shakti_media_hash(const unsigned char *bytes, size_t size)
-{
-    uint64_t hash = UINT64_C(14695981039346656037);
-    size_t i;
-    for (i = 0U; i < size; ++i) {
-        hash ^= bytes[i];
-        hash *= UINT64_C(1099511628211);
-    }
-    return hash;
-}
-
 static int overlap(const void *a, size_t na, const void *b, size_t nb)
 {
     uintptr_t aa = (uintptr_t)a, bb = (uintptr_t)b;
@@ -87,7 +39,8 @@ static int frame_valid(const shakti_media_frame_t *frame)
     size_t sizes[4];
     if (frame == NULL || !memchr(frame->source_id, 0, sizeof(frame->source_id)) ||
         !frame->source_id[0] || !memchr(frame->context, 0, sizeof(frame->context)) ||
-        frame->lane > 2U || frame->sample_bytes == 0U || frame->sample_bytes > 8U ||
+        frame->lane > 2U || frame->retention_policy > SHAKTI_MEDIA_MOMENT ||
+        frame->format > SHAKTI_FORMAT_PCM_S16LE || frame->sample_bytes == 0U || frame->sample_bytes > 8U ||
         (frame->required_mask != SHAKTI_MEDIA_SIGHT && frame->required_mask != SHAKTI_MEDIA_AUDIO_PAIR &&
          frame->required_mask != SHAKTI_MEDIA_MOVIE) || !(frame->required_mask & (1U << frame->lane))) return 0;
     for (i = 0U; frame->source_id[i]; ++i)
@@ -110,6 +63,10 @@ static int frame_valid(const shakti_media_frame_t *frame)
         expected = count * frame->channels * frame->sample_bytes;
     }
     if (expected == 0U || expected > SIZE_MAX || frame->bytes != (size_t)expected) return 0;
+    if (frame->format && (frame->lane ?
+        (frame->format != SHAKTI_FORMAT_PCM_S16LE || frame->sample_bytes != 2U) :
+        (frame->sample_bytes != 1U || frame->format !=
+            (frame->channels == 3U ? SHAKTI_FORMAT_RGB8 : SHAKTI_FORMAT_RGBA8)))) return 0;
     size = shakti_binary_capacity(frame->bytes);
     if (!size || !frame->input || !frame->reference || !frame->binary || !frame->rebuilt ||
         frame->reference_capacity < frame->bytes || frame->binary_capacity < size ||
@@ -163,9 +120,10 @@ int shakti_media_queue(shakti_media_state_t *state, const shakti_media_frame_t *
             memset(group, 0, sizeof(*group));
             group->order = ++state->next_order;
             group->required_mask = frame->required_mask;
+            group->retention_policy = frame->retention_policy;
             group->in_use = 1U;
         }
-        if (group->required_mask != frame->required_mask || group->taken || group->held ||
+        if (group->required_mask != frame->required_mask || group->retention_policy != frame->retention_policy || group->taken || group->held ||
             (group->queued_mask & (1U << frame->lane))) return reject(state, "duplicate or incompatible convergence lane");
         for (lane = 0U; lane < 3U; ++lane) if (group->queued_mask & (1U << lane)) {
             const shakti_media_frame_t *other = &group->parts[lane];
@@ -182,37 +140,73 @@ int shakti_media_queue(shakti_media_state_t *state, const shakti_media_frame_t *
     return 1;
 }
 
+static int decompose(shakti_media_state_t *state, shakti_media_group_t *group)
+{
+    size_t lane, byte;
+    for (lane = 0U; lane < 3U; ++lane) if (group->required_mask & (1U << lane)) {
+        shakti_media_frame_t *frame = &group->parts[lane];
+        memcpy(frame->reference, frame->input, frame->bytes);
+        if (!shakti_binary_encode(frame->input, frame->bytes, frame->binary, frame->binary_capacity)) {
+            group->held = 1U;
+            (void)reject(state, "binary breakdown failed; item held");
+            return 0;
+        }
+        for (byte = 0U; byte < frame->bytes; ++byte)
+            frame->rebuilt[byte] = (unsigned char)~frame->reference[byte];
+    }
+    group->taken = 1U;
+    return 1;
+}
+
+static int validate_lane(shakti_media_state_t *state, shakti_media_group_t *group, size_t lane)
+{
+    shakti_media_frame_t *frame = &group->parts[lane];
+    uint64_t hash = shakti_media_hash(frame->reference, frame->bytes);
+    if (!shakti_binary_rebuild(frame->binary, frame->bytes, frame->rebuilt, frame->rebuilt_capacity) ||
+        memcmp(frame->reference, frame->rebuilt, frame->bytes) != 0 ||
+        (frame->expected_hash && frame->expected_hash != hash)) {
+        group->held = 1U;
+        (void)reject(state, "reconstruction mismatch; whole source window held");
+        return 0;
+    }
+    frame->validated_hash = hash;
+    frame->prepared_binary_hash = shakti_media_hash(frame->binary, shakti_binary_capacity(frame->bytes));
+    group->checked_mask |= 1U << lane;
+    ++state->validated_parts;
+    return 1;
+}
+
+int shakti_media_prepare(shakti_media_state_t *state)
+{
+    size_t i, lane;
+    int count = 0;
+    if (!state) return -1;
+    for (i = 0U; i < SHAKTI_MEDIA_GROUPS; ++i) {
+        shakti_media_group_t *group = &state->pending[i];
+        if (!group->in_use || group->held || group->taken ||
+            group->queued_mask != group->required_mask) continue;
+        if (!decompose(state, group)) return -1;
+        for (lane = 0U; lane < 3U; ++lane)
+            if ((group->required_mask & (1U << lane)) && !validate_lane(state, group, lane)) return -1;
+        group->prepared = 1U;
+        ++count;
+    }
+    return count;
+}
+
 int shakti_media_take(shakti_media_state_t *state)
 {
-    size_t i, lane, chosen = SHAKTI_MEDIA_GROUPS;
+    size_t i, chosen = SHAKTI_MEDIA_GROUPS;
     uint64_t oldest = UINT64_MAX;
-    if (state == NULL || state->current_ready || state->active != SHAKTI_MEDIA_GROUPS) return 0;
-    for (i = 0U; i < SHAKTI_MEDIA_GROUPS; ++i) {
+    if (!state || state->current_ready || state->active != SHAKTI_MEDIA_GROUPS) return 0;
+    for (i = 0U; i < SHAKTI_MEDIA_GROUPS; ++i)
         if (state->pending[i].in_use && !state->pending[i].held && state->pending[i].order < oldest) {
             oldest = state->pending[i].order;
             chosen = i;
         }
-    }
-    if (chosen == SHAKTI_MEDIA_GROUPS) return 0;
-    if (state->pending[chosen].queued_mask != state->pending[chosen].required_mask) return 0;
-    for (lane = 0U; lane < 3U; ++lane) if (state->pending[chosen].required_mask & (1U << lane)) {
-        shakti_media_frame_t *frame = &state->pending[chosen].parts[lane];
-        memcpy(frame->reference, frame->input, frame->bytes);
-        if (!shakti_binary_encode(frame->input, frame->bytes, frame->binary, frame->binary_capacity)) {
-            state->pending[chosen].held = 1U;
-            (void)reject(state, "binary breakdown failed; item held");
-            return -1;
-        }
-    }
-    /* No original pixels or samples seed the output. Every output byte starts
-     * different from its reference; a skipped or partial decoder cannot pass. */
-    for (lane = 0U; lane < 3U; ++lane) if (state->pending[chosen].required_mask & (1U << lane)) {
-        shakti_media_frame_t *frame = &state->pending[chosen].parts[lane];
-        size_t byte;
-        for (byte = 0U; byte < frame->bytes; ++byte)
-            frame->rebuilt[byte] = (unsigned char)~frame->reference[byte];
-    }
-    state->pending[chosen].taken = 1U;
+    if (chosen == SHAKTI_MEDIA_GROUPS ||
+        state->pending[chosen].queued_mask != state->pending[chosen].required_mask) return 0;
+    if (!state->pending[chosen].taken && !decompose(state, &state->pending[chosen])) return -1;
     state->active = (unsigned int)chosen;
     return 1;
 }
@@ -230,24 +224,28 @@ int shakti_media_step(shakti_media_state_t *state, unsigned int heartbeat_slot)
         if (taken == 0) return 1;
     }
     group = &state->pending[state->active];
+    if (group->prepared) {
+        if (!(heartbeat_slot & 1U)) group->gate_seen = 1U;
+        if (!group->gate_seen || ((group->required_mask == SHAKTI_MEDIA_SIGHT) ?
+            (heartbeat_slot & 1U) : !(heartbeat_slot & 1U))) return 1;
+        for (lane = 0U; lane < 3U; ++lane) if (group->required_mask & (1U << lane)) {
+            const shakti_media_frame_t *frame = &group->parts[lane];
+            if (shakti_media_hash(frame->reference, frame->bytes) != frame->validated_hash ||
+                shakti_media_hash(frame->binary, shakti_binary_capacity(frame->bytes)) != frame->prepared_binary_hash ||
+                memcmp(frame->reference, frame->rebuilt, frame->bytes)) {
+                group->held = 1U; state->active = SHAKTI_MEDIA_GROUPS;
+                (void)reject(state, "prepared window changed before heartbeat publication");
+                return -1;
+            }
+        }
+    }
     for (lane = 0U; lane < 3U; ++lane) {
-        shakti_media_frame_t *frame;
-        uint64_t hash;
         if (!(group->required_mask & (1U << lane)) || (group->checked_mask & (1U << lane)) ||
             ((heartbeat_slot & 1U) != (lane == 2U ? 1U : 0U))) continue;
-        frame = &group->parts[lane];
-        hash = shakti_media_hash(frame->reference, frame->bytes);
-        if (!shakti_binary_rebuild(frame->binary, frame->bytes, frame->rebuilt, frame->rebuilt_capacity) ||
-            memcmp(frame->reference, frame->rebuilt, frame->bytes) != 0 ||
-            (frame->expected_hash && frame->expected_hash != hash)) {
-            group->held = 1U;
+        if (!validate_lane(state, group, lane)) {
             state->active = SHAKTI_MEDIA_GROUPS;
-            (void)reject(state, "reconstruction mismatch; whole source window held");
             return -1;
         }
-        frame->validated_hash = hash;
-        group->checked_mask |= 1U << lane;
-        ++state->validated_parts;
     }
     if (group->checked_mask == group->required_mask) {
         state->current = *group;
@@ -265,6 +263,7 @@ int shakti_media_step(shakti_media_state_t *state, unsigned int heartbeat_slot)
             to->channels = from->channels;
             to->sample_bytes = from->sample_bytes;
             to->sample_rate = from->sample_rate;
+            to->format = from->format;
             to->data = from->rebuilt;
             to->bytes = from->bytes;
             to->validated_hash = from->validated_hash;
@@ -315,3 +314,4 @@ const shakti_sensory_group_t *shakti_media_perception(const shakti_media_state_t
 {
     return state != NULL && state->current_ready ? &state->sensory : NULL;
 }
+

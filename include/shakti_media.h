@@ -9,6 +9,12 @@
 #define SHAKTI_MEDIA_SIGHT 1U
 #define SHAKTI_MEDIA_AUDIO_PAIR 6U
 #define SHAKTI_MEDIA_MOVIE 7U
+#define SHAKTI_MEDIA_HISTORY 0U
+#define SHAKTI_MEDIA_MOMENT 1U
+#define SHAKTI_FORMAT_UNSPECIFIED 0U
+#define SHAKTI_FORMAT_RGB8 1U
+#define SHAKTI_FORMAT_RGBA8 2U
+#define SHAKTI_FORMAT_PCM_S16LE 3U
 
 /* The native controller deposits decoded pixels/PCM in caller-owned storage.
  * Queueing borrows these buffers until release/cancel. Take immediately makes
@@ -21,6 +27,7 @@ typedef struct {
     uint64_t position64;
     unsigned int lane;                 /* 0 sight, 1 first audio, 2 second audio */
     unsigned int required_mask;        /* 1 picture/page, 6 sound, 7 movie */
+    unsigned int format, retention_policy; /* Explicit format; moment does not record a movie. */
     unsigned int width, height, channels, sample_bytes, sample_rate;
     const unsigned char *input;
     unsigned char *reference;
@@ -29,13 +36,15 @@ typedef struct {
     size_t bytes, reference_capacity, binary_capacity, rebuilt_capacity;
     uint64_t expected_hash;            /* 0: compare to the held reference only */
     uint64_t validated_hash;
+    uint64_t prepared_binary_hash;     /* Set only by the explicit prepare path. */
 } shakti_media_frame_t;
 
 typedef struct {
     shakti_media_frame_t parts[3];
     uint64_t order;
     unsigned int queued_mask, checked_mask, required_mask;
-    unsigned char in_use, taken, held;
+    unsigned int retention_policy;
+    unsigned char in_use, taken, held, prepared, gate_seen;
 } shakti_media_group_t;
 
 typedef struct {
@@ -43,6 +52,7 @@ typedef struct {
     char context[SHAKTI_MEDIA_CONTEXT_BYTES];
     uint64_t position64;
     unsigned int lane, width, height, channels, sample_bytes, sample_rate;
+    unsigned int format;
     const unsigned char *data; /* Actual rebuilt bytes in the shared arena. */
     size_t bytes;
     uint64_t validated_hash;
@@ -68,6 +78,10 @@ uint64_t shakti_media_hash(const unsigned char *bytes, size_t size);
 void shakti_media_init(shakti_media_state_t *state);
 int shakti_media_queue(shakti_media_state_t *state, const shakti_media_frame_t *frame);
 int shakti_media_take(shakti_media_state_t *state);
+/* Compute complete queued windows ahead of the clock. Never publish, advance
+ * a clock, or award an exposure. Positive: windows prepared, 0: none, -1: hold.
+ * All borrowed buffers remain leased through heartbeat publication/release. */
+int shakti_media_prepare(shakti_media_state_t *state);
 /* -1 held bad item, 1 continuing/waiting, 2 complete synchronized publication. */
 int shakti_media_step(shakti_media_state_t *state, unsigned int heartbeat_slot);
 /* Intake diagnostics only. Perception consumers use perception(), which

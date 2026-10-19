@@ -468,6 +468,7 @@ void shakti_prenatal_feed(shakti_runtime_t *runtime, unsigned int slot)
         if (!lane) {
             frame->width = flow.config.width; frame->height = flow.config.height;
             frame->channels = 3U; frame->sample_bytes = 1U; frame->bytes = n;
+            frame->format = SHAKTI_FORMAT_RGB8;
             frame->input = sight[0]; frame->reference = sight[1];
             frame->binary = sight[2]; frame->rebuilt = sight[3];
             frame->reference_capacity = frame->binary_capacity = frame->rebuilt_capacity = sizeof(sight[0]);
@@ -482,6 +483,7 @@ void shakti_prenatal_feed(shakti_runtime_t *runtime, unsigned int slot)
                 memcpy(out + i * 4U + 2U, waves[8].samples + (offset + i) * 2U, 2U);
             }
             frame->channels = 2U; frame->sample_bytes = 2U; frame->sample_rate = 16000U;
+            frame->format = SHAKTI_FORMAT_PCM_S16LE;
             frame->bytes = AUDIO_BYTES; frame->input = out;
             frame->reference = hearing[lane - 1U][1]; frame->binary = hearing[lane - 1U][2];
             frame->rebuilt = hearing[lane - 1U][3];

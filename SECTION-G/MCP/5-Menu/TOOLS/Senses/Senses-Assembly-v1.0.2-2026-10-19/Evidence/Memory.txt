@@ -1,0 +1,157 @@
+2140000000:6
+id=sense-document
+SHAKTI_SENSE_V1
+source=source-1
+window=0
+visual=OCR_DOCUMENT RGB8 384x128 hash=810592bc30f2758d
+text=ABC
+2+2=4
+123
+audio=PCM_S16LE rate=44100 channels=1 positions=0,1 hashes=bc3cfdc3d2ef07dc,426b1335fa0056dc
+transcript=NOT_SUPPLIED
+thought=NOT_SUPPLIED
+
+2140000020:24
+reflection=reflection-batch-2140000019-64
+1. Title the last 10 tool calls
+SYNTHETIC RUN ANSWER review=1 question=1. Tests transport and consolidation, not autonomous reflection.
+2. Summary
+SYNTHETIC RUN ANSWER review=1 question=2. Tests transport and consolidation, not autonomous reflection.
+3. Did I finish — if no, the reason
+SYNTHETIC RUN ANSWER review=1 question=3. Tests transport and consolidation, not autonomous reflection.
+4. Was it successful
+SYNTHETIC RUN ANSWER review=1 question=4. Tests transport and consolidation, not autonomous reflection.
+5. If I was to redo it, what would I do different
+SYNTHETIC RUN ANSWER review=1 question=5. Tests transport and consolidation, not autonomous reflection.
+6. Tools used
+SYNTHETIC RUN ANSWER review=1 question=6. Tests transport and consolidation, not autonomous reflection.
+7. What tools would have helped
+SYNTHETIC RUN ANSWER review=1 question=7. Tests transport and consolidation, not autonomous reflection.
+8. What could Tyler have done different to help
+SYNTHETIC RUN ANSWER review=1 question=8. Tests transport and consolidation, not autonomous reflection.
+9. What files did I save, and their paths
+SYNTHETIC RUN ANSWER review=1 question=9. Tests transport and consolidation, not autonomous reflection.
+10. Memories recalled that helped, by the epoch of the first memory in the batch
+SYNTHETIC RUN ANSWER review=1 question=10. Tests transport and consolidation, not autonomous reflection.
+11. Notes
+SYNTHETIC RUN ANSWER review=1 question=11. Tests transport and consolidation, not autonomous reflection.
+12. Meta tags for auto-search — shoot for 15
+SYNTHETIC RUN ANSWER review=1 question=12. Tests transport and consolidation, not autonomous reflection.
+13. Cross reference — override all additional memory sets to link this to:
+sense-document
+
+2140000040:38
+reflection=reflection-batch-2140000040-12
+1. Title the last 10 tool calls
+SYNTHETIC RUN ANSWER review=2 question=1. Tests transport and consolidation, not autonomous reflection.
+2. Summary
+SYNTHETIC RUN ANSWER review=2 question=2. Tests transport and consolidation, not autonomous reflection.
+3. Did I finish — if no, the reason
+SYNTHETIC RUN ANSWER review=2 question=3. Tests transport and consolidation, not autonomous reflection.
+4. Was it successful
+SYNTHETIC RUN ANSWER review=2 question=4. Tests transport and consolidation, not autonomous reflection.
+5. If I was to redo it, what would I do different
+SYNTHETIC RUN ANSWER review=2 question=5. Tests transport and consolidation, not autonomous reflection.
+6. Tools used
+SYNTHETIC RUN ANSWER review=2 question=6. Tests transport and consolidation, not autonomous reflection.
+7. What tools would have helped
+SYNTHETIC RUN ANSWER review=2 question=7. Tests transport and consolidation, not autonomous reflection.
+8. What could Tyler have done different to help
+SYNTHETIC RUN ANSWER review=2 question=8. Tests transport and consolidation, not autonomous reflection.
+9. What files did I save, and their paths
+SYNTHETIC RUN ANSWER review=2 question=9. Tests transport and consolidation, not autonomous reflection.
+10. Memories recalled that helped, by the epoch of the first memory in the batch
+SYNTHETIC RUN ANSWER review=2 question=10. Tests transport and consolidation, not autonomous reflection.
+11. Notes
+SYNTHETIC RUN ANSWER review=2 question=11. Tests transport and consolidation, not autonomous reflection.
+12. Meta tags for auto-search — shoot for 15
+SYNTHETIC RUN ANSWER review=2 question=12. Tests transport and consolidation, not autonomous reflection.
+13. Cross reference — override all additional memory sets to link this to:
+sense-document
+
+2140000060:50
+reflection=reflection-batch-2140000060-24
+1. Title the last 10 tool calls
+SYNTHETIC RUN ANSWER review=3 question=1. Tests transport and consolidation, not autonomous reflection.
+2. Summary
+SYNTHETIC RUN ANSWER review=3 question=2. Tests transport and consolidation, not autonomous reflection.
+3. Did I finish — if no, the reason
+SYNTHETIC RUN ANSWER review=3 question=3. Tests transport and consolidation, not autonomous reflection.
+4. Was it successful
+SYNTHETIC RUN ANSWER review=3 question=4. Tests transport and consolidation, not autonomous reflection.
+5. If I was to redo it, what would I do different
+SYNTHETIC RUN ANSWER review=3 question=5. Tests transport and consolidation, not autonomous reflection.
+6. Tools used
+SYNTHETIC RUN ANSWER review=3 question=6. Tests transport and consolidation, not autonomous reflection.
+7. What tools would have helped
+SYNTHETIC RUN ANSWER review=3 question=7. Tests transport and consolidation, not autonomous reflection.
+8. What could Tyler have done different to help
+SYNTHETIC RUN ANSWER review=3 question=8. Tests transport and consolidation, not autonomous reflection.
+9. What files did I save, and their paths
+SYNTHETIC RUN ANSWER review=3 question=9. Tests transport and consolidation, not autonomous reflection.
+10. Memories recalled that helped, by the epoch of the first memory in the batch
+SYNTHETIC RUN ANSWER review=3 question=10. Tests transport and consolidation, not autonomous reflection.
+11. Notes
+SYNTHETIC RUN ANSWER review=3 question=11. Tests transport and consolidation, not autonomous reflection.
+12. Meta tags for auto-search — shoot for 15
+SYNTHETIC RUN ANSWER review=3 question=12. Tests transport and consolidation, not autonomous reflection.
+13. Cross reference — override all additional memory sets to link this to:
+sense-document
+
+2140000080:62
+reflection=reflection-batch-2140000080-36
+1. Title the last 10 tool calls
+SYNTHETIC RUN ANSWER review=4 question=1. Tests transport and consolidation, not autonomous reflection.
+2. Summary
+SYNTHETIC RUN ANSWER review=4 question=2. Tests transport and consolidation, not autonomous reflection.
+3. Did I finish — if no, the reason
+SYNTHETIC RUN ANSWER review=4 question=3. Tests transport and consolidation, not autonomous reflection.
+4. Was it successful
+SYNTHETIC RUN ANSWER review=4 question=4. Tests transport and consolidation, not autonomous reflection.
+5. If I was to redo it, what would I do different
+SYNTHETIC RUN ANSWER review=4 question=5. Tests transport and consolidation, not autonomous reflection.
+6. Tools used
+SYNTHETIC RUN ANSWER review=4 question=6. Tests transport and consolidation, not autonomous reflection.
+7. What tools would have helped
+SYNTHETIC RUN ANSWER review=4 question=7. Tests transport and consolidation, not autonomous reflection.
+8. What could Tyler have done different to help
+SYNTHETIC RUN ANSWER review=4 question=8. Tests transport and consolidation, not autonomous reflection.
+9. What files did I save, and their paths
+SYNTHETIC RUN ANSWER review=4 question=9. Tests transport and consolidation, not autonomous reflection.
+10. Memories recalled that helped, by the epoch of the first memory in the batch
+SYNTHETIC RUN ANSWER review=4 question=10. Tests transport and consolidation, not autonomous reflection.
+11. Notes
+SYNTHETIC RUN ANSWER review=4 question=11. Tests transport and consolidation, not autonomous reflection.
+12. Meta tags for auto-search — shoot for 15
+SYNTHETIC RUN ANSWER review=4 question=12. Tests transport and consolidation, not autonomous reflection.
+13. Cross reference — override all additional memory sets to link this to:
+sense-document
+
+2140000100:74
+reflection=reflection-batch-2140000100-48
+1. Title the last 10 tool calls
+SYNTHETIC RUN ANSWER review=5 question=1. Tests transport and consolidation, not autonomous reflection.
+2. Summary
+SYNTHETIC RUN ANSWER review=5 question=2. Tests transport and consolidation, not autonomous reflection.
+3. Did I finish — if no, the reason
+SYNTHETIC RUN ANSWER review=5 question=3. Tests transport and consolidation, not autonomous reflection.
+4. Was it successful
+SYNTHETIC RUN ANSWER review=5 question=4. Tests transport and consolidation, not autonomous reflection.
+5. If I was to redo it, what would I do different
+SYNTHETIC RUN ANSWER review=5 question=5. Tests transport and consolidation, not autonomous reflection.
+6. Tools used
+SYNTHETIC RUN ANSWER review=5 question=6. Tests transport and consolidation, not autonomous reflection.
+7. What tools would have helped
+SYNTHETIC RUN ANSWER review=5 question=7. Tests transport and consolidation, not autonomous reflection.
+8. What could Tyler have done different to help
+SYNTHETIC RUN ANSWER review=5 question=8. Tests transport and consolidation, not autonomous reflection.
+9. What files did I save, and their paths
+SYNTHETIC RUN ANSWER review=5 question=9. Tests transport and consolidation, not autonomous reflection.
+10. Memories recalled that helped, by the epoch of the first memory in the batch
+SYNTHETIC RUN ANSWER review=5 question=10. Tests transport and consolidation, not autonomous reflection.
+11. Notes
+SYNTHETIC RUN ANSWER review=5 question=11. Tests transport and consolidation, not autonomous reflection.
+12. Meta tags for auto-search — shoot for 15
+SYNTHETIC RUN ANSWER review=5 question=12. Tests transport and consolidation, not autonomous reflection.
+13. Cross reference — override all additional memory sets to link this to:
+sense-document

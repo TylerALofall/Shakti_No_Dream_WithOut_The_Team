@@ -1,0 +1,16 @@
+FAMILY: Senses
+TOOL: Assembly
+VERSION: 1.0.1
+DATE: 2026-10-19
+INTRODUCTION: Run typed image and optional PCM files through tagged preparation, exact reconstruction, heartbeat publication, supplied-font OCR and existing memory; published raw evidence is image-only.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Senses.Assembly.c @Runtime.Sources.txt -o shakti-senses
+COMMAND: ./shakti-senses --run "{new_output_directory}" "{image_pnm}" "{wav_or_minus}" "{atlas_or_minus}" "{alphabet}" "{cell_width}" "{cell_height}"
+EXAMPLE: ./shakti-senses --run /tmp/senses-output SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Inputs/document.ppm - SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Inputs/atlas.ppm " 0123456789+=ABC" 24 32
+ENTRY_KIND: manifest
+ENTRY: Senses.Assembly.manifest.txt
+REQUIRED: Senses.Assembly.c
+REQUIRED: Senses.Assembly.manifest.txt
+REQUIRED: Sources.Bindings.txt
+REQUIRED: Native.Run.txt
+REQUIRED: Inputs/document.ppm
+REQUIRED: Inputs/atlas.ppm
