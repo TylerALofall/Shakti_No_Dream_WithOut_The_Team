@@ -1,4 +1,31 @@
 # Shakti_No_Dream_WithOut_The_Team
+
+## Current integration boundary — 2026-10-18
+
+The current runtime map and component completion register are in
+`SECTION-A/Runtime.Flow.txt`, under `COMPONENT COMPLETION AND SECTION BOUNDARIES`.
+Use that register for the active build and its qualification limits. The older
+dated chapters below preserve project history and do not establish that their
+paths, response scheduling, or proposed integrations are implemented today.
+
+The published C baseline is `ff5a03a0a809bff86b3bb2b5f433dc3ca2860a30`.
+Its console build compiles 19 `SECTION-A` C files with the `include/` interfaces.
+The loop runs without a reply; one heartbeat paces all 32 sight and 64 hearing
+slots. Input files, tool packages, historical copies and work orders are not
+all compiled into that executable. Other sections require their own acceptance.
+
+The input-only prenatal branch `shakti/clean-start-2026-10-18`, reviewed at
+`7aa4919e3f362fafd482644a5f5f4e3bf031625f`, is a separate, unmerged component.
+Its native RUNs pass; its default density profile still differs from the
+agreed solid-color stimulus. Heartbeat/frontend integration belongs to the
+host work, not that input-preparation worker.
+
+No Swift app or Xcode project is qualified yet. The first host must drive the
+existing C loop, load actual media bytes through MCP, display rebuilt output,
+and show native epoch/memory/reflection receipts. Completion is recorded per
+component and interface; a native RUN does not certify an entire section or
+real learned perception.
+
 Plugging in the Drift Free Workflow and hitting the build hard with work flows and systematic building
 
 > **START HERE — QA work orders:** the one live instruction document is `Copilot_Intake/QA_specialist_Instruction.md` (v1.1, 2026-09-29). The old `QA_Specialist_Instruction.txt` is deleted. The `2026-09-22 No Drift.zip` is a frozen snapshot — never read instructions from it. Copilot agents: read `.github/copilot-instructions.md` first.
@@ -338,7 +365,7 @@ Learn the nine as a single loop, in order.
 | 6 | SHAKTI SHELL | Gf — TOOL CALL | The shell she lives in; tool calls execute here. |
 | 7 | OUTBOUND MAIL | Gg — MESSAGES AND NOTES TO TYLER | Her → Tyler. |
 | 8 | INBOUND MAIL | Gh — TYLER'S MESSAGES AND NOTES TO SHAKTI | Tyler → her. |
-| 9 | SELF-REFLECTION | Gi — THIRTEEN-POINT SELF-REFLECTION | Taken every 10–13 responses; 13 questions; stored by epoch. |
+| 9 | SELF-REFLECTION | Gi — THIRTEEN-POINT SELF-REFLECTION | After ten actual MCP tool calls; pending capsules also request timed reviews. Thirteen actual answers are stored by epoch. |
 
 Log/address contract: `[epoch]:[frame/subsecond]-[function identity]`.
 The Aa-01 tail of the old contract is retired; the function identity is

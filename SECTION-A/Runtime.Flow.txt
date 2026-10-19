@@ -235,3 +235,137 @@ the new full-size native media queue. It must not be used as full vision.
 The prenatal programs in SECTION-B were not migrated or retrained here.
 The requested 19-week sound, 25-week colors and 22,982,400 stateless beats
 remain a separate training integration; this change does not claim them.
+
+COMPONENT COMPLETION AND SECTION BOUNDARIES — 2026-10-18
+
+Purpose: keep the active build and accepted behavior reviewable as the source
+bank grows. Close a specific component/interface at an exact source commit.
+Do not mark an entire section complete from a successful partial RUN. Reuse
+these existing guides and the append-only tool ledger; do not make another
+runtime copy or start a parallel memory/clock implementation for the host.
+
+PINNED INVENTORY
+Published baseline ff5a03a0a809bff86b3bb2b5f433dc3ca2860a30:
+  611 tracked files, 195 C sources, 36 headers, zero Swift sources.
+Reviewed prenatal branch 7aa4919e3f362fafd482644a5f5f4e3bf031625f:
+  634 tracked files, 197 C sources, 37 headers, nine WAVs, zero Swift sources.
+These are dated source snapshots, not automatic live counts. The incoming
+branch adds 23 files and one ledger line. It has not been merged by this work.
+
+The console command at the top of this guide compiles 19 Section-A C files:
+  Bootstrap/data: main.c, shakti_loader.c, shakti_asset.c, shakti_manifest.c.
+  Clock/control/log: shakti_time.c, shakti_loop.c, shakti_log.c.
+  Sensory reconstruction: shakti_media.c, shakti_rebuild.c.
+  Memory/arena: shakti_memory.c, shakti_retention.c.
+  Existing fact reasoning/report: shakti_reason.c, shakti_report.c.
+  Lessons/artifacts: shakti_artifact.c, shakti_handwriting.c,
+    shakti_receptor.c, shakti_school.c, shakti_score.c, shakti_tablet.c.
+The twenty shipped baseline include/shakti_*.h files define those interfaces;
+the added prenatal header belongs to the separately reviewed input component.
+Other section sources, tool families and generated work orders are not thereby
+linked or qualified. Keep their logical homes; no bulk moves or deletion.
+
+COMPONENT REGISTER
+
+1. Continuous loop and shared heartbeat — native RUNs passed.
+   Sources: shakti_loop.c, shakti_time.c and main.c.
+   Boundary: quiet app_cycle keeps running without a response; all seven
+   current rates share 64 hearing slots and 32 sight slots per logical beat.
+   Remaining: the native Apple host must own serialized scheduling and
+   lifecycle. The HTML minute timer is a legacy response-era control.
+
+2. Full-size binary sight/hearing reconstruction — native RUNs passed.
+   Sources: shakti_media.c, shakti_rebuild.c; shakti_media.h/shakti_app.h.
+   Boundary: independent reference, poisoned rebuilt bytes, full matching,
+   shared perception pointers, no-op/partial decoder refusal, held capacity.
+   Remaining: platform file decoding, input/audio/display bindings and device
+   throughput. These results do not certify the separate Section-E demo.
+
+3. Static staged memory and retention arena — native RUNs passed.
+   Sources: shakti_memory.c, shakti_retention.c and corresponding headers.
+   Boundary: timed whole stages, five real thirteen-answer review identities,
+   source references, whole recall, pending checkpoints, retained first/latest,
+   audio pinning and native transcript/release contracts.
+   Remaining: production reasoning/reflection and ASR adapters, learned
+   category organization, legacy migration and actual device/power-cut checks.
+   This does not declare every legacy Section-F source finished or integrated.
+
+4. Prenatal input preparation — separate reviewed branch; profile issue open.
+   Sources: SECTION-B/shakti_prenatal_loader.c and its include/ header.
+   Evidence: Prenatal-Input-v1.0.0-2026-10-18 at commit 7aa4919; strict native
+   RUN repeated in two fresh fixtures, 357 complete receipts per run; eight
+   recordings byte-matched to Tyler's original archive and pulse reproduced.
+   Boundary: prepare caller-owned input and deposit through existing intake.
+   Its worker did not own heartbeat integration. The profile gives fifteen
+   solid, six patterned and eleven black frames per beat; align it with the
+   agreed solid-color requirement before adopting that default. Preserve the
+   sealed package; use the existing assembler for a corrected new version.
+
+5. Ordered prenatal progression/curriculum — not yet implemented as requested.
+   Owner: the host/runtime integration, using the reviewed input component.
+   Required: heartbeat-only first, sound from beat 11,491,201, color from
+   15,120,001, 22,982,400 actually completed prenatal beats. The full light
+   phase allows 982,800 paired beats per key color, 32 full frames per beat,
+   31,449,600 frame passes per color. Preserve the actual recordings and
+   learned capsules; restart exposure in the requested order after a pause.
+   Queue admission/exposure counters are not proof of completed processing or
+   mastery. Later counting/ABC/colors/shapes/math and the memory game need
+   cumulative real feedback and learned-order actuator gates.
+
+6. Swift/native phone host — not started in this source tree.
+   The supplied shakti_host.html is a visual reference and runtime entry
+   concept. It was provided to the input worker; lack of native host code is
+   integration work here, not a defect assigned to that worker.
+   The supplied HTML stores file names/small text, uses a minute timer,
+   generates UI epoch addresses and has browser-side memory tags. Those mock
+   actions are not native intake, master timing or capsule state.
+
+   First host scope:
+   - Keep the C runtime and all fixed model buffers in C. Serialize calls.
+   - Run quiet cycles independently of chat, tool availability or replies.
+   - Send pace changes to the shared C heartbeat; do not create a second
+     training clock. UI animation is a display of acknowledged runtime state.
+   - Pick local media and deliver actual decoded full pixels/PCM through MCP.
+     Report queued, held and validated states from native receipts.
+   - Display only validated rebuilt buffers within their ownership lifetime.
+   - Feed original recorded PCM, not a browser speech transcript as hearing.
+   - Display native epochs, capsule stages and actual reflection answers.
+   - Checkpoint for lifecycle interruption and restore/replay in order.
+
+   The current authoring environment is Linux with no Swift compiler, Xcode
+   or Apple Simulator installed. Source/project preparation is possible here;
+   iOS compilation, signing, Simulator and device qualification need a Mac
+   with the appropriate Apple tools. A cloud build service does not supply
+   an interactive Xcode desktop in this environment. No Apple build is claimed.
+   iOS can suspend a background application; continuous C operation means
+   while the app is scheduled, with the explicit checkpoint/replay contract
+   for interruption. A host must not promise uninterrupted background life.
+
+7. Remaining Section C through O source bodies — no blanket completion claim.
+   The nine MCP documentation slots describe the native control boundary;
+   Section-G tool seals certify their exact packaged contents, not the whole
+   source bank. Sealed versions and historical outputs remain traceable.
+   Audit each next section's actual build inputs, called interfaces and RUNs
+   before linking it. The inventory alone does not classify a file as live,
+   obsolete, safe to delete, integrated or correctly implemented.
+
+EVIDENCE AND CONDITIONS FOR CLOSING A COMPONENT
+For each component record its exact source commit, files/headers and runtime
+data inputs, public input/output and buffer ownership, actual strict build,
+native RUN result and important refusal/restart cases, remaining limits,
+independent review status and integration caller. All must be explicit.
+
+Current mechanical evidence is Runtime.MemoryArena.Run.2026-10-18.txt and
+Cycle-Run-v2.0.0-2026-10-18. Its directory seal is
+190e8ffbf81633a9a75f153173cc450f130b675436b772604a94a651d326cbf6.
+The reviewed prenatal package seal is
+bc534327677a1b34471f39ad129974eef622a1ab173f3fdec7f4c3e1069ca34c.
+Native synthetic callbacks demonstrate mechanical contracts; they are not
+the missing production model. Independent Opus review has not been completed.
+
+Reopen a qualified component when its implementation, serialized format,
+public contract or called dependency changes. Review the changed files and
+their directly affected callers, run the relevant acceptance/refusal cases,
+and record a new source pin. Reuse an unchanged accepted baseline instead of
+rewriting it to accommodate a screen. A caller-only UI change need not reopen
+unrelated sealed tool families or untouched memory internals.
