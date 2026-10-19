@@ -1,0 +1,21 @@
+PRENATAL LOADER v2.0.0 — SOURCE BINDINGS / MANUAL NATIVE ENTRY
+
+Active runtime modules, built only at their established homes:
+SECTION-A/shakti_prenatal_flow.c
+SECTION-B/shakti_prenatal_loader.c
+include/shakti_prenatal_flow.h
+include/shakti_prenatal_loader.h
+Integration callers: SECTION-A/main.c and SECTION-A/shakti_loop.c
+Dependencies: the existing Section-A shakti_*.c and include/ interfaces.
+
+The four package C/H copies are byte-identical source bindings. Do not link
+them twice with the active copies. Sources.Bindings.txt records SHA-256.
+
+Native RUN source: Prenatal.Flow.Run.c
+Native synthetic entry: shakti-prenatal-run --run NEW_DIRECTORY ABSOLUTE_ASSETS ABSOLUTE_PROFILE
+Inputs: Prenatal.Profile.xml and the nine complete local Assets/*.wav files.
+The assembler's BUILD records the separate RUN-only hook build. Production
+builds omit SHAKTI_PRENATAL_RUN_HOOKS. See Prenatal.Loader.Guide.txt for
+production runtime, production refusal and actual process-recovery builds.
+
+The assembler packages this declared set; it never compiles or executes it.

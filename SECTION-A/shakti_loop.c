@@ -15,6 +15,7 @@
 #include "shakti_memory.h"
 #include "shakti_time.h"
 #include "shakti_retention.h"
+#include "shakti_prenatal_flow.h"
 
 static const char *REFLECTION_QUESTIONS[] = {
     "Title the last 10 tool calls",
@@ -449,6 +450,7 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
     int n;
     if (runtime == NULL || runtime->loop.cycle_count == ULONG_MAX) return 0;
     slot = (unsigned int)(runtime->loop.cycle_count % SHAKTI_HEARING_SLOTS);
+    shakti_prenatal_before_cycle(runtime, slot);
     if (slot == 0U && runtime->loop.cycle_count != 0UL &&
         !shakti_tick_clock_beat(&runtime->clock)) return 0;
     runtime->loop.heartbeat_slot = slot;
@@ -496,6 +498,7 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
                 "shakti_memory.c:shakti_memory_step", 39U, "memory", item->id,
                 "whole_container_recalled", event, NULL)) return 0;
     }
+    shakti_prenatal_feed(runtime, slot);
     {
         int media = shakti_media_step(&runtime->media, slot);
         if (media == 2) {
@@ -509,7 +512,9 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
                 !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &media_tick,
                     "shakti_media.c:shakti_media_step", 12U, "AWAKE", "internal",
                     first->source_id, "validated_convergence", event)) return 0;
-            if (!shakti_retention_capture(shakti_media_perception(&runtime->media),
+            if (shakti_prenatal_owns(runtime, group)) {
+                if (!shakti_prenatal_published(runtime)) return 0;
+            } else if (!shakti_retention_capture(shakti_media_perception(&runtime->media),
                 (uint64_t)media_tick.epoch_seconds, media_tick.frame)) return 0;
             /* Sensory validation is an audit event, not automatic library
              * admission. The reasoning adapter chooses semantic capsules. */
@@ -610,7 +615,7 @@ int shakti_loop_set_heartbeat(shakti_loop_state_t *state, unsigned int beats_per
     if (state == NULL || beats_per_second == 0U ||
         beats_per_second > SHAKTI_HEARTBEAT_MAX_RATE ||
         (beats_per_second & (beats_per_second - 1U)) != 0U) return 0;
-    state->heartbeat_rate = beats_per_second;
+    state->heartbeat_rate = shakti_prenatal_rate_requested(state, beats_per_second);
     state->pace_remainder = 0U;
     state->audio_remainder = 0U;
     return 1;

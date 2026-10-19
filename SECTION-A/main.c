@@ -18,6 +18,7 @@
 #include "shakti_log.h"
 #include "shakti_loop.h"
 #include "shakti_memory.h"
+#include "shakti_prenatal_flow.h"
 #include "shakti_manifest.h"
 #include "shakti_reason.h"
 #include "shakti_report.h"
@@ -687,6 +688,7 @@ static void print_help(void)
     puts("/heartbeat/ 1|2|4|8|16|32|64 (beats per second)");
     puts("/memory_decay/ BEATS (positive idle short-term duration)");
     puts("/working_memory/ 20..90 (heartbeat seconds)");
+    puts("/prenatal/status/ | /prenatal/pause/ | /prenatal/resume/ | /prenatal/stop/");
     puts("/goal/ system message");
     puts("/notebook/");
     puts("/notebook/ reminder or note");
@@ -728,6 +730,7 @@ static void print_help(void)
     puts("activate id (whole container already in RAM)");
     puts("organize id | method | logical location");
     puts("reference id | source_id | first position64 | last position64");
+    puts("prenatal start ASSET_DIRECTORY | PROFILE_PATH (or prenatal status)");
     puts("release_artifact capsule_id (requires five complete reflections)");
     puts("validate");
     puts("status");
@@ -772,7 +775,7 @@ static int process_tool(
     {
         static const char * const names[] = {
             "ask", "learn", "reject", "sense", "pass", "school", "draft",
-            "tablet", "manifest", "load", "recall", "remember", "activate", "organize", "reference", "release_artifact", "validate", "status"
+            "tablet", "manifest", "load", "recall", "remember", "activate", "organize", "reference", "release_artifact", "validate", "status", "prenatal"
         };
         size_t i;
         int known = 0;
@@ -783,6 +786,10 @@ static int process_tool(
 
     if (!log_tool_call(runtime, command, arguments)) {
         return 0;
+    }
+
+    if (strcmp(command, "prenatal") == 0) {
+        return shakti_prenatal_command(runtime, arguments);
     }
 
     if (strcmp(command, "ask") == 0) {
@@ -978,6 +985,13 @@ static int process_control(
         return 1;
     }
 
+    if (strcmp(line, "/prenatal/status/") == 0) {
+        shakti_prenatal_print_status(runtime); return 1;
+    }
+    if (strcmp(line, "/prenatal/pause/") == 0) return shakti_prenatal_pause(runtime);
+    if (strcmp(line, "/prenatal/resume/") == 0) return shakti_prenatal_resume(runtime);
+    if (strcmp(line, "/prenatal/stop/") == 0) return shakti_prenatal_stop(runtime);
+
     if (strncmp(line, "/shakti_run/ ", 13U) == 0) {
         return process_tool(runtime, line + 13U);
     }
@@ -988,7 +1002,8 @@ static int process_control(
             !shakti_loop_set_heartbeat(&runtime->loop, rate)) {
             puts("Heartbeat accepts 1, 2, 4, 8, 16, 32, or 64 beats per second.");
         } else {
-            printf("Heartbeat: %u beats/second. Every channel follows.\n", rate);
+            printf("Heartbeat requested: %u; effective: %u beats/second. Every channel follows.\n",
+                rate, runtime->loop.heartbeat_rate);
         }
         return 1;
     }
@@ -1384,7 +1399,7 @@ int shakti_app_initialize(shakti_runtime_t *runtime)
     shakti_media_init(&runtime->media);
     if (!shakti_retention_restore()) return 0;
     shakti_memory_bind_eden(&runtime->memory, &runtime->reason);
-    return 1;
+    return shakti_prenatal_restore(runtime);
 }
 
 int shakti_app_queue_frame(shakti_runtime_t *runtime, const shakti_media_frame_t *frame)
@@ -1393,7 +1408,8 @@ int shakti_app_queue_frame(shakti_runtime_t *runtime, const shakti_media_frame_t
     shakti_tick_t tick;
     char event[SHAKTI_TEXT_CAPACITY];
     int n;
-    if (runtime == NULL || frame == NULL || !shakti_retention_accepts(frame->source_id)) return 0;
+    if (runtime == NULL || frame == NULL || !shakti_prenatal_gate(runtime, frame) ||
+        !shakti_retention_accepts(frame->source_id)) return 0;
     before = runtime->media;
     if (!shakti_media_queue(&runtime->media, frame)) return 0;
     n = snprintf(event, sizeof(event), "source=%s position64=%" PRIu64 " lane=%u bytes=%lu",
@@ -1468,7 +1484,10 @@ int shakti_app_cycle(shakti_runtime_t *runtime, const char *command)
     char input[SHAKTI_INPUT_CAPACITY];
     shakti_tick_t tick;
     int ok = 1;
-    if (runtime == NULL || !shakti_loop_begin_cycle(runtime, &tick)) return 0;
+    if (runtime == NULL) return 0;
+    if (!shakti_loop_begin_cycle(runtime, &tick)) {
+        shakti_prenatal_cycle_result(runtime, 0); return 0;
+    }
     if (command != NULL && command[0] != '\0') {
         if (strlen(command) >= sizeof(input)) {
             fputs("BENCH input exceeds fixed capacity\n", stderr);
@@ -1484,6 +1503,7 @@ int shakti_app_cycle(shakti_runtime_t *runtime, const char *command)
         }
     }
     if (!shakti_loop_finish_cycle(runtime)) ok = 0;
+    shakti_prenatal_cycle_result(runtime, ok);
     if (!ok) runtime->loop.tools_interrupted = 1U;
     return ok;
 }

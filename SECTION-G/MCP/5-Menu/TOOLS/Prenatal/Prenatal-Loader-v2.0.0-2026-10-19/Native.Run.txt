@@ -1,0 +1,81 @@
+PRENATAL LOADER v2.0.0 — ACTUAL NATIVE QUALIFICATION, 2026-10-19
+Base e199bbb03343db830ec76b8056dbef7028c963df plus bound integration changes.
+All builds: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2
+Linux native C runtime; no external process launched by the delivered code,
+explicit heap, network, camera, speaker, Swift compiler or model callback.
+
+Production runtime build, exit 0:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c SECTION-B/shakti_prenatal_loader.c -o shakti-runtime
+Production BSS: 639955936 bytes, including the existing media and capsule pools.
+The existing 512 MiB media arena and memory implementations were not modified.
+No malloc/calloc/realloc/free symbol is imported by the native executable.
+
+RUN build, exit 0:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_PRENATAL_RUN_HOOKS -Iinclude -ISECTION-A Prenatal.Flow.Run.c SECTION-A/shakti_*.c SECTION-B/shakti_prenatal_loader.c -o prenatal-flow-run
+For the literal root-relative command, see the package record/Guide; the actual
+RUN source was in an isolated incoming directory and main.c came from SECTION-A.
+
+Production refusal harness, exit 0: same build without SHAKTI_PRENATAL_RUN_HOOKS.
+The marker-injecting function is absent from the production executable.
+
+Final primary RUN: --run NEW fixture-03 ABSOLUTE_ASSETS ABSOLUTE_PROFILE, exit 0.
+It processes 1122 checked real windows, including 544 full-HD frames. It also
+drains additional owned windows at control boundaries. Every injected prefix
+is explicitly synthetic; analytical totals do not certify a full prenatal run.
+The eight voices and simultaneous quiet heart are compared sample by sample.
+Full-HD pixels are compared byte by byte against independently expected RGB.
+The fixture capsule includes an epoch and the entire baseball/ball/bat/cat
+context, tags, organization method and logical location. Live pause/replay
+retains it while the runtime counter and memory slots keep advancing.
+
+Actual primary stdout, followed by expected refusal stderr:
+PASS exact phase boundaries and balanced 982800 beats / 31449600 full frames per color
+PASS heartbeat-only input; MCP ownership; live pause/replay keeps clock, memory and context running
+PASS sound only: all eight original words and long tails; 64 paired-channel microclips per beat
+PASS full-size sight and simultaneous voice/heart: complete pixels, 32:64 ratio, private fixed banks
+PASS binary corruption and failed-cycle refusal; live replay retains learned containers
+PASS memory integrity fault holds training while heartbeat continues
+PASS changed corpus and corrupt checkpoint refusal; memories unaffected
+PASS native windows=1122 full_HD_frames=544; synthetic boundary prefixes only; no learned-mastery claim
+BENCH prenatal workflow: full-size frame exceeds fixed loader capacity; no resizing
+BENCH prenatal workflow: prenatal workflow requires 32 solid frames
+BENCH prenatal loader: cannot open supplied WAV
+BENCH prenatal workflow: whole supplied voice/pulse must fit its two-beat/one-beat bound
+BENCH media: reconstruction mismatch; whole source window held
+BENCH prenatal workflow: source reconstruction held; ordered replay required
+BENCH prenatal workflow: runtime cycle failed; ordered replay required
+BENCH prenatal workflow: runtime cycle failed; ordered replay required
+BENCH prenatal workflow: restart corpus changed or is incomplete
+BENCH prenatal workflow: resume requires the same loaded corpus in paused/held state
+BENCH prenatal workflow: whole loader checkpoint failed validation
+
+Companion native commands, all exit 0:
+prenatal-flow-production-check --reject fixture-03 ABSOLUTE_ASSETS
+prenatal-flow-run --restart fixture-03 ABSOLUTE_ASSETS
+cycle-regression --run NEW cycle-final
+memory-regression --run NEW memory-final
+
+Cycle/Memory regression builds link the exact unchanged sealed v2 RUN source,
+SECTION-A/*.c and SECTION-B/shakti_prenatal_loader.c with SHAKTI_APP_NO_MAIN.
+This requalifies ordinary movie capture, all seven heart rates, 13-question
+tool/reflection gates, five-review promotion, whole recall, idle decay and
+restart against the final integration. The sealed Cycle package stays intact.
+
+Actual companion stdout/stderr (production refusal, restart, Cycle, Memory):
+PASS production build rejects RUN-only checkpoint; continuous loop and whole memory retained
+BENCH prenatal workflow: synthetic RUN checkpoint cannot train production
+PASS fresh-process ordered replay; original capsule, context and organization retained
+Learned stream: 14752 valid lines, 0 invalid lines.
+Learned stream: 14755 valid lines, 0 invalid lines.
+Learned stream: 14758 valid lines, 0 invalid lines.
+Learned stream: 14761 valid lines, 0 invalid lines.
+Learned stream: 14764 valid lines, 0 invalid lines.
+Learned stream: 14767 valid lines, 0 invalid lines.
+Learned stream: 14770 valid lines, 0 invalid lines.
+Learned stream: 14773 valid lines, 0 invalid lines.
+Learned stream: 14776 valid lines, 0 invalid lines.
+Learned stream: 14779 valid lines, 0 invalid lines.
+The required 13-answer reflection must complete before another tool call.
+PASS full-HD MCP convergence; pinned PCM/transcript recovery; five timed reviews; checked release; shared pacing; tool gates; restart
+PASS static capsules; 20-beat demotion; five distinct complete reflections; decay; whole recall; restart integrity
+BENCH memory: damaged/incomplete capsule or checkpoint; admission held

@@ -1,10 +1,10 @@
-SHAKTI RUNTIME FLOW — 2026-10-18
+SHAKTI RUNTIME FLOW — 2026-10-19
 
 This change implements the C loop behind the agreed flow. It does not supply
 a Swift application, a media codec, speaker playback, or a trained ML model.
 
 BUILD FROM THE REPOSITORY ROOT
-cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c -o shakti-runtime
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c SECTION-B/shakti_prenatal_loader.c -o shakti-runtime
 
 The console host uses POSIX nonblocking input and monotonic pacing. The
 controller-facing API is include/shakti_app.h. One owner serializes calls;
@@ -232,9 +232,9 @@ The Section-A handwriting font/receptor remains an 8x8 teaching surface.
 The old SECTION-E eyes/font demonstration is separate and is not used by
 the new full-size native media queue. It must not be used as full vision.
 
-The prenatal programs in SECTION-B were not migrated or retrained here.
-The requested 19-week sound, 25-week colors and 22,982,400 stateless beats
-remain a separate training integration; this change does not claim them.
+The legacy prenatal programs in SECTION-B remain separate. The active
+shakti_prenatal_loader.c input helper and Section-A workflow are explicitly
+linked above. Their delivery mechanics do not establish learned perception.
 
 COMPONENT COMPLETION AND SECTION BOUNDARIES — 2026-10-18
 
@@ -252,7 +252,7 @@ Reviewed prenatal branch 7aa4919e3f362fafd482644a5f5f4e3bf031625f:
 These are dated source snapshots, not automatic live counts. The incoming
 branch adds 23 files and one ledger line. It has not been merged by this work.
 
-The console command at the top of this guide compiles 19 Section-A C files:
+The dated baseline compiled 19 Section-A C files:
   Bootstrap/data: main.c, shakti_loader.c, shakti_asset.c, shakti_manifest.c.
   Clock/control/log: shakti_time.c, shakti_loop.c, shakti_log.c.
   Sensory reconstruction: shakti_media.c, shakti_rebuild.c.
@@ -260,8 +260,8 @@ The console command at the top of this guide compiles 19 Section-A C files:
   Existing fact reasoning/report: shakti_reason.c, shakti_report.c.
   Lessons/artifacts: shakti_artifact.c, shakti_handwriting.c,
     shakti_receptor.c, shakti_school.c, shakti_score.c, shakti_tablet.c.
-The twenty shipped baseline include/shakti_*.h files define those interfaces;
-the added prenatal header belongs to the separately reviewed input component.
+The current build adds shakti_prenatal_flow.c and the one Section-B input
+helper: 21 C translation units total, with two prenatal include/ interfaces.
 Other section sources, tool families and generated work orders are not thereby
 linked or qualified. Keep their logical homes; no bulk moves or deletion.
 
@@ -288,29 +288,65 @@ COMPONENT REGISTER
    audio pinning and native transcript/release contracts.
    Remaining: production reasoning/reflection and ASR adapters, learned
    category organization, legacy migration and actual device/power-cut checks.
+   The 512 MiB arena is currently media retention. Capsules occupy separate
+   fixed working/short-term pools. A general memory playlist and guaranteed
+   reservation for whole recalled containers are still open. Activation
+   refreshes idle use; working leases remain independently bounded at 20--90
+   logical beats. Long-term containers are copied, never moved out of storage.
    This does not declare every legacy Section-F source finished or integrated.
 
-4. Prenatal input preparation — separate reviewed branch; profile issue open.
+4. Prenatal input preparation — adopted with corrected full-solid profile.
    Sources: SECTION-B/shakti_prenatal_loader.c and its include/ header.
    Evidence: Prenatal-Input-v1.0.0-2026-10-18 at commit 7aa4919; strict native
    RUN repeated in two fresh fixtures, 357 complete receipts per run; eight
    recordings byte-matched to Tyler's original archive and pulse reproduced.
    Boundary: prepare caller-owned input and deposit through existing intake.
-   Its worker did not own heartbeat integration. The profile gives fifteen
-   solid, six patterned and eleven black frames per beat; align it with the
-   agreed solid-color requirement before adopting that default. Preserve the
-   sealed package; use the existing assembler for a corrected new version.
+   Its worker did not own heartbeat integration. The new active default and
+   v2 profile require all 32 frames solid. Original voice/pulse WAV bytes are
+   preserved. The sealed v1 input package remains on its original branch;
+   v2 is assembled separately with the existing native assembler.
 
-5. Ordered prenatal progression/curriculum — not yet implemented as requested.
-   Owner: the host/runtime integration, using the reviewed input component.
-   Required: heartbeat-only first, sound from beat 11,491,201, color from
-   15,120,001, 22,982,400 actually completed prenatal beats. The full light
+5. Ordered prenatal delivery — native workflow integrated; curriculum open.
+   Owner: shakti_prenatal_flow.c, called by main.c and shakti_loop.c.
+   Heartbeat-only first, sound from beat 11,491,201, color from 15,120,001;
+   production delivery requires 22,982,400 actually completed beats. The light
    phase allows 982,800 paired beats per key color, 32 full frames per beat,
    31,449,600 frame passes per color. Preserve the actual recordings and
-   learned capsules; restart exposure in the requested order after a pause.
+   learned capsules; replay exposure in the requested order after a pause.
    Queue admission/exposure counters are not proof of completed processing or
    mastery. Later counting/ABC/colors/shapes/math and the memory game need
    cumulative real feedback and learned-order actuator gates.
+
+   Loading-zone ownership, source validation and the existing binary rebuild
+   precede every exposure. Each key color stays for two beats so recorded
+   words longer than one second retain their tails. Hearing lanes stay two
+   consecutive temporal microclips; each has channel 0 founder voice and
+   channel 1 quiet heartbeat at 16 kHz PCM16. Before sound, voice is silent;
+   before light, no sight lane is admitted. Source ids are opaque and context
+   is empty. There are no label-text perception shortcuts.
+
+   Keep scheduling quiet app_cycle calls during every loader control state.
+   /prenatal/pause/, /prenatal/resume/ and /prenatal/stop/ affect training
+   intake only. Live replay preserves the existing runtime/RAM and clock.
+   Actual process restart reopens durable memories and re-arms the same
+   ordered training from beat 1. The loader checkpoint never clears capsules,
+   organization or Eden. Final state DELIVERED leaves the loop running.
+
+   The shared heart slows to one beat/second for the first 16 sound beats
+   and first 16 color beats, then restores its requested rate. No separate
+   wall timer, skipped beat credit or response gate drives training.
+   The resident source collection and four distinct sight buffers occupy
+   about 24.3 MiB outside the media arena. Every exposure is rebuilt; repeated
+   source bytes do not become millions of duplicate movie records. Epoch
+   audit receipts and an atomic control checkpoint track delivered windows.
+
+   Evidence: Prenatal-Loader-v2.0.0-2026-10-19, explicit native integration
+   RUN with 1,122 checked windows and 544 full-HD frames, refusal cases,
+   live replay, fresh-process recovery and production rejection of RUN-only
+   checkpoints. Boundary prefixes are injected only in the separate RUN
+   build and explicitly marked synthetic. This is not a full 22-million-beat
+   execution, a learned-memory classifier, a reserved general-memory
+   playlist, a production reflection adapter, or a Swift/device qualification.
 
 6. Swift/native phone host — not started in this source tree.
    The supplied shakti_host.html is a visual reference and runtime entry

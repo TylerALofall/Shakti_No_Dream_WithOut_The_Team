@@ -1,6 +1,6 @@
 # Shakti_No_Dream_WithOut_The_Team
 
-## Current integration boundary — 2026-10-18
+## Current integration boundary — 2026-10-19
 
 The current runtime map and component completion register are in
 `SECTION-A/Runtime.Flow.txt`, under `COMPONENT COMPLETION AND SECTION BOUNDARIES`.
@@ -8,17 +8,34 @@ Use that register for the active build and its qualification limits. The older
 dated chapters below preserve project history and do not establish that their
 paths, response scheduling, or proposed integrations are implemented today.
 
-The published C baseline is `ff5a03a0a809bff86b3bb2b5f433dc3ca2860a30`.
-Its console build compiles 19 `SECTION-A` C files with the `include/` interfaces.
+This loader integration builds on `e199bbb03343db830ec76b8056dbef7028c963df`.
+Its console build compiles 20 `SECTION-A` C files and
+`SECTION-B/shakti_prenatal_loader.c` with the `include/` interfaces:
+
+`cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c SECTION-B/shakti_prenatal_loader.c -o shakti-runtime`
+
 The loop runs without a reply; one heartbeat paces all 32 sight and 64 hearing
 slots. Input files, tool packages, historical copies and work orders are not
 all compiled into that executable. Other sections require their own acceptance.
 
-The input-only prenatal branch `shakti/clean-start-2026-10-18`, reviewed at
-`7aa4919e3f362fafd482644a5f5f4e3bf031625f`, is a separate, unmerged component.
-Its native RUNs pass; its default density profile still differs from the
-agreed solid-color stimulus. Heartbeat/frontend integration belongs to the
-host work, not that input-preparation worker.
+The reviewed input helper and nine recordings from `shakti/clean-start-2026-10-18`
+at `7aa4919e3f362fafd482644a5f5f4e3bf031625f` are now used by the C prenatal
+workflow. Its corrected profile uses all 32 full-size solid frames per beat.
+The new `Prenatal-Loader-v2.0.0-2026-10-19` Menu package records source bindings,
+native RUN evidence and manual build/use commands; the older sealed package
+on its source branch stays intact. This is a scoped integration, not a bulk merge.
+
+The loader follows the shared heart through heartbeat-only, voice and color
+phases. It reuses fixed input/reference/binary/rebuilt buffers and preserves
+whole recorded words over two beats. Pausing or unloading training intake
+keeps heartbeat, reasoning and memory cycling. Live replay does not initialize
+the runtime or clear memory. Actual process recovery uses stored checkpoints.
+The final delivery state is available to a future curriculum controller;
+counting/ABC/shapes/math, interactive games and actuator progression remain open.
+
+The 512 MiB arena currently retains media. Whole working/short-term capsules
+occupy separate fixed pools. A general long-term-memory playlist with a
+guaranteed resident reservation and learned organization is still open.
 
 No Swift app or Xcode project is qualified yet. The first host must drive the
 existing C loop, load actual media bytes through MCP, display rebuilt output,
