@@ -1,0 +1,11 @@
+source=source-1 window=0 row=0 column=0 xy=0,0 box=24x32 char=A
+source=source-1 window=0 row=0 column=1 xy=24,0 box=24x32 char=B
+source=source-1 window=0 row=0 column=2 xy=48,0 box=24x32 char=C
+source=source-1 window=0 row=1 column=0 xy=0,32 box=24x32 char=2
+source=source-1 window=0 row=1 column=1 xy=24,32 box=24x32 char=+
+source=source-1 window=0 row=1 column=2 xy=48,32 box=24x32 char=2
+source=source-1 window=0 row=1 column=3 xy=72,32 box=24x32 char==
+source=source-1 window=0 row=1 column=4 xy=96,32 box=24x32 char=4
+source=source-1 window=0 row=2 column=0 xy=0,64 box=24x32 char=1
+source=source-1 window=0 row=2 column=1 xy=24,64 box=24x32 char=2
+source=source-1 window=0 row=2 column=2 xy=48,64 box=24x32 char=3

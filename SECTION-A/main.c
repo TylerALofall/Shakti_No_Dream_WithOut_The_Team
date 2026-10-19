@@ -1409,14 +1409,14 @@ int shakti_app_queue_frame(shakti_runtime_t *runtime, const shakti_media_frame_t
     char event[SHAKTI_TEXT_CAPACITY];
     int n;
     if (runtime == NULL || frame == NULL || !shakti_prenatal_gate(runtime, frame) ||
-        !shakti_retention_accepts(frame->source_id)) return 0;
+        (frame->retention_policy == SHAKTI_MEDIA_HISTORY && !shakti_retention_accepts(frame->source_id))) return 0;
     before = runtime->media;
     if (!shakti_media_queue(&runtime->media, frame)) return 0;
     n = snprintf(event, sizeof(event), "source=%s position64=%" PRIu64 " lane=%u bytes=%lu",
         frame->source_id, frame->position64, frame->lane, (unsigned long)frame->bytes);
     if (n < 0 || (size_t)n >= sizeof(event) || !shakti_tick_next(&runtime->clock, &tick) ||
         !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
-            "shakti_media.c:shakti_media_queue", 10U, "AWAKE", "internal",
+            "shakti_media.c:shakti_media_queue", 6U, "AWAKE", "internal",
             frame->source_id, "loading_zone", event)) {
         runtime->media = before;
         return 0;

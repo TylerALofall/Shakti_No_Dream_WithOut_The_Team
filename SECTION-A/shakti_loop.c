@@ -505,16 +505,17 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
             const shakti_media_group_t *group = shakti_media_current(&runtime->media);
             const shakti_media_frame_t *first = &group->parts[(group->required_mask & 1U) ? 0U : 1U];
             shakti_tick_t media_tick;
-            n = snprintf(event, sizeof(event), "source=%s window=%" PRIu64 " mask=%u hashes=%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64,
-                first->source_id, first->position64 / 2U, group->checked_mask,
+            n = snprintf(event, sizeof(event), "source=%s window=%" PRIu64 " mask=%u retention=%u hashes=%016" PRIx64 ",%016" PRIx64 ",%016" PRIx64,
+                first->source_id, first->position64 / 2U, group->checked_mask, group->retention_policy,
                 group->parts[0].validated_hash, group->parts[1].validated_hash, group->parts[2].validated_hash);
             if (n < 0 || (size_t)n >= sizeof(event) || !shakti_tick_next(&runtime->clock, &media_tick) ||
                 !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &media_tick,
-                    "shakti_media.c:shakti_media_step", 12U, "AWAKE", "internal",
+                    "shakti_media.c:shakti_media_step", 11U, "AWAKE", "internal",
                     first->source_id, "validated_convergence", event)) return 0;
             if (shakti_prenatal_owns(runtime, group)) {
                 if (!shakti_prenatal_published(runtime)) return 0;
-            } else if (!shakti_retention_capture(shakti_media_perception(&runtime->media),
+            } else if (group->retention_policy == SHAKTI_MEDIA_HISTORY &&
+                !shakti_retention_capture(shakti_media_perception(&runtime->media),
                 (uint64_t)media_tick.epoch_seconds, media_tick.frame)) return 0;
             /* Sensory validation is an audit event, not automatic library
              * admission. The reasoning adapter chooses semantic capsules. */
@@ -522,7 +523,7 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
             shakti_tick_t hold_tick;
             if (!shakti_tick_next(&runtime->clock, &hold_tick) ||
                 !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &hold_tick,
-                    "shakti_media.c:shakti_media_step", 12U, "AWAKE", "internal",
+                    "shakti_media.c:shakti_media_step", 11U, "AWAKE", "internal",
                     "media", "validation_hold", "Source window held; no unvalidated content admitted")) return 0;
         }
     }

@@ -1,0 +1,96 @@
+NATIVE QUALIFICATION — 2026-10-19 — SENSES ASSEMBLY v1.0.1
+
+Reviewed branch base: 82c5f5d500071da5019cc4c3855362b1b7d0d5a8.
+Current source bytes are bound in Sources.Bindings.txt.
+Strict C99 -pedantic -Wall -Wextra -Werror -O2 builds: production and RUN PASS.
+All code builds were inspected before the separate executions.
+
+PUBLISHED EVIDENCE
+Evidence/ contains the separate image-only run: one 384x128 visual window,
+no WAV, audio=ABSENT, a 148-byte capsule candidate and 9310-byte reviewed text.
+Frames.txt offsets refer to its visual-only 147456-byte Planes.bin. The PNGs
+match, actual OCR is ABC / 2+2=4 / 123, and all eight full-HD color inputs
+passed reconstruction. These bytes came from the frozen-code image-only RUN.
+No raw audio or audio-bearing bit-plane traces are included in this package.
+Automatic approval review blocked WAV publication as potentially sensitive
+audio despite the generated fixture's provenance. Explicit audio-publication
+approval remains pending. This version's EXAMPLE uses the image-only route.
+
+LOCAL AUDIO QUALIFICATION, RAW PAYLOADS NOT PUBLISHED
+
+ACTUAL ISOLATED RUN
+Inputs: 384x128 RGB8 synthetic document, explicitly supplied 24x32-cell
+font atlas and one-second 44100 Hz mono PCM16 synthetic WAV.
+32 visual windows, 64 consecutive audio clips, source-1 identity throughout.
+Shared requested rates alternate x1/x4/x16; this is unpaced processing,
+not a physical-throughput measurement.
+Preparation did not advance a clock or publish. Normal app cycles published
+complete windows into the shared C convergence view. Every rebuilt pixel
+and PCM byte was compared with the input/reference; every original source
+audio byte was recovered in order, with no fractional-sample loss.
+Original.png and Rebuilt.png compare IDENTICAL.
+Original sound.wav and Rebuilt.wav compare IDENTICAL, including WAV headers.
+
+RECORDED SOURCE CHECK
+An existing recorded black.wav from Prenatal-Loader-v2.0.0-2026-10-19/Assets
+also passed: 16000 Hz mono PCM16, 17280 recorded sample frames, 35 visual
+windows and 70 audio clips. The final clip contains 30 recorded sample frames
+and 220 explicit EOF-padding frames. Every recorded PCM byte was preserved;
+only the confirmed end of file was padded. The original already resides at:
+SECTION-G/MCP/5-Menu/TOOLS/Prenatal/Prenatal-Loader-v2.0.0-2026-10-19/Assets/black.wav
+Its reconstructed WAV remains local; this package publishes no copy of it.
+This is byte-processing evidence, not recognized speech or learned meaning.
+
+Actual OCR:
+ABC
+2+2=4
+123
+
+Character receipts: 11 recognized nonspace cells, three lines, with pixel
+coordinates. OCR comes from rebuilt pixels; no expected string enters it.
+Compact candidate: 252 bytes. Full reviewed memory text: 9414 bytes.
+The latter includes five explicitly synthetic complete 13-answer reviews.
+No fictitious tool calls were used; the production reflection provider stays NULL.
+The native memory library/checkpoint format and engine were not replaced.
+Moment mode was checked to leave legacy raw movie retention inactive.
+
+Eight further full-HD 1920x1080 RGB8 frames (6220800 bytes each), one reusable
+moment: black/red/green/yellow/blue/magenta/cyan/white all matched completely.
+The color sheet is sampled from these actual validated shared buffers.
+Names are fixture annotations, not proof of learned color recognition.
+
+REFUSAL AND OWNERSHIP
+PASS gray8 normalization, including a whitespace-valued first source pixel.
+PASS CR/CRLF header boundaries preserve an LF-valued first source pixel.
+PASS truncated PNM refusal before output mutation.
+PASS unsupported WAV encoding refusal.
+PASS 64 fractional audio slices span an exact source second.
+PASS unknown glyph clears/refuses the complete OCR result.
+PASS foreign OCR source hash cannot attach to the current view.
+PASS prepared window publishes nothing before the heart gate.
+PASS deliberately changed prepared binary holds the entire source window.
+Expected BENCH: prepared window changed before heartbeat publication.
+PASS leased publication cannot be credited twice.
+PASS image-only execution with absent audio and no manufactured sound evidence.
+
+COMPATIBILITY, REBUILT AGAINST CURRENT SOURCES
+Cycle-Run-v2.0.0-2026-10-18: PASS full-HD convergence, legacy retained history,
+pinned PCM/transcript recovery, five timed reviews, checked release, shared
+pacing, actual-tool reflection gates and process restart.
+Unchanged Prenatal.Flow.Run.c with explicit RUN hooks: PASS 1122 windows and
+544 full-HD frames, real voice/pulse source checks, live replay/context,
+corruption and changed/corrupt recovery. Boundary prefixes remain synthetic.
+These results do not claim a completed 22-million-beat training run.
+
+Linux BSS from size:
+production runtime 639956288 bytes;
+diagnostic executable 706693088 bytes (includes its fixed input/proof buffers).
+The existing 512 MiB history reservation remains; moment mode suppresses
+automatic capture, not the compiled reservation. No device RAM claim is made.
+
+OPEN
+General OCR/font/grid discovery, PDF/JPEG/MP4 codecs, speech recognition,
+semantic descriptions of arbitrary images, production reflection/learning,
+three offset clones and geometric comparison, Swift bindings, display/audio
+devices, physical pacing/throughput, and final idle-duration selection.
+No independent acceptance signature or Apple-device run is asserted.

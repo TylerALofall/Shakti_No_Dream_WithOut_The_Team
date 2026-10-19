@@ -9,10 +9,10 @@ section meanings, component boundaries, current source map and work method.
 Sealed tool-package records describe their own versions; they are not
 alternate project architecture guides.
 
-**Scope review is in progress. Tyler's full drawing comes before source
-relocation or further subsystem implementation.** The loader and sensory
-containers below are the agreed boundary to preserve. Their final source
-placement must follow that scope. This README update does not move code.
+**Current bounded scope:** Tyler's eight-stage loader/senses pipeline, drawn
+below, is implemented and exercised as a native C RUN. This does not close
+the whole model, general OCR, speech recognition, the Apple host or the
+three offset clones. No other project scope is inferred from these results.
 
 ## 1. Start a session here
 
@@ -63,7 +63,7 @@ implemented, correctly placed, connected or qualified.
 |---|---|---|
 | A | Kernel | Bootstrap, lifetime, scheduling and core service calls. |
 | B | Eden / resident foundation | Deterministic foundation and its prenatal preparation. |
-| C | Four channels / connectors | Declared handoffs among sight, hearing, reasoning and available context. |
+| C | Four channels / connectors | Shared item/task loader and declared channel handoffs. |
 | D | Model-side controller / engine | Coordinate task processing and model-side control. |
 | E | Senses | Eyes and ears; complete sensory breakdown, reconstruction and validation. |
 | F | Memory | Working, short-term and long-term containers; recall, retention and organization. |
@@ -78,123 +78,192 @@ The supplied companion retires standalone K, L and O assignments. Do not
 invent meanings or use unassigned letters as overflow folders. Tyler's
 full scope decides any revision. Reflection is Gi, not a new section.
 
-**E means senses; F means memory.** A generic binary filename is not enough
-evidence to assign its implementation to F. The full scope must settle
-shared services and container homes before moves are made.
+**E means senses; F means memory.** Shared sensory binary processing now
+lives in E/shared. A generic binary filename is not evidence of memory
+ownership. Further moves require their own section scope and caller review.
 
-## 4. Separate loader and sensory containers
+## 4. Loader and sensory containers
 
 The boundary is **[loader] | [ears | eyes]**.
 
-| Container | Owns | Hands off |
+| Container | Active home | Responsibility |
 |---|---|---|
-| Loader | Intake, loading-zone queue, item identity, task ownership and held validation reference. | A shared task describing the actual source item, its timeline and required sensory channels. |
-| Eyes | Full-size pixels/pages, binary processing, rebuilt visual data and validation state. | Validated visual data at the task's source position. |
-| Ears | Original PCM samples, binary processing, rebuilt audio data and validation state. | Validated audio data at the matching source position. |
+| Shared loader | SECTION-C/loader/ | One source/task, channel presence, slicing, tags, leases, prepared queue and heartbeat release. |
+| Eyes | SECTION-E/eyes/ | P5/P6 decoding to full RGB8; exact supplied-font, fixed-cell OCR. |
+| Ears | SECTION-E/ears/ | PCM16 WAV classification and exact source-time slices. |
+| Shared sensory codec | SECTION-E/shared/ | Existing reversible bit-plane encode/rebuild and byte hash, linked once. |
 
-One movie is one source task with visual and audio channels. Eyes and ears
-may use that same item; neither creates an unrelated second task or a new
-source library. A still picture/document activates its visual channel; a
-sound item activates its audio channel. Only required channels participate.
-Normal vision retains full-size pixels. The 8x8 exercise belongs to
-handwriting practice; it is not the resolution of her eyes.
+One movie is one source task with visual and audio channels. Neither sense
+creates a separate unrelated task. A still/document can use sight alone;
+sound alone uses the audio pair. The loop still schedules all timing slots
+when a channel is absent. Absence, confirmed silence, pending data and
+validated content are different states.
 
-Keep task identity, source position, epoch receipts, reference ownership
-and buffer lifetime explicit. Sharing an item does not permit a processor
-to overwrite another channel's leased buffers. Input, held reference,
-binary work and rebuilt output remain distinct where required for validation.
+The eight stages mean:
 
-This is a partial container contract for scope review, not a generated
-function-call graph or a claim that the final module split is implemented:
+1. **Classify:** inspect actual bytes. The native file route accepts P5/P6
+   gray/RGB8 images and RIFF PCM16 WAV; it does not decode PDF/JPEG/MP4.
+2. **Reshape:** normalize an explicitly supported format. Gray8 becomes
+   RGB8 with the same intensity in all channels. There is no spatial
+   resize, forced square, 8x8 reduction or discarded source detail.
+3. **Slice:** retain a complete visual frame per source window and two
+   consecutive audio slices. At sample rate R, clip k spans sample-frame
+   indices floor(k*R/64) through floor((k+1)*R/64), excluding the endpoint.
+   Only a known end of file is zero-padded; recorded sample counts are explicit.
+4. **Tag:** source_id plus window n identifies sight position 2n and
+   audio positions 2n / 2n+1. These audio lanes are consecutive times,
+   not left/right channels. PCM channels are interleaved within each slice.
+5. **Prepare:** validate every buffer lease, take an independent reference,
+   decompose to eight packed bit planes, rebuild from those planes and
+   compare every byte. This may complete before a heartbeat release.
+6. **Assemble:** required lanes must share the source/window, compatible
+   context and audio format. A partial or corrupt window cannot publish.
+7. **Wait and publish:** the prepared queue is the bottleneck. A normal
+   heart-owned cycle publishes sight on an even slot; a movie/audio pair
+   waits through its even/odd pair. Preparation alone advances no clock,
+   exposure or publication. Reference, binary and rebuilt buffers are
+   checked again at publication so post-prepare corruption cannot pass.
+8. **Compact:** the shared rebuilt view can produce OCR, solid RGB facts,
+   actual caller thoughts and a versioned capsule candidate. This
+   deliberately selected representation is distinct from exact pixel/PCM
+   reconstruction. It cannot recreate all discarded raw detail.
 
 ```mermaid
 flowchart TD
-    subgraph L["Loader container"]
-        Q["Queued source item"] --> T["Take one shared task"]
-        T --> R["Hold validation reference"]
-    end
-    subgraph E["Senses container: Section E"]
-        V["Eyes: full pixels to binary"]
-        A["Ears: full PCM to binary"]
-    end
-    T --> V
-    T --> A
-    V --> B["Timed rebuild and validation"]
-    A --> B
-    R --> B
-    B --> C["Shared convergence"]
-    H["Heartbeat and epoch"] --> B
-    H --> C
-    H -->|"Next beat"| H
-    M["Whole memory, Eden, reasoning and context"] --> C
-    C -->|"Reasoning feedback"| M
+    T["MCP trigger"] --> L["Loader: classify, reshape, slice, tag"]
+    L --> E["Eyes: visual slices"]
+    L --> A["Ears: PCM slices"]
+    E --> C["Assemble matching slices and validate reconstruction"]
+    A --> C
+    C --> Q["Prepared window waits here"]
+    H["Heartbeat: 64 hearing / 32 sight / 1 beat"] --> Q
+    Q --> V["Publish one shared convergence view"]
+    V --> R["OCR, reasoning and compact Shakti capsule"]
+    R --> S["Short-term copy and working access"]
+    R --> P["Intentional photograph"]
+    S --> F["Reflections and whole-capsule library admission"]
+    F --> S
 ```
 
-The diagram illustrates a movie; channel presence is governed by the task.
-A failed or incomplete reconstruction holds that task and grants no
-validated exposure. The heartbeat, memory and reasoning continue cycling.
-With no new item, the loop continues with its existing memory and thoughts.
+This is the stage contract, not an extracted function-call graph.
+Convergence assembly joins source slices; shared publication makes a
+complete validated view available to Eden, memory and the reasoning adapter.
+The current C view is not a learned visual interpreter.
 
-Every presentation of sound or light traverses binary breakdown, rebuilding
-and matching before publication. Reusing a recording or a buffer does not
-reuse a previous validation as credit for a new presentation. Eyes and mind
-consume the actual rebuilt data through the shared convergence view.
+The explicit new formats are RGB8 / RGBA8 and signed little-endian PCM16.
+RGB8 is tightly packed, top row first, R/G/B per pixel. Pixel byte offset
+is ((y*width+x)*3)+channel. The legacy UNSPECIFIED format remains accepted
+for old callers; it must not be silently described as a known PCM encoding.
+
+OCR reads actual rebuilt RGB pixels. The supplied atlas declares its
+alphabet, cell dimensions and grid; it does not supply the answer text.
+Unknown/ambiguous glyphs refuse the whole result. Character receipts contain
+source/window, row/column, pixel coordinates and cell dimensions.
+The RUN uses 24x32 cells rendered from the existing handwriting fixture;
+the OCR accepts declared sizes up to 128x128 without spatial rescaling.
+Automatic font/grid discovery and general handwriting remain open.
+
+The native proof renders these eight full-HD solid inputs after reconstruction:
+
+| Fixture color | RGB8 |
+|---|---|
+| Black | 0, 0, 0 |
+| Red | 255, 0, 0 |
+| Green | 0, 255, 0 |
+| Yellow | 255, 255, 0 |
+| Blue | 0, 0, 255 |
+| Magenta | 255, 0, 255 |
+| Cyan | 0, 255, 255 |
+| White | 255, 255, 255 |
+
+![Native color sheet made from validated rebuilt buffers](SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Evidence/Colors-Rebuilt.png)
+
+Names above are fixture metadata, not learned color names. Full prenatal
+flashes remain solid frames; the proof sheet is only a presentation.
 
 ## 5. Heartbeat and continuous loop
 
-The heart is the shared timing trigger. At rest it advances one logical
-beat per second; each beat has 32 sight slots and 64 hearing slots. Their
-2:1 ratio remains exact when the shared rate changes. The current native
-control accepts 1, 2, 4, 8, 16, 32 and 64 beats per physical second;
-actual device throughput still needs qualification.
+The heart is the shared trigger. At rest: one logical beat per physical
+second, 64 hearing slots and 32 sight slots per beat. Shared rate controls
+are 1, 2, 4, 8, 16, 32 and 64. Actual device throughput needs qualification.
 
-Source position and epoch have different jobs: source position aligns the
-item's sound and sight; epoch records the live sequence of events. Replaying
-an item changes its run identity without moving the live epoch backwards.
+A 64-step phase can equally be represented as two nested base-8 counters:
+eight subticks carry into one group; eight groups carry into one beat.
+Each group has eight hearing slots and four sight slots. Local counters
+can wrap or re-arm at an aligned empty boundary while carried beat/source
+identity survives. This never resets memory or awards missing exposures.
+Rational rhythm lanes carry their remainders and dispatch all crossed events.
 
-The loop runs without a reply. Holding a tool, waiting for reflection
-answers, an empty loading zone or pausing training intake does not stop the
-kernel loop or clear RAM. Live exposure replay stays inside the running
-instance. Actual process termination needs durable recovery; recovery is
-not a promise that physical RAM survives a device restart.
+Source position aligns an artifact's channels. Logical epoch/frame orders
+live runtime events. Real host epoch anchors locate an execution in UTC.
+The legacy clock is seeded from host epoch and then advances once per
+logical beat; at accelerated rates its value is not current physical UTC.
+Frames.txt records a separate real host anchor and labels the synthetic RUN
+origin. A full durable physical/logical anchor mapping remains open.
 
-Eden, recalled whole memories, reasoning feedback and available context
-remain participants in convergence. The full scope must show these paths,
-including long-term recall into short-term and current work.
+The host uses a local monotonic pacer for physical playback. Offline RUNs
+can advance logical cycles without sleeping. Exact integer ratios do not
+establish real-time throughput or replace a physical playback clock.
 
-## 6. Memory and arenas
+The loop runs without a reply. Empty intake, pending reflections, held
+tools, failed source reconstruction and paused training do not stop it.
+Live replay keeps RAM and the current instance. Actual process termination
+uses durable recovery; it cannot preserve physical RAM across a restart.
+Eden, whole memory recall, reasoning feedback and available context remain
+participants in the shared convergence view.
+
+## 6. Memory, moments and arenas
 
 Memory items travel as whole containers with their context. Recall copies
-the container; the original remains in long-term storage. Use refreshes
-short-term idle lifetime. Shakti chooses her organization outside the
-fixed Eden boundary, and the chosen method and location must be preserved.
+the container; its original remains in long-term storage. Use refreshes
+short-term idle lifetime. Shakti chooses her organization outside Eden;
+the selected method and location must survive recovery.
 
-- Working memory covers about 20–90 logical heartbeat seconds.
-- Short-term memory holds whole recent containers and retained references.
-  Permanent training and decaying recent events have different policies.
-- At least five distinct completed reflections consolidate a pending
-  container before long-term admission. Each reflection has 13 real answers.
-- Long-term memory is the stored chronological library: epoch first,
-  context, answers, tags, references and organization retained together.
+The new senses adapter chooses **MOMENT** retention. Its full-detail frame
+and audio buffers remain leased until the consumer finishes and releases
+the view. It does not automatically record a raw movie. A photograph is
+an explicit host action. The caller must finish its compact-memory decision
+before reusing buffers; the C API does not invent a caption or release them
+on an unimplemented interpretation's behalf. Original input files are not
+deleted by the adapter or RUN.
 
-A fixed arena can contain bounded subarenas. Reserved playlist/foundation
-space and Shakti-organized short-term space are part of the scope being
-defined; they are not automatically provided by the existing movie arena.
+SHAKTI_SENSE_V1 is a compact textual candidate containing source/window,
+format, dimensions, hashes and actual OCR when available. A solid image
+can be described by its dimensions and RGB value. Other images are marked
+UNINTERPRETED, audio without actual ASR is NOT_SUPPLIED, and missing thoughts
+are NOT_SUPPLIED. Metadata is not a substitute for semantic understanding.
 
-**Current code:** the 512 MiB reservation is media retention: 448 MiB history,
-32 MiB latest window and 32 MiB processing/recovery work. Working and
-short-term capsules use separate fixed pools. A general whole-memory
-playlist with a guaranteed resident reservation remains open.
+The native RUN stores the candidate using the existing memory API and
+links the source range. It does not create a second memory engine:
 
-Movie thinning is a retention policy after full sensory processing. The
-native policy can retain alternate frames after 20 minutes and a quarter
-after 40, thinning further when bytes require it while preserving timeline
-references. PCM stays pending until an actual transcript is supplied;
-there is no built-in speech recognizer or learned category organizer yet.
+- Working memory lasts 20–90 logical beats, default 60.
+- Short-term holds complete recent containers and permanent training.
+  The existing default idle decay is 600 logical beats. Tyler's proposed
+  64 intervals remains configurable; this RUN explicitly uses 64 beats.
+  That does not mean 64 hearing ticks or 64 physical seconds at every speed.
+- At least five distinct completed reflections, each with 13 real answers,
+  precede library admission. Pending capsules cannot fade before this gate.
+- Long-term records begin with epoch and preserve context, answers, tags,
+  organization, source references, checksum and completion footer together.
+- Timed pending-capsule reviews occur every 20 logical beats; ten actual
+  tool calls independently require a reflection. Neither frames nor quiet
+  cycles are fabricated tool calls. A NULL provider leaves answers pending.
 
-Local scripts and assets need stable stored versions linked from their
-complete containers. A logical reference field is not proof that a complete
-automatically organized script/asset library has been implemented.
+The older explicit **HISTORY** route still has its 512 MiB media arena:
+448 MiB history, 32 MiB latest, 32 MiB work. That reservation remains in the
+production binary, even when moment mode records no movie. It is not a
+general 512 MiB short-term capsule allocator. Working/short pools are separate.
+A fixed arena can contain bounded subarenas; a guaranteed resident general
+playlist reservation remains open.
+
+For legacy history, every frame is processed before thinning after 20/40
+source minutes or byte pressure. Untranscribed PCM stays pinned until an
+actual transcript arrives; release requires the reviewed whole-source capsule.
+Do not silently switch existing history callers or erase their pending data.
+
+Learning categories, arbitrary image descriptions, speech recognition and
+an automatically organized script/asset library remain model integration
+work. A reference field alone does not implement any of them.
 
 ## 7. Prenatal input and later learning
 
@@ -261,80 +330,113 @@ Reflection metadata supplies search triggers and explicit memory links.
 It must recall complete containers with context. Fixed questions and real
 answers belong to the container record; they are not invented by a loader.
 
-## 9. Current published implementation — facts, not target placement
+## 9. Active source map and qualification
 
-Reviewed main: b079eb159d3d1edaa4d6e0802d1453490fff72a2.
-It contains all 649 files from reviewed branch commit
-5106e2e3af9bb2dea731a74ddc669d182d7f7b4a byte-for-byte, plus
-WO-M-womb_decode_c-A.txt. The audited tree has 650 files.
+Audited base main b079eb159d3d1edaa4d6e0802d1453490fff72a2 contained
+650 files: all 649 from 5106e2e3af9bb2dea731a74ddc669d182d7f7b4a,
+plus WO-M-womb_decode_c-A.txt. The Guide base is review commit
+82c5f5d500071da5019cc4c3855362b1b7d0d5a8. These are historical pins.
 
-The published native build has 21 C translation units: 20 in SECTION-A,
-plus SECTION-B/shakti_prenatal_loader.c. This concentration in A does
-not follow the intended subsystem ownership. The pending placement
-correction is not represented here as a completed integration.
+Runtime.Sources.txt is the explicit current compiler input list:
+24 C translation units, 18 in A, one in B, two in C and three in E.
+It is a compiler response file, not a script or background builder.
 
-| Current published path | Actual job |
+| Active path | Actual job |
 |---|---|
-| SECTION-A/main.c | Native initialization, command routing, queue/view entry points and console host. |
-| SECTION-A/shakti_loop.c | Continuous cycle, shared pacing, module calls, reasoning feedback and reflection gate. |
-| SECTION-A/shakti_media.c | Full-size sensory queue, binary encoding, validation and shared publication. |
-| SECTION-A/shakti_rebuild.c | Rebuild bytes from binary planes. |
-| SECTION-A/shakti_prenatal_flow.c | Ordered prenatal schedule, source ownership, counters and replay controls. |
-| SECTION-B/shakti_prenatal_loader.c | Bounded profile/WAV/pixel preparation. |
-| SECTION-A/shakti_loader.c | Existing bounded 4,096-byte artifact file reader; not the full-size sensory queue. |
-| SECTION-A/shakti_memory.c | Whole capsule stages, reflection consolidation, persistence and recall. |
-| SECTION-A/shakti_retention.c | Fixed movie arena, timeline thinning, PCM/transcript and release contracts. |
-| include/ | Public interfaces shared by the active C modules. |
+| SECTION-A/main.c | Once-only initialization, serialized native entry points and console host. |
+| SECTION-A/shakti_loop.c | Continuous heart slots, publication calls, reasoning feedback and reflection gate. |
+| SECTION-C/loader/shakti_media.c | Existing source-window queue, leases, prepared barrier and shared publication. Moved from A. |
+| SECTION-C/loader/shakti_senses.c | Typed item adapter and compact-candidate handoff. |
+| SECTION-E/shared/shakti_binary.c | Existing encoder and rebuilder combined once; former A media/rebuild algorithms. |
+| SECTION-E/eyes/shakti_eyes.c | P5/P6 RGB decoding and exact supplied-font OCR. |
+| SECTION-E/ears/shakti_ears.c | PCM16 WAV parsing and exact fractional sample slicing. |
+| SECTION-A/shakti_prenatal_flow.c | Existing ordered prenatal schedule, private source ownership and replay controls. |
+| SECTION-B/shakti_prenatal_loader.c | Existing bounded prenatal profile/WAV/pixel preparation. |
+| SECTION-A/shakti_loader.c | Legacy 4,096-byte artifact reader; distinct from full sensory intake. |
+| SECTION-A/shakti_memory.c | Existing whole-capsule memory engine; logical home F, relocation still pending. |
+| SECTION-A/shakti_retention.c | Existing explicit history arena; new moment mode does not auto-capture here. |
+| include/shakti_senses.h | Typed image, PCM, storage lease, OCR and candidate interfaces. |
 
-The existing SECTION-E/eyes*.c programs are not linked by this native build.
-Their font/document demonstrations are not the new full-byte-preserving
-sensory implementation. The next scope must reconcile existing and active
-code explicitly, without silently building another eyes/ears system.
+The other A inputs are listed by exact path in Runtime.Sources.txt. The
+existing SECTION-E/eyes*.c demonstrations are not linked. They still depend
+on missing legacy eyes headers and the 8x8 exercise; do not silently promote
+them to full vision or create replacement copies alongside the new path.
+Reconcile them in their own reviewed scope.
 
-The artifact reader, prenatal preparation, prenatal scheduling and sensory
-queue are existing jobs with different interfaces. Use these interfaces
-when defining the single loading container, and identify which jobs remain
-sensory processing. Reuse their implementations instead of duplicating them.
+Senses-Assembly-v1.0.1-2026-10-19 supplies the reusable native RUN, declared
+input fixtures, source bindings and actual evidence. One file plus a
+one-second 44.1 kHz PCM source produced 32 visual windows / 64 audio clips.
+Original/rebuilt PNG and whole WAV bytes matched; OCR recovered ABC,
+2+2=4 and 123 from rebuilt pixels. Eight further full-HD colors matched.
+The compact candidate was 252 bytes; the reviewed container text was
+9,414 bytes including synthetic question/answer history. These are fixture
+measurements, not universal compression ratios.
 
-Other A build inputs are shakti_artifact.c, shakti_asset.c,
-shakti_handwriting.c, shakti_log.c, shakti_manifest.c,
-shakti_reason.c, shakti_receptor.c, shakti_report.c, shakti_school.c,
-shakti_score.c, shakti_tablet.c and shakti_time.c. Presence in the repository
-does not add another source to that executable.
+The published raw evidence is the separate image-only run: one visual window,
+148-byte candidate and 9,310-byte reviewed text, with audio marked ABSENT.
+Frames.txt and Planes.bin contain only that image. WAV uploads were blocked
+by automatic approval review as potentially sensitive audio; new raw audio files
+and audio-bearing bit-plane traces are omitted from this branch pending approval.
+The audio measurements above are local qualification results, not included
+audio payloads. The published package uses the image-only EXAMPLE.
 
-Native evidence is recorded in Cycle-Run-v2.0.0-2026-10-18 and
-Prenatal-Loader-v2.0.0-2026-10-19 under the Menu tool bank. The prenatal
-integration RUN checked 1,122 real windows, including 544 full-size frames,
-live pause/replay, corruption/refusal and recovery boundaries. Injected
-prefixes were marked synthetic; the production build rejects them.
+Image-only input also passed. Negative RUN cases cover unknown glyphs,
+truncated images, unsupported WAV encoding, foreign OCR hash, prepared
+binary corruption and duplicate publication. The RUN uses explicitly
+synthetic reflection answers in an isolated host; production supplies none.
 
-These RUNs demonstrate the named mechanical contracts. They do not certify
-all sections, a full prenatal run, learned perception or independent review.
+The existing Cycle v2 RUN passed again against this source set, including
+legacy history, actual transcript input, five reviews, tool gates and restart.
+The unchanged prenatal RUN passed again: 1,122 checked windows and 544 full-HD
+frames, live replay and corruption/recovery cases. Injected boundary prefixes
+remain synthetic; there is no full prenatal or learned-mastery claim.
 
-The source placement draft made after this main audit is paused locally.
-It has not been published or qualified. No Runtime-Layout package, new
-build manifest or per-section operating README is adopted by this revision.
+The unqualified earlier section-repair draft is not adopted. This source map,
+the explicit build list and sealed RUN evidence describe the bounded change.
+No whole-section or independent-review signoff is implied.
 
-## 10. Runtime entry and qualification boundary
+## 10. Build, trigger and native output
 
-The native controller initializes once with shakti_app_initialize.
-It keeps scheduling shakti_app_cycle, including quiet cycles with no
-command. The kernel's loop calls the sensory step; a complete validated
-source window is exposed through shakti_app_convergence_view. Keep calls
-serialized and respect each returned view's lifetime.
+From the repository root:
 
-Current build, from the repository root of the pinned source revision:
+    cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude @Runtime.Sources.txt -o shakti-runtime
 
-    cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c SECTION-B/shakti_prenatal_loader.c -o shakti-runtime
+Initialize once with shakti_app_initialize, then keep calling
+shakti_app_cycle, including quiet cycles. Calls are serialized. A native
+producer supplies typed decoded data, caller-owned fixed buffers and one
+source id to shakti_senses_prepare. It prepares without advancing time.
+Normal cycles release the completed window; shakti_app_convergence_view
+then exposes its actual rebuilt pointers, Eden, whole memory and thought.
+The consumer can run OCR, describe the view, store/reference a complete
+capsule and explicitly release the leased buffers.
 
-This records the existing build, not approval to place new subsystems
-inside A. Replace its source selection only as part of the agreed scope.
-Do not compile every C file in every section; many contain standalone mains.
+Reusable file RUN, built separately from its declared source:
 
-Swift/iOS file picking, codecs, actual speaker/display bindings, lifecycle
-and device throughput remain unqualified. A future host must deliver real
-decoded bytes through MCP, display validated rebuilt output and use the
-same C heartbeat and memory state. A mockup is not a native bridge.
+    cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Senses.Assembly.c @Runtime.Sources.txt -o shakti-senses
+
+The generated package README gives COMMAND and EXAMPLE. Use --fixture
+NEW_DIRECTORY to create declared input data, inspect it, then separately
+use --run NEW_OUTPUT_DIRECTORY IMAGE_PNM WAV_OR_MINUS ATLAS_OR_MINUS
+ALPHABET CELL_WIDTH CELL_HEIGHT. The RUN loads input bytes before changing
+directory and creates an isolated synthetic Eden/control store. It is not
+a command that attaches to a running production instance.
+
+Outputs: Original.png, Rebuilt.png, Rebuilt.wav when sound is present,
+OCR.txt and Characters.txt when an atlas is supplied, Capsule.txt,
+Memory.txt after the synthetic five-review exercise, Colors-Rebuilt.png,
+Frames.txt and one Planes.bin. Every plane has a tagged byte offset and
+length. COMPLETE.txt marks successful completion; BENCH is failure, not
+partial success. The diagnostic refuses a complete item above its fixed
+64 MiB plane-trace budget or 1,024 windows instead of truncating it.
+
+The PNG writer is local C with no metadata or external dependency. Proof
+images are explicit RUN outputs, not automatic model photographs. There is
+no per-flash file or per-channel source task proliferation.
+
+Linux production/RUN builds passed strict C99. Swift/iOS picking, PDF/JPEG/
+MP4 decoding, actual display/speaker bindings, lifecycle and device-rate
+qualification remain open. The native host must retain real input sources,
+use the C heartbeat and display/play only validated rebuilt bytes.
 
 ## 11. Tools, Guide workflow and QA
 
@@ -387,18 +489,23 @@ Current code/document review branch: shakti/menu-moved-2026-10-15.
 A review-branch push is not an instruction to update main. Tyler controls
 the main integration unless he explicitly delegates that action.
 
+Git calls a file's exact bytes a blob. The GitHub upload helper is a publication
+tool outside Shakti; it is not linked into her runtime. Returned blob hashes
+are compared with the expected local hashes before a tree is published.
+
 Before a push, name the exact parent and changed paths, review the diff
 and verify that all unrelated files and package seals remain intact.
 After it, verify the remote blob/tree, parent and branch, pull the bytes
-back and compare them. Base64 transport preserves source bytes without
-retyping XML payloads. Any discrepancy is reported and corrected visibly.
+back and compare them. Transport source bytes directly without retyping XML
+payloads. Any discrepancy is reported and corrected visibly.
 
 For each bounded handoff retain: commit, section, authoritative file,
 interface/callers, exact change, actual RUN result, open issue and next
 permitted step. Start the next session from those repository facts.
 
-**Next permitted architecture step:** Tyler supplies the full scope.
-Then reconcile the single loader container and its shared eyes/ears task
-with section ownership, existing code, memory and the forever loop.
-Source moves and new implementations follow that drawing; they do not
-precede it.
+**Next bounded work:** qualify other input formats and the real reasoning/
+reflection adapter; then connect the native host. Tyler's three new offset
+clones/geometric comparisons are recorded as a future phasing contract.
+Their exact offsets, whole-memory access, write ownership and deterministic
+comparison rules must be defined before implementation. No clone behavior
+or complete project scope is invented here.

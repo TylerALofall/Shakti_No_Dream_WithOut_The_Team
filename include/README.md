@@ -1,13 +1,14 @@
-# C runtime interfaces
+# Public C interfaces
 
-Section A previously included these headers without shipping them. The retained
-definitions in COPILOT_INTAKE/shakti_master_architecture.md provided the starting
-interfaces. They are restored as buildable headers, with updated loop, memory,
-clock, school and log definitions. Formatting is not a byte-for-byte recovery.
+The single project operating Guide and current source map are ../01_README.md.
+Runtime.Sources.txt at repository root supplies the explicit build inputs.
 
-shakti_app.h and shakti_media.h expose the serialized native controller API.
-shakti_retention.h exposes fixed arena retention and native transcript input;
-shakti_memory.h exposes timed stages and five-reflection capsule promotion.
-See ../SECTION-A/Runtime.Flow.txt for ownership, timing, limits and unfinished
-Swift/ML integration. The 64-pixel receptor declaration belongs to handwriting;
-the full-size media interface has no 8x8 spatial limit.
+shakti_app.h: once-only initialization, quiet cycles and shared convergence.
+shakti_media.h: tagged windows, buffer leases, preparation and heartbeat publication.
+shakti_senses.h: typed PNM/PCM adapters, supplied-font OCR and compact candidates.
+shakti_memory.h: existing whole-capsule stages, reflection admission and recall.
+shakti_retention.h: existing explicit history arena and actual transcript input.
+
+The handwriting receptor is a separate exercise. Full sensory input has no
+8x8 spatial limit. Header names do not relocate their implementations or
+qualify unfinished model/Swift bindings; use the canonical Guide.
