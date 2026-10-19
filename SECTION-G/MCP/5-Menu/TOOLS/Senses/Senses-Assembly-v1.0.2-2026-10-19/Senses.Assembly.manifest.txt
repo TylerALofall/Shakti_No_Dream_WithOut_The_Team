@@ -1,0 +1,61 @@
+SENSES ASSEMBLY v1.0.2 — MANUAL NATIVE ENTRY
+
+BUILD LOCATION: repository root
+ENTRY: Senses.Assembly.c in this package.
+RUNTIME INPUTS: the exact 24 paths in root Runtime.Sources.txt.
+Do not compile the old standalone Section-E demos or add a second main.
+SHAKTI_APP_NO_MAIN renames the console entry while retaining the public app API.
+
+File route: P5/P6 image -> normalized RGB8 -> shared source/window task.
+Optional RIFF PCM16 WAV -> two consecutive exact sample slices per visual window.
+Optional single-row glyph atlas -> exact fixed-cell OCR on reconstructed pixels.
+The image is held for the supplied sound's complete duration; this is a still
+plus audio file route, not an MP4 decoder. Native C producers can supply a
+different decoded image per window using the same public task interface.
+
+Run --fixture NEW_INPUT_DIRECTORY to create clearly synthetic inputs.
+Inspect those bytes/images before the separate --run.
+--run NEW_OUTPUT_DIRECTORY IMAGE_PNM WAV_OR_MINUS ATLAS_OR_MINUS ALPHABET CELL_WIDTH CELL_HEIGHT
+Inputs are read before the new output directory is entered. An occupied output
+directory refuses. An isolated synthetic Eden/control host is created; this
+command never connects to, initializes or shuts down a live Shakti instance.
+
+Inputs/document.ppm, Inputs/atlas.ppm and Inputs/sound.wav are provided.
+The fixture alphabet starts with a space: " 0123456789+=ABC", cells 24 by 32.
+The image generator alone reuses existing handwriting glyphs. OCR consumes
+every pixel of the resulting full-size cells and has no 8x8 spatial restriction.
+The alphabet maps atlas images to character codes; it contains no answer text.
+Exact text in Evidence/OCR.txt is produced from the reconstructed page.
+
+Outputs are explicit diagnostic artifacts: Frames.txt, one Planes.bin, original
+and reconstructed PNG, whole reconstructed PCM WAV, OCR/character coordinates
+when requested, a compact textual candidate, a synthetic reviewed memory text,
+a native color sheet and COMPLETE.txt. No per-flash file proliferation.
+Frames.txt tags each plane's offset/length; it captures complete prepared
+decomposition and reconstruction before the heartbeat publication receipt.
+
+The source item is refused whole if its diagnostic plane trace would exceed
+64 MiB or 1,024 windows. Decoded RGB cap is 1920*1080*3 bytes; the image file
+cap allows a further 8192 header bytes. WAV and atlas input caps are 1 MiB each.
+Glyph cells are 1..128 pixels in each dimension; alphabet <=95 unique printable ASCII characters
+with a blank space cell first. OCR <=4096 recognized nonspace cells and <8192
+text bytes. The model-facing adapters use caller-owned bounded buffers.
+
+Production memory defaults are unchanged. The isolated RUN explicitly selects
+20 logical beats working and 64 idle short-term beats, with five actual review
+records supplied by a visibly synthetic compiled provider. No automatic ASR,
+semantic image caption, learned color name, autonomous reflection or mastery
+is supplied by this tool. The API returns NOT_SUPPLIED/UNINTERPRETED where true.
+Real host epoch anchors and the synthetic logical epoch are labeled separately.
+
+New typed tasks choose MOMENT retention. They do not auto-record a raw movie.
+Original input files remain untouched; caller-owned buffers remain leased
+until release/cancel. Compact memory decisions belong to the consumer, using
+the existing whole-capsule API and five-reflection admission gate.
+Legacy HISTORY callers retain their existing arena and transcript guarantees.
+
+Evidence/ contains an actual isolated native execution, not a production
+checkpoint or a learned model. The run's deliberate corruption BENCH is an
+expected refusal check. COMPLETE.txt and Native.Run.txt record its outcome.
+This version includes the approved WAV inputs/outputs and matching audio/visual
+bit-plane trace. Runtime and diagnostic C source bytes are unchanged.

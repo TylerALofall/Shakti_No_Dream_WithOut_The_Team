@@ -1,0 +1,6 @@
+SYNTHETIC INPUTS ONLY
+Document font cells are 24x32, rendered using existing handwriting fixture glyphs.
+OCR compares the full 24x32 cells without rescaling the input.
+Alphabet:  0123456789+=ABC
+Expected text, for RUN comparison only: ABC / 2+2=4 / 123
+Audio is synthetic 44100 Hz PCM16, not a voice or speech-recognition fixture.

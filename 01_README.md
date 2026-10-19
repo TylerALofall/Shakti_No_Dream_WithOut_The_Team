@@ -176,7 +176,7 @@ The native proof renders these eight full-HD solid inputs after reconstruction:
 | Cyan | 0, 255, 255 |
 | White | 255, 255, 255 |
 
-![Native color sheet made from validated rebuilt buffers](SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Evidence/Colors-Rebuilt.png)
+![Native color sheet made from validated rebuilt buffers](SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.2-2026-10-19/Evidence/Colors-Rebuilt.png)
 
 Names above are fixture metadata, not learned color names. Full prenatal
 flashes remain solid frames; the proof sheet is only a presentation.
@@ -363,7 +363,7 @@ on missing legacy eyes headers and the 8x8 exercise; do not silently promote
 them to full vision or create replacement copies alongside the new path.
 Reconcile them in their own reviewed scope.
 
-Senses-Assembly-v1.0.1-2026-10-19 supplies the reusable native RUN, declared
+Senses-Assembly-v1.0.2-2026-10-19 supplies the reusable native RUN, declared
 input fixtures, source bindings and actual evidence. One file plus a
 one-second 44.1 kHz PCM source produced 32 visual windows / 64 audio clips.
 Original/rebuilt PNG and whole WAV bytes matched; OCR recovered ABC,
@@ -372,13 +372,17 @@ The compact candidate was 252 bytes; the reviewed container text was
 9,414 bytes including synthetic question/answer history. These are fixture
 measurements, not universal compression ratios.
 
-The published raw evidence is the separate image-only run: one visual window,
+Tyler approved the audio artifacts on 2026-10-19. The current package includes
+the synthetic WAV input, its byte-identical reconstructed output, the rebuilt
+prenatal black.wav recording and the matching full Frames.txt / Planes.bin pair.
+The EXAMPLE now supplies the one-second audio source. The recorded-word output
+preserves all 17,280 source sample frames and adds 220 confirmed EOF-padding
+frames. Evidence/Recorded-Voice.txt identifies that separate execution.
+
+The sealed v1.0.1 image-only evidence remains unchanged: one visual window,
 148-byte candidate and 9,310-byte reviewed text, with audio marked ABSENT.
-Frames.txt and Planes.bin contain only that image. WAV uploads were blocked
-by automatic approval review as potentially sensitive audio; new raw audio files
-and audio-bearing bit-plane traces are omitted from this branch pending approval.
-The audio measurements above are local qualification results, not included
-audio payloads. The published package uses the image-only EXAMPLE.
+Its earlier pending-approval notes describe that historical publication.
+Runtime and diagnostic C source are unchanged by this artifact release.
 
 Image-only input also passed. Negative RUN cases cover unknown glyphs,
 truncated images, unsupported WAV encoding, foreign OCR hash, prepared
@@ -412,7 +416,7 @@ capsule and explicitly release the leased buffers.
 
 Reusable file RUN, built separately from its declared source:
 
-    cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.1-2026-10-19/Senses.Assembly.c @Runtime.Sources.txt -o shakti-senses
+    cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_APP_NO_MAIN -Iinclude SECTION-G/MCP/5-Menu/TOOLS/Senses/Senses-Assembly-v1.0.2-2026-10-19/Senses.Assembly.c @Runtime.Sources.txt -o shakti-senses
 
 The generated package README gives COMMAND and EXAMPLE. Use --fixture
 NEW_DIRECTORY to create declared input data, inspect it, then separately

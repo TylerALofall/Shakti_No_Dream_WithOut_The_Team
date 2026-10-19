@@ -1,0 +1,10 @@
+SHAKTI_SENSE_V1
+source=source-1
+window=0
+visual=OCR_DOCUMENT RGB8 384x128 hash=810592bc30f2758d
+text=ABC
+2+2=4
+123
+audio=PCM_S16LE rate=44100 channels=1 positions=0,1 hashes=bc3cfdc3d2ef07dc,426b1335fa0056dc
+transcript=NOT_SUPPLIED
+thought=NOT_SUPPLIED
