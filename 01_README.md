@@ -1,4 +1,48 @@
 # Shakti_No_Dream_WithOut_The_Team
+
+## Current integration boundary — 2026-10-19
+
+The current runtime map and component completion register are in
+`SECTION-A/Runtime.Flow.txt`, under `COMPONENT COMPLETION AND SECTION BOUNDARIES`.
+Use that register for the active build and its qualification limits. The older
+dated chapters below preserve project history and do not establish that their
+paths, response scheduling, or proposed integrations are implemented today.
+
+This loader integration builds on `e199bbb03343db830ec76b8056dbef7028c963df`.
+Its console build compiles 20 `SECTION-A` C files and
+`SECTION-B/shakti_prenatal_loader.c` with the `include/` interfaces:
+
+`cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c SECTION-B/shakti_prenatal_loader.c -o shakti-runtime`
+
+The loop runs without a reply; one heartbeat paces all 32 sight and 64 hearing
+slots. Input files, tool packages, historical copies and work orders are not
+all compiled into that executable. Other sections require their own acceptance.
+
+The reviewed input helper and nine recordings from `shakti/clean-start-2026-10-18`
+at `7aa4919e3f362fafd482644a5f5f4e3bf031625f` are now used by the C prenatal
+workflow. Its corrected profile uses all 32 full-size solid frames per beat.
+The new `Prenatal-Loader-v2.0.0-2026-10-19` Menu package records source bindings,
+native RUN evidence and manual build/use commands; the older sealed package
+on its source branch stays intact. This is a scoped integration, not a bulk merge.
+
+The loader follows the shared heart through heartbeat-only, voice and color
+phases. It reuses fixed input/reference/binary/rebuilt buffers and preserves
+whole recorded words over two beats. Pausing or unloading training intake
+keeps heartbeat, reasoning and memory cycling. Live replay does not initialize
+the runtime or clear memory. Actual process recovery uses stored checkpoints.
+The final delivery state is available to a future curriculum controller;
+counting/ABC/shapes/math, interactive games and actuator progression remain open.
+
+The 512 MiB arena currently retains media. Whole working/short-term capsules
+occupy separate fixed pools. A general long-term-memory playlist with a
+guaranteed resident reservation and learned organization is still open.
+
+No Swift app or Xcode project is qualified yet. The first host must drive the
+existing C loop, load actual media bytes through MCP, display rebuilt output,
+and show native epoch/memory/reflection receipts. Completion is recorded per
+component and interface; a native RUN does not certify an entire section or
+real learned perception.
+
 Plugging in the Drift Free Workflow and hitting the build hard with work flows and systematic building
 
 > **START HERE — QA work orders:** the one live instruction document is `Copilot_Intake/QA_specialist_Instruction.md` (v1.1, 2026-09-29). The old `QA_Specialist_Instruction.txt` is deleted. The `2026-09-22 No Drift.zip` is a frozen snapshot — never read instructions from it. Copilot agents: read `.github/copilot-instructions.md` first.
@@ -338,7 +382,7 @@ Learn the nine as a single loop, in order.
 | 6 | SHAKTI SHELL | Gf — TOOL CALL | The shell she lives in; tool calls execute here. |
 | 7 | OUTBOUND MAIL | Gg — MESSAGES AND NOTES TO TYLER | Her → Tyler. |
 | 8 | INBOUND MAIL | Gh — TYLER'S MESSAGES AND NOTES TO SHAKTI | Tyler → her. |
-| 9 | SELF-REFLECTION | Gi — THIRTEEN-POINT SELF-REFLECTION | Taken every 10–13 responses; 13 questions; stored by epoch. |
+| 9 | SELF-REFLECTION | Gi — THIRTEEN-POINT SELF-REFLECTION | After ten actual MCP tool calls; pending capsules also request timed reviews. Thirteen actual answers are stored by epoch. |
 
 Log/address contract: `[epoch]:[frame/subsecond]-[function identity]`.
 The Aa-01 tail of the old contract is retired; the function identity is

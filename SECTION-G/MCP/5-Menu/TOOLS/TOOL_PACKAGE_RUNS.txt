@@ -1,4 +1,50 @@
-SHAKTI MENU PACKAGE RUNS -- 2026-10-18
+SHAKTI ZIP RECOVERY -- 2026-10-19
+
+The supplied junzip_nomalloc.h resolves the missing-header failures recorded
+below. The parser, vault C source and vault header remain byte-identical to
+their existing versions. The header is restored beside the original parser
+in TOOLS/jz and included in both self-contained assembler packages.
+
+CURRENT ZIP RESULTS
+Zip / Core v1_local2: independent strict C99 object BUILD 0; PACKAGE 0.
+Zip / Vault v0.1_recovered1: strict C99 library object BUILD 0; native RUN
+  BUILD 0; RUN 0 with 31 passed and zero BENCH; PACKAGE 0.
+  The RUN exercises both core and vault with static synthetic inputs.
+  Packaged-source rebuilds and the packaged RUN also passed. No optional
+  decompression backend was installed, enabled or linked.
+
+PACKAGES UNDER TOOLS/Zip
+Zip-Core-v1_local2-2026-10-19
+  Directory SHA256:
+  105b8bdc21968f54be4e52c7fb78acc7c810ec73e44f42c1b2d03e9b58cfc7df
+Zip-Vault-v0.1_recovered1-2026-10-19
+  Directory SHA256:
+  c68461a5e494ef1c6ba060747d2392483c45b490a8ee108fb957c65ca546ae04
+The existing C99 README assembler generated both packages and appended
+their ledger registrations. Every README payload hash and both complete
+directory seals independently matched the host SHA-256 calculation.
+
+BUILD AND RUN
+Each generated README records the commands. The Vault manifest separates
+the two library modules from Zip.Recovery.Run.c. The explicit RUN uses the
+vault's existing ZV_TEST_HOOKS only for synthetic damage and inspection;
+normal library builds omit that define and the RUN main.
+
+Coverage includes all 256 byte values, two entries, empty ZIP, maximum
+comment across an end-record scan boundary, signed and signatureless data
+descriptors, 255/256-byte names, input/output caps, unsafe and duplicate
+names, CRC/header/descriptor damage, truncation, unsupported layouts,
+oversized claims, sealed refill refusal, wiping and damage to A, B and C.
+
+LIMITS
+Stored entries only. Compressed ZIP support, persistence, airlock and
+heartbeat/eye-loader integration remain outside this recovery. Guard and
+CRC checks detect damage at API checks; pointer lifetimes and serialized
+access remain caller responsibilities. These Linux synthetic RUNs do not
+establish Apple runtime behavior or whole-process allocation guarantees.
+Existing sealed packages and earlier failure logs are preserved.
+
+HISTORICAL MENU PACKAGE RUNS -- 2026-10-18
 
 17 programs built, ran on local examples, and were packaged by the same
 C99 assembler. Two ZIP libraries are incomplete because junzip_nomalloc.h

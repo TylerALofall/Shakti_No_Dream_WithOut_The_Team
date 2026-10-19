@@ -1,0 +1,12 @@
+FAMILY: Zip
+TOOL: Core
+VERSION: 1_local2
+DATE: 2026-10-19
+INTRODUCTION: Supplied fixed-buffer ZIP parsing library with its recovered companion header. No optional decoder backend is enabled. The unchanged implementation is exercised by the companion Vault package's explicit native RUN.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -c junzip_nomalloc.c -o junzip_nomalloc.o
+COMMAND: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -c junzip_nomalloc.c -o junzip_nomalloc.o
+EXAMPLE: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -c junzip_nomalloc.c -o junzip_nomalloc.o
+ENTRY_KIND: single
+ENTRY: junzip_nomalloc.c
+REQUIRED: junzip_nomalloc.c
+REQUIRED: junzip_nomalloc.h

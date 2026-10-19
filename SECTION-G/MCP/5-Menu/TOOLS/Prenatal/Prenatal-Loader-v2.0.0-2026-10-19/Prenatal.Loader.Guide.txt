@@ -1,0 +1,184 @@
+PRENATAL LOADER v2 — CONTINUOUS C RUNTIME / FIXED STORAGE
+
+This package joins the reviewed input helper to the existing C loading zone,
+binary reconstruction, validation and shared convergence view. It uses the
+existing heartbeat and memory code. It supplies no Swift app, codec, device
+playback, speech recognizer, neural learner or automatic memory organizer.
+
+SOURCE AND BUILD
+Work from this repository root. The runtime build is:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude SECTION-A/*.c SECTION-B/shakti_prenatal_loader.c -o shakti-runtime
+
+The package's C/H copies bind the exact loader revision; the build above uses
+the active copies at their Section-A/Section-B/include homes. Do not link both
+copies. Sources.Bindings.txt pins the actual runtime inputs and recordings.
+The old sealed input package on its source branch is preserved unchanged.
+The native assembler packages files and writes README last; it does not build
+or execute a supplied tool. Every BUILD and RUN here is a separate manual step.
+
+LIVE USE
+Start the initialized continuous runtime with its real Eden/control/manifest
+data. Keep one owner serializing app_cycle and view access. Choose a local
+package Assets directory and its Prenatal.Profile.xml. The exact native MCP
+form is:
+/shakti_run/ prenatal start ASSET_DIRECTORY | PROFILE_PATH
+
+Use absolute local paths if the native controller may change working directory.
+Both paths are bounded at 511 bytes; the console command must fit its 1024-byte
+input capacity. The profile and all nine complete WAVs are validated before
+admission. Empty media queue, no current borrowed view, healthy memory and an
+idle episodic source are required. A different active movie is never erased.
+
+Controls, available even with the tool/reflection gate held:
+/prenatal/status/
+/prenatal/pause/
+/prenatal/resume/
+/prenatal/stop/
+
+These control training intake only. Continue quiet app_cycle calls in every
+state. The heartbeat, reasoning, recall, reflection processing and memory aging
+stay live. Pause drains the borrowed window and holds training progress.
+Resume replays ordered exposure from beat 1 within the same existing runtime;
+it does not call initialize, close memory, free RAM or clear an arena. Stop
+unloads the intake schedule and restores ordinary media admission after the
+owned window drains. The small source collection stays resident.
+
+Normal /interrupt/, /quit/ and /resume/ still control MCP tool availability.
+They do not pause the training schedule or the continuous loop. One actual
+MCP start counts as one tool call. Repeated frames do not invent tool calls
+or fill in any of the thirteen reflection answers.
+
+HEART-OWNED TIMELINE
+One logical beat has 32 sight slots and 64 hearing slots. Source positions
+use position64; the live epoch continues forward even when exposure replays.
+There is one scheduling clock. /heartbeat/ accepts 1,2,4,8,16,32,64 beats per
+physical second. No frame, word or beat is skipped to catch up with wall time.
+
+Beat 1 through 11,491,200: heartbeat only; voice channel silent; no sight lane.
+Beat 11,491,201 through 15,120,000: heartbeat and recorded voice; no sight lane.
+Beat 15,120,001 through 22,982,400: heartbeat, recorded voice, full solid color.
+
+Color order: black, red, green, yellow, blue, magenta, cyan, white.
+Each color/word occupies two consecutive beats. Two recordings exceed one
+second; their unmodified tails continue into the second beat. All eight
+colors therefore occupy one 16-beat round. The first round of the sound phase
+and the first round of the light phase slow the shared heart to 1 beat/second;
+afterward the latest requested heart speed is restored. All 32 sight frames
+per beat are solid. The former patterned/dark density ramp is refused here.
+
+The complete light phase contains 7,862,400 beats: 982,800 beats and 31,449,600
+full frame reconstructions per color; 491,400 complete two-beat presentations
+per color. These are analytical schedule totals. The native boundary RUN
+below does not claim to have executed that whole schedule or learned it.
+
+SENSORY FORMAT AND OWNERSHIP
+The profile defaults to 1920x1080 RGB, pulse on fraction 2/3, voice-to-pulse
+peak ratio 4 and monitor off. Native dimensions are retained; a frame larger
+than the fixed 1920x1080x3 byte capacity refuses whole. There is no resizing,
+8x8 perception, OCR shortcut, SVG stimulus or color-label text as perception.
+
+The supplied eight voice WAVs and one prepared quiet pulse WAV remain exact
+source bytes. The pulse is one complete 16 kHz PCM16 second; the source helper
+can prepare such an atom from a retained source recording and reference voice.
+Its gain and off region must agree with the profile. Changing that profile
+requires a matching prepared pulse; the loader does not silently transform it.
+
+Each hearing microclip has 250 samples of interleaved PCM16 at 16 kHz:
+  channel 0: exact recorded voice, or zero outside its phase/recorded extent;
+  channel 1: exact quiet pulse at the matching within-beat sample position.
+These are simultaneous logical streams. Temporal lanes 1 and 2 remain two
+consecutive microclips, not two sources at the same source position. No mixing
+or clipping changes the voice. A future native playback adapter must handle
+the shared pace and this channel contract; no physical audio rate is certified.
+During training use the validated heartbeat channel, rather than adding the
+console loop's separate generic monitor PCM as a second model-input heart.
+monitor_enabled is an exposed host preference; this module opens no device.
+
+Every exposure follows ordinary receipted queue -> take -> independent
+reference and binary planes -> reconstruction -> byte/hash validation ->
+shared sensory view. The loader never copies input into the rebuilt output.
+Eyes/mind consumers see those same rebuilt pointers. Source identity is opaque;
+context is empty. There is no filename/color/word side channel in the frames.
+
+Four distinct fixed full-frame buffers, two sets of four audio buffers, nine
+bounded source-file buffers and small control/profile records reserve about
+24.3 MiB. All are static. A sensory view is borrowed until the next serialized
+cycle, where its completed window is acknowledged and released before reuse.
+Only private descriptors and exact buffer ownership qualify for source-corpus
+retention. An ordinary caller cannot mark a frame to bypass movie retention.
+
+The source collection/profile remains on local durable storage and is loaded
+once per start/recovery. Repeated training exposures retain the resident source
+collection plus epoch delivery receipts, instead of filling the 512 MiB media
+arena with millions of identical untranscribed PCM/movie copies. Normal media
+retention and whole capsule memory are unchanged. This is not the general
+long-term capsule playlist or its guaranteed arena reservation; that remains
+an open memory interface. Shakti's logical organization fields remain hers.
+
+HOLD, REPLAY AND ACTUAL PROCESS RECOVERY
+Invalid source/reconstruction, capacity or receipt/checkpoint failures hold
+training; they grant no progress and do not shut down the loop. Memory faults
+also hold training. A failed cycle cannot later acknowledge its pending view.
+Resume after a validation hold requires the same loaded source collection.
+A changed or missing recovery collection requires explicit unload/new start.
+
+data/control/prenatal_loader_v2.bin is a bounded checksummed control record,
+atomically replaced after completed beats and controls using fflush/fsync and
+rename. The collection fingerprint binds the exact local profile and WAVs;
+the independent package SHA-256 seal binds the distribution. Epoch receipts
+remain in the existing learned stream. This control file is not a memory
+capsule, transcript, fabricated reflection or learned-mastery certificate.
+
+If the operating system actually terminates the process, the ordinary memory
+recovery runs before this loader restores. The collection is reloaded and
+verified; configured exposure restarts in heart -> sound -> light order with
+a new source identity and monotonic live epoch. Saved PAUSED and HELD states
+stay held for explicit control. A saved DELIVERED state re-arms ordered replay
+on a real process start, as requested. No claim of retaining physical RAM
+through an OS termination, power cut or device reboot is made.
+
+DELIVERED exposes completed prenatal input delivery to a future curriculum
+controller and keeps the continuous loop awake. Counting, ABC, shapes, math,
+memory-game progression, learned-order actuators and deterministic mastery
+gates require a later real controller/learner. No delivery count certifies them.
+
+EXPLICIT NATIVE RUN
+Set task_prenatal_dir to this package's path, from the repository root:
+task_prenatal_dir=SECTION-G/MCP/5-Menu/TOOLS/Prenatal/Prenatal-Loader-v2.0.0-2026-10-19
+
+Build the separate synthetic boundary RUN:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_PRENATAL_RUN_HOOKS -Iinclude -ISECTION-A "$task_prenatal_dir/Prenatal.Flow.Run.c" SECTION-A/shakti_*.c SECTION-B/shakti_prenatal_loader.c -o shakti-prenatal-run
+
+After source review and build, use real absolute package paths:
+./shakti-prenatal-run --run NEW_DIRECTORY ABSOLUTE_ASSETS ABSOLUTE_PROFILE
+
+NEW_DIRECTORY must not exist. This creates its own synthetic Eden/control
+fixture and one clearly synthetic baseball-context capsule. It does not edit
+an existing user directory. Boundary prefixes are injected only by a
+SHAKTI_PRENATAL_RUN_HOOKS entry point absent from production and the MCP menu.
+Such checkpoints carry an explicit synthetic marker. No unprocessed prefix
+is represented as real training. Every checked window is actually rebuilt.
+
+The RUN checks exact boundaries, whole refusals, native MCP ownership,
+heartbeat-only and voice-only phases, all complete original words, a full
+16-beat color round, all full-HD pixels, 32:64 ratios, live pause/replay with
+advancing clock/memory, warm pace changes, corruption, memory-fault refusal,
+changed/corrupt recovery inputs, final delivery and whole context preservation.
+It supplies no production reflection answers or transcript recognizer.
+
+Build the same RUN harness without the boundary hook macro:
+cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -Iinclude -ISECTION-A "$task_prenatal_dir/Prenatal.Flow.Run.c" SECTION-A/shakti_*.c SECTION-B/shakti_prenatal_loader.c -o shakti-prenatal-production-check
+./shakti-prenatal-production-check --reject RUN_DIRECTORY ABSOLUTE_ASSETS
+
+This proves a production build refuses the marked synthetic checkpoint while
+the ordinary loop and whole capsule stay usable. The separate native RUN can
+then exercise actual fresh-process recovery of that owned synthetic fixture:
+./shakti-prenatal-run --restart RUN_DIRECTORY ABSOLUTE_ASSETS
+
+The marker and complete capsule must match before either recovery mode runs.
+Expected BENCH lines are deliberate refusal cases, each followed by PASS.
+BENCH RUN, nonzero exit or a missing final PASS is failure. Native.Run.txt
+records actual outcomes. The existing Cycle-Run-v2.0.0 and Memory.Run sources
+are requalified with the added Section-B source in their link commands;
+their sealed packages are never rewritten. Device/Xcode performance, a full
+22,982,400-beat run, training efficacy and independent model review are open.

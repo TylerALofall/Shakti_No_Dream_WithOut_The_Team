@@ -13,7 +13,7 @@ Canon: Library guide, Chapter 6. Lineage letters Ga–Gi kept for the record.
 | 6 | Shell/ | SHELL | Gf | The shell she lives in; tool calls execute here. |
 | 7 | Outbound_Mail/ | OUTBOUND MAIL | Gg | Her to Tyler. |
 | 8 | Inbound_Mail/ | INBOUND MAIL | Gh | Tyler to her. |
-| 9 | Self_Reflection/ | SELF-REFLECTION | Gi | 13 actual answers after 10 dispatched tool calls, stored by epoch. |
+| 9 | Self_Reflection/ | SELF-REFLECTION | Gi | 13 actual answers after 10 tool calls or a pending-memory review; five distinct reviews before library promotion. |
 
 Log/address contract for every slot:
 `[epoch]:[frame/subsecond]-[function identity]`

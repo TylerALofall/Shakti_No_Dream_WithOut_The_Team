@@ -1,0 +1,106 @@
+SHAKTI STATIC MEMORY / ARENA — NATIVE RUN RECORD — 2026-10-18
+
+Scope: focused follow-up to runtime commit 1954ad8. Branch publication only;
+no main update, real device, camera, account, speaker or trained model used.
+
+STRICT BUILD
+Seven programs compiled with cc -std=c99 -pedantic -Wall -Wextra -Werror -O2:
+  Section-A console host;
+  Cycle.Run.c, Memory.Run.c, Retention.Run.c;
+  Sensory.Run.c with the real, deliberately no-op and partial RUN decoders.
+Actual Section-A sources and restored include/ interfaces were linked.
+Sources were read/reviewed, compiled, then executed in separate actions.
+No explicit malloc/calloc/realloc/free or runtime subprocess builds were added.
+
+FINAL NATIVE RUN RESULTS — ALL EXITED ZERO
+1. Primary Cycle RUN, two independent new fixtures:
+   full 1920x1080 RGB with synchronized 48kHz PCM through MCP deposit, binary
+   breakdown and rebuild into the shared convergence buffers; resident Eden;
+   static arena capture and reduced active-budget pressure; untranscribed PCM
+   pins intake rather than disappearing; supplied synthetic transcript bytes
+   persist; five distinct real thirteen-answer callback completions during
+   quiet cycles consolidate a whole capsule without inventing tool calls;
+   partially answered timed reflection survives restart; matching whole-source
+   capsule permits raw media release; all seven heartbeat rates preserve exact
+   one-second aggregate pacing and 48,000 PCM samples; actual ten-call tool
+   gate still works after timed reviews; mixed review chronology restores.
+   Final first tool-validation observation: 14,752 valid learned-stream lines,
+   zero invalid lines. Pending eleventh call was visibly held.
+
+   Every file in the two 15-file fixture trees was byte-identical, including
+   epoch logs, reviewed capsules, pending checkpoint, reflection audit and
+   native sensory journal. Stdout/stderr were also byte-identical.
+
+2. Memory RUN:
+   working admission without library write; whole demotion at twenty logical
+   beats despite activation; pending unreviewed short-term retention; incomplete
+   thirteen-answer set refused; repeated id counted once; four reviews cannot
+   promote; fifth distinct complete set promotes; answered questions and chosen
+   method/location survive restart; idle short-term fade; uppercase trigger
+   recalls the whole lowercase-tagged capsule; library record not duplicated.
+   A deliberately damaged NEW fixture checkpoint admitted no fragments.
+
+3. Retention RUN:
+   reserved arena exactly 536,870,912 bytes; native-size 32x24 synthetic input
+   passes actual binary reconstruction; reduced 64KiB history budget forces
+   uniform temporal thinning; first and separate latest full frames remain
+   byte-exact together; journal recovery preserves both. Sparse timestamp
+   probes exercise 20/40-minute retention floors. An incomplete NEW fixture
+   journal exposed no retained view. This is not a forty-minute movie RUN.
+
+4. Real sensory RUN:
+   independent expected eight-byte binary-plane layout; 32 consecutive full-HD
+   solid-blue RGB frames and 64 PCM clips; every output byte initially differs
+   from its expected byte; input mutation after take cannot seed perception;
+   every rebuilt pixel/sample matches; eyes and mind share identical rebuilt
+   pointers with empty text context; release invalidates the borrowed view.
+
+5–6. Deliberately no-op and partial decoder RUN linkages:
+   both refused whole source windows and published no sensory view. There is
+   no production decoder fault hook. Expected BENCH messages accompany these
+   two cases and the deliberate Memory/Retention fixture corruption cases.
+
+STATIC SPACE AND PACKAGING
+The final Linux host reports BSS 614,462,464 bytes. Its arena symbol alone is
+536,870,912 bytes. Fixed descriptors, transcript storage and other runtime
+state explain the additional reservation. No phone memory/throughput claim.
+
+Packaged by the existing README assembler, not by a new packaging tool:
+SECTION-G/MCP/5-Menu/TOOLS/Cycle/Cycle-Run-v2.0.0-2026-10-18/
+The multi-source manifest, explicit BUILD/COMMAND and guide accompany all four
+RUN sources. The assembler did not compile/run the submission. README payload
+hashes match native SHA-256. Independent path-sorted F/hash/path directory seal:
+190e8ffbf81633a9a75f153173cc450f130b675436b772604a94a651d326cbf6
+It matches the appended ledger registration. The sealed v1.0 package remains
+unchanged. No fabricated independent-supervisor acceptance is asserted.
+
+BOUNDARIES
+Synthetic callback answers and supplied fixture transcript text qualify native
+contracts only: they do not demonstrate real ASR, visual understanding, learned
+car/color/shape categories, biological development or semantic mastery.
+The production reflection/ASR/visual reasoning adapter is still absent.
+No real Tyler voice recordings or Swift project are present in this branch.
+The full ordered 22,982,400-beat prenatal loader/curriculum integration is a
+separate pending step; it was not run, skipped with counters, or prewritten
+into Eden here. Per-window persistence and frame rate were not qualified on
+iOS. Native process restart was exercised, not a power-cut/device-filesystem
+guarantee. Legacy SMC1 files remain intact and uncurated for five-review import.
+
+FOLLOW-UP: ACCURATE RECALL PROVENANCE
+Review found that whole-container recall appended the recalled item to the
+working set while its receipt still read working[0]. With another item already
+working, the receipt could name that other item and its epoch/hash. The receipt
+now reads the actual validated recall candidate, preserving its original id,
+epoch, size and stored checksum independently of working-set order.
+
+The native console reproduced this in two isolated synthetic fixtures. Both
+started with the reviewed movie-capsule library record and empty pending/control
+history, then admitted focus-a and requested BLUE. Before the fix the recall
+receipt incorrectly named focus-a. After the fix it named movie-capsule with
+origin 2140000000:133, 6,286 bytes and checksum 390ea3e3cc90eadb. Both bounded
+16-cycle runs processed two actual tool calls and continued through stdin EOF.
+The updated host and primary Cycle RUN compiled under the same strict flags;
+the complete integration RUN also passed after the correction. Packaged RUN
+sources and their content seal remain unchanged.
+Two new complete integration fixtures after the correction also matched
+byte-for-byte across all fifteen files and stdout/stderr.

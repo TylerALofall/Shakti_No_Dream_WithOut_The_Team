@@ -14,6 +14,8 @@
 #include "shakti_log.h"
 #include "shakti_memory.h"
 #include "shakti_time.h"
+#include "shakti_retention.h"
+#include "shakti_prenatal_flow.h"
 
 static const char *REFLECTION_QUESTIONS[] = {
     "Title the last 10 tool calls",
@@ -324,14 +326,18 @@ static int hex_value(unsigned char c)
     return -1;
 }
 
+static void selected_tags(const char *answer, char *out, size_t capacity);
+
 int shakti_loop_restore(shakti_runtime_t *runtime)
 {
     shakti_loop_state_t *loop;
     FILE *file;
     char line[SHAKTI_LINE_CAPACITY], *fields[7];
     char last_completion[SHAKTI_MEMORY_ID_BYTES] = "";
+    char last_tags[SHAKTI_MEMORY_TAG_BYTES] = "";
     shakti_tick_t tick;
-    int result;
+    shakti_tick_t last_complete_tick = { 0, 0U };
+    int result, have_complete = 0, requested_review = 0;
     if (runtime == NULL) return 0;
     loop = &runtime->loop;
     file = fopen(SHAKTI_LEARNED_STREAM_PATH, "rb");
@@ -363,6 +369,12 @@ int shakti_loop_restore(shakti_runtime_t *runtime)
                     ++loop->reflection_count;
                     memcpy(last_completion, fields[4], size + 1U);
                 }
+                selected_tags(loop->reflection_answers[11], last_tags, sizeof(last_tags));
+                last_complete_tick = tick; have_complete = 1; requested_review = 0;
+                loop->reflection_answered_mask = 0U;
+                memset(loop->reflection_answers, 0, sizeof(loop->reflection_answers));
+            } else if (strcmp(fields[5], "review_requested") == 0) {
+                requested_review = 1; loop->reflection_batch_tick = tick;
                 loop->reflection_answered_mask = 0U;
                 memset(loop->reflection_answers, 0, sizeof(loop->reflection_answers));
             } else if (strcmp(fields[5], "actual_answer_hex") == 0) {
@@ -388,16 +400,40 @@ int shakti_loop_restore(shakti_runtime_t *runtime)
         }
         if (fclose(file) != 0 || result < 0) return 0;
     }
-    if (loop->reflection_count > loop->tool_calls / SHAKTI_REFLECTION_INTERVAL ||
-        loop->tool_calls - loop->reflection_count * SHAKTI_REFLECTION_INTERVAL >
-            SHAKTI_REFLECTION_INTERVAL) return 0;
-    loop->turns_since_reflection = (unsigned int)(loop->tool_calls -
-        loop->reflection_count * SHAKTI_REFLECTION_INTERVAL);
-    loop->reflection_due = (unsigned char)(loop->turns_since_reflection == SHAKTI_REFLECTION_INTERVAL);
+    /* Time-triggered memory reviews can complete without ten additional tool
+     * calls. Recover actual calls since the latest completed review by epoch,
+     * rather than multiplying a reflection count by ten. */
+    loop->turns_since_reflection = 0U;
+    memset(loop->tool_trace, 0, sizeof(loop->tool_trace));
+    file = fopen(SHAKTI_LEARNED_STREAM_PATH, "rb");
+    if (!file && errno != ENOENT) return 0;
+    if (file) {
+        while ((result = shakti_log_read_record(file, line, sizeof(line), fields, &tick)) > 0) {
+            unsigned int index;
+            int n;
+            if (strcmp(fields[5], "actual_call") || (have_complete &&
+                (tick.epoch_seconds < last_complete_tick.epoch_seconds ||
+                 (tick.epoch_seconds == last_complete_tick.epoch_seconds && tick.frame <= last_complete_tick.frame)))) continue;
+            index = loop->turns_since_reflection;
+            if (index >= SHAKTI_REFLECTION_INTERVAL) { fclose(file); return 0; }
+            n = snprintf(loop->tool_trace[index], SHAKTI_INPUT_CAPACITY,
+                "%s%s%s", fields[4], fields[6][0] ? " " : "", fields[6]);
+            if (n < 0 || (size_t)n >= SHAKTI_INPUT_CAPACITY) { fclose(file); return 0; }
+            if (!index && !requested_review) loop->reflection_batch_tick = tick;
+            ++loop->turns_since_reflection;
+        }
+        if (fclose(file) || result < 0) return 0;
+    }
+    loop->reflection_due = (unsigned char)(requested_review || loop->turns_since_reflection == SHAKTI_REFLECTION_INTERVAL);
+    loop->last_reflection_slot = runtime->memory.current_slot;
     if (last_completion[0]) {
-        shakti_memory_item_t completed;
-        if (shakti_memory_fetch(&runtime->memory, last_completion, &completed) != 1) return 0;
-        memcpy(loop->pending_recall, completed.tags, strlen(completed.tags) + 1U);
+        static shakti_memory_item_t completed;
+        int fetched = shakti_memory_fetch(&runtime->memory, last_completion, &completed);
+        if (fetched < 0) return 0;
+        /* Historical SMC1 files remain intact and unpromoted. Their actual
+         * answer log supplies the prior batch metadata during this upgrade. */
+        if (fetched) memcpy(loop->pending_recall, completed.tags, strlen(completed.tags) + 1U);
+        else memcpy(loop->pending_recall, last_tags, strlen(last_tags) + 1U);
     }
     return loop->reflection_due || loop->reflection_answered_mask == 0U;
 }
@@ -414,6 +450,7 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
     int n;
     if (runtime == NULL || runtime->loop.cycle_count == ULONG_MAX) return 0;
     slot = (unsigned int)(runtime->loop.cycle_count % SHAKTI_HEARING_SLOTS);
+    shakti_prenatal_before_cycle(runtime, slot);
     if (slot == 0U && runtime->loop.cycle_count != 0UL &&
         !shakti_tick_clock_beat(&runtime->clock)) return 0;
     runtime->loop.heartbeat_slot = slot;
@@ -446,19 +483,22 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
         !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
             "Ga", 1U, "AWAKE", "internal", "cycle", "heartbeat_slot", event)) return 0;
     shakti_memory_bind_eden(&runtime->memory, &runtime->reason);
+    runtime->memory.now_tick = tick;
     recalled = runtime->memory.recalled_count;
-    if (!shakti_memory_step(&runtime->memory, runtime->loop.cycle_count))
+    if (runtime->memory.current_slot == UINT64_MAX ||
+        !shakti_memory_step(&runtime->memory, runtime->memory.current_slot + 1U))
         runtime->loop.tools_interrupted = 1U;
     else if (runtime->memory.recalled_count > recalled && runtime->memory.working_count) {
-        const shakti_memory_item_t *item = &runtime->memory.working[0];
+        const shakti_memory_item_t *item = &runtime->memory.recall_candidate;
         n = snprintf(event, sizeof(event), "id=%s origin=%ld:%u bytes=%lu hash=%016" PRIx64,
             item->id, (long)item->tick.epoch_seconds, item->tick.frame,
             (unsigned long)item->size, item->checksum);
         if (n < 0 || (size_t)n >= sizeof(event) ||
             !append_loop_log(runtime, SHAKTI_LEARNED_STREAM_PATH, "LRN1",
-                "shakti_memory.c:shakti_memory_step", 26U, "memory", item->id,
+                "shakti_memory.c:shakti_memory_step", 39U, "memory", item->id,
                 "whole_container_recalled", event, NULL)) return 0;
     }
+    shakti_prenatal_feed(runtime, slot);
     {
         int media = shakti_media_step(&runtime->media, slot);
         if (media == 2) {
@@ -470,14 +510,19 @@ int shakti_loop_begin_cycle(shakti_runtime_t *runtime, shakti_tick_t *cycle_tick
                 group->parts[0].validated_hash, group->parts[1].validated_hash, group->parts[2].validated_hash);
             if (n < 0 || (size_t)n >= sizeof(event) || !shakti_tick_next(&runtime->clock, &media_tick) ||
                 !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &media_tick,
-                    "shakti_media.c:shakti_media_step", 13U, "AWAKE", "internal",
+                    "shakti_media.c:shakti_media_step", 12U, "AWAKE", "internal",
                     first->source_id, "validated_convergence", event)) return 0;
-            if (!shakti_memory_remember(&runtime->memory, &media_tick, event)) return 0;
+            if (shakti_prenatal_owns(runtime, group)) {
+                if (!shakti_prenatal_published(runtime)) return 0;
+            } else if (!shakti_retention_capture(shakti_media_perception(&runtime->media),
+                (uint64_t)media_tick.epoch_seconds, media_tick.frame)) return 0;
+            /* Sensory validation is an audit event, not automatic library
+             * admission. The reasoning adapter chooses semantic capsules. */
         } else if (media < 0) {
             shakti_tick_t hold_tick;
             if (!shakti_tick_next(&runtime->clock, &hold_tick) ||
                 !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &hold_tick,
-                    "shakti_media.c:shakti_media_step", 13U, "AWAKE", "internal",
+                    "shakti_media.c:shakti_media_step", 12U, "AWAKE", "internal",
                     "media", "validation_hold", "Source window held; no unvalidated content admitted")) return 0;
         }
     }
@@ -508,6 +553,14 @@ int shakti_loop_finish_cycle(shakti_runtime_t *runtime)
     unsigned int question;
     if (runtime == NULL) return 0;
     loop = &runtime->loop;
+    if (!loop->reflection_due && shakti_memory_pending_reviews(&runtime->memory) &&
+        runtime->memory.current_slot - loop->last_reflection_slot >= UINT64_C(20) * SHAKTI_HEARING_SLOTS) {
+        if (!append_loop_log(runtime, SHAKTI_REFLECTION_PATH, "REF1", "Gi", 1U,
+            "reflection", "memory-review", "review_requested", "Pending whole capsules need consolidation",
+            &loop->reflection_batch_tick)) return 0;
+        loop->reflection_due = 1U; loop->reflection_stored = 0U; loop->reflection_answered_mask = 0U;
+        memset(loop->reflection_answers, 0, sizeof(loop->reflection_answers));
+    }
     if (loop->pending_recall[0] && runtime->memory.recall_file == NULL) {
         if (!shakti_memory_request(&runtime->memory, loop->pending_recall)) return 0;
         loop->pending_recall[0] = '\0';
@@ -562,7 +615,7 @@ int shakti_loop_set_heartbeat(shakti_loop_state_t *state, unsigned int beats_per
     if (state == NULL || beats_per_second == 0U ||
         beats_per_second > SHAKTI_HEARTBEAT_MAX_RATE ||
         (beats_per_second & (beats_per_second - 1U)) != 0U) return 0;
-    state->heartbeat_rate = beats_per_second;
+    state->heartbeat_rate = shakti_prenatal_rate_requested(state, beats_per_second);
     state->pace_remainder = 0U;
     state->audio_remainder = 0U;
     return 1;
@@ -884,11 +937,11 @@ static void selected_tags(const char *answer, char *out, size_t capacity)
 
 static int complete_reflection(shakti_runtime_t *runtime)
 {
-    char block[SHAKTI_MEMORY_BYTES];
     char tags[SHAKTI_MEMORY_TAG_BYTES];
-    shakti_memory_item_t previous;
+    const char *answers[SHAKTI_REFLECTION_QUESTIONS];
+    static shakti_memory_item_t previous;
     shakti_loop_state_t *loop = &runtime->loop;
-    size_t i, used = 0U;
+    size_t i;
     int n;
     const unsigned int all = (1U << SHAKTI_REFLECTION_QUESTIONS) - 1U;
     if (!loop->reflection_due || loop->reflection_answered_mask != all ||
@@ -896,36 +949,24 @@ static int complete_reflection(shakti_runtime_t *runtime)
     if (loop->reflection_count == ULONG_MAX) return 0;
     selected_tags(loop->reflection_answers[11], tags, sizeof(tags));
     if (!loop->reflection_stored) {
-        for (i = 0U; i < REFLECTION_QUESTION_COUNT; ++i) {
-            n = snprintf(block + used, sizeof(block) - used, "%lu. %s\n%s\n",
-                (unsigned long)(i + 1U), REFLECTION_QUESTIONS[i], loop->reflection_answers[i]);
-            if (n < 0 || (size_t)n >= sizeof(block) - used) return 0;
-            used += (size_t)n;
-        }
         int exists;
         n = snprintf(loop->reflection_id, sizeof(loop->reflection_id), "reflection-batch-%ld-%u",
             (long)loop->reflection_batch_tick.epoch_seconds, loop->reflection_batch_tick.frame);
         if (n < 0 || (size_t)n >= sizeof(loop->reflection_id)) return 0;
         exists = shakti_memory_fetch(&runtime->memory, loop->reflection_id, &previous);
         if (exists < 0) return 0;
-        if (exists) {
-            if (previous.size != used || strcmp(previous.tags, tags) != 0 ||
-                memcmp(previous.text, block, used) != 0) {
-                fputs("BENCH reflection: committed batch container disagrees with actual answers\n", stderr);
-                return 0;
-            }
-            loop->reflection_tick = previous.tick;
-        } else {
-            if (!shakti_tick_next(&runtime->clock, &loop->reflection_tick) ||
-                !shakti_memory_store(&runtime->memory, &loop->reflection_tick,
-                    loop->reflection_id, tags, block, 0)) return 0;
-        }
+        if (exists) loop->reflection_tick = previous.tick;
+        else if (!shakti_tick_next(&runtime->clock, &loop->reflection_tick)) return 0;
+        for (i = 0U; i < REFLECTION_QUESTION_COUNT; ++i) answers[i] = loop->reflection_answers[i];
+        if (!shakti_memory_commit_reflection(&runtime->memory, &loop->reflection_tick,
+            loop->reflection_id, tags, answers)) return 0;
         loop->reflection_stored = 1U;
     }
     if (!shakti_log_append(SHAKTI_REFLECTION_PATH, "REF1", &loop->reflection_tick,
             "Gi", 1U, "AWAKE", "internal", loop->reflection_id,
             "complete_13_answers", loop->reflection_id)) return 0;
     ++loop->reflection_count;
+    loop->last_reflection_slot = runtime->memory.current_slot;
     loop->turns_since_reflection = 0U;
     loop->reflection_due = 0U;
     loop->reflection_deferrals = 0U;

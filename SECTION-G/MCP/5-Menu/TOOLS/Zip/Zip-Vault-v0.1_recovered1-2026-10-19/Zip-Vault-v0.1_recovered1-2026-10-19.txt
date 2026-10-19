@@ -1,0 +1,16 @@
+FAMILY: Zip
+TOOL: Vault
+VERSION: 0.1_recovered1
+DATE: 2026-10-19
+INTRODUCTION: Supplied static A/B/C loading-zone vault with recovered ZIP header, unchanged parser and vault sources, and an explicit synthetic qualification RUN. Stored ZIP entries only. The library is called in-process; the example executable exercises its APIs and existing damage hooks.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DZV_TEST_HOOKS Zip.Recovery.Run.c zip_vault.c junzip_nomalloc.c -o zip-vault-run
+COMMAND: ./zip-vault-run
+EXAMPLE: ./zip-vault-run
+ENTRY_KIND: manifest
+ENTRY: Zip.Vault.manifest.txt
+REQUIRED: zip_vault.c
+REQUIRED: zip_vault.h
+REQUIRED: junzip_nomalloc.c
+REQUIRED: junzip_nomalloc.h
+REQUIRED: Zip.Recovery.Run.c
+REQUIRED: Zip.Vault.manifest.txt

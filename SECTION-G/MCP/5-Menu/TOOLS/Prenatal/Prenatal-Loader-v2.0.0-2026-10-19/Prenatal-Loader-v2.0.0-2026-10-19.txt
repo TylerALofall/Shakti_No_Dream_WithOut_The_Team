@@ -1,0 +1,29 @@
+FAMILY: Prenatal
+TOOL: Loader
+VERSION: 2.0.0
+DATE: 2026-10-19
+INTRODUCTION: Drive the resident recorded prenatal source collection through the continuous heart-owned C loading zone, full binary reconstruction and shared convergence; native synthetic RUN includes live replay and whole-memory preservation.
+BUILD: cc -std=c99 -pedantic -Wall -Wextra -Werror -O2 -DSHAKTI_PRENATAL_RUN_HOOKS -Iinclude -ISECTION-A SECTION-G/MCP/5-Menu/TOOLS/Prenatal/Prenatal-Loader-v2.0.0-2026-10-19/Prenatal.Flow.Run.c SECTION-A/shakti_*.c SECTION-B/shakti_prenatal_loader.c -o shakti-prenatal-run
+COMMAND: ./shakti-prenatal-run --run "{new_fixture_directory}" "{absolute_assets_directory}" "{absolute_profile_path}"
+EXAMPLE: ./shakti-prenatal-run --run /tmp/shakti-prenatal-v2-001 /tmp/shakti-prenatal-v2-package/Assets /tmp/shakti-prenatal-v2-package/Prenatal.Profile.xml
+ENTRY_KIND: manifest
+ENTRY: Prenatal.Loader.manifest.txt
+REQUIRED: shakti_prenatal_flow.c
+REQUIRED: shakti_prenatal_loader.c
+REQUIRED: shakti_prenatal_flow.h
+REQUIRED: shakti_prenatal_loader.h
+REQUIRED: Prenatal.Flow.Run.c
+REQUIRED: Prenatal.Loader.manifest.txt
+REQUIRED: Prenatal.Profile.xml
+REQUIRED: Assets/black.wav
+REQUIRED: Assets/red.wav
+REQUIRED: Assets/green.wav
+REQUIRED: Assets/yellow.wav
+REQUIRED: Assets/blue.wav
+REQUIRED: Assets/magenta.wav
+REQUIRED: Assets/cyan.wav
+REQUIRED: Assets/white.wav
+REQUIRED: Assets/pulse.wav
+REQUIRED: Sources.Bindings.txt
+REQUIRED: Native.Run.txt
+REQUIRED: Prenatal.Loader.Guide.txt

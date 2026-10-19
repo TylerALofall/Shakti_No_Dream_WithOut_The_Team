@@ -18,6 +18,7 @@
 #include "shakti_log.h"
 #include "shakti_loop.h"
 #include "shakti_memory.h"
+#include "shakti_prenatal_flow.h"
 #include "shakti_manifest.h"
 #include "shakti_reason.h"
 #include "shakti_report.h"
@@ -685,7 +686,9 @@ static void print_help(void)
 {
     puts("Loop controls:");
     puts("/heartbeat/ 1|2|4|8|16|32|64 (beats per second)");
-    puts("/memory_decay/ BEATS (0 leaves timed expiry disabled)");
+    puts("/memory_decay/ BEATS (positive idle short-term duration)");
+    puts("/working_memory/ 20..90 (heartbeat seconds)");
+    puts("/prenatal/status/ | /prenatal/pause/ | /prenatal/resume/ | /prenatal/stop/");
     puts("/goal/ system message");
     puts("/notebook/");
     puts("/notebook/ reminder or note");
@@ -725,6 +728,10 @@ static void print_help(void)
     puts("recall trigger words");
     puts("remember id | tags | recent|training | complete text");
     puts("activate id (whole container already in RAM)");
+    puts("organize id | method | logical location");
+    puts("reference id | source_id | first position64 | last position64");
+    puts("prenatal start ASSET_DIRECTORY | PROFILE_PATH (or prenatal status)");
+    puts("release_artifact capsule_id (requires five complete reflections)");
     puts("validate");
     puts("status");
 }
@@ -768,7 +775,7 @@ static int process_tool(
     {
         static const char * const names[] = {
             "ask", "learn", "reject", "sense", "pass", "school", "draft",
-            "tablet", "manifest", "load", "recall", "remember", "activate", "validate", "status"
+            "tablet", "manifest", "load", "recall", "remember", "activate", "organize", "reference", "release_artifact", "validate", "status", "prenatal"
         };
         size_t i;
         int known = 0;
@@ -779,6 +786,10 @@ static int process_tool(
 
     if (!log_tool_call(runtime, command, arguments)) {
         return 0;
+    }
+
+    if (strcmp(command, "prenatal") == 0) {
+        return shakti_prenatal_command(runtime, arguments);
     }
 
     if (strcmp(command, "ask") == 0) {
@@ -842,6 +853,30 @@ static int process_tool(
     if (strcmp(command, "activate") == 0) {
         puts(shakti_memory_activate(&runtime->memory, arguments)
             ? "Whole RAM container active in convergence." : "Container is not in RAM; recall it first.");
+        return 1;
+    }
+    if (strcmp(command, "organize") == 0) {
+        char *fields[3];
+        if (!split_pipe_fields(arguments, fields, 3U) ||
+            !shakti_memory_organize(&runtime->memory, fields[0], fields[1], fields[2]))
+            puts("Organization refused; use an unarchived whole capsule and complete method/location.");
+        return 1;
+    }
+    if (strcmp(command, "reference") == 0) {
+        char *fields[4], *end;
+        uint64_t first, last;
+        if (!split_pipe_fields(arguments, fields, 4U)) return 1;
+        errno = 0; first = strtoull(fields[2], &end, 10);
+        if (errno || *end || !fields[2][0] || fields[2][0] == '-') return 1;
+        errno = 0; last = strtoull(fields[3], &end, 10);
+        if (errno || *end || !fields[3][0] || fields[3][0] == '-') return 1;
+        if (!shakti_memory_reference(&runtime->memory, fields[0], fields[1], first, last))
+            puts("Source reference refused; bind it before its first reflection.");
+        return 1;
+    }
+    if (strcmp(command, "release_artifact") == 0) {
+        puts(shakti_app_release_artifact(runtime, arguments) ? "Reviewed capsule retained; media arena released." :
+            "Media retained: a matching five-reflection capsule covering the whole source is required.");
         return 1;
     }
 
@@ -950,6 +985,13 @@ static int process_control(
         return 1;
     }
 
+    if (strcmp(line, "/prenatal/status/") == 0) {
+        shakti_prenatal_print_status(runtime); return 1;
+    }
+    if (strcmp(line, "/prenatal/pause/") == 0) return shakti_prenatal_pause(runtime);
+    if (strcmp(line, "/prenatal/resume/") == 0) return shakti_prenatal_resume(runtime);
+    if (strcmp(line, "/prenatal/stop/") == 0) return shakti_prenatal_stop(runtime);
+
     if (strncmp(line, "/shakti_run/ ", 13U) == 0) {
         return process_tool(runtime, line + 13U);
     }
@@ -960,18 +1002,26 @@ static int process_control(
             !shakti_loop_set_heartbeat(&runtime->loop, rate)) {
             puts("Heartbeat accepts 1, 2, 4, 8, 16, 32, or 64 beats per second.");
         } else {
-            printf("Heartbeat: %u beats/second. Every channel follows.\n", rate);
+            printf("Heartbeat requested: %u; effective: %u beats/second. Every channel follows.\n",
+                rate, runtime->loop.heartbeat_rate);
         }
         return 1;
     }
     if (strncmp(line, "/memory_decay/ ", 15U) == 0) {
         unsigned int beats;
-        if (!parse_unsigned__app_h(trim_text__app_h(line + 15U), &beats)) {
+        if (!parse_unsigned__app_h(trim_text__app_h(line + 15U), &beats) || !beats) {
             puts("Use: /memory_decay/ BEATS");
         } else {
-            runtime->memory.recent_decay_beats = beats;
+            if (!shakti_memory_policy(&runtime->memory, runtime->memory.working_beats, beats)) return 0;
             printf("Recent-memory timed expiry: %u heartbeat beats; permanent lessons retained.\n", beats);
         }
+        return 1;
+    }
+    if (strncmp(line, "/working_memory/ ", 17U) == 0) {
+        unsigned int beats;
+        if (!parse_unsigned__app_h(trim_text__app_h(line + 17U), &beats) || beats < 20U || beats > 90U)
+            puts("Working memory accepts 20 through 90 heartbeat seconds.");
+        else if (!shakti_memory_policy(&runtime->memory, beats, runtime->memory.recent_decay_beats)) return 0;
         return 1;
     }
     if (strncmp(line, "/trial/ ", 8U) == 0)
@@ -1331,7 +1381,7 @@ static void print_usage(const char *program_name)
 int shakti_app_initialize(shakti_runtime_t *runtime)
 {
     if (!initialize_runtime(runtime)) return 0;
-    runtime->recorded_epoch = runtime->memory.serial
+    runtime->recorded_epoch = runtime->memory.newest_epoch > (time_t)0
         ? runtime->memory.newest_epoch : (time_t)-1;
     if (!shakti_log_latest_epoch(SHAKTI_LEARNED_STREAM_PATH, &runtime->recorded_epoch) ||
         !shakti_log_latest_epoch(SHAKTI_MESSAGES_PATH, &runtime->recorded_epoch) ||
@@ -1341,9 +1391,15 @@ int shakti_app_initialize(shakti_runtime_t *runtime)
         if (runtime->recorded_epoch >= (time_t)LONG_MAX) return 0;
         shakti_tick_clock_seed(&runtime->clock, runtime->recorded_epoch + (time_t)1);
     }
+    if (runtime->memory.serial && runtime->recorded_epoch > runtime->memory.now_tick.epoch_seconds) {
+        uint64_t elapsed = (uint64_t)(runtime->recorded_epoch - runtime->memory.now_tick.epoch_seconds);
+        if (elapsed > (UINT64_MAX - runtime->memory.current_slot) / SHAKTI_HEARING_SLOTS) return 0;
+        runtime->memory.current_slot += elapsed * SHAKTI_HEARING_SLOTS;
+    }
     shakti_media_init(&runtime->media);
+    if (!shakti_retention_restore()) return 0;
     shakti_memory_bind_eden(&runtime->memory, &runtime->reason);
-    return 1;
+    return shakti_prenatal_restore(runtime);
 }
 
 int shakti_app_queue_frame(shakti_runtime_t *runtime, const shakti_media_frame_t *frame)
@@ -1352,14 +1408,15 @@ int shakti_app_queue_frame(shakti_runtime_t *runtime, const shakti_media_frame_t
     shakti_tick_t tick;
     char event[SHAKTI_TEXT_CAPACITY];
     int n;
-    if (runtime == NULL || frame == NULL) return 0;
+    if (runtime == NULL || frame == NULL || !shakti_prenatal_gate(runtime, frame) ||
+        !shakti_retention_accepts(frame->source_id)) return 0;
     before = runtime->media;
     if (!shakti_media_queue(&runtime->media, frame)) return 0;
     n = snprintf(event, sizeof(event), "source=%s position64=%" PRIu64 " lane=%u bytes=%lu",
         frame->source_id, frame->position64, frame->lane, (unsigned long)frame->bytes);
     if (n < 0 || (size_t)n >= sizeof(event) || !shakti_tick_next(&runtime->clock, &tick) ||
         !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
-            "shakti_media.c:shakti_media_queue", 11U, "AWAKE", "internal",
+            "shakti_media.c:shakti_media_queue", 10U, "AWAKE", "internal",
             frame->source_id, "loading_zone", event)) {
         runtime->media = before;
         return 0;
@@ -1369,15 +1426,57 @@ int shakti_app_queue_frame(shakti_runtime_t *runtime, const shakti_media_frame_t
 
 int shakti_app_convergence_view(const shakti_runtime_t *runtime, shakti_convergence_view_t *view)
 {
-    if (runtime == NULL || view == NULL) return 0;
-    view->sensory = shakti_media_current(&runtime->media);
+    if (runtime == NULL || view == NULL || runtime->memory.fault) return 0;
+    view->sensory = shakti_media_perception(&runtime->media);
     view->eden = runtime->memory.eden;
     view->working = runtime->memory.working;
     view->working_count = runtime->memory.working_count;
+    view->short_term = runtime->memory.short_term;
+    view->short_term_count = runtime->memory.short_term_count;
+    view->pending_reviews = shakti_memory_pending_reviews(&runtime->memory);
+    view->retained_media = shakti_retention_view();
     view->thought = runtime->loop.current_thought;
     view->tick.epoch_seconds = runtime->clock.last_epoch_seconds;
     view->tick.frame = runtime->clock.next_frame ? runtime->clock.next_frame - 1U : 0U;
     return 1;
+}
+
+int shakti_app_release_artifact(shakti_runtime_t *runtime, const char *capsule_id)
+{
+    static shakti_memory_item_t capsule;
+    const shakti_retention_state_t *state = shakti_retention_view();
+    shakti_tick_t tick;
+    size_t i;
+    if (!runtime || !capsule_id || !state || !state->active || runtime->media.current_ready || shakti_retention_audio_pending() ||
+        shakti_memory_fetch(&runtime->memory, capsule_id, &capsule) != 1 || !capsule.archived ||
+        capsule.reflection_count < SHAKTI_MEMORY_MIN_REFLECTIONS ||
+        strcmp(capsule.media_source_id, state->source_id) || capsule.media_start64 > state->first_position64 ||
+        capsule.media_end64 < state->latest.position64 + ((state->latest.mask & 4U) ? 1U : 0U)) return 0;
+    for (i = 0U; i < SHAKTI_MEDIA_GROUPS; ++i) if (runtime->media.pending[i].in_use) return 0;
+    if (!shakti_tick_next(&runtime->clock, &tick) ||
+        !shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
+            "shakti_retention.c:shakti_retention_release", 27U, "AWAKE", "internal",
+            state->source_id, "reviewed_capsule", capsule_id)) return 0;
+    return shakti_retention_release();
+}
+
+int shakti_app_transcribe(shakti_runtime_t *runtime, uint64_t start64,
+    uint64_t end64, const char *actual_text)
+{
+    shakti_tick_t tick;
+    char event[SHAKTI_TEXT_CAPACITY];
+    int n;
+    const shakti_retention_state_t *state = shakti_retention_view();
+    if (!runtime || !actual_text || !state || !state->active ||
+        !shakti_tick_next(&runtime->clock, &tick)) return 0;
+    if (!shakti_retention_transcribe(start64, end64, actual_text,
+        (uint64_t)tick.epoch_seconds, tick.frame)) return 0;
+    n = snprintf(event, sizeof(event), "start64=%" PRIu64 " end64=%" PRIu64 " bytes=%lu",
+        start64, end64, (unsigned long)strlen(actual_text));
+    return n > 0 && (size_t)n < sizeof(event) &&
+        shakti_log_append(SHAKTI_LEARNED_STREAM_PATH, "LRN1", &tick,
+            "shakti_retention.c:shakti_retention_transcribe", 24U, "AWAKE", "internal",
+            state->source_id, "actual_transcript", event);
 }
 
 int shakti_app_cycle(shakti_runtime_t *runtime, const char *command)
@@ -1385,7 +1484,10 @@ int shakti_app_cycle(shakti_runtime_t *runtime, const char *command)
     char input[SHAKTI_INPUT_CAPACITY];
     shakti_tick_t tick;
     int ok = 1;
-    if (runtime == NULL || !shakti_loop_begin_cycle(runtime, &tick)) return 0;
+    if (runtime == NULL) return 0;
+    if (!shakti_loop_begin_cycle(runtime, &tick)) {
+        shakti_prenatal_cycle_result(runtime, 0); return 0;
+    }
     if (command != NULL && command[0] != '\0') {
         if (strlen(command) >= sizeof(input)) {
             fputs("BENCH input exceeds fixed capacity\n", stderr);
@@ -1401,6 +1503,7 @@ int shakti_app_cycle(shakti_runtime_t *runtime, const char *command)
         }
     }
     if (!shakti_loop_finish_cycle(runtime)) ok = 0;
+    shakti_prenatal_cycle_result(runtime, ok);
     if (!ok) runtime->loop.tools_interrupted = 1U;
     return ok;
 }
